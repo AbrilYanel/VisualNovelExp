@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+
 
 public class Player_Camera : MonoBehaviour
 {
@@ -8,6 +10,11 @@ public class Player_Camera : MonoBehaviour
     public Transform playerBody;
 
     float xRotation = 0f;
+
+
+    [Header("Interaccion")]
+    public float interactDistance = 3f;
+    
 
     void Start()
     {
@@ -25,5 +32,34 @@ public class Player_Camera : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
+
+
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            TryInteract();
+        }
     }
+
+    void TryInteract()
+    {
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, interactDistance))
+        {
+            if (hit.collider.CompareTag("NPC"))
+            {
+                Interaccion_NPC npc = hit.collider.GetComponentInParent<Interaccion_NPC>();
+
+                if (npc != null)
+                {
+                    npc.Interact();
+                }
+            }
+        }
+    }
+
+
+
 }

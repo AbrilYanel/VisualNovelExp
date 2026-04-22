@@ -15,4 +15,7 @@ public class Nodo_Dialogo : ScriptableObject
     public Nodo_Dialogo option2Next;
 
     public bool startsMinigame;
+
+    public bool endsDialogue;
+    public Nodo_Dialogo nextNode;
 }

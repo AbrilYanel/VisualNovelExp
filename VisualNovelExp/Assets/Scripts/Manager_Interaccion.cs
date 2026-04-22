@@ -25,8 +25,15 @@ public class Manager_Interaccion : MonoBehaviour
     private string currentSentence;
     private bool isTyping = false;
     public MonoBehaviour cameraController;
+    public MonoBehaviour Player_Movement;
 
     private Nodo_Dialogo currentNode;
+    [Header("Minijuego 1")]
+    public GameObject minigameUI;
+    public Manager_Minijuego managerMinijuego; 
+    public Nodo_Dialogo nodoSuccess;
+    public Nodo_Dialogo nodoFail;
+
     void Start()
     {
         dialoguePanel.SetActive(false);
@@ -76,8 +83,25 @@ public class Manager_Interaccion : MonoBehaviour
 
         isTyping = false;
 
-        //Cuando termina el texto mostrar opciones
-        ShowChoices();
+      
+        if (currentNode.endsDialogue)
+        {
+            yield return new WaitForSeconds(1f); // opcional (para que se lea)
+            EndDialogue();
+            yield break;
+        }
+
+      
+        if (currentNode.hasChoices)
+        {
+            ShowChoices();
+        }
+       
+        else if (currentNode.nextNode != null)
+        {
+            yield return new WaitForSeconds(1f);
+            StartDialogue(currentNode.nextNode);
+        }
     }
 
     void ShowChoices()
@@ -96,29 +120,71 @@ public class Manager_Interaccion : MonoBehaviour
         button2.onClick.AddListener(() => ChooseOption(2));
     }
 
-    void ChooseOption(int option)
-    {
-        choicePanel.SetActive(false);
-
-        Nodo_Dialogo nextNode = null;
-
-        if (option == 1)
-            nextNode = currentNode.option1Next;
-        else
-            nextNode = currentNode.option2Next;
-
-        if (nextNode != null)
+     void ChooseOption(int option)
         {
-            StartDialogue(nextNode);
-        }
-        else if (currentNode.startsMinigame)
-        {
-            StartMinigame();
+            choicePanel.SetActive(false);
+
+            Nodo_Dialogo nextNode = null;
+
+            if (option == 1)
+                nextNode = currentNode.option1Next;
+            else
+                nextNode = currentNode.option2Next;
+
+            if (nextNode != null)
+            {
+               
+                if (nextNode.startsMinigame)
+                {
+                    StartMinigame();
+                    return;
+                }
+
+                
+                StartDialogue(nextNode);
         }
     }
 
     void StartMinigame()
     {
-        Debug.Log("Inicia minijuego de aprender 'neko'");
+        dialoguePanel.SetActive(false);
+        choicePanel.SetActive(false);
+        minigameUI.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if (cameraController != null) cameraController.enabled = false;
+        if (Player_Movement != null) Player_Movement.enabled = false;
+
+        managerMinijuego.Iniciar(); 
+    }
+
+    public void OnMinigameFinished(bool success)
+    {
+        minigameUI.SetActive(false);
+
+        if (success)
+        {
+            StartDialogue(nodoSuccess);
+        }
+        else
+        {
+            StartDialogue(nodoFail);
+        }
+    }
+    void EndDialogue()
+    {
+        dialoguePanel.SetActive(false);
+        choicePanel.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        if (cameraController != null)
+            cameraController.enabled = true;
+
+        if (Player_Movement != null)
+            Player_Movement.enabled = true;
     }
 }

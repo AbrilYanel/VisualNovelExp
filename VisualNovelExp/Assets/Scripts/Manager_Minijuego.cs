@@ -152,7 +152,7 @@ public class Manager_Minijuego : MonoBehaviour
             conexiones[itemImagen.id] = itemPalabra.id;
             parejasCorrectas++;
 
-            textoFeedback.text = "✓ " + itemImagen.id.ToUpper() + "!";
+            textoFeedback.text = itemImagen.id.ToUpper() + "!";
 
             if (parejasCorrectas >= parejas.Count)
             {
@@ -162,7 +162,7 @@ public class Manager_Minijuego : MonoBehaviour
         }
         else
         {
-            // ❌ Incorrecto
+       
             itemImagen.SetError();
             itemPalabra.SetError();
             textoFeedback.text = "Intentá de nuevo...";
@@ -194,6 +194,26 @@ public class Manager_Minijuego : MonoBehaviour
     public void ConfirmarResultado()
     {
         bool exito = parejasCorrectas >= parejas.Count;
+
+        if (exito)
+        {
+           
+            List<PalabraAprendida> aprendidas = new List<PalabraAprendida>();
+            foreach (var pareja in parejas)
+            {
+                aprendidas.Add(new PalabraAprendida
+                {
+                    hiragana = pareja.palabraJaponesa,
+                    romaji = pareja.romaji,
+                    traduccion = pareja.traduccion,
+                    idFuente = pareja.id
+                });
+            }
+
+          
+            FindObjectOfType<Manager_Journal>().RegistrarPalabras(aprendidas);
+        }
+
         interaccionManager.OnMinigameFinished(exito);
     }
 
@@ -215,4 +235,5 @@ public class ParejaDatos
     public Sprite imagen;
     public string palabraJaponesa;  // "猫"
     public string romaji;           // "Neko"
+    public string traduccion;
 }

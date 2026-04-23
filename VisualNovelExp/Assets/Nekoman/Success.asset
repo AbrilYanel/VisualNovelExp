@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
-  m_Name: Comenzar
+  m_Name: Success
   m_EditorClassIdentifier: 
   speakerName: Hombre Gato
-  sentence: Miau~ Soy un gato!
+  sentence: "Muy bien humano, aprendiste 3 nuevas palabras, chequealas en tu journal
+    y contin\xFAa conociendo m\xE1s personas interesantes, miau! Buena suerte."
   hasChoices: 1
-  option1Text: Genial, yo soy un humano!
-  option2Text: No estoy para estas cosas
-  option1Next: {fileID: 11400000, guid: 2b4ff461bdd0b6c468e1326b2bd68e54, type: 2}
-  option2Next: {fileID: 11400000, guid: 8f12ab836421247429528423d91a3f47, type: 2}
+  option1Text: Gracias Nekoman
+  option2Text: Hasta luego.
+  option1Next: {fileID: 0}
+  option2Next: {fileID: 0}
   startsMinigame: 0
-  endsDialogue: 0
+  endsDialogue: 1
   nextNode: {fileID: 0}

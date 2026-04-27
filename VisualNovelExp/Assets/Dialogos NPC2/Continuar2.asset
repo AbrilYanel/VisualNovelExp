@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
+  m_Name: Continuar2
+  m_EditorClassIdentifier: 
+  speakerName: 
+  sentence: "Genial, voy a ense\xF1arte sobre la part\xEDcula m\xE1s usada, su funcion
+    es la de marcar el tema de la oraci\xF3n y unificar la primera palabra con el
+    resto, dale un intento."
+  hasChoices: 0
+  option1Text: 
+  option2Text: 
+  option1Next: {fileID: 0}
+  option2Next: {fileID: 0}
+  startsMinigame: 1
+  endsDialogue: 0
+  nextNode: {fileID: 0}
+  tipoMinijuego: 1

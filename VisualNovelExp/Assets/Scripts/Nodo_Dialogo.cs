@@ -18,4 +18,7 @@ public class Nodo_Dialogo : ScriptableObject
 
     public bool endsDialogue;
     public Nodo_Dialogo nextNode;
+
+    public enum TipoMinijuego { Minijuego1, Minijuego2 }
+    public TipoMinijuego tipoMinijuego;
 }

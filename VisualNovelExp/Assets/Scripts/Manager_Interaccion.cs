@@ -28,11 +28,15 @@ public class Manager_Interaccion : MonoBehaviour
     public MonoBehaviour Player_Movement;
 
     private Nodo_Dialogo currentNode;
-    [Header("Minijuego 1")]
+    [Header("Minijuego")]
     public GameObject minigameUI;
     public Manager_Minijuego managerMinijuego; 
     public Nodo_Dialogo nodoSuccess;
     public Nodo_Dialogo nodoFail;
+
+    [Header("Minijuego 2")]
+    public GameObject minijuego2UI;
+    public Manager_Minijuego2 managerMinijuego2;
 
     void Start()
     {
@@ -149,15 +153,21 @@ public class Manager_Interaccion : MonoBehaviour
     {
         dialoguePanel.SetActive(false);
         choicePanel.SetActive(false);
-        minigameUI.SetActive(true);
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
         if (cameraController != null) cameraController.enabled = false;
         if (Player_Movement != null) Player_Movement.enabled = false;
 
-        managerMinijuego.Iniciar(); 
+        if (currentNode.tipoMinijuego == Nodo_Dialogo.TipoMinijuego.Minijuego1)
+        {
+            minigameUI.SetActive(true);
+            managerMinijuego.Iniciar();
+        }
+        else
+        {
+            minijuego2UI.SetActive(true);
+            managerMinijuego2.Iniciar();
+        }
     }
 
     public void OnMinigameFinished(bool success)

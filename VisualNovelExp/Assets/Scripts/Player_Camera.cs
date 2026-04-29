@@ -23,6 +23,7 @@ public class Player_Camera : MonoBehaviour
 
     void Update()
     {
+        if (Cursor.lockState == CursorLockMode.None) return;
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

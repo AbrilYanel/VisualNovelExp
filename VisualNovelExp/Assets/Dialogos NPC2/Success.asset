@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: Success
   m_EditorClassIdentifier: 
-  speakerName: Hombre Gato
-  sentence: "Muy bien humano, aprendiste 3 nuevas palabras, chequealas en tu journal
-    y contin\xFAa conociendo m\xE1s personas interesantes, miau! Buena suerte."
+  speakerName: 
+  sentence: "Wow, aprendes r\xE1pido. Toma esta recompensa y as\xED estar\xE1s preparado
+    para interactuar con gente m\xE1s avanzada. Ganbattene!"
   hasChoices: 0
-  option1Text: Gracias Nekoman
-  option2Text: Hasta luego.
+  option1Text: 
+  option2Text: 
   option1Next: {fileID: 0}
   option2Next: {fileID: 0}
   startsMinigame: 0

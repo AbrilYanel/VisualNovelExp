@@ -39,6 +39,9 @@ public class SlotPalabra : MonoBehaviour
     public void LiberarBloque()
     {
         if (OcupadoPor == null) return;
+
+        OcupadoPor.transform.SetParent(OcupadoPor.contenedorOriginal);
+        OcupadoPor.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         OcupadoPor = null;
         imagenFondo.color = colorVacio;
     }

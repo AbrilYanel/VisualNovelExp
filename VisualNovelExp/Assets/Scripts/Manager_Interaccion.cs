@@ -30,18 +30,25 @@ public class Manager_Interaccion : MonoBehaviour
     private Nodo_Dialogo currentNode;
     [Header("Minijuego")]
     public GameObject minigameUI;
-    public Manager_Minijuego managerMinijuego; 
-    public Nodo_Dialogo nodoSuccess;
-    public Nodo_Dialogo nodoFail;
+    public Manager_Minijuego managerMinijuego;
+    public Nodo_Dialogo nodoSuccess1;
+    public Nodo_Dialogo nodoFail1;
 
     [Header("Minijuego 2")]
     public GameObject minijuego2UI;
     public Manager_Minijuego2 managerMinijuego2;
+    public Nodo_Dialogo nodoSuccess2;
+    public Nodo_Dialogo nodoFail2;
+
+
+    private int minijuegoActivo = 0;
+
 
     void Start()
     {
         dialoguePanel.SetActive(false);
         choicePanel.SetActive(false);
+  
     }
 
     void Update()
@@ -51,22 +58,45 @@ public class Manager_Interaccion : MonoBehaviour
             StopAllCoroutines();
             dialogueText.text = currentSentence;
             isTyping = false;
-            ShowChoices();
+
+            // Reproducir la lógica de fin de typing manualmente
+            if (currentNode.endsDialogue)
+            {
+                EndDialogue();
+            }
+            else if (currentNode.hasChoices)
+            {
+                ShowChoices();
+            }
+            else if (currentNode.nextNode != null)
+            {
+                StartDialogue(currentNode.nextNode);
+            }
+            else
+            {
+                // No hay nada más, cerrar
+                EndDialogue();
+            }
         }
     }
     //Inicia el diálogo
     public void StartDialogue(Nodo_Dialogo node)
     {
+        if (cameraController != null)
+            cameraController.enabled = false;
+
+        if (Player_Movement != null)
+            Player_Movement.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        
+
         if (isTyping) return;
         currentNode = node;
 
         dialoguePanel.SetActive(true);
         choicePanel.SetActive(false);
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        cameraController.enabled = false;
 
         nameText.text = node.speakerName;
         currentSentence = node.sentence;
@@ -160,11 +190,13 @@ public class Manager_Interaccion : MonoBehaviour
 
         if (currentNode.tipoMinijuego == Nodo_Dialogo.TipoMinijuego.Minijuego1)
         {
+            minijuegoActivo = 1;
             minigameUI.SetActive(true);
             managerMinijuego.Iniciar();
         }
         else
         {
+            minijuegoActivo = 2;
             minijuego2UI.SetActive(true);
             managerMinijuego2.Iniciar();
         }
@@ -173,15 +205,12 @@ public class Manager_Interaccion : MonoBehaviour
     public void OnMinigameFinished(bool success)
     {
         minigameUI.SetActive(false);
+        minijuego2UI.SetActive(false);
 
-        if (success)
-        {
-            StartDialogue(nodoSuccess);
-        }
+        if (minijuegoActivo == 1)
+            StartDialogue(success ? nodoSuccess1 : nodoFail1);
         else
-        {
-            StartDialogue(nodoFail);
-        }
+            StartDialogue(success ? nodoSuccess2 : nodoFail2);
     }
     void EndDialogue()
     {

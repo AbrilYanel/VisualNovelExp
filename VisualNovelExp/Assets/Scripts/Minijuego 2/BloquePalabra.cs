@@ -11,9 +11,10 @@ public class BloquePalabra : MonoBehaviour,
 
     private RectTransform rt;
     private Canvas canvas;
-    private Transform contenedorOriginal;
+    public Transform contenedorOriginal;
     private Vector2 posicionOriginal;
     private Image imagenFondo;
+    private SlotPalabra slotActual = null;
 
     [Header("Colores")]
     public Color colorNormal = Color.white;
@@ -37,7 +38,15 @@ public class BloquePalabra : MonoBehaviour,
     {
         posicionOriginal = rt.anchoredPosition;
         imagenFondo.color = colorArrastrando;
-        transform.SetParent(canvas.transform); // sale del layout al arrastrar
+
+        // Si estaba en un slot, liberarlo
+        if (slotActual != null)
+        {
+            slotActual.LiberarBloque();
+            slotActual = null;
+        }
+
+        transform.SetParent(canvas.transform);
         transform.SetAsLastSibling();
     }
 
@@ -50,18 +59,21 @@ public class BloquePalabra : MonoBehaviour,
     {
         imagenFondo.color = colorNormal;
 
-        // Buscar slot cercano
+        imagenFondo.color = colorNormal;
+
         SlotPalabra slotCercano = EncontrarSlotCercano();
 
         if (slotCercano != null && slotCercano.EstaVacio())
         {
+            slotActual = slotCercano;
             slotCercano.ColocarBloque(this);
         }
         else
         {
-            // Volver al contenedor original
+            // Volver al contenedor de bloques disponibles
             transform.SetParent(contenedorOriginal);
-            rt.anchoredPosition = posicionOriginal;
+            rt.anchoredPosition = Vector2.zero;
+            slotActual = null;
         }
     }
 

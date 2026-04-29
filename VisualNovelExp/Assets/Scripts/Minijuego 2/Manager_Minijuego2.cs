@@ -19,6 +19,9 @@ public class Manager_Minijuego2 : MonoBehaviour
     public TextMeshProUGUI textoProgreso;
     public Button botonConfirmar;
     public Button botonSiguiente;
+    public TextMeshProUGUI textoBotonSiguiente;
+    public GameObject minijuego2Panel;
+
 
     [Header("UI Fill in the Blank")]
     public GameObject panelFillBlank;
@@ -98,24 +101,22 @@ public class Manager_Minijuego2 : MonoBehaviour
 
         foreach (Transform t in contenedorOpciones) Destroy(t.gameObject);
 
+        // Mezclar opciones manteniendo track del índice correcto
+        List<int> indices = new List<int>();
         for (int i = 0; i < pregunta.opciones.Length; i++)
+            indices.Add(i);
+        Shuffle(indices);
+
+        foreach (int i in indices)
         {
             int indiceLocal = i;
             GameObject obj = Instantiate(botonOpcionPrefab, contenedorOpciones);
 
-            // Buscar TMP en hijos y en el objeto mismo
             TextMeshProUGUI tmp = obj.GetComponentInChildren<TextMeshProUGUI>(true);
-
             if (tmp != null)
             {
                 tmp.text = pregunta.opciones[i];
-                tmp.color = Color.black; // forzar color visible
-                tmp.fontSize = 24;
-                Debug.Log("Texto asignado: " + pregunta.opciones[i]);
-            }
-            else
-            {
-                Debug.LogError("No se encontró TMP en BotonOpcionPrefab");
+                tmp.color = Color.black;
             }
 
             Button btn = obj.GetComponent<Button>();
@@ -137,7 +138,7 @@ public class Manager_Minijuego2 : MonoBehaviour
         botonObj.GetComponent<Image>().color = new Color(0.7f, 0.9f, 1f);
     }
 
-    // FASE 2: Word Order 
+    // Word Order 
     void MostrarWordOrder(PreguntaData pregunta)
     {
         panelFillBlank.SetActive(false);
@@ -185,13 +186,17 @@ public class Manager_Minijuego2 : MonoBehaviour
         botonConfirmar.gameObject.SetActive(false);
         botonSiguiente.gameObject.SetActive(true);
 
+        // Cambiar texto según si es la última pregunta
+        bool esUltima = (indiceActual >= preguntas.Count - 1);
+        if (textoBotonSiguiente != null)
+            textoBotonSiguiente.text = esUltima ? "Finalizar" : "Siguiente";
+
         if (correcto)
         {
             respuestasCorrectas++;
             textoFeedback.color = colorCorrecto;
             textoFeedback.text = "¡Correcto!";
 
-            // Registrar palabras en el journal
             if (pregunta.palabrasQueEnsena != null && managerJournal != null)
                 managerJournal.RegistrarPalabras(pregunta.palabrasQueEnsena);
         }
@@ -258,6 +263,11 @@ public class Manager_Minijuego2 : MonoBehaviour
     void TerminarMinijuego()
     {
         bool exito = respuestasCorrectas >= Mathf.CeilToInt(preguntas.Count * 0.6f);
+
+        // Cerrar el panel antes de continuar el diálogo
+        if (minijuego2Panel != null)
+            minijuego2Panel.SetActive(false);
+
         interaccionManager.OnMinigameFinished(exito);
     }
 

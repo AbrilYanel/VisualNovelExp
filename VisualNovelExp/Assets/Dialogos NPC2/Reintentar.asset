@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
-  m_Name: Fail
+  m_Name: Reintentar
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Mmm, parece que no lo entendiste del todo, te gustar\xEDa reintentar?"
-  hasChoices: 1
-  option1Text: Si con gusto
-  option2Text: No gracias
-  option1Next: {fileID: 11400000, guid: 216f1bb038f85f145b790a82ebbf03aa, type: 2}
-  option2Next: {fileID: 11400000, guid: eb78132a1f8fedd4ba2cf0f8cda18b51, type: 2}
+  sentence: 
+  hasChoices: 0
+  option1Text: 
+  option2Text: 
+  option1Next: {fileID: 0}
+  option2Next: {fileID: 0}
   startsMinigame: 0
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 0
-  reintentarMinijuego: 0
+  reintentarMinijuego: 1

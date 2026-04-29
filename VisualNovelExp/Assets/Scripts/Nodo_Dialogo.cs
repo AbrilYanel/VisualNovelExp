@@ -21,4 +21,6 @@ public class Nodo_Dialogo : ScriptableObject
 
     public enum TipoMinijuego { Minijuego1, Minijuego2 }
     public TipoMinijuego tipoMinijuego;
+
+    public bool reintentarMinijuego;
 }

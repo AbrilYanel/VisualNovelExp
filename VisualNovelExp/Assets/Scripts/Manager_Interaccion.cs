@@ -43,12 +43,21 @@ public class Manager_Interaccion : MonoBehaviour
 
     private int minijuegoActivo = 0;
 
+    [Header("Progreso")]
+    public PlayerProgress playerProgress;
+    public TextMeshProUGUI textoNivel;
+    private Interaccion_NPC npcActual;
+
+    private int minijuegoActivoParaReintento = 0;
+
 
     void Start()
     {
         dialoguePanel.SetActive(false);
         choicePanel.SetActive(false);
-  
+        if (playerProgress != null) playerProgress.Resetear();
+        ActualizarUIProgreso();
+
     }
 
     void Update()
@@ -59,7 +68,7 @@ public class Manager_Interaccion : MonoBehaviour
             dialogueText.text = currentSentence;
             isTyping = false;
 
-            // Reproducir la lógica de fin de typing manualmente
+           
             if (currentNode.endsDialogue)
             {
                 EndDialogue();
@@ -74,7 +83,7 @@ public class Manager_Interaccion : MonoBehaviour
             }
             else
             {
-                // No hay nada más, cerrar
+                
                 EndDialogue();
             }
         }
@@ -89,7 +98,7 @@ public class Manager_Interaccion : MonoBehaviour
             Player_Movement.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        
+
 
         if (isTyping) return;
         currentNode = node;
@@ -117,7 +126,7 @@ public class Manager_Interaccion : MonoBehaviour
 
         isTyping = false;
 
-      
+
         if (currentNode.endsDialogue)
         {
             yield return new WaitForSeconds(1f); // opcional (para que se lea)
@@ -125,12 +134,12 @@ public class Manager_Interaccion : MonoBehaviour
             yield break;
         }
 
-      
+
         if (currentNode.hasChoices)
         {
             ShowChoices();
         }
-       
+
         else if (currentNode.nextNode != null)
         {
             yield return new WaitForSeconds(1f);
@@ -154,28 +163,29 @@ public class Manager_Interaccion : MonoBehaviour
         button2.onClick.AddListener(() => ChooseOption(2));
     }
 
-     void ChooseOption(int option)
+    void ChooseOption(int option)
+    {
+        choicePanel.SetActive(false);
+
+        Nodo_Dialogo nextNode = option == 1
+            ? currentNode.option1Next
+            : currentNode.option2Next;
+
+        if (nextNode != null)
         {
-            choicePanel.SetActive(false);
-
-            Nodo_Dialogo nextNode = null;
-
-            if (option == 1)
-                nextNode = currentNode.option1Next;
-            else
-                nextNode = currentNode.option2Next;
-
-            if (nextNode != null)
+            if (nextNode.startsMinigame)
             {
-               
-                if (nextNode.startsMinigame)
-                {
-                    StartMinigame();
-                    return;
-                }
+                StartMinigame();
+                return;
+            }
 
-                
-                StartDialogue(nextNode);
+            if (nextNode.reintentarMinijuego)
+            {
+                ReintentarMinijuego();
+                return;
+            }
+
+            StartDialogue(nextNode);
         }
     }
 
@@ -207,11 +217,60 @@ public class Manager_Interaccion : MonoBehaviour
         minigameUI.SetActive(false);
         minijuego2UI.SetActive(false);
 
-        if (minijuegoActivo == 1)
-            StartDialogue(success ? nodoSuccess1 : nodoFail1);
+        if (success)
+        {
+            if (playerProgress != null)
+            {
+                playerProgress.CompletarInteraccion();
+                ActualizarUIProgreso();
+            }
+
+           
+            if (npcActual != null)
+                npcActual.MarcarCompletado();
+
+            if (minijuegoActivo == 1)
+                StartDialogue(nodoSuccess1);
+            else
+                StartDialogue(nodoSuccess2);
+        }
         else
-            StartDialogue(success ? nodoSuccess2 : nodoFail2);
+        {
+            minijuegoActivoParaReintento = minijuegoActivo;
+
+            if (minijuegoActivo == 1)
+                StartDialogue(nodoFail1);
+            else
+                StartDialogue(nodoFail2);
+        }
     }
+
+    public void ReintentarMinijuego()
+    {
+        dialoguePanel.SetActive(false);
+        choicePanel.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if (cameraController != null) cameraController.enabled = false;
+        if (Player_Movement != null) Player_Movement.enabled = false;
+
+        if (minijuegoActivoParaReintento == 1)
+        {
+            minigameUI.SetActive(true);
+            managerMinijuego.Iniciar();
+        }
+        else
+        {
+            minijuego2UI.SetActive(true);
+            if (managerMinijuego2.minijuego2Panel != null)
+                managerMinijuego2.minijuego2Panel.SetActive(true);
+            managerMinijuego2.Iniciar();
+        }
+    }
+
+
     void EndDialogue()
     {
         dialoguePanel.SetActive(false);
@@ -225,5 +284,17 @@ public class Manager_Interaccion : MonoBehaviour
 
         if (Player_Movement != null)
             Player_Movement.enabled = true;
+    }
+
+    void ActualizarUIProgreso()
+    {
+        if (textoNivel != null)
+            textoNivel.text = $"Nivel {playerProgress.nivelActual} — {playerProgress.interaccionesCompletadas}/{playerProgress.interaccionesPorNivel} interacciones";
+    }
+
+
+    public void SetNPCActual(Interaccion_NPC npc)
+    {
+        npcActual = npc;
     }
 }

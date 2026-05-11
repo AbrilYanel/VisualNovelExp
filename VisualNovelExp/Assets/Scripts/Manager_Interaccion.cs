@@ -106,7 +106,7 @@ public class Manager_Interaccion : MonoBehaviour
         if (isTyping) return;
         currentNode = node;
 
-        // ✅ EJECUTAR EFECTOS DEL NODO AL INICIARLO
+        //  EJECUTAR EFECTOS DEL NODO AL INICIARLO
         EjecutarEfectosNodo(node);
 
         dialoguePanel.SetActive(true);

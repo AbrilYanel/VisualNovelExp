@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Sakamoto
+  m_EditorClassIdentifier: Assembly-CSharp::EntrevistaData
+  nombreEntrevistado: Sakamoto-San
+  preguntas:
+  - preguntaEspanol: Preguntarle el nombre
+    preguntaJapones: "\u304A\u540D\u524D\u306F\u4F55\u3067\u3059\u304B\uFF1F"
+    opciones:
+    - textoOpcion: "O namae wa nan desu ka\uFF1F"
+      respuestaDelNPC: Kenji Sakamoto desu. Yoroshiku!
+      esCorrecta: 1
+      puntaje: 2
+      reaccion: 0
+    - textoOpcion: "Namae ga suki desu ka\uFF1F"
+      respuestaDelNPC: "Esa es una pregunta extra\xF1a..."
+      esCorrecta: 0
+      puntaje: 0
+      reaccion: 2
+    - textoOpcion: "Nan sai desu ka\uFF1F"
+      respuestaDelNPC: "No deber\xEDas preguntar mi nombre primero?"
+      esCorrecta: 0
+      puntaje: 1
+      reaccion: 1
+  - preguntaEspanol: "Preguntarle qu\xE9 le gusta"
+    preguntaJapones: Nani ga suki desu ka?
+    opciones:
+    - textoOpcion: Nani ga suki desu ka?
+      respuestaDelNPC: Neko ga suki desu!
+      esCorrecta: 1
+      puntaje: 2
+      reaccion: 0
+    - textoOpcion: Nani o tabemasu ka?
+      respuestaDelNPC: "A\xFAn no es la hora de comer..."
+      esCorrecta: 0
+      puntaje: 0
+      reaccion: 3
+  - preguntaEspanol: Agradecerle por la entrevista
+    preguntaJapones: "\u3042\u308A\u304C\u3068\u3046\u3054\u3056\u3044\u307E\u3057\u305F\uFF01"
+    opciones:
+    - textoOpcion: Arigatou gozaimasu!
+      respuestaDelNPC: Gracias a vos tambien!
+      esCorrecta: 1
+      puntaje: 2
+      reaccion: 0
+    - textoOpcion: Sayounara.
+      respuestaDelNPC: "...Si, adi\xF3s."
+      esCorrecta: 0
+      puntaje: 1
+      reaccion: 2
+  puntajeMaximo: 6
+  puntajeMinimoExito: 3

@@ -76,7 +76,10 @@ public class Manager_Entrevista : MonoBehaviour
         indiceActual = 0;
         puntajeTotal = 0;
         esperandoSiguiente = false;
-
+        if (managerInteraccion != null)
+        {
+            managerInteraccion.dialogueText.text = " ";
+        }
         panelEntrevista.SetActive(true);
         textoNombreEntrevistado.text = entrevistaData.nombreEntrevistado;
 
@@ -92,8 +95,8 @@ public class Manager_Entrevista : MonoBehaviour
     {
         esperandoSiguiente = false;
         textoRespuestaNPC.text = "";
-        textoProgreso.text = $"質問 {indiceActual + 1}/{entrevistaData.preguntas.Count}";
-        textoPuntaje.text = $"関係: {puntajeTotal}pts";
+        textoProgreso.text = $"Pregunta {indiceActual + 1}/{entrevistaData.preguntas.Count}";
+        textoPuntaje.text = $"Relacion: {puntajeTotal}pts";
 
         textoPreguntaJapones.text = pregunta.preguntaJapones;
         textoPreguntaEspanol.text = $"({pregunta.preguntaEspanol})";
@@ -148,7 +151,7 @@ public class Manager_Entrevista : MonoBehaviour
 
         // Actualizar puntaje
         puntajeTotal += opcion.puntaje;
-        textoPuntaje.text = $"関係: {puntajeTotal}pts";
+        textoPuntaje.text = $"Relación: {puntajeTotal}pts";
 
         // Mostrar respuesta y reacción del NPC
         textoRespuestaNPC.text = opcion.respuestaDelNPC;
@@ -168,7 +171,7 @@ public class Manager_Entrevista : MonoBehaviour
         panelFeedback.SetActive(true);
 
         if (textoFeedback != null)
-            textoFeedback.text = correcto ? "✓ 正解！" : "✗ 不正解";
+            textoFeedback.text = correcto ? "Correcto" : "Incorrecto";
         // "¡Correcto!" / "Incorrecto"
 
         if (imagenFeedbackBG != null)
@@ -209,7 +212,7 @@ public class Manager_Entrevista : MonoBehaviour
     }
 
     // ─────────────────────────────────────────
-    void TerminarEntrevista()
+    public void TerminarEntrevista()
     {
         // Ocultar panel de preguntas
         panelEntrevista.SetActive(false);
@@ -232,12 +235,12 @@ public class Manager_Entrevista : MonoBehaviour
 
         if (textoResultadoTitulo != null)
             textoResultadoTitulo.text = exito
-                ? "インタビュー成功！🎉"   // ¡Entrevista exitosa!
-                : "インタビュー終了";       // Entrevista terminada
+                ? "¡Entrevista exitosa!"   // ¡Entrevista exitosa!
+                : " Entrevista terminada";       // Entrevista terminada
 
         if (textoResultadoPuntaje != null)
             textoResultadoPuntaje.text =
-                $"スコア: {puntajeTotal} / {entrevistaData.puntajeMaximo}";
+                $"Score: {puntajeTotal} / {entrevistaData.puntajeMaximo}";
 
         if (textoResultadoMensaje != null)
         {
@@ -251,11 +254,11 @@ public class Manager_Entrevista : MonoBehaviour
         float porcentaje = (float)puntaje / entrevistaData.puntajeMaximo;
 
         if (porcentaje >= 0.8f)
-            return "素晴らしい！\n¡Excelente entrevista! Sakamoto-san quedó muy contento.";
+            return "Excelente!\n¡Excelente entrevista! Sakamoto-san quedó muy contento.";
         else if (porcentaje >= 0.5f)
-            return "まあまあ。\nEntrevista aceptable. Podría haber sido mejor.";
+            return "Bien.\nEntrevista aceptable. Podría haber sido mejor.";
         else
-            return "がんばれ！\nNecesitás practicar más el vocabulario.";
+            return "Ánimos\nNecesitás practicar más el vocabulario.";
     }
 
     // ─────────────────────────────────────────

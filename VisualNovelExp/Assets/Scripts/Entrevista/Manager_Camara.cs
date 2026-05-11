@@ -62,9 +62,9 @@ public class Manager_Camara : MonoBehaviour
         panelTextoGrabar.SetActive(true);
 
         if (textoGrabar != null)
-            textoGrabar.text = "【R】で撮影開始  /  Presioná R para grabar";
+            textoGrabar.text = "Presioná R para grabar";
 
-        ActualizarEstado("インタビューを始めよう！");
+        ActualizarEstado("Empieza la entrevista!");
         // "¡Empecemos la entrevista!"
     }
 
@@ -76,10 +76,10 @@ public class Manager_Camara : MonoBehaviour
 
         // Feedback según puntaje
         if (puntaje >= puntajeMinimoExito)
-            ActualizarEstado("✓ 良いインタビューだった！監督に戻ろう");
+            ActualizarEstado("Fue una buena entrevista! Volvé al Director");
         // "¡Fue una buena entrevista! Volvé al Director"
         else
-            ActualizarEstado("△ インタビュー終了。監督に戻ろう");
+            ActualizarEstado("Entrevista terminada. Volvé al Director");
         // "Entrevista terminada. Volvé al Director"
     }
 
@@ -87,7 +87,7 @@ public class Manager_Camara : MonoBehaviour
     {
         tieneCamara = false;
         iconoCamara.SetActive(false);
-        ActualizarEstado("ミッション完了！");
+        ActualizarEstado("Mision Completa!");
         // "¡Misión completa!"
     }
 
@@ -112,7 +112,7 @@ public class Manager_Camara : MonoBehaviour
     {
         panelItemRecibido.SetActive(true);
         if (textoItemRecibido != null)
-            textoItemRecibido.text = $"Item Recibido！\n{nombreItem}";
+            textoItemRecibido.text = $"Item Recibido! \n{nombreItem}";
 
         yield return new WaitForSeconds(2.5f);
 

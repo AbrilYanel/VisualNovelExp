@@ -31,6 +31,11 @@ public class Interaccion_NPC : MonoBehaviour
         if (completado)
             return;
 
+        if (playerProgress != null && !playerProgress.PuedeInteractuar(nivelRequerido))
+        {
+            MostrarMensajeNivel();
+            return;
+        }
         if (npcEntrevistado != null)
         {
             npcEntrevistado.Interact();
@@ -43,11 +48,7 @@ public class Interaccion_NPC : MonoBehaviour
             return;
         }
 
-        if (playerProgress != null && !playerProgress.PuedeInteractuar(nivelRequerido))
-        {
-            MostrarMensajeNivel();
-            return;
-        }
+       
 
        
 

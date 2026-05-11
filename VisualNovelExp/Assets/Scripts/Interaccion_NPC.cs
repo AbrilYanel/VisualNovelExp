@@ -11,22 +11,45 @@ public class Interaccion_NPC : MonoBehaviour
     public int nivelRequerido = 1;
     public PlayerProgress playerProgress;
 
-    [Header("UI nivel insuficiente")]
+    [Header("UI")]
     public GameObject panelNivelInsuficiente;
     public TextMeshProUGUI textoNivelInsuficiente;
+    public GameObject indicadorExclamacion;
 
     private bool completado = false;
+
+    public NPC_Entrevistado npcEntrevistado;   
+    public NPC_Director npcDirector;          
+
+    void Start()
+    {
+        ActualizarIndicador();
+    }
 
     public void Interact()
     {
         if (completado)
             return;
 
+        if (npcEntrevistado != null)
+        {
+            npcEntrevistado.Interact();
+            return;
+        }
+
+        if (npcDirector != null)
+        {
+            npcDirector.Interact();
+            return;
+        }
+
         if (playerProgress != null && !playerProgress.PuedeInteractuar(nivelRequerido))
         {
             MostrarMensajeNivel();
             return;
         }
+
+       
 
         dialogueManager.SetNPCActual(this);
         dialogueManager.StartDialogue(startNode);
@@ -54,6 +77,20 @@ public class Interaccion_NPC : MonoBehaviour
     public void MarcarCompletado()
     {
         completado = true;
+        ActualizarIndicador();
+
+    }
+
+    public void ActualizarIndicador()
+    {
+        if (indicadorExclamacion == null) return;
+
+        
+        bool mostrar = !completado &&
+                       playerProgress != null &&
+                       playerProgress.PuedeInteractuar(nivelRequerido);
+
+        indicadorExclamacion.SetActive(mostrar);
     }
 
 

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -50,7 +50,13 @@ public class Manager_Interaccion : MonoBehaviour
 
     private int minijuegoActivoParaReintento = 0;
 
+    [Header("Sistema Entrevista")]
+    public Manager_Camara managerCamara;
+    public Manager_Entrevista managerEntrevista;
+    public Nodo_Dialogo nodoEntregaExitosa;
+    public Nodo_Dialogo nodoEntregaMala;
 
+    private Nodo_Dialogo nodoPostEntrega = null;
     void Start()
     {
         dialoguePanel.SetActive(false);
@@ -88,24 +94,23 @@ public class Manager_Interaccion : MonoBehaviour
             }
         }
     }
-    //Inicia el di�logo
+    //Inicia el diálogo
     public void StartDialogue(Nodo_Dialogo node)
     {
-        if (cameraController != null)
-            cameraController.enabled = false;
+        if (cameraController != null) cameraController.enabled = false;
+        if (Player_Movement != null) Player_Movement.enabled = false;
 
-        if (Player_Movement != null)
-            Player_Movement.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
 
         if (isTyping) return;
         currentNode = node;
 
+        // ✅ EJECUTAR EFECTOS DEL NODO AL INICIARLO
+        EjecutarEfectosNodo(node);
+
         dialoguePanel.SetActive(true);
         choicePanel.SetActive(false);
-
 
         nameText.text = node.speakerName;
         currentSentence = node.sentence;
@@ -113,6 +118,38 @@ public class Manager_Interaccion : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TypeSentence());
     }
+
+
+    void EjecutarEfectosNodo(Nodo_Dialogo node)
+    {
+        // Dar cámara al jugador
+        if (node.daCamara && managerCamara != null)
+        {
+            Debug.Log("[Misión] RecibirCamara() ejecutado");
+            managerCamara.RecibirCamara();
+        }
+
+        // Dar permiso para entrevistar
+        if (node.daPermiso && managerCamara != null)
+        {
+            Debug.Log("[Misión] ObtenerPermiso() ejecutado");
+            managerCamara.ObtenerPermiso();
+        }
+
+        // Entregar entrevista al Director
+        if (node.entregaEntrevista && managerCamara != null && managerEntrevista != null)
+        {
+            Debug.Log("[Misión] EntregarEntrevista() ejecutado");
+            bool exitosa = managerCamara.puntajeEntrevista >=
+                           managerEntrevista.entrevistaData.puntajeMinimoExito;
+            managerCamara.EntregarEntrevista();
+
+            // Guardamos el nodo siguiente para después del diálogo actual
+            nodoPostEntrega = exitosa ? nodoEntregaExitosa : nodoEntregaMala;
+        }
+    }
+
+
     IEnumerator TypeSentence()
     {
         isTyping = true;
@@ -126,20 +163,27 @@ public class Manager_Interaccion : MonoBehaviour
 
         isTyping = false;
 
-
         if (currentNode.endsDialogue)
         {
-            yield return new WaitForSeconds(1f); // opcional (para que se lea)
+            yield return new WaitForSeconds(1f);
+
+            // Si hay nodo post-entrega pendiente, ir a él
+            if (nodoPostEntrega != null)
+            {
+                Nodo_Dialogo temp = nodoPostEntrega;
+                nodoPostEntrega = null;
+                StartDialogue(temp);
+                yield break;
+            }
+
             EndDialogue();
             yield break;
         }
-
 
         if (currentNode.hasChoices)
         {
             ShowChoices();
         }
-
         else if (currentNode.nextNode != null)
         {
             yield return new WaitForSeconds(1f);
@@ -286,10 +330,13 @@ public class Manager_Interaccion : MonoBehaviour
             Player_Movement.enabled = true;
     }
 
-    void ActualizarUIProgreso()
+    public void ActualizarUIProgreso()
     {
         if (textoNivel != null)
-            textoNivel.text = $"Nivel {playerProgress.nivelActual} � {playerProgress.interaccionesCompletadas}/{playerProgress.interaccionesPorNivel} interacciones";
+            textoNivel.text = $"Nivel {playerProgress.nivelActual} — {playerProgress.interaccionesCompletadas}/{playerProgress.interaccionesPorNivel} interacciones";
+
+        foreach (Interaccion_NPC npc in FindObjectsOfType<Interaccion_NPC>())
+            npc.ActualizarIndicador();
     }
 
 

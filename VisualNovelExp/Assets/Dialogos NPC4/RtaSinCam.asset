@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
-  m_Name: Success
+  m_Name: RtaSinCam
   m_EditorClassIdentifier: 
-  speakerName: Hombre Gato
-  sentence: "Muy bien humano, aprendiste 3 nuevas palabras, chequealas en tu journal
-    (Tab) y contin\xFAa conociendo m\xE1s personas interesantes, miau! Buena suerte."
+  speakerName: 
+  sentence: No, no podes
   hasChoices: 0
-  option1Text: Gracias Nekoman
-  option2Text: Hasta luego.
+  option1Text: 
+  option2Text: 
   option1Next: {fileID: 0}
   option2Next: {fileID: 0}
   startsMinigame: 0
@@ -27,3 +26,4 @@ MonoBehaviour:
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0
+  daPermiso: 0

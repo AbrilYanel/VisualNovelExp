@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
-  m_Name: Success
+  m_Name: Claro
   m_EditorClassIdentifier: 
-  speakerName: Hombre Gato
-  sentence: "Muy bien humano, aprendiste 3 nuevas palabras, chequealas en tu journal
-    (Tab) y contin\xFAa conociendo m\xE1s personas interesantes, miau! Buena suerte."
-  hasChoices: 0
-  option1Text: Gracias Nekoman
-  option2Text: Hasta luego.
-  option1Next: {fileID: 0}
+  speakerName: 
+  sentence: "Genial, necesito que vayas a entrevistar alg\xFAn transeunte, haz una
+    grabaci\xF3n excelente y traela de vuelta conmigo. \xBFPodr\xEDas?"
+  hasChoices: 1
+  option1Text: De acuerdo
+  option2Text: "M\xE1s tarde"
+  option1Next: {fileID: 11400000, guid: f39e2929091379d4e9e706ebe8d84b0c, type: 2}
   option2Next: {fileID: 0}
   startsMinigame: 0
-  endsDialogue: 1
+  endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 0
   reintentarMinijuego: 0

@@ -23,4 +23,8 @@ public class Nodo_Dialogo : ScriptableObject
     public TipoMinijuego tipoMinijuego;
 
     public bool reintentarMinijuego;
+
+    public bool daCamara;           // activa la cámara al terminar este nodo
+    public bool entregaEntrevista;
+    public bool daPermiso;
 }

@@ -5,7 +5,7 @@ public class PlayerProgress : ScriptableObject
 {
     public int nivelActual = 1;
     public int interaccionesCompletadas = 0;
-    public int interaccionesPorNivel = 2; // cuántas para subir de nivel
+    public int interaccionesPorNivel = 2; 
 
     public void CompletarInteraccion()
     {

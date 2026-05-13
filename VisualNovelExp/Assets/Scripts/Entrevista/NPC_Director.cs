@@ -7,13 +7,14 @@ public class NPC_Director : MonoBehaviour
     public Manager_Camara managerCamara;
 
     [Header("Nodos de diálogo")]
-    public Nodo_Dialogo nodoInicio;           // Primera vez que habla
-    public Nodo_Dialogo nodoMisionActiva;     // Ya le dio la cámara, aún no terminó
-    public Nodo_Dialogo nodoEntrega;          // Jugador vuelve con entrevista completa
-    public Nodo_Dialogo nodoMisionCompleta;   // Ya entregó todo
+    public Nodo_Dialogo nodoInicio;           
+    public Nodo_Dialogo nodoMisionActiva;     
+    public Nodo_Dialogo nodoEntrega;          
+    public Nodo_Dialogo nodoMisionCompleta;   
 
     private bool misionCompletada = false;
-
+    public PlayerProgress playerProgress;
+    public int interaccionesAlCompletar = 2;
     public void Interact()
     {
         // Misión ya terminada del todo
@@ -27,7 +28,6 @@ public class NPC_Director : MonoBehaviour
         if (managerCamara.entrevistaCompletada)
         {
             managerInteraccion.StartDialogue(nodoEntrega);
-            // El nodo de entrega debe tener un evento que llame a EntregarEntrevista()
             return;
         }
 
@@ -40,10 +40,9 @@ public class NPC_Director : MonoBehaviour
 
         // Primera interacción: dar cámara
         managerInteraccion.StartDialogue(nodoInicio);
-        // El nodo de inicio debe tener un evento que llame a IniciarMision()
     }
 
-    // Llamado desde el evento del nodo de diálogo de inicio
+   
     public void IniciarMision()
     {
         managerCamara.RecibirCamara();
@@ -56,15 +55,24 @@ public class NPC_Director : MonoBehaviour
         misionCompletada = true;
         managerCamara.EntregarEntrevista();
 
-        // Aquí podés disparar lógica según el resultado
-        if (puntaje >= managerCamara.puntajeMinimoExito)
+        bool exitosa = puntaje >= managerCamara.puntajeMinimoExito;
+      
+        if (exitosa && playerProgress != null)
         {
-            Debug.Log($"¡Entrevista exitosa! Puntaje: {puntaje}");
-            // Desbloquear siguiente capítulo, dar recompensa, etc.
+           
+            for (int i = 0; i < interaccionesAlCompletar; i++)
+            {
+                playerProgress.CompletarInteraccion();
+            }
+
+            // Actualizar UI
+            managerInteraccion.ActualizarUIProgreso();
+
+            Debug.Log($" Misión completada. Nivel actual: {playerProgress.nivelActual}");
         }
-        else
+        else if (!exitosa)
         {
-            Debug.Log($"Entrevista mediocre. Puntaje: {puntaje}");
+            Debug.Log("Entrevista entregada pero puntaje insuficiente");
         }
     }
 }

@@ -998,7 +998,9 @@ MonoBehaviour:
   nodoInicio: {fileID: 11400000, guid: 69597a7de3afbc64d85d404ff541de50, type: 2}
   nodoMisionActiva: {fileID: 11400000, guid: f39e2929091379d4e9e706ebe8d84b0c, type: 2}
   nodoEntrega: {fileID: 11400000, guid: c1d388cf08d8797419581eafc0c3914d, type: 2}
-  nodoMisionCompleta: {fileID: 0}
+  nodoMisionCompleta: {fileID: 11400000, guid: 33b7023c4a49e11419f4b63c16c46469, type: 2}
+  playerProgress: {fileID: 11400000, guid: a2287b95c78e0ad48898d23931b08749, type: 2}
+  interaccionesAlCompletar: 2
 --- !u!1001 &225605574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1523,7 +1525,7 @@ MonoBehaviour:
   managerEntrevista: {fileID: 2029658475}
   nodoSinCamara: {fileID: 11400000, guid: 2b4164703f795fc4da01ad5447a94253, type: 2}
   nodoConCamara: {fileID: 11400000, guid: 9add66b011dfe2b4094115f0893b8b46, type: 2}
-  nodoYaEntrevistado: {fileID: 11400000, guid: c1d388cf08d8797419581eafc0c3914d, type: 2}
+  nodoYaEntrevistado: {fileID: 11400000, guid: e268ee97e7454bf4db1ee9baae0f4852, type: 2}
   indicadorAccion: {fileID: 0}
 --- !u!114 &254230500
 MonoBehaviour:
@@ -6598,7 +6600,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.9212, y: -397.7495}
+  m_AnchoredPosition: {x: 5.9211426, y: -397.7495}
   m_SizeDelta: {x: -247.91, y: -795.499}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1014632220
@@ -7020,7 +7022,7 @@ MonoBehaviour:
   permisoObtenido: 0
   entrevistaCompletada: 0
   puntajeEntrevista: 0
-  puntajeMinimoExito: 3
+  puntajeMinimoExito: 5
   iconoCamara: {fileID: 953221426}
   panelTextoGrabar: {fileID: 1202536943}
   textoGrabar: {fileID: 1656245135}
@@ -7369,8 +7371,8 @@ MonoBehaviour:
   textoNivel: {fileID: 1683861199}
   managerCamara: {fileID: 1083995660}
   managerEntrevista: {fileID: 2029658475}
-  nodoEntregaExitosa: {fileID: 0}
-  nodoEntregaMala: {fileID: 0}
+  nodoEntregaExitosa: {fileID: 11400000, guid: 33b7023c4a49e11419f4b63c16c46469, type: 2}
+  nodoEntregaMala: {fileID: 11400000, guid: fc5f3c38bd63314439bee34a00431653, type: 2}
 --- !u!4 &1122052090
 Transform:
   m_ObjectHideFlags: 0
@@ -9858,7 +9860,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10.999939, y: -12.999939}
+  m_AnchoredPosition: {x: 11, y: -13}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1683861199

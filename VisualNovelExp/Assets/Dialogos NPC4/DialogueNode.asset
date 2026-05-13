@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
-  m_Name: Confirmar1
+  m_Name: DialogueNode
   m_EditorClassIdentifier: 
-  speakerName: Hombre Gato
-  sentence: "Incre\xEDble! Sab\xEDas que gato se dice NEKO? Podr\xEDa ense\xF1arte
-    incluso m\xE1s palabras si quer\xE9s."
-  hasChoices: 1
-  option1Text: Si, por favor!
-  option2Text: Mejor no, gracias.
-  option1Next: {fileID: 11400000, guid: fd8227ae5d07d914ea85cbc7c2f62a5e, type: 2}
-  option2Next: {fileID: 11400000, guid: 8f12ab836421247429528423d91a3f47, type: 2}
+  speakerName: 
+  sentence: Espero que te hayan servido mis respuestas!
+  hasChoices: 0
+  option1Text: 
+  option2Text: 
+  option1Next: {fileID: 0}
+  option2Next: {fileID: 0}
   startsMinigame: 0
-  endsDialogue: 0
+  endsDialogue: 1
   nextNode: {fileID: 0}
   tipoMinijuego: 0
   reintentarMinijuego: 0

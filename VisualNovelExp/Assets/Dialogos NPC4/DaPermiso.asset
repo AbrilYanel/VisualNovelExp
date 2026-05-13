@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DaPermiso
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: Si claro podes
+  sentence: "Ya has conseguido una c\xE1mara? Genial, empez\xE1 a grabar cuando quieras!"
   hasChoices: 0
   option1Text: 
   option2Text: 

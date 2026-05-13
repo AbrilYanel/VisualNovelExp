@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RtaSinCam
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: No, no podes
+  sentence: "Hm, una entrevista? Pero ni siquiera ten\xE9s una c\xE1mara..."
   hasChoices: 0
   option1Text: 
   option2Text: 

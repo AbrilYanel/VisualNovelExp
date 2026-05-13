@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
-  m_Name: Rechazo2
+  m_Name: Despedir
   m_EditorClassIdentifier: 
-  speakerName: Hombre Gato
-  sentence: De acuerdo, nos vemos luego!
+  speakerName: 
+  sentence: "De acuerdo, ten un buen d\xEDa!"
   hasChoices: 0
   option1Text: 
   option2Text: 
@@ -22,3 +22,8 @@ MonoBehaviour:
   startsMinigame: 0
   endsDialogue: 1
   nextNode: {fileID: 0}
+  tipoMinijuego: 0
+  reintentarMinijuego: 0
+  daCamara: 0
+  entregaEntrevista: 0
+  daPermiso: 0

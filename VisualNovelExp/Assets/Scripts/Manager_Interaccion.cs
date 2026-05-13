@@ -106,7 +106,7 @@ public class Manager_Interaccion : MonoBehaviour
         if (isTyping) return;
         currentNode = node;
 
-        //  EJECUTAR EFECTOS DEL NODO AL INICIARLO
+        // 
         EjecutarEfectosNodo(node);
 
         dialoguePanel.SetActive(true);
@@ -125,26 +125,29 @@ public class Manager_Interaccion : MonoBehaviour
         // Dar cámara al jugador
         if (node.daCamara && managerCamara != null)
         {
-            Debug.Log("[Misión] RecibirCamara() ejecutado");
+            Debug.Log("[Misión] Recibir Camara ejecutado");
             managerCamara.RecibirCamara();
         }
 
         // Dar permiso para entrevistar
         if (node.daPermiso && managerCamara != null)
         {
-            Debug.Log("[Misión] ObtenerPermiso() ejecutado");
+            Debug.Log("[Misión] Obtener permiso ejecutado");
             managerCamara.ObtenerPermiso();
         }
 
         // Entregar entrevista al Director
         if (node.entregaEntrevista && managerCamara != null && managerEntrevista != null)
         {
-            Debug.Log("[Misión] EntregarEntrevista() ejecutado");
+            Debug.Log("[Misión] Entregar Entrevista ejecutado");
             bool exitosa = managerCamara.puntajeEntrevista >=
-                           managerEntrevista.entrevistaData.puntajeMinimoExito;
-            managerCamara.EntregarEntrevista();
+                      managerEntrevista.entrevistaData.puntajeMinimoExito;
 
-            // Guardamos el nodo siguiente para después del diálogo actual
+            
+            NPC_Director director = FindObjectOfType<NPC_Director>();
+            if (director != null)
+                director.CompletarMision();
+
             nodoPostEntrega = exitosa ? nodoEntregaExitosa : nodoEntregaMala;
         }
     }

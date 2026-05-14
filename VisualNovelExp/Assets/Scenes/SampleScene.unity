@@ -8726,10 +8726,10 @@ MonoBehaviour:
     oracionConBlanco: 
     opciones: []
     indiceRespuestaCorrecta: 0
-    oracionEspanol: Mi nombre es Juan
+    oracionEspanol: Mi nombre es Kole
     palabrasDesordenadas:
     - namae
-    - juan
+    - Kole
     - watashi
     - wa
     - no
@@ -8739,7 +8739,7 @@ MonoBehaviour:
     - no
     - namae
     - wa
-    - juan
+    - Kole
     - desu
     palabrasQueEnsena:
     - hiragana: Watashi

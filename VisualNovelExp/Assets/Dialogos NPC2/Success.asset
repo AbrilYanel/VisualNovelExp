@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Success
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Wow, aprendes r\xE1pido. Toma esta recompensa y as\xED estar\xE1s preparado
-    para interactuar con gente m\xE1s avanzada. Ganbattene!"
+  sentence: "Wow, aprendes r\xE1pido. Ahora est\xE1s preparado para interactuar con
+    gente m\xE1s avanzada. Ganbattene!"
   hasChoices: 0
   option1Text: 
   option2Text: 
@@ -24,3 +24,7 @@ MonoBehaviour:
   endsDialogue: 1
   nextNode: {fileID: 0}
   tipoMinijuego: 0
+  reintentarMinijuego: 0
+  daCamara: 0
+  entregaEntrevista: 0
+  daPermiso: 0

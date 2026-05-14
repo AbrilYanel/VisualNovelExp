@@ -58,14 +58,21 @@ public class Manager_Entrevista : MonoBehaviour
     // ─────────────────────────────────────────
     void Start()
     {
-        panelEntrevista.SetActive(false);
 
-        if (panelResultado != null)
-            panelResultado.SetActive(false);
+        if (entrevistaData == null)
+        {
+            entrevistaData = Resources.Load<EntrevistaData>("Sakamoto");
+            Debug.Log("Intentando cargar desde Resources/Sakamoto");
+            Debug.Log("Resultado: " + (entrevistaData != null ? "OK" : "NULL"));
+        }
+        else
+        {
+            Debug.Log("EntrevistaData asignado desde Inspector: " + entrevistaData.name);
+        }
 
-        if (panelFeedback != null)
-            panelFeedback.SetActive(false);
-
+        if (panelEntrevista != null) panelEntrevista.SetActive(false);
+        if (panelResultado != null) panelResultado.SetActive(false);
+        if (panelFeedback != null) panelFeedback.SetActive(false);
         if (botonCerrarResultado != null)
             botonCerrarResultado.onClick.AddListener(CerrarPanelResultado);
     }
@@ -76,16 +83,47 @@ public class Manager_Entrevista : MonoBehaviour
         indiceActual = 0;
         puntajeTotal = 0;
         esperandoSiguiente = false;
+
+       
+
+
         if (managerInteraccion != null)
         {
-            managerInteraccion.dialogueText.text = " ";
-        }
-        panelEntrevista.SetActive(true);
-        textoNombreEntrevistado.text = entrevistaData.nombreEntrevistado;
+            if (managerInteraccion.dialoguePanel != null)
+                managerInteraccion.dialoguePanel.SetActive(false);
+            else
+                Debug.LogError("[Manager_Entrevista] dialoguePanel es null en build");
 
-        // Liberar cursor para hacer clic en opciones
+            if (managerInteraccion.choicePanel != null)
+                managerInteraccion.choicePanel.SetActive(false);
+        }
+
+        if (panelEntrevista != null)
+            panelEntrevista.SetActive(true);
+        else
+        {
+            Debug.LogError("[Manager_Entrevista] panelEntrevista es null en build");
+            return;
+        }
+
+        if (textoNombreEntrevistado != null && entrevistaData != null)
+            textoNombreEntrevistado.text = entrevistaData.nombreEntrevistado;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        if (entrevistaData == null)
+        {
+            entrevistaData = Resources.Load<EntrevistaData>("Sakamoto");
+            Debug.Log("Carga desde Resources en IniciarEntrevista: " +
+                      (entrevistaData != null ? "OK" : "FALLÓ"));
+        }
+
+        if (entrevistaData == null)
+        {
+            Debug.LogError("entrevistaData sigue siendo null, abortando");
+            return;
+        }
 
         MostrarPregunta(entrevistaData.preguntas[indiceActual]);
     }

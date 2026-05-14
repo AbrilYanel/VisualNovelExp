@@ -33,12 +33,15 @@ public class Manager_Camara : MonoBehaviour
 
     void Start()
     {
-        // Estado inicial: todo oculto
-        iconoCamara.SetActive(false);
-        panelTextoGrabar.SetActive(false);
+        if (iconoCamara != null)
+            iconoCamara.SetActive(false);
+        else
+            Debug.LogError("[Manager_Camara] iconoCamara es null");
 
-        if (panelItemRecibido != null)
-            panelItemRecibido.SetActive(false);
+        if (panelTextoGrabar != null)
+            panelTextoGrabar.SetActive(false);
+        else
+            Debug.LogError("[Manager_Camara] panelTextoGrabar es null");
     }
 
     public void RecibirCamara()
@@ -57,15 +60,20 @@ public class Manager_Camara : MonoBehaviour
 
     public void ObtenerPermiso()
     {
-        Debug.Log(" ObtenerPermiso() llamado correctamente");
         permisoObtenido = true;
-        panelTextoGrabar.SetActive(true);
+
+        // ✅ Null check
+        if (panelTextoGrabar != null)
+            panelTextoGrabar.SetActive(true);
+        else
+            Debug.LogError("[Manager_Camara] panelTextoGrabar es null en build");
 
         if (textoGrabar != null)
             textoGrabar.text = "Presioná R para grabar";
+        else
+            Debug.LogError("[Manager_Camara] textoGrabar es null en build");
 
-        ActualizarEstado("Empieza la entrevista!");
-        // "¡Empecemos la entrevista!"
+        ActualizarEstado("Empezá la entrevista!");
     }
 
     public void CompletarEntrevista(int puntaje)

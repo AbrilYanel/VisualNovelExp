@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class Manager_Minijuego : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class Manager_Minijuego : MonoBehaviour
         IniciarMinijuego();
     }
 
-    void IniciarMinijuego()
+        void IniciarMinijuego()
     {
         // Limpiar estado anterior
         conexiones.Clear();
@@ -65,7 +66,6 @@ public class Manager_Minijuego : MonoBehaviour
         // Mezclar orden
         List<ParejaDatos> mezcladas = new List<ParejaDatos>(parejas);
         Shuffle(mezcladas);
-
         List<ParejaDatos> palabrasMezcladas = new List<ParejaDatos>(parejas);
         Shuffle(palabrasMezcladas);
 
@@ -81,8 +81,20 @@ public class Manager_Minijuego : MonoBehaviour
             if (img != null) img.sprite = pareja.imagen;
             else Debug.LogError("No se encontró Image en ItemImagen");
 
-            Button btn = obj.GetComponent<Button>();
-            btn.onClick.AddListener(() => OnClickItem(item));
+            MatchItem itemCapturado = item;
+
+            EventTrigger trigger = obj.GetComponent<EventTrigger>()
+                                ?? obj.AddComponent<EventTrigger>();
+            trigger.triggers.Clear();
+
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerClick;
+            entry.callback.AddListener((data) =>
+            {
+                Debug.Log("Click recibido en: " + itemCapturado.id);
+                OnClickItem(itemCapturado);
+            });
+            trigger.triggers.Add(entry);
         }
 
         // Instanciar palabras (derecha)
@@ -101,8 +113,20 @@ public class Manager_Minijuego : MonoBehaviour
             }
             else Debug.LogError("ItemPalabra necesita al menos 2 TMP, tiene: " + textos.Length);
 
-            Button btn = obj.GetComponent<Button>();
-            btn.onClick.AddListener(() => OnClickItem(item));
+            MatchItem itemCapturado = item;
+
+            EventTrigger trigger = obj.GetComponent<EventTrigger>()
+                                ?? obj.AddComponent<EventTrigger>();
+            trigger.triggers.Clear();
+
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerClick;
+            entry.callback.AddListener((data) =>
+            {
+                Debug.Log("Click recibido en: " + itemCapturado.id);
+                OnClickItem(itemCapturado);
+            });
+            trigger.triggers.Add(entry);
         }
 
         botonConfirmar.gameObject.SetActive(false);

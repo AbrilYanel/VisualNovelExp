@@ -46,6 +46,7 @@ public class Manager_Interaccion : MonoBehaviour
     [Header("Progreso")]
     public PlayerProgress playerProgress;
     public TextMeshProUGUI textoNivel;
+    public int recompensaMonedas = 20; // Monedas otorgadas al completar un minijuego con éxito
     private Interaccion_NPC npcActual;
 
     private int minijuegoActivoParaReintento = 0;
@@ -74,7 +75,7 @@ public class Manager_Interaccion : MonoBehaviour
             dialogueText.text = currentSentence;
             isTyping = false;
 
-           
+
             if (currentNode.endsDialogue)
             {
                 EndDialogue();
@@ -89,7 +90,7 @@ public class Manager_Interaccion : MonoBehaviour
             }
             else
             {
-                
+
                 EndDialogue();
             }
         }
@@ -143,7 +144,7 @@ public class Manager_Interaccion : MonoBehaviour
             bool exitosa = managerCamara.puntajeEntrevista >=
                       managerEntrevista.entrevistaData.puntajeMinimoExito;
 
-            
+
             NPC_Director director = FindObjectOfType<NPC_Director>();
             if (director != null)
                 director.CompletarMision();
@@ -269,10 +270,11 @@ public class Manager_Interaccion : MonoBehaviour
             if (playerProgress != null)
             {
                 playerProgress.CompletarInteraccion();
+                playerProgress.GanarMonedas(recompensaMonedas);
                 ActualizarUIProgreso();
             }
 
-           
+
             if (npcActual != null)
                 npcActual.MarcarCompletado();
 

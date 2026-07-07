@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class NPC_Director : MonoBehaviour
 {
@@ -6,18 +6,19 @@ public class NPC_Director : MonoBehaviour
     public Manager_Interaccion managerInteraccion;
     public Manager_Camara managerCamara;
 
-    [Header("Nodos de diálogo")]
-    public Nodo_Dialogo nodoInicio;           
-    public Nodo_Dialogo nodoMisionActiva;     
-    public Nodo_Dialogo nodoEntrega;          
-    public Nodo_Dialogo nodoMisionCompleta;   
+    [Header("Nodos de diï¿½logo")]
+    public Nodo_Dialogo nodoInicio;
+    public Nodo_Dialogo nodoMisionActiva;
+    public Nodo_Dialogo nodoEntrega;
+    public Nodo_Dialogo nodoMisionCompleta;
 
     private bool misionCompletada = false;
     public PlayerProgress playerProgress;
-    public int interaccionesAlCompletar = 2;
+    public int interaccionesAlCompletar = 1; // Ajustado a 3 interacciones por nivel (ahora es solo el Ãºltimo de 9 NPCs)
+    public int recompensaMonedas = 20;
     public void Interact()
     {
-        // Misión ya terminada del todo
+        // Misiï¿½n ya terminada del todo
         if (misionCompletada)
         {
             managerInteraccion.StartDialogue(nodoMisionCompleta);
@@ -31,18 +32,18 @@ public class NPC_Director : MonoBehaviour
             return;
         }
 
-        // Misión en curso (ya tiene cámara)
+        // Misiï¿½n en curso (ya tiene cï¿½mara)
         if (managerCamara.tieneCamara)
         {
             managerInteraccion.StartDialogue(nodoMisionActiva);
             return;
         }
 
-        // Primera interacción: dar cámara
+        // Primera interacciï¿½n: dar cï¿½mara
         managerInteraccion.StartDialogue(nodoInicio);
     }
 
-   
+
     public void IniciarMision()
     {
         managerCamara.RecibirCamara();
@@ -56,19 +57,21 @@ public class NPC_Director : MonoBehaviour
         managerCamara.EntregarEntrevista();
 
         bool exitosa = puntaje >= managerCamara.puntajeMinimoExito;
-      
+
         if (exitosa && playerProgress != null)
         {
-           
+
             for (int i = 0; i < interaccionesAlCompletar; i++)
             {
                 playerProgress.CompletarInteraccion();
             }
 
+            playerProgress.GanarMonedas(recompensaMonedas);
+
             // Actualizar UI
             managerInteraccion.ActualizarUIProgreso();
 
-            Debug.Log($" Misión completada. Nivel actual: {playerProgress.nivelActual}");
+            Debug.Log($" Misiï¿½n completada. Nivel actual: {playerProgress.nivelActual}");
         }
         else if (!exitosa)
         {

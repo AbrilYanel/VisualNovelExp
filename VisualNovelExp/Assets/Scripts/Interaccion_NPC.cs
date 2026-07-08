@@ -18,8 +18,9 @@ public class Interaccion_NPC : MonoBehaviour
 
     private bool completado = false;
 
-    public NPC_Entrevistado npcEntrevistado;   
-    public NPC_Director npcDirector;          
+    public NPC_Entrevistado npcEntrevistado;
+    public NPC_Director npcDirector;
+    public NPC_Comerciante npcComerciante;
 
     void Start()
     {
@@ -48,9 +49,15 @@ public class Interaccion_NPC : MonoBehaviour
             return;
         }
 
-       
+        if (npcComerciante != null)
+        {
+            npcComerciante.Interact();
+            return;
+        }
 
-       
+
+
+
 
         dialogueManager.SetNPCActual(this);
         dialogueManager.StartDialogue(startNode);
@@ -86,7 +93,7 @@ public class Interaccion_NPC : MonoBehaviour
     {
         if (indicadorExclamacion == null) return;
 
-        
+
         bool mostrar = !completado &&
                        playerProgress != null &&
                        playerProgress.PuedeInteractuar(nivelRequerido);

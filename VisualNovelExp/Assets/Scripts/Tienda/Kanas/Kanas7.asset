@@ -9,11 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64b8975488a81a64da90a379d4572575, type: 3}
-  m_Name: PlayerProgress
+  m_Script: {fileID: 11500000, guid: 90bde83940a3ace4b99c72c3160580d2, type: 3}
+  m_Name: Kanas7
   m_EditorClassIdentifier: 
-  nivelActual: 1
-  interaccionesCompletadas: 0
-  interaccionesPorNivel: 3
-  monedas: 15
-  monedaInicial: 15
+  id: 7
+  nombreFila: Mas
+  caracteres:
+  - kana: MA
+    romaji: ma
+  - kana: MI
+    romaji: mi
+  - kana: MU
+    romaji: mu
+  - kana: ME
+    romaji: me
+  - kana: MO
+    romaji: mo
+  costo: 20

@@ -1,3 +1,10 @@
+﻿// Manager_Minijuego2 - versión inyectable (Paso 4)
+// Reemplaza tu Manager_Minijuego2.cs actual
+// Cambios clave:
+// - SetPreguntas(List<PreguntaData>) para inyectar desde Manager_Interaccion
+// - Soporte bloqueo 🔒 con KanaInventario
+// - Mantiene FillBlank y WordOrder
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +13,15 @@ using TMPro;
 
 public class Manager_Minijuego2 : MonoBehaviour
 {
-    [Header("Referencia al manager principal")]
+    [Header("Referencia principal")]
     public Manager_Interaccion interaccionManager;
     public Manager_Journal managerJournal;
 
-    [Header("Preguntas")]
-    public List<PreguntaData> preguntas;
+    [Header("Preguntas - se inyectan por código (Paso 4)")]
+    public List<PreguntaData> preguntas; // fallback inspector
+
+    [Header("Progresión Kanas")]
+    public KanaInventario kanaInventario;
 
     [Header("UI General")]
     public TextMeshProUGUI textoInstruccion;
@@ -22,7 +32,6 @@ public class Manager_Minijuego2 : MonoBehaviour
     public TextMeshProUGUI textoBotonSiguiente;
     public GameObject minijuego2Panel;
 
-
     [Header("UI Fill in the Blank")]
     public GameObject panelFillBlank;
     public TextMeshProUGUI textoOracion;
@@ -32,178 +41,165 @@ public class Manager_Minijuego2 : MonoBehaviour
     [Header("UI Word Order")]
     public GameObject panelWordOrder;
     public TextMeshProUGUI textoEspanol;
-    public Transform contenedorBloques;   // bloques disponibles (abajo)
-    public Transform contenedorSlots;     // slots de respuesta (arriba)
+    public Transform contenedorBloques;
+    public Transform contenedorSlots;
     public GameObject bloquePrefab;
     public GameObject slotPrefab;
 
-    [Header("Colores feedback")]
+    [Header("Colores")]
     public Color colorCorrecto = new Color(0.2f, 0.8f, 0.2f);
     public Color colorIncorrecto = new Color(0.9f, 0.2f, 0.2f);
     public Color colorNeutro = Color.white;
 
-    private int indiceActual = 0;
-    private int respuestasCorrectas = 0;
-    private int opcionSeleccionada = -1;
-    private bool esperandoSiguiente = false;
+    int indiceActual = 0;
+    int respuestasCorrectas = 0;
+    int opcionSeleccionada = -1;
+    bool esperandoSiguiente = false;
 
-    // Entrada 
+    // --- INYECCIÓN PASO 4 ---
+    public void SetPreguntas(List<PreguntaData> nuevasPreguntas)
+    {
+        if (nuevasPreguntas != null && nuevasPreguntas.Count > 0)
+        {
+            preguntas = nuevasPreguntas;
+            Debug.Log($"[Minijuego2] Preguntas inyectadas: {preguntas.Count}");
+        }
+    }
+
     public void Iniciar()
     {
-        if (!ValidarReferencias()) return;
+        if (preguntas == null || preguntas.Count == 0)
+        { Debug.LogError("[Minijuego2] No hay preguntas. ¿Olvidaste SetPreguntas()?"); return; }
 
         indiceActual = 0;
         respuestasCorrectas = 0;
         esperandoSiguiente = false;
-
-        botonSiguiente.gameObject.SetActive(false);
-        botonConfirmar.gameObject.SetActive(true);
-
+        if (botonSiguiente) botonSiguiente.gameObject.SetActive(false);
+        if (botonConfirmar) botonConfirmar.gameObject.SetActive(true);
         MostrarPregunta(preguntas[indiceActual]);
     }
 
-    bool ValidarReferencias()
-    {
-        if (preguntas == null || preguntas.Count == 0)
-        { Debug.LogError("No hay preguntas cargadas"); return false; }
-        if (textoFeedback == null)
-        { Debug.LogError("Falta textoFeedback"); return false; }
-        return true;
-    }
-
-    //  Mostrar pregunta
     void MostrarPregunta(PreguntaData pregunta)
     {
         textoFeedback.text = "";
         textoFeedback.color = colorNeutro;
         opcionSeleccionada = -1;
         esperandoSiguiente = false;
+        if (botonConfirmar) botonConfirmar.gameObject.SetActive(true);
+        if (botonSiguiente) botonSiguiente.gameObject.SetActive(false);
+        if (textoProgreso) textoProgreso.text = $"{indiceActual + 1} / {preguntas.Count}";
+        if (textoInstruccion) textoInstruccion.text = pregunta.instruccion;
 
-        botonConfirmar.gameObject.SetActive(true);
-        botonSiguiente.gameObject.SetActive(false);
-
-        textoProgreso.text = $"{indiceActual + 1} / {preguntas.Count}";
-        textoInstruccion.text = pregunta.instruccion;
+        // bloqueo visual de la pregunta entera si su kana no está desbloqueado
+        bool bloqueada = false;
+        if (kanaInventario != null && !string.IsNullOrEmpty(pregunta.idFilaKana))
+            bloqueada = !kanaInventario.EstaDesbloqueado(pregunta.idFilaKana);
 
         if (pregunta.tipo == TipoPregunta.FillBlank)
-            MostrarFillBlank(pregunta);
+            MostrarFillBlank(pregunta, bloqueada);
         else
-            MostrarWordOrder(pregunta);
+            MostrarWordOrder(pregunta, bloqueada);
     }
 
-    // FASE 1: Fill in the Blank 
-    void MostrarFillBlank(PreguntaData pregunta)
+    void MostrarFillBlank(PreguntaData pregunta, bool bloqueada)
     {
         panelFillBlank.SetActive(true);
         panelWordOrder.SetActive(false);
 
-        textoOracion.text = pregunta.oracionConBlanco;
+        if (textoOracion)
+            textoOracion.text = bloqueada ? "🔒 🔒 🔒" : pregunta.oracionConBlanco;
 
         foreach (Transform t in contenedorOpciones) Destroy(t.gameObject);
 
-        // Mezclar opciones manteniendo track del �ndice correcto
         List<int> indices = new List<int>();
-        for (int i = 0; i < pregunta.opciones.Length; i++)
-            indices.Add(i);
+        for (int i = 0; i < pregunta.opciones.Length; i++) indices.Add(i);
         Shuffle(indices);
 
         foreach (int i in indices)
         {
-            int indiceLocal = i;
+            int idxLocal = i;
             GameObject obj = Instantiate(botonOpcionPrefab, contenedorOpciones);
-
-            TextMeshProUGUI tmp = obj.GetComponentInChildren<TextMeshProUGUI>(true);
-            if (tmp != null)
+            var tmp = obj.GetComponentInChildren<TextMeshProUGUI>(true);
+            if (tmp) { tmp.text = bloqueada ? "🔒" : pregunta.opciones[i]; tmp.color = Color.black; }
+            var btn = obj.GetComponent<Button>();
+            if (btn)
             {
-                tmp.text = pregunta.opciones[i];
-                tmp.color = Color.black;
+                btn.interactable = !bloqueada; // si está bloqueado, no deja elegir bien -> fuerza fallo
+                btn.onClick.AddListener(() => SeleccionarOpcion(idxLocal, obj));
             }
+        }
 
-            Button btn = obj.GetComponent<Button>();
-            btn.onClick.AddListener(() => SeleccionarOpcion(indiceLocal, obj));
+        if (bloqueada && textoFeedback)
+        {
+            textoFeedback.color = colorIncorrecto;
+            textoFeedback.text = "¡Necesitás comprar el kana en la tienda!";
         }
     }
 
     void SeleccionarOpcion(int indice, GameObject botonObj)
     {
         if (esperandoSiguiente) return;
-
         opcionSeleccionada = indice;
-
-        // Resetear color de todos los botones
         foreach (Transform t in contenedorOpciones)
             t.GetComponent<Image>().color = colorNeutro;
-
-        // Resaltar el seleccionado
         botonObj.GetComponent<Image>().color = new Color(0.7f, 0.9f, 1f);
     }
 
-    // Word Order 
-    void MostrarWordOrder(PreguntaData pregunta)
+    void MostrarWordOrder(PreguntaData pregunta, bool bloqueada)
     {
         panelFillBlank.SetActive(false);
         panelWordOrder.SetActive(true);
+        if (textoEspanol) textoEspanol.text = pregunta.oracionEspanol;
 
-        textoEspanol.text = pregunta.oracionEspanol;
-
-        // Limpiar anterior
         foreach (Transform t in contenedorBloques) Destroy(t.gameObject);
         foreach (Transform t in contenedorSlots) Destroy(t.gameObject);
 
-        // Mezclar palabras
         List<string> mezcladas = new List<string>(pregunta.palabrasDesordenadas);
         Shuffle(mezcladas);
 
-        // Crear bloques
         foreach (string palabra in mezcladas)
         {
             GameObject obj = Instantiate(bloquePrefab, contenedorBloques);
-            BloquePalabra bloque = obj.GetComponent<BloquePalabra>();
-            bloque.Configurar(palabra, contenedorBloques);
+            var bloque = obj.GetComponent<BloquePalabra>();
+            string mostrar = bloqueada ? "🔒" : palabra;
+            if (bloque) bloque.Configurar(mostrar, contenedorBloques);
+            // guardar valor real igual, para que falle si está bloqueado
+            if (bloque) bloque.valor = palabra;
         }
-
-        // Crear slots vac�os
         for (int i = 0; i < pregunta.ordenCorrecto.Length; i++)
-        {
             Instantiate(slotPrefab, contenedorSlots);
+
+        if (bloqueada && textoFeedback)
+        {
+            textoFeedback.color = colorIncorrecto;
+            textoFeedback.text = "Kana bloqueado – compralo en la tienda";
         }
     }
 
-    //  Confirmar respuesta
     public void ConfirmarRespuesta()
     {
         if (esperandoSiguiente) return;
-
-        PreguntaData pregunta = preguntas[indiceActual];
-        bool correcto = false;
-
-        if (pregunta.tipo == TipoPregunta.FillBlank)
-            correcto = VerificarFillBlank(pregunta);
-        else
-            correcto = VerificarWordOrder(pregunta);
+        var pregunta = preguntas[indiceActual];
+        bool correcto = pregunta.tipo == TipoPregunta.FillBlank ? VerificarFillBlank(pregunta) : VerificarWordOrder(pregunta);
+        if (!esperandoSiguiente && !correcto && (pregunta.tipo == TipoPregunta.FillBlank && opcionSeleccionada == -1)) return; // ya mostró mensaje "seleccioná opción"
 
         esperandoSiguiente = true;
-        botonConfirmar.gameObject.SetActive(false);
-        botonSiguiente.gameObject.SetActive(true);
-
-        // Cambiar texto seg�n si es la �ltima pregunta
-        bool esUltima = (indiceActual >= preguntas.Count - 1);
-        if (textoBotonSiguiente != null)
-            textoBotonSiguiente.text = esUltima ? "Finalizar" : "Siguiente";
+        if (botonConfirmar) botonConfirmar.gameObject.SetActive(false);
+        if (botonSiguiente) botonSiguiente.gameObject.SetActive(true);
+        bool esUltima = indiceActual >= preguntas.Count - 1;
+        if (textoBotonSiguiente) textoBotonSiguiente.text = esUltima ? "Finalizar" : "Siguiente";
 
         if (correcto)
         {
             respuestasCorrectas++;
             textoFeedback.color = colorCorrecto;
-            textoFeedback.text = "�Correcto!";
-
+            textoFeedback.text = "¡Correcto!";
             if (pregunta.palabrasQueEnsena != null && managerJournal != null)
                 managerJournal.RegistrarPalabras(pregunta.palabrasQueEnsena);
         }
         else
         {
             textoFeedback.color = colorIncorrecto;
-
             if (pregunta.tipo == TipoPregunta.FillBlank)
                 textoFeedback.text = $"Incorrecto. Era: {pregunta.opciones[pregunta.indiceRespuestaCorrecta]}";
             else
@@ -215,10 +211,8 @@ public class Manager_Minijuego2 : MonoBehaviour
     {
         if (opcionSeleccionada == -1)
         {
-            textoFeedback.text = "Seleccion� una opci�n primero";
-            esperandoSiguiente = false;
-            botonConfirmar.gameObject.SetActive(true);
-            botonSiguiente.gameObject.SetActive(false);
+            textoFeedback.text = "Seleccioná una opción primero";
+            textoFeedback.color = colorIncorrecto;
             return false;
         }
         return opcionSeleccionada == pregunta.indiceRespuestaCorrecta;
@@ -227,17 +221,16 @@ public class Manager_Minijuego2 : MonoBehaviour
     bool VerificarWordOrder(PreguntaData pregunta)
     {
         SlotPalabra[] slots = contenedorSlots.GetComponentsInChildren<SlotPalabra>();
-
         if (slots.Length != pregunta.ordenCorrecto.Length) return false;
-
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i].EstaVacio())
             {
-                textoFeedback.text = "Complet� todos los espacios primero";
+                textoFeedback.text = "Completá todos los espacios";
+                textoFeedback.color = colorIncorrecto;
                 esperandoSiguiente = false;
-                botonConfirmar.gameObject.SetActive(true);
-                botonSiguiente.gameObject.SetActive(false);
+                if (botonConfirmar) botonConfirmar.gameObject.SetActive(true);
+                if (botonSiguiente) botonSiguiente.gameObject.SetActive(false);
                 return false;
             }
             if (slots[i].OcupadoPor.valor != pregunta.ordenCorrecto[i])
@@ -246,37 +239,19 @@ public class Manager_Minijuego2 : MonoBehaviour
         return true;
     }
 
-    //  Siguiente pregunta
     public void SiguientePregunta()
     {
         indiceActual++;
-
-        if (indiceActual >= preguntas.Count)
-        {
-            TerminarMinijuego();
-            return;
-        }
-
+        if (indiceActual >= preguntas.Count) { TerminarMinijuego(); return; }
         MostrarPregunta(preguntas[indiceActual]);
     }
 
     void TerminarMinijuego()
     {
         bool exito = respuestasCorrectas >= Mathf.CeilToInt(preguntas.Count * 0.6f);
-
-        // Cerrar el panel antes de continuar el di�logo
-        if (minijuego2Panel != null)
-            minijuego2Panel.SetActive(false);
-
+        if (minijuego2Panel) minijuego2Panel.SetActive(false);
         interaccionManager.OnMinigameFinished(exito);
     }
 
-    void Shuffle<T>(List<T> lista)
-    {
-        for (int i = lista.Count - 1; i > 0; i--)
-        {
-            int j = Random.Range(0, i + 1);
-            (lista[i], lista[j]) = (lista[j], lista[i]);
-        }
-    }
+    void Shuffle<T>(List<T> lista) { for (int i = lista.Count - 1; i > 0; i--) { int j = Random.Range(0, i + 1); (lista[i], lista[j]) = (lista[j], lista[i]); } }
 }

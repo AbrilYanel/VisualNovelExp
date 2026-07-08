@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90bde83940a3ace4b99c72c3160580d2, type: 3}
   m_Name: Kanas9
   m_EditorClassIdentifier: 
-  id: 8
-  nombreFila: Yas
+  id: 9
+  nombreFila: RA
   caracteres:
-  - kana: YA
-    romaji: ya
-  - kana: YU
-    romaji: yu
-  - kana: YO
-    romaji: yo
+  - kana: RA
+    romaji: ra
+  - kana: RI
+    romaji: ri
+  - kana: RU
+    romaji: ru
+  - kana: RE
+    romaji: re
+  - kana: RO
+    romaji: ro
   costo: 20

@@ -1,3 +1,6 @@
+﻿// Reemplaza tu PreguntaData.cs con este
+// Añade idFilaKana para bloqueo visual
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,17 +12,20 @@ public class PreguntaData
     public TipoPregunta tipo;
 
     [Header("Compartido")]
-    public string instruccion; // texto de ayuda arriba
+    public string instruccion;
+
+    [Header("Progresión Kanas")]
+    public string idFilaKana = ""; // ej: "fila_ta" - si está vacío, no bloquea. Si el jugador no la tiene comprada, se muestra 🔒
 
     [Header("Fill in the Blank")]
-    public string oracionConBlanco; // "Watashi ___ gakusei desu"
-    public string[] opciones;       // ["wa", "wo", "ni", "ga"]
+    public string oracionConBlanco;
+    public string[] opciones;
     public int indiceRespuestaCorrecta;
 
     [Header("Word Order")]
-    public string oracionEspanol;   // "El gato come pescado"
-    public string[] palabrasDesordenadas; // ["taberu","neko","sakana","wa","wo"]
-    public string[] ordenCorrecto;        // ["neko","wa","sakana","wo","taberu"]
+    public string oracionEspanol;
+    public string[] palabrasDesordenadas;
+    public string[] ordenCorrecto;
 
     [Header("Journal")]
     public List<PalabraAprendida> palabrasQueEnsena;

@@ -58,6 +58,12 @@ public class Manager_Interaccion : MonoBehaviour
     public Nodo_Dialogo nodoEntregaMala;
 
     private Nodo_Dialogo nodoPostEntrega = null;
+
+    [Header("Minijuego 2 Preguntas")]
+    public List<PreguntaData> preguntasFillBlank_NPC4;  // asignar en Inspector: preguntas de TA-chi-tsu-te-to
+    public List<PreguntaData> preguntasWordOrder_NPC7; // asignar en Inspector: preguntas de MA-mi-mu-me-mo
+
+
     void Start()
     {
         dialoguePanel.SetActive(false);
@@ -252,9 +258,35 @@ public class Manager_Interaccion : MonoBehaviour
             minigameUI.SetActive(true);
             managerMinijuego.Iniciar();
         }
-        else
+        else // Minijuego2
         {
             minijuegoActivo = 2;
+
+            
+            if (managerMinijuego2 != null)
+            {
+                // Determinar qué set de preguntas usar según el NPC actual
+                // Opción A: por nivelRequerido
+                // Opción B: agregar un campo "idMinijuego" al NPC - por ahora usamos nivel
+                if (npcActual != null)
+                {
+                    // NPC 4 (ta-row, nivel 2, primer NPC del nivel 2) -> FillBlank
+                    // NPC 7 (ma-row, nivel 3, primer NPC del nivel 3) -> WordOrder
+                    if (npcActual.nivelRequerido == 2)
+                    {
+                        managerMinijuego2.SetPreguntas(preguntasFillBlank_NPC4);
+                    }
+                    else if (npcActual.nivelRequerido == 3)
+                    {
+                        managerMinijuego2.SetPreguntas(preguntasWordOrder_NPC7);
+                    }
+                    // si querés ser más preciso, compará por nombre del GameObject:
+                    // if (npcActual.name.Contains("NPC4")) ...
+                }
+
+                // fallback: si no se inyectó nada, usa la lista que tenga el manager en el Inspector
+            }
+
             minijuego2UI.SetActive(true);
             managerMinijuego2.Iniciar();
         }

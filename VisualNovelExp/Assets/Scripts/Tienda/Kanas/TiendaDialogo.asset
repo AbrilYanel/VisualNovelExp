@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: TiendaDialogo
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: 
+  speakerName: Comerciante
+  sentence: Deseas adquirir conocimiento? Bienvenido a la tienda
   hasChoices: 0
-  option1Text: 
-  option2Text: 
+  option1Text: Si gracias
+  option2Text: No
   option1Next: {fileID: 0}
   option2Next: {fileID: 0}
   startsMinigame: 0
-  endsDialogue: 0
+  endsDialogue: 1
   nextNode: {fileID: 0}
   tipoMinijuego: 0
   reintentarMinijuego: 0

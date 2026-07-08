@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerProgress
   m_EditorClassIdentifier: 
   nivelActual: 1
-  interaccionesCompletadas: 0
+  interaccionesCompletadas: 1
   interaccionesPorNivel: 3
-  monedas: 15
+  monedas: 35
   monedaInicial: 15

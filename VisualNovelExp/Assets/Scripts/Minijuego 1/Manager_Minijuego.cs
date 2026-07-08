@@ -10,67 +10,67 @@ public class Manager_Minijuego : MonoBehaviour
     public Manager_Interaccion interaccionManager;
 
     [Header("Contenedores UI")]
-    public Transform columnaImagenes;   // Panel izquierdo
-    public Transform columnaPalabras;   // Panel derecho
+    public Transform columnaImagenes;
+    public Transform columnaPalabras;
 
     [Header("Prefabs")]
     public GameObject itemImagenPrefab;
     public GameObject itemPalabraPrefab;
 
     [Header("Línea de conexión")]
-    public RectTransform lineaVisual;   // Image estirada entre dos puntos
-    private List<GameObject> lineasActivas = new List<GameObject>();
     public GameObject lineaPrefab;
+    private List<GameObject> lineasActivas = new List<GameObject>();
 
     [Header("Datos del minijuego")]
-    public List<ParejaDatos> parejas;   // Asignás desde el Inspector
+    public List<ParejaDatos> parejas;
 
     [Header("UI")]
     public TextMeshProUGUI textoFeedback;
     public Button botonConfirmar;
 
-    private MatchItem itemSeleccionado = null;
-    private Dictionary<string, string> conexiones = new Dictionary<string, string>();
-    // key: id imagen, value: id palabra conectada
+    // --- PASO 3: vidas / intentos ---
+    [Header("Paso 3 - Vidas")]
+    public int erroresMaximos = 3;
+    public TextMeshProUGUI textoVidas; // asignar en inspector: "Vidas: ❤❤❤"
+    private int erroresActuales = 0;
 
+    // --- PASO 5: bloqueo por kanas ---
+    [Header("Progresión Kanas")]
+    public KanaInventario kanaInventario; // arrastrar asset
+
+    private MatchItem itemSeleccionado = null;
     private int parejasCorrectas = 0;
 
     public void Iniciar()
     {
-        // Validaciones primero
-        if (textoFeedback == null) { Debug.LogError("textoFeedback no asignado"); return; }
-        if (botonConfirmar == null) { Debug.LogError("botonConfirmar no asignado"); return; }
-        if (columnaImagenes == null) { Debug.LogError("columnaImagenes no asignado"); return; }
-        if (columnaPalabras == null) { Debug.LogError("columnaPalabras no asignado"); return; }
-        if (itemImagenPrefab == null) { Debug.LogError("itemImagenPrefab no asignado"); return; }
-        if (itemPalabraPrefab == null) { Debug.LogError("itemPalabraPrefab no asignado"); return; }
-        if (parejas == null || parejas.Count == 0) { Debug.LogError("Lista parejas vacía"); return; }
+        if (textoFeedback == null || botonConfirmar == null || columnaImagenes == null || columnaPalabras == null)
+        { Debug.LogError("[Minijuego] Faltan referencias UI"); return; }
+        if (parejas == null || parejas.Count == 0)
+        { Debug.LogError("[Minijuego] Lista parejas vacía"); return; }
 
         IniciarMinijuego();
     }
 
-        void IniciarMinijuego()
+    void IniciarMinijuego()
     {
-        // Limpiar estado anterior
-        conexiones.Clear();
         parejasCorrectas = 0;
+        erroresActuales = 0;
         itemSeleccionado = null;
         textoFeedback.text = "";
+        ActualizarVidasUI();
 
-        // Limpiar columnas
         foreach (Transform t in columnaImagenes) Destroy(t.gameObject);
         foreach (Transform t in columnaPalabras) Destroy(t.gameObject);
         foreach (var l in lineasActivas) Destroy(l);
         lineasActivas.Clear();
 
-        // Mezclar orden
-        List<ParejaDatos> mezcladas = new List<ParejaDatos>(parejas);
-        Shuffle(mezcladas);
-        List<ParejaDatos> palabrasMezcladas = new List<ParejaDatos>(parejas);
-        Shuffle(palabrasMezcladas);
+        List<ParejaDatos> mezcladasIzq = new List<ParejaDatos>(parejas);
+        Shuffle(mezcladasIzq);
+        List<ParejaDatos> mezcladasDer = new List<ParejaDatos>(parejas);
+        Shuffle(mezcladasDer);
 
-        // Instanciar imágenes (izquierda)
-        foreach (var pareja in mezcladas)
+        // Izquierda - imágenes
+        foreach (var pareja in mezcladasIzq)
         {
             GameObject obj = Instantiate(itemImagenPrefab, columnaImagenes);
             MatchItem item = obj.GetComponent<MatchItem>();
@@ -79,78 +79,69 @@ public class Manager_Minijuego : MonoBehaviour
 
             Image img = obj.GetComponentInChildren<Image>();
             if (img != null) img.sprite = pareja.imagen;
-            else Debug.LogError("No se encontró Image en ItemImagen");
 
-            MatchItem itemCapturado = item;
-
-            EventTrigger trigger = obj.GetComponent<EventTrigger>()
-                                ?? obj.AddComponent<EventTrigger>();
-            trigger.triggers.Clear();
-
-            EventTrigger.Entry entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.PointerClick;
-            entry.callback.AddListener((data) =>
-            {
-                Debug.Log("Click recibido en: " + itemCapturado.id);
-                OnClickItem(itemCapturado);
-            });
-            trigger.triggers.Add(entry);
+            AddClick(obj, item);
         }
 
-        // Instanciar palabras (derecha)
-        foreach (var pareja in palabrasMezcladas)
+        // Derecha - palabras (con bloqueo 🔒)
+        foreach (var pareja in mezcladasDer)
         {
             GameObject obj = Instantiate(itemPalabraPrefab, columnaPalabras);
             MatchItem item = obj.GetComponent<MatchItem>();
             item.id = pareja.id;
             item.tipo = MatchItem.TipoItem.Palabra;
 
+            bool bloqueado = false;
+            if (kanaInventario != null && !string.IsNullOrEmpty(pareja.idFilaKana))
+            {
+                bloqueado = !kanaInventario.EstaDesbloqueado(pareja.idFilaKana);
+            }
+
             TextMeshProUGUI[] textos = obj.GetComponentsInChildren<TextMeshProUGUI>();
             if (textos.Length >= 2)
             {
-                textos[0].text = pareja.palabraJaponesa;
-                textos[1].text = pareja.romaji;
+                if (bloqueado)
+                {
+                    textos[0].text = "🔒";
+                    textos[1].text = "???";
+                }
+                else
+                {
+                    textos[0].text = pareja.palabraJaponesa;
+                    textos[1].text = pareja.romaji;
+                }
             }
-            else Debug.LogError("ItemPalabra necesita al menos 2 TMP, tiene: " + textos.Length);
 
-            MatchItem itemCapturado = item;
-
-            EventTrigger trigger = obj.GetComponent<EventTrigger>()
-                                ?? obj.AddComponent<EventTrigger>();
-            trigger.triggers.Clear();
-
-            EventTrigger.Entry entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.PointerClick;
-            entry.callback.AddListener((data) =>
-            {
-                Debug.Log("Click recibido en: " + itemCapturado.id);
-                OnClickItem(itemCapturado);
-            });
-            trigger.triggers.Add(entry);
+            AddClick(obj, item);
         }
 
         botonConfirmar.gameObject.SetActive(false);
     }
 
+    void AddClick(GameObject obj, MatchItem item)
+    {
+        EventTrigger trigger = obj.GetComponent<EventTrigger>() ?? obj.AddComponent<EventTrigger>();
+        trigger.triggers.Clear();
+        var entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
+        MatchItem captured = item;
+        entry.callback.AddListener((data) => OnClickItem(captured));
+        trigger.triggers.Add(entry);
+    }
+
     void OnClickItem(MatchItem itemClickeado)
     {
-        // Si no hay nada seleccionado, seleccionar este
         if (itemSeleccionado == null)
         {
             itemSeleccionado = itemClickeado;
             itemClickeado.SetSeleccionado(true);
             return;
         }
-
-        // Si clickeás el mismo, deseleccionar
         if (itemSeleccionado == itemClickeado)
         {
             itemSeleccionado.SetSeleccionado(false);
             itemSeleccionado = null;
             return;
         }
-
-        // Si clickeás dos del mismo tipo, cambiar selección
         if (itemSeleccionado.tipo == itemClickeado.tipo)
         {
             itemSeleccionado.SetSeleccionado(false);
@@ -159,85 +150,89 @@ public class Manager_Minijuego : MonoBehaviour
             return;
         }
 
-        // Son de distinto tipo → intentar conectar
-        MatchItem itemImagen = itemSeleccionado.tipo == MatchItem.TipoItem.Imagen
-            ? itemSeleccionado : itemClickeado;
-        MatchItem itemPalabra = itemSeleccionado.tipo == MatchItem.TipoItem.Palabra
-            ? itemSeleccionado : itemClickeado;
+        MatchItem itemImagen = itemSeleccionado.tipo == MatchItem.TipoItem.Imagen ? itemSeleccionado : itemClickeado;
+        MatchItem itemPalabra = itemSeleccionado.tipo == MatchItem.TipoItem.Palabra ? itemSeleccionado : itemClickeado;
 
         if (itemImagen.id == itemPalabra.id)
         {
-            // ✅ Correcto
+            // correcto
             itemImagen.SetConectado();
             itemPalabra.SetConectado();
-            DibujarLinea(itemImagen.GetComponent<RectTransform>(),
-                         itemPalabra.GetComponent<RectTransform>());
-
-            conexiones[itemImagen.id] = itemPalabra.id;
             parejasCorrectas++;
+            textoFeedback.text = "¡Bien! " + itemImagen.id.ToUpper();
+            textoFeedback.color = Color.green;
 
-            textoFeedback.text = itemImagen.id.ToUpper() + "!";
+            // opcional: dibujar línea
+            // DibujarLinea(...)
 
             if (parejasCorrectas >= parejas.Count)
             {
                 textoFeedback.text = "¡Completaste todo!";
                 botonConfirmar.gameObject.SetActive(true);
+                // auto-confirmar a los 0.8s
+                Invoke(nameof(ConfirmarResultado), 0.8f);
             }
         }
         else
         {
-       
+            // --- ERROR ---
             itemImagen.SetError();
             itemPalabra.SetError();
-            textoFeedback.text = "Intentá de nuevo...";
+            erroresActuales++;
+            ActualizarVidasUI();
+            textoFeedback.text = $"Incorrecto... Vidas: {erroresMaximos - erroresActuales}";
+            textoFeedback.color = Color.red;
+
+            if (erroresActuales >= erroresMaximos)
+            {
+                textoFeedback.text = "¡Sin intentos!";
+                Invoke(nameof(FallarMinijuego), 1.0f);
+                return;
+            }
         }
 
+        itemSeleccionado?.SetSeleccionado(false);
         itemSeleccionado = null;
     }
 
-    void DibujarLinea(RectTransform desde, RectTransform hasta)
+    void ActualizarVidasUI()
     {
-        GameObject linea = Instantiate(lineaPrefab, transform);
-        lineasActivas.Add(linea);
+        if (textoVidas == null) return;
+        int vidasRestantes = Mathf.Max(0, erroresMaximos - erroresActuales);
+        string corazones = "";
+        for (int i = 0; i < vidasRestantes; i++) corazones += "❤";
+        for (int i = vidasRestantes; i < erroresMaximos; i++) corazones += "♡";
+        textoVidas.text = $"Intentos: {corazones}  ({vidasRestantes}/{erroresMaximos})";
+    }
 
-        RectTransform rt = linea.GetComponent<RectTransform>();
-
-        Vector2 posDesde = desde.anchoredPosition + new Vector2(desde.rect.width / 2, 0);
-        Vector2 posHasta = hasta.anchoredPosition - new Vector2(hasta.rect.width / 2, 0);
-
-        Vector2 centro = (posDesde + posHasta) / 2;
-        float distancia = Vector2.Distance(posDesde, posHasta);
-        float angulo = Mathf.Atan2(posHasta.y - posDesde.y, posHasta.x - posDesde.x)
-                       * Mathf.Rad2Deg;
-
-        rt.anchoredPosition = centro;
-        rt.sizeDelta = new Vector2(distancia, 4f); // 4px de grosor
-        rt.rotation = Quaternion.Euler(0, 0, angulo);
+    void FallarMinijuego()
+    {
+        interaccionManager.OnMinigameFinished(false);
     }
 
     public void ConfirmarResultado()
     {
         bool exito = parejasCorrectas >= parejas.Count;
-
         if (exito)
         {
-           
-            List<PalabraAprendida> aprendidas = new List<PalabraAprendida>();
-            foreach (var pareja in parejas)
+            // registrar en journal
+            var journal = FindObjectOfType<Manager_Journal>();
+            if (journal != null)
             {
-                aprendidas.Add(new PalabraAprendida
+                List<PalabraAprendida> aprendidas = new List<PalabraAprendida>();
+                foreach (var p in parejas)
                 {
-                    hiragana = pareja.palabraJaponesa,
-                    romaji = pareja.romaji,
-                    traduccion = pareja.traduccion,
-                    idFuente = pareja.id
-                });
+                    aprendidas.Add(new PalabraAprendida
+                    {
+                        hiragana = p.palabraJaponesa,
+                        romaji = p.romaji,
+                        traduccion = p.traduccion,
+                        idFuente = p.id
+                    });
+                }
+                journal.RegistrarPalabras(aprendidas);
             }
-
-          
-            FindObjectOfType<Manager_Journal>().RegistrarPalabras(aprendidas);
         }
-
         interaccionManager.OnMinigameFinished(exito);
     }
 
@@ -251,13 +246,16 @@ public class Manager_Minijuego : MonoBehaviour
     }
 }
 
-// Estructura de datos para cada pareja
+// --- Datos extendidos Paso 3/5 ---
 [System.Serializable]
 public class ParejaDatos
 {
-    public string id;               // "neko", "sakana", etc.
+    public string id;
     public Sprite imagen;
-    public string palabraJaponesa;  // "猫"
-    public string romaji;           // "Neko"
+    public string palabraJaponesa;
+    public string romaji;
     public string traduccion;
+
+    [Header("Progresión Kanas - Paso 5")]
+    public string idFilaKana = "fila_a"; // ej: "fila_ka", "fila_sa"... deja vacío si no requiere bloqueo
 }

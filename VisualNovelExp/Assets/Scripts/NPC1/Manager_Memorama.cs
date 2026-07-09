@@ -24,6 +24,12 @@ public class Manager_Memorama : MonoBehaviour
     public int erroresMaximos = 3;
     public float tiempoMostrarCarta = 0.9f;
 
+    [Header("Preview inicial")]
+    [Tooltip("Segundos que se muestran todas las cartas al empezar")]
+    public float tiempoPreviewInicial = 2.5f;
+    public bool previewInicialActivado = true;
+    public TextMeshProUGUI textoCuentaRegresiva; // opcional: "Memorizá... 3...2...1"
+
     List<CartaMemorama> cartasEnMesa = new List<CartaMemorama>();
     CartaMemorama primera = null;
     CartaMemorama segunda = null;
@@ -34,11 +40,12 @@ public class Manager_Memorama : MonoBehaviour
 
     public void Iniciar()
     {
+        StopAllCoroutines();
         // limpiar
         foreach (Transform t in contenedorCartas) Destroy(t.gameObject);
         cartasEnMesa.Clear();
         primera = segunda = null;
-        bloqueInput = false;
+        bloqueInput = true; // bloqueado hasta terminar preview
         aciertos = 0;
         errores = 0;
 
@@ -60,7 +67,66 @@ public class Manager_Memorama : MonoBehaviour
         }
 
         ActualizarUI();
+
+        if (previewInicialActivado && tiempoPreviewInicial > 0f)
+        {
+            StartCoroutine(RutinaPreviewInicial());
+        }
+        else
+        {
+            bloqueInput = false;
+            if (textoFeedback) textoFeedback.text = "¡Encontrá las parejas!";
+        }
+    }
+
+    IEnumerator RutinaPreviewInicial()
+    {
+        // Mostrar todas boca arriba
+        foreach (var c in cartasEnMesa)
+        {
+            if (c != null) c.Revelar(true);
+            if (c.boton) c.boton.interactable = false;
+        }
+
+        float restante = tiempoPreviewInicial;
+        while (restante > 0f)
+        {
+            if (textoFeedback)
+            {
+                textoFeedback.color = new Color(1f, 0.6f, 0.1f);
+                textoFeedback.text = $"Memorizá las posiciones... {Mathf.CeilToInt(restante)}";
+            }
+            if (textoCuentaRegresiva)
+                textoCuentaRegresiva.text = Mathf.CeilToInt(restante).ToString();
+
+            yield return new WaitForSeconds(0.1f);
+            restante -= 0.1f;
+        }
+
+        // Ocultar con pequeño efecto escalonado (más lindo)
+        for (int i = 0; i < cartasEnMesa.Count; i++)
+        {
+            var c = cartasEnMesa[i];
+            if (c != null && !c.estaEmparejada)
+            {
+                c.Revelar(false);
+                if (c.boton) c.boton.interactable = true;
+            }
+            if (i % 4 == 3) yield return new WaitForSeconds(0.04f); // wave effect
+        }
+
+        if (textoCuentaRegresiva) textoCuentaRegresiva.text = "";
+        if (textoFeedback)
+        {
+            textoFeedback.color = Color.white;
+            textoFeedback.text = "¡A jugar!";
+        }
+
+        yield return new WaitForSeconds(0.4f);
+
+        bloqueInput = false;
         if (textoFeedback) textoFeedback.text = "¡Encontrá las parejas!";
+        ActualizarUI();
     }
 
     void OnCartaClick(CartaMemorama carta)
@@ -140,87 +206,3 @@ public class Manager_Memorama : MonoBehaviour
     void Shuffle<T>(List<T> l) { for (int i = l.Count - 1; i > 0; i--) { int j = Random.Range(0, i + 1); (l[i], l[j]) = (l[j], l[i]); } }
 }
 
-// -------------------------------------------------
-// Componente para cada carta
-// Poner este script en el prefab cartaPrefab
-// -------------------------------------------------
-public class CartaMemorama : MonoBehaviour
-{
-    [Header("UI refs")]
-    public Image imagenFondo;
-    public Image imagenContenido; // para sprite (opcional)
-    public TextMeshProUGUI textoKana;
-    public TextMeshProUGUI textoRomaji;
-    public Button boton;
-
-    [HideInInspector] public ParejaDatos datoPareja;
-    [HideInInspector] public bool estaRevelada = false;
-    [HideInInspector] public bool estaEmparejada = false;
-
-    System.Action<CartaMemorama> onClick;
-    bool bloqueada = false;
-
-    void Awake()
-    {
-        if (boton == null) boton = GetComponent<Button>();
-        if (boton) boton.onClick.AddListener(() => onClick?.Invoke(this));
-    }
-
-    public void Configurar(ParejaDatos dato, bool esBloqueada, System.Action<CartaMemorama> callback)
-    {
-        datoPareja = dato;
-        bloqueada = esBloqueada;
-        onClick = callback;
-        estaRevelada = false;
-        estaEmparejada = false;
-        ActualizarVisual(false);
-    }
-
-    public void Revelar(bool mostrar)
-    {
-        estaRevelada = mostrar;
-        ActualizarVisual(mostrar);
-    }
-
-    public void MarcarEmparejada()
-    {
-        estaEmparejada = true;
-        estaRevelada = true;
-        if (imagenFondo) imagenFondo.color = new Color(0.6f, 1f, 0.6f);
-        if (boton) boton.interactable = false;
-        ActualizarVisual(true);
-    }
-
-    void ActualizarVisual(bool revelada)
-    {
-        if (!revelada)
-        {
-            // dorso
-            if (textoKana) textoKana.text = "?";
-            if (textoRomaji) textoRomaji.text = "";
-            if (imagenContenido) imagenContenido.enabled = false;
-            if (imagenFondo) imagenFondo.color = Color.white;
-        }
-        else
-        {
-            if (bloqueada)
-            {
-                if (textoKana) textoKana.text = "🔒";
-                if (textoRomaji) textoRomaji.text = "???";
-                if (imagenContenido) imagenContenido.enabled = false;
-            }
-            else
-            {
-                if (textoKana) textoKana.text = datoPareja.palabraJaponesa;
-                if (textoRomaji) textoRomaji.text = datoPareja.romaji;
-                if (imagenContenido && datoPareja.imagen != null)
-                {
-                    imagenContenido.enabled = true;
-                    imagenContenido.sprite = datoPareja.imagen;
-                }
-                else if (imagenContenido) imagenContenido.enabled = false;
-            }
-            if (imagenFondo && !estaEmparejada) imagenFondo.color = new Color(1f, 0.95f, 0.7f);
-        }
-    }
-}

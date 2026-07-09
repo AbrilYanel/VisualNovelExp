@@ -162,20 +162,19 @@ public class Manager_Minijuego : MonoBehaviour
             textoFeedback.text = "¡Bien! " + itemImagen.id.ToUpper();
             textoFeedback.color = Color.green;
 
-            // opcional: dibujar línea
-            // DibujarLinea(...)
+           
 
             if (parejasCorrectas >= parejas.Count)
             {
                 textoFeedback.text = "¡Completaste todo!";
                 botonConfirmar.gameObject.SetActive(true);
-                // auto-confirmar a los 0.8s
+                // auto confirmar a los 0.8s
                 Invoke(nameof(ConfirmarResultado), 0.8f);
             }
         }
         else
         {
-            // --- ERROR ---
+           
             itemImagen.SetError();
             itemPalabra.SetError();
             erroresActuales++;
@@ -230,7 +229,7 @@ public class Manager_Minijuego : MonoBehaviour
                         idFuente = p.id
                     });
                 }
-                journal.RegistrarPalabras(aprendidas);
+                //journal.RegistrarPalabras(aprendidas);
             }
         }
         interaccionManager.OnMinigameFinished(exito);
@@ -246,7 +245,6 @@ public class Manager_Minijuego : MonoBehaviour
     }
 }
 
-// --- Datos extendidos Paso 3/5 ---
 [System.Serializable]
 public class ParejaDatos
 {
@@ -257,5 +255,5 @@ public class ParejaDatos
     public string traduccion;
 
     [Header("Progresión Kanas - Paso 5")]
-    public string idFilaKana = "fila_a"; // ej: "fila_ka", "fila_sa"... deja vacío si no requiere bloqueo
+    public string idFilaKana = "fila_a"; 
 }

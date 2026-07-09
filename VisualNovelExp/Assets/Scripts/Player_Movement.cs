@@ -66,14 +66,7 @@ public class Player_Movement : MonoBehaviour
 
     void HandleReinicio()
     {
-        // 1. No reiniciar si hay una UI modal abierta
-        if (EstaUIBloqueanteAbierta())
-        {
-            holdTimer = 0f;
-            return;
-        }
-
-        // 2. No robar la R de la entrevista:
+       
         // Si tenés permiso de entrevista y todavía no la completaste,
         // dejamos que NPC_Entrevistado use la R.
         var camara = Manager_Camara.Instance;
@@ -130,32 +123,6 @@ public class Player_Movement : MonoBehaviour
             float restante = Mathf.Max(0f, tiempoMantener - holdTimer);
             Debug.Log($"[Reinicio] Soltá para cancelar... {restante:F1}s");
         }
-    }
-
-    bool EstaUIBloqueanteAbierta()
-    {
-        // Diálogo
-        if (interaccionManager != null)
-        {
-            if (interaccionManager.dialoguePanel != null && interaccionManager.dialoguePanel.activeSelf) return true;
-            if (interaccionManager.choicePanel != null && interaccionManager.choicePanel.activeSelf) return true;
-            if (interaccionManager.minigameUI != null && interaccionManager.minigameUI.activeSelf) return true;
-            if (interaccionManager.minijuego2UI != null && interaccionManager.minijuego2UI.activeSelf) return true;
-
-            // chequear UIs nuevas si existen (VoF / Memorama) por nombre
-            var vof = interaccionManager.GetType().GetField("vofUI")?.GetValue(interaccionManager) as GameObject;
-            if (vof != null && vof.activeSelf) return true;
-            var memo = interaccionManager.GetType().GetField("memoramaUI")?.GetValue(interaccionManager) as GameObject;
-            if (memo != null && memo.activeSelf) return true;
-        }
-
-        // Tienda
-        if (tiendaManager != null && tiendaManager.panelTienda != null && tiendaManager.panelTienda.activeSelf) return true;
-
-        // Journal
-        if (journalManager != null && journalManager.journalPanel != null && journalManager.journalPanel.activeSelf) return true;
-
-        return false;
     }
 
     void ReiniciarJuego()

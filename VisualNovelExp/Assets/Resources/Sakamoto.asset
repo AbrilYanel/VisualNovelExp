@@ -35,16 +35,16 @@ MonoBehaviour:
   - preguntaEspanol: "Preguntar qu\xE9 le gusta"
     preguntaJapones: 
     opciones:
-    - textoOpcion: Nani ga suki desu ka?
-      respuestaDelNPC: 
-      esCorrecta: 1
-      puntaje: 2
-      reaccion: 0
     - textoOpcion: Nani ga tabemasu ka?
       respuestaDelNPC: No es hora de comer...
       esCorrecta: 0
       puntaje: 0
       reaccion: 3
+    - textoOpcion: Nani ga suki desu ka?
+      respuestaDelNPC: Momo ga suki desu!
+      esCorrecta: 1
+      puntaje: 2
+      reaccion: 0
   - preguntaEspanol: Dale las gracias
     preguntaJapones: 
     opciones:

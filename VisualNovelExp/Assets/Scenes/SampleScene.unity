@@ -12731,8 +12731,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e6e8f2b17e244b74a9400a8a732f8cff, type: 2}
+  m_sharedMaterial: {fileID: 144273725763147936, guid: e6e8f2b17e244b74a9400a8a732f8cff,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13044,6 +13045,9 @@ MonoBehaviour:
   managerEntrevista: {fileID: 2029658475}
   nodoEntregaExitosa: {fileID: 11400000, guid: 33b7023c4a49e11419f4b63c16c46469, type: 2}
   nodoEntregaMala: {fileID: 11400000, guid: fc5f3c38bd63314439bee34a00431653, type: 2}
+  permitirAbortoConEsc: 1
+  textoAyudaSalir: {fileID: 0}
+  teclaAborto: 27
 --- !u!4 &1122052090
 Transform:
   m_ObjectHideFlags: 0

@@ -70,7 +70,7 @@ public class Manager_VerdaderoFalso : MonoBehaviour
 
         if (textoProgreso) textoProgreso.text = $"{indice + 1} / {preguntas.Count}";
         if (textoEnunciadoJapones) textoEnunciadoJapones.text = bloqueada ? "🔒🔒🔒" : p.enunciadoJapones;
-        if (textoEnunciadoEspanol) textoEnunciadoEspanol.text = bloqueada ? "(kana bloqueado – compralo en la tienda)" : p.enunciadoEspanol;
+        if (textoEnunciadoEspanol) textoEnunciadoEspanol.text = bloqueada ? "(Kana bloqueado, compralo en la tienda)" : p.enunciadoEspanol;
         if (textoFeedback) textoFeedback.text = bloqueada ? "¡Necesitás la fila " + p.idFilaKana + "!" : "";
 
         botonVerdadero.interactable = true;

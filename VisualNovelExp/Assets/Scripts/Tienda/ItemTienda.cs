@@ -44,7 +44,7 @@ public class ItemTienda : MonoBehaviour
             textoCosto.text = desbloqueada ? "" : $"{fila.costo} monedas";
 
         if (textoEstado != null)
-            textoEstado.text = desbloqueada ? "Desbloqueada ✓" : "Disponible";
+            textoEstado.text = desbloqueada ? "Desbloqueada" : "Disponible";
 
         if (fondo != null && desbloqueada)
             fondo.color = colorComprado;

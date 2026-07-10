@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class Manager_EscrituraInversa : MonoBehaviour
 {
@@ -10,23 +11,34 @@ public class Manager_EscrituraInversa : MonoBehaviour
     public KanaInventario kanaInventario;
 
     [Header("UI")]
-    public TextMeshProUGUI textoRomaji; // ej: "ha"
-    public TMP_InputField inputKana; // el jugador escribe "は"
+    [Tooltip("IMPORTANTE: aunque el campo se llama textoRomaji por compatibilidad, ahora muestra el HIRAGANA")]
+    public TextMeshProUGUI textoRomaji; // REUTILIZADO: ahora muestra el kana grande (ひらがな)
+
+    [Tooltip("Input donde el jugador escribe – ahora espera ROMAJI")]
+    public TMP_InputField inputKana; // REUTILIZADO: ahora se escribe romaji aquí
+
     public TextMeshProUGUI textoPista;
     public TextMeshProUGUI textoProgreso;
     public TextMeshProUGUI textoFeedback;
     public Button botonConfirmar;
     public Button botonPista;
 
+    [Header("UI extra opcional")]
+    public TextMeshProUGUI textoSubtitulo; // ej: "Escribí el romaji"
+    public TextMeshProUGUI textoPlaceholderInput; // para cambiar placeholder del InputField en runtime
+
     [Header("Datos")]
-    public List<ItemEscritura> items; // se puede autogenerar desde filas
+    public List<ItemEscritura> items;
 
     public List<KanaData> filasPermitidas; // ej: fila_ha
 
     [Header("Reglas")]
     public int rondas = 8;
     public int aciertosNecesarios = 5;
-    public bool aceptarRomajiComoFallback = true; // si no tienen IME japonés, acepta "ha"
+
+    [FormerlySerializedAs("aceptarRomajiComoFallback")]
+    [Tooltip("Si el jugador pega el hiragana igual se acepta – útil si tienen IME")]
+    public bool aceptarKanaComoFallback = true;
 
     int indice = 0;
     int aciertos = 0;
@@ -53,13 +65,12 @@ public class Manager_EscrituraInversa : MonoBehaviour
     public void Iniciar()
     {
         // autogenerar si no hay items manuales
-        if ((items == null || items.Count == 0) && filasPermitidas != null && kanaInventario != null)
+        if ((items == null || items.Count == 0) && filasPermitidas != null)
         {
             items = new List<ItemEscritura>();
             foreach (var fila in filasPermitidas)
             {
                 if (fila == null) continue;
-                // no exigimos que esté desbloqueada para poder practicar, pero marcamos idFilaKana
                 foreach (var c in fila.caracteres)
                 {
                     items.Add(new ItemEscritura
@@ -85,7 +96,7 @@ public class Manager_EscrituraInversa : MonoBehaviour
         if (kanaInventario != null)
             mazo.RemoveAll(it => !string.IsNullOrEmpty(it.idFilaKana) && !kanaInventario.EstaDesbloqueado(it.idFilaKana));
 
-        if (mazo.Count == 0) mazo = new List<ItemEscritura>(items); // fallback para testear
+        if (mazo.Count == 0) mazo = new List<ItemEscritura>(items); // fallback test
 
         Shuffle(mazo);
         if (mazo.Count > rondas) mazo = mazo.GetRange(0, rondas);
@@ -104,13 +115,28 @@ public class Manager_EscrituraInversa : MonoBehaviour
             return;
         }
         actual = mazo[indice];
-        if (textoRomaji) textoRomaji.text = actual.romaji;
+
+        // >>> CAMBIO CLAVE: mostrar HIRAGANA grande <<<
+        if (textoRomaji)
+        {
+            textoRomaji.text = actual.kanaCorrecto; // ej: "は"
+            textoRomaji.fontSize = 96; // grande, ajustá en inspector si querés
+        }
+
+        // subtítulo ayuda
+        if (textoSubtitulo) textoSubtitulo.text = "Escribí el romaji y presioná Enter";
+
         if (textoProgreso) textoProgreso.text = $"{indice + 1} / {Mathf.Min(rondas, mazo.Count)}   ✓ {aciertos}";
         if (textoPista) textoPista.text = "";
         if (textoFeedback) textoFeedback.text = "";
+
         if (inputKana)
         {
             inputKana.text = "";
+            // cambiar placeholder a "ha / hi / fu..."
+            var ph = inputKana.placeholder as TextMeshProUGUI;
+            if (ph) ph.text = "escribí en romaji...";
+            if (textoPlaceholderInput) textoPlaceholderInput.text = "romaji...";
             inputKana.ActivateInputField();
             inputKana.Select();
         }
@@ -119,41 +145,93 @@ public class Manager_EscrituraInversa : MonoBehaviour
     void DarPista()
     {
         pistasUsadas++;
-        if (textoPista) textoPista.text = "💡 " + actual.pista + (actual.kanaCorrecto != null ? $" → {actual.kanaCorrecto}" : "");
+        if (textoPista)
+        {
+            // Pista progresiva: 1ª vez primera letra, 2ª vez 2 letras, etc.
+            string rom = actual.romaji;
+            string pistaMostrar = pistasUsadas == 1 ? $"{rom[0]}___" :
+                                  pistasUsadas == 2 && rom.Length > 1 ? $"{rom.Substring(0, Mathf.Min(2, rom.Length))}___" :
+                                  rom; // tercera pista revela todo
+            textoPista.text = $"💡 {pistaMostrar}  ·  {actual.idFilaKana}";
+        }
     }
 
     public void Confirmar()
     {
         if (actual == null) return;
         string respuesta = inputKana ? inputKana.text.Trim().ToLower() : "";
+        // normalizar: quitar espacios, pasar a minúsculas
+        respuesta = respuesta.Replace(" ", "").Replace("-", "");
+
         if (string.IsNullOrEmpty(respuesta))
         {
-            if (textoFeedback) { textoFeedback.color = Color.yellow; textoFeedback.text = "Escribí el kana (o romaji)"; }
+            if (textoFeedback) { textoFeedback.color = Color.yellow; textoFeedback.text = "Escribí el romaji y presioná Enter"; }
+            if (inputKana) { inputKana.ActivateInputField(); }
             return;
         }
 
-        bool ok = respuesta == actual.kanaCorrecto;
-        if (!ok && aceptarRomajiComoFallback)
-            ok = respuesta == actual.romaji.ToLower();
+        // >>> CAMBIO CLAVE: ahora la respuesta correcta es ROMAJI <<<
+        bool ok = respuesta == actual.romaji.ToLower();
+
+        // fallback: si escribe el kana y tiene IME, también aceptamos
+        if (!ok && aceptarKanaComoFallback)
+            ok = respuesta == actual.kanaCorrecto;
+
+        // aceptar variantes comunes: hu = fu, si = shi, chi = ti, etc.
+        if (!ok)
+            ok = EsVarianteAceptable(respuesta, actual.romaji.ToLower());
 
         if (textoFeedback)
         {
             textoFeedback.color = ok ? new Color(0.2f, 0.8f, 0.2f) : new Color(0.9f, 0.2f, 0.2f);
-            textoFeedback.text = ok ? "¡Correcto!" : $"Era: {actual.kanaCorrecto} ({actual.romaji})";
+            textoFeedback.text = ok ? "¡Correcto!" : $"Era: {actual.romaji}  ({actual.kanaCorrecto})";
         }
 
         if (ok) aciertos++;
         indice++;
-        Invoke(nameof(Siguiente), 1.0f);
+        Invoke(nameof(Siguiente), ok ? 0.9f : 1.4f);
+    }
+
+    // acepta variantes de romanización hepburn / kunrei
+    bool EsVarianteAceptable(string input, string correcto)
+    {
+        var mapa = new Dictionary<string, string[]>
+        {
+            {"shi", new[]{"si","shi","ci"}},
+            {"chi", new[]{"ti","chi"}},
+            {"tsu", new[]{"tu","tsu"}},
+            {"fu", new[]{"hu","fu"}},
+            {"ji", new[]{"zi","ji","dji"}},
+            {"sha", new[]{"sya","sha"}},
+            {"shu", new[]{"syu","shu"}},
+            {"sho", new[]{"syo","sho"}},
+            {"cha", new[]{"tya","cha"}},
+            {"chu", new[]{"tyu","chu"}},
+            {"cho", new[]{"tyo","cho"}},
+            {"ja", new[]{"zya","ja"}},
+            {"ju", new[]{"zyu","ju"}},
+            {"jo", new[]{"zyo","jo"}},
+        };
+        if (mapa.ContainsKey(correcto))
+            return System.Array.Exists(mapa[correcto], v => v == input);
+        // búsqueda inversa
+        foreach (var kv in mapa)
+            if (System.Array.Exists(kv.Value, v => v == correcto) && System.Array.Exists(kv.Value, v => v == input))
+                return true;
+        return false;
     }
 
     void Terminar()
     {
-        // si usó más de 3 pistas, exige un acierto extra
         int requeridos = aciertosNecesarios + (pistasUsadas > 3 ? 1 : 0);
         bool exito = aciertos >= requeridos;
+        Debug.Log($"[EscrituraInversa] Fin: {aciertos}/{rondas}  pistas:{pistasUsadas}  exito:{exito}");
         interaccionManager.OnMinigameFinished(exito);
     }
 
     void Shuffle<T>(List<T> l) { for (int i = l.Count - 1; i > 0; i--) { int j = Random.Range(0, i + 1); (l[i], l[j]) = (l[j], l[i]); } }
+
+    // test rápido desde inspector
+    [ContextMenu("Test Iniciar")]
+    void TestIniciar() => Iniciar();
 }

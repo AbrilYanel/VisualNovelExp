@@ -15,14 +15,14 @@ MonoBehaviour:
   id: 9
   nombreFila: RA
   caracteres:
-  - kana: RA
+  - kana: "\u3089"
     romaji: ra
-  - kana: RI
+  - kana: "\u308A"
     romaji: ri
-  - kana: RU
+  - kana: "\u308B"
     romaji: ru
-  - kana: RE
+  - kana: "\u308C"
     romaji: re
-  - kana: RO
+  - kana: "\u308D"
     romaji: ro
   costo: 20

@@ -15,14 +15,14 @@ MonoBehaviour:
   id: 7
   nombreFila: Mas
   caracteres:
-  - kana: MA
+  - kana: "\u307E"
     romaji: ma
-  - kana: MI
+  - kana: "\u307F"
     romaji: mi
-  - kana: MU
+  - kana: "\u3080"
     romaji: mu
-  - kana: ME
+  - kana: "\u3081"
     romaji: me
-  - kana: MO
+  - kana: "\u3082"
     romaji: mo
   costo: 20

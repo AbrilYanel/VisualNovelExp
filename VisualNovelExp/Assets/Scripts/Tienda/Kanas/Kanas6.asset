@@ -15,14 +15,14 @@ MonoBehaviour:
   id: 6
   nombreFila: Has
   caracteres:
-  - kana: HA
+  - kana: "\u306F"
     romaji: ha
-  - kana: HI
+  - kana: "\u3072"
     romaji: hi
-  - kana: FU
+  - kana: "\u3075"
     romaji: fu
-  - kana: HE
+  - kana: "\u3078"
     romaji: he
-  - kana: HO
+  - kana: "\u307B"
     romaji: ho
   costo: 20

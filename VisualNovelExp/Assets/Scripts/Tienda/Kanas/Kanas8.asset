@@ -15,10 +15,10 @@ MonoBehaviour:
   id: 8
   nombreFila: Yas
   caracteres:
-  - kana: YA
+  - kana: "\u3084"
     romaji: ya
-  - kana: YU
+  - kana: "\u3086"
     romaji: yu
-  - kana: YO
+  - kana: "\u3088"
     romaji: yo
   costo: 20

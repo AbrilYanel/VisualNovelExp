@@ -15,14 +15,14 @@ MonoBehaviour:
   id: 2
   nombreFila: Kas
   caracteres:
-  - kana: KA
+  - kana: "\u304B"
     romaji: ka
-  - kana: KI
+  - kana: "\u304D"
     romaji: ki
-  - kana: KU
+  - kana: "\u304F"
     romaji: ku
-  - kana: KE
+  - kana: "\u3051"
     romaji: ke
-  - kana: KO
+  - kana: "\u3053"
     romaji: ko
   costo: 20

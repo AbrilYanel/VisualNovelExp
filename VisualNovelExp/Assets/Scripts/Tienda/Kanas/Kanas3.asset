@@ -15,14 +15,14 @@ MonoBehaviour:
   id: 3
   nombreFila: Sas
   caracteres:
-  - kana: SA
+  - kana: "\u3055"
     romaji: sa
-  - kana: SHI
+  - kana: "\u3057"
     romaji: shi
-  - kana: SU
+  - kana: "\u3059"
     romaji: su
-  - kana: SE
+  - kana: "\u305B"
     romaji: se
-  - kana: SO
+  - kana: "\u305D"
     romaji: so
   costo: 20

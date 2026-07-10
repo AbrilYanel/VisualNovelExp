@@ -28,7 +28,7 @@ public class Manager_Memorama : MonoBehaviour
     [Tooltip("Segundos que se muestran todas las cartas al empezar")]
     public float tiempoPreviewInicial = 2.5f;
     public bool previewInicialActivado = true;
-    public TextMeshProUGUI textoCuentaRegresiva; // opcional: "Memorizá... 3...2...1"
+    public TextMeshProUGUI textoCuentaRegresiva; 
 
     List<CartaMemorama> cartasEnMesa = new List<CartaMemorama>();
     CartaMemorama primera = null;
@@ -197,7 +197,7 @@ public class Manager_Memorama : MonoBehaviour
             string s = "";
             for (int i = 0; i < vidas; i++) s += "❤";
             for (int i = vidas; i < erroresMaximos; i++) s += "♡";
-            textoVidas.text = $"{s}  {vidas}/{erroresMaximos}";
+            textoVidas.text = $"{vidas}/{erroresMaximos}";
         }
         if (textoProgreso)
             textoProgreso.text = $"Pares: {aciertos}/{totalParejas}";

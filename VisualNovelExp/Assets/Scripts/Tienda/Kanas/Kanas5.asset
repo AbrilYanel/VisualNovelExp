@@ -15,14 +15,14 @@ MonoBehaviour:
   id: 5
   nombreFila: Nas
   caracteres:
-  - kana: NA
+  - kana: "\u306A"
     romaji: na
-  - kana: NI
+  - kana: "\u306B"
     romaji: ni
-  - kana: NU
+  - kana: "\u306C"
     romaji: nu
-  - kana: NE
+  - kana: "\u306D"
     romaji: ne
-  - kana: NO
+  - kana: "\u306E"
     romaji: no
   costo: 20

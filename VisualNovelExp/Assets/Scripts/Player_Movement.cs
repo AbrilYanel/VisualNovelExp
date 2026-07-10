@@ -70,7 +70,7 @@ public class Player_Movement : MonoBehaviour
         // Si tenés permiso de entrevista y todavía no la completaste,
         // dejamos que NPC_Entrevistado use la R.
         var camara = Manager_Camara.Instance;
-        if (camara != null && camara.permisoObtenido && !camara.entrevistaCompletada)
+       /* if (camara != null && camara.permisoObtenido && !camara.entrevistaCompletada)
         {
             // Estamos en "modo entrevista disponible" -> no interceptar R simple
             // Sí permitir Ctrl+R forzado
@@ -79,7 +79,7 @@ public class Player_Movement : MonoBehaviour
                 ReiniciarJuego();
             }
             return;
-        }
+        }*/
 
         // 3. Input reinicio
         if (permitirCtrlRInstantaneo && Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(teclaReiniciar))

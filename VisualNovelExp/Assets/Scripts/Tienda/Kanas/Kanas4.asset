@@ -15,14 +15,14 @@ MonoBehaviour:
   id: 4
   nombreFila: Tas
   caracteres:
-  - kana: TA
+  - kana: "\u305F"
     romaji: ta
-  - kana: CHI
+  - kana: "\u3061"
     romaji: chi
-  - kana: TSU
+  - kana: "\u3064"
     romaji: tsu
-  - kana: TE
+  - kana: "\u3066"
     romaji: te
-  - kana: TO
+  - kana: "\u3068"
     romaji: to
   costo: 20

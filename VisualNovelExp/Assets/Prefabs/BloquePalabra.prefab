@@ -67,8 +67,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e6e8f2b17e244b74a9400a8a732f8cff, type: 2}
+  m_sharedMaterial: {fileID: 144273725763147936, guid: e6e8f2b17e244b74a9400a8a732f8cff,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -98,7 +99,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -189,6 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texto: {fileID: 3609529185085856225}
   valor: 
+  contenedorOriginal: {fileID: 0}
   colorNormal: {r: 1, g: 1, b: 1, a: 1}
   colorArrastrando: {r: 1, g: 1, b: 0.6, a: 1}
 --- !u!114 &5201287512923223530

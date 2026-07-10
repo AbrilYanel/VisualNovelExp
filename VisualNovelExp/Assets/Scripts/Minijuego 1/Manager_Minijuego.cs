@@ -201,7 +201,7 @@ public class Manager_Minijuego : MonoBehaviour
         string corazones = "";
         for (int i = 0; i < vidasRestantes; i++) corazones += "❤";
         for (int i = vidasRestantes; i < erroresMaximos; i++) corazones += "♡";
-        textoVidas.text = $"Intentos: {corazones}  ({vidasRestantes}/{erroresMaximos})";
+        textoVidas.text = $"{corazones}  ({vidasRestantes}/{erroresMaximos})";
     }
 
     void FallarMinijuego()

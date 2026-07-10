@@ -15,14 +15,14 @@ MonoBehaviour:
   id: 1
   nombreFila: As
   caracteres:
-  - kana: A
+  - kana: "\u3042"
     romaji: a
-  - kana: I
+  - kana: "\u3044"
     romaji: i
-  - kana: U
+  - kana: "\u3046"
     romaji: u
-  - kana: E
+  - kana: "\u3048"
     romaji: e
-  - kana: O
+  - kana: "\u304A"
     romaji: o
   costo: 15

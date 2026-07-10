@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Success
   m_EditorClassIdentifier: 
   speakerName: Hombre Gato
-  sentence: "Muy bien humano, aprendiste 3 nuevas palabras, chequealas en tu journal
-    (Tab) y contin\xFAa conociendo m\xE1s personas interesantes, miau! Buena suerte."
+  sentence: "Muy bien humano, al parecer sabes un poco, la pr\xF3xima no ser\xE1
+    tan f\xE1cil miau! Buena suerte."
   hasChoices: 0
   option1Text: Gracias Nekoman
   option2Text: Hasta luego.
@@ -27,3 +27,4 @@ MonoBehaviour:
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0
+  daPermiso: 0

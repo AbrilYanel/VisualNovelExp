@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Manager_Interaccion : MonoBehaviour
 {
@@ -83,6 +85,14 @@ public class Manager_Interaccion : MonoBehaviour
     public Nodo_Dialogo nodoEntregaExitosa;
     public Nodo_Dialogo nodoEntregaMala;
 
+    // --- NUEVO: aborto ---
+    [Header("Aborto Minijuego")]
+    [Tooltip("Permite salir con ESC de cualquier minijuego")]
+    public bool permitirAbortoConEsc = true;
+    [Tooltip("Texto opcional que se muestra en los minijuegos: 'ESC para salir'")]
+    public TextMeshProUGUI textoAyudaSalir; // puedes arrastrar un TMP en cada UI de minijuego, o dejarlo null
+    public KeyCode teclaAborto = KeyCode.Escape;
+
     // control interno
     int minijuegoActivo = 0;
     // 1=Emparejar,2=Minijuego2,3=VoF,4=Memorama,5=KanaRush,6=Escritura,8=Quiz
@@ -107,15 +117,47 @@ public class Manager_Interaccion : MonoBehaviour
         if (kanaRushUI) kanaRushUI.SetActive(false);
         if (escrituraUI) escrituraUI.SetActive(false);
         if (quizCortesiaUI) quizCortesiaUI.SetActive(false);
+        minijuegoActivo = 0; // <--- importante: resetea flag
     }
 
-    // ---------- diálogo base (igual que antes) ----------
+    // ---------- UPDATE con ABORTO ----------
     void Update()
     {
+        // --- ABORTO MINIJUEGO con ESC ---
+        if (permitirAbortoConEsc && minijuegoActivo != 0)
+        {
+            // No interceptar ESC si el jugador está escribiendo en un InputField (Escritura Inversa)
+            // TMP_InputField captura ESC para salir del campo, lo dejamos pasar primero
+            bool inputFieldActivo = EventSystem.current != null &&
+                EventSystem.current.currentSelectedGameObject != null &&
+                EventSystem.current.currentSelectedGameObject.GetComponent<TMPro.TMP_InputField>() != null;
+
+            // Si hay InputField activo, requiere Ctrl+ESC para abortar, para no chocar con “salir del input”
+            bool abortar = false;
+            if (inputFieldActivo)
+            {
+                // Ctrl+ESC fuerza salida aunque estés escribiendo
+                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(teclaAborto))
+                    abortar = true;
+            }
+            else
+            {
+                if (Input.GetKeyDown(teclaAborto))
+                    abortar = true;
+            }
+
+            if (abortar)
+            {
+                AbandonarMinijuego();
+                return;
+            }
+        }
+
+        // diálogo typewriter click-to-skip
         if (isTyping && Input.GetMouseButtonDown(0))
         {
             StopAllCoroutines();
-            dialogueText.text = currentSentence;
+            if (dialogueText) dialogueText.text = currentSentence;
             isTyping = false;
             if (currentNode.endsDialogue) EndDialogue();
             else if (currentNode.hasChoices) ShowChoices();
@@ -124,6 +166,51 @@ public class Manager_Interaccion : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Cierra el minijuego actual sin marcar éxito ni fallo.
+    /// El NPC queda NO completado, el jugador puede ir a la tienda y volver.
+    /// </summary>
+    public void AbandonarMinijuego()
+    {
+        Debug.LogWarning($"[Interaccion] Abortando minijuego {minijuegoActivo} por ESC – volviendo al mundo");
+        StopAllCoroutines();
+
+        // cerrar UIs
+        CerrarTodasUIs();
+
+        // limpiar estados
+        minijuegoActivoParaReintento = 0;
+        // minijuegoActivo ya se pone a 0 en CerrarTodasUIs()
+
+        // feedback opcional
+        if (textoAyudaSalir != null)
+            StartCoroutine(FlashTexto($"{textoAyudaSalir.text}", 0.3f));
+
+        // Volver al juego – SIN marcar NPC como completado, SIN monedas
+        // Opción A: volver directo al mundo
+        EndDialogue();
+
+        // Opción B: si preferís ir al nodo Fail para mostrar “¿Reintentar?”,
+        // comentá EndDialogue() arriba y descomentá esto:
+        /*
+        minijuegoActivoParaReintento = minijuegoActivo;
+        Nodo_Dialogo nodoFail = null;
+        switch (lastMinigame) { ... } // usa el último minijuegoActivo guardado antes del reset
+        if (nodoFail != null) StartDialogue(nodoFail); else EndDialogue();
+        */
+    }
+
+    IEnumerator FlashTexto(string msg, float t)
+    {
+        yield return null;
+    }
+
+    bool EstaEnMinijuego()
+    {
+        return minijuegoActivo != 0;
+    }
+
+    // ---------- diálogo base ----------
     public void StartDialogue(Nodo_Dialogo node)
     {
         if (cameraController) cameraController.enabled = false;
@@ -166,7 +253,7 @@ public class Manager_Interaccion : MonoBehaviour
         if (currentNode.endsDialogue)
         {
             yield return new WaitForSeconds(0.8f);
-            if (nodoPostEntrega != null) { var t = nodoPostEntrega; nodoPostEntrega = null; StartDialogue(t); yield break; }
+            if (nodoPostEntrega != null) { var temp = nodoPostEntrega; nodoPostEntrega = null; StartDialogue(temp); yield break; }
             EndDialogue(); yield break;
         }
         if (currentNode.hasChoices) ShowChoices();
@@ -176,9 +263,9 @@ public class Manager_Interaccion : MonoBehaviour
     void ShowChoices()
     {
         if (!currentNode.hasChoices) return;
-        choicePanel.SetActive(true);
-        buttonText1.text = currentNode.option1Text;
-        buttonText2.text = currentNode.option2Text;
+        if (choicePanel) choicePanel.SetActive(true);
+        if (buttonText1) buttonText1.text = currentNode.option1Text;
+        if (buttonText2) buttonText2.text = currentNode.option2Text;
         button1.onClick.RemoveAllListeners();
         button2.onClick.RemoveAllListeners();
         button1.onClick.AddListener(() => ChooseOption(1));
@@ -187,7 +274,7 @@ public class Manager_Interaccion : MonoBehaviour
 
     void ChooseOption(int option)
     {
-        choicePanel.SetActive(false);
+        if (choicePanel) choicePanel.SetActive(false);
         var nextNode = option == 1 ? currentNode.option1Next : currentNode.option2Next;
         if (nextNode != null)
         {
@@ -209,7 +296,6 @@ public class Manager_Interaccion : MonoBehaviour
         CerrarTodasUIs();
 
         var tipo = currentNode.tipoMinijuego;
-        // legacy compat
         if (tipo == Nodo_Dialogo.TipoMinijuego.Minijuego1) tipo = Nodo_Dialogo.TipoMinijuego.Emparejar;
         if (tipo == Nodo_Dialogo.TipoMinijuego.Minijuego2) tipo = Nodo_Dialogo.TipoMinijuego.FillBlank;
 
@@ -225,19 +311,16 @@ public class Manager_Interaccion : MonoBehaviour
                     managerVoF.Iniciar();
                 }
                 break;
-
             case Nodo_Dialogo.TipoMinijuego.Memorama:
                 minijuegoActivo = 4;
                 if (memoramaUI) memoramaUI.SetActive(true);
                 if (managerMemorama) managerMemorama.Iniciar();
                 break;
-
             case Nodo_Dialogo.TipoMinijuego.Emparejar:
                 minijuegoActivo = 1;
                 if (minigameUI) minigameUI.SetActive(true);
                 if (managerMinijuego) managerMinijuego.Iniciar();
                 break;
-
             case Nodo_Dialogo.TipoMinijuego.FillBlank:
                 minijuegoActivo = 2;
                 if (managerMinijuego2 && preguntasFillBlank_NPC4 != null)
@@ -245,7 +328,6 @@ public class Manager_Interaccion : MonoBehaviour
                 if (minijuego2UI) minijuego2UI.SetActive(true);
                 if (managerMinijuego2) managerMinijuego2.Iniciar();
                 break;
-
             case Nodo_Dialogo.TipoMinijuego.WordOrder:
                 minijuegoActivo = 2;
                 if (managerMinijuego2 && preguntasWordOrder_NPC7 != null)
@@ -253,19 +335,16 @@ public class Manager_Interaccion : MonoBehaviour
                 if (minijuego2UI) minijuego2UI.SetActive(true);
                 if (managerMinijuego2) managerMinijuego2.Iniciar();
                 break;
-
             case Nodo_Dialogo.TipoMinijuego.KanaRush:
                 minijuegoActivo = 5;
                 if (kanaRushUI) kanaRushUI.SetActive(true);
                 if (managerKanaRush) managerKanaRush.Iniciar();
                 break;
-
             case Nodo_Dialogo.TipoMinijuego.EscrituraInversa:
                 minijuegoActivo = 6;
                 if (escrituraUI) escrituraUI.SetActive(true);
                 if (managerEscritura) managerEscritura.Iniciar();
                 break;
-
             case Nodo_Dialogo.TipoMinijuego.QuizCortesia:
                 minijuegoActivo = 8;
                 if (quizCortesiaUI) quizCortesiaUI.SetActive(true);
@@ -276,23 +355,32 @@ public class Manager_Interaccion : MonoBehaviour
                     managerQuiz.Iniciar();
                 }
                 break;
-
             case Nodo_Dialogo.TipoMinijuego.Entrevista:
-                // la entrevista se lanza vía NPC_Entrevistado con R, no desde aquí
                 Debug.Log("[Interaccion] Entrevista se inicia con R, no desde StartMinigame");
                 EndDialogue();
                 break;
-
             default:
                 Debug.LogWarning("Minijuego no implementado: " + tipo);
                 EndDialogue();
                 break;
         }
+
+        // mostrar hint ESC
+        if (minijuegoActivo != 0)
+        {
+            Debug.Log($"[Interaccion] Minijuego {minijuegoActivo} iniciado – presiona ESC para salir");
+            if (textoAyudaSalir != null)
+            {
+                textoAyudaSalir.gameObject.SetActive(true);
+                textoAyudaSalir.text = "ESC para salir  •  TAB para journal";
+            }
+        }
     }
 
     public void OnMinigameFinished(bool success)
     {
-        CerrarTodasUIs();
+        int juegoTerminado = minijuegoActivo;
+        CerrarTodasUIs(); // esto pone minijuegoActivo = 0
 
         if (success)
         {
@@ -305,7 +393,7 @@ public class Manager_Interaccion : MonoBehaviour
             if (npcActual != null) npcActual.MarcarCompletado();
 
             Nodo_Dialogo nodoOk = null;
-            switch (minijuegoActivo)
+            switch (juegoTerminado)
             {
                 case 3: nodoOk = nodoSuccessVoF; break;
                 case 4: nodoOk = nodoSuccessMemorama; break;
@@ -319,9 +407,9 @@ public class Manager_Interaccion : MonoBehaviour
         }
         else
         {
-            minijuegoActivoParaReintento = minijuegoActivo;
+            minijuegoActivoParaReintento = juegoTerminado;
             Nodo_Dialogo nodoFail = null;
-            switch (minijuegoActivo)
+            switch (juegoTerminado)
             {
                 case 3: nodoFail = nodoFailVoF; break;
                 case 4: nodoFail = nodoFailMemorama; break;
@@ -338,8 +426,8 @@ public class Manager_Interaccion : MonoBehaviour
     public void ReintentarMinijuego()
     {
         CerrarTodasUIs();
-        dialoguePanel.SetActive(false);
-        choicePanel.SetActive(false);
+        if (dialoguePanel) dialoguePanel.SetActive(false);
+        if (choicePanel) choicePanel.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         minijuegoActivo = minijuegoActivoParaReintento;
@@ -358,12 +446,15 @@ public class Manager_Interaccion : MonoBehaviour
 
     void EndDialogue()
     {
+        CerrarTodasUIs();
         if (dialoguePanel) dialoguePanel.SetActive(false);
         if (choicePanel) choicePanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         if (cameraController) cameraController.enabled = true;
         if (Player_Movement) Player_Movement.enabled = true;
+        minijuegoActivo = 0;
+        minijuegoActivoParaReintento = 0;
     }
 
     public void ActualizarUIProgreso()
@@ -375,4 +466,7 @@ public class Manager_Interaccion : MonoBehaviour
     }
 
     public void SetNPCActual(Interaccion_NPC npc) { npcActual = npc; }
+
+    // Botón UI opcional "Salir"
+    public void BotonSalirMinijuego() { AbandonarMinijuego(); }
 }

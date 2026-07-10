@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Continuar1
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Oh, disculpa, se nota que no sos de ac\xE1, te gustar\xEDa que te ense\xF1e
-    algunas oraciones b\xE1sicas?"
+  sentence: "Genial, entonces te ense\xF1ar\xE9 un poco de part\xEDculas y vocabulario."
   hasChoices: 1
-  option1Text: Me encantaria
+  option1Text: Gracias!
   option2Text: Ahora no
   option1Next: {fileID: 11400000, guid: 46831545b1957524e98eedc90a76bca3, type: 2}
-  option2Next: {fileID: 0}
+  option2Next: {fileID: 11400000, guid: eb78132a1f8fedd4ba2cf0f8cda18b51, type: 2}
   startsMinigame: 0
   endsDialogue: 0
   nextNode: {fileID: 0}

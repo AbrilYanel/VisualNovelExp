@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: Comenzar
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: Ohayo, boku wa kaishain desu, anata wa?
+  sentence: "Pareces interesado en aprender sobre oraciones, te gustar\xEDa intentarlo?"
   hasChoices: 1
-  option1Text: Eh... Konnichiwa?
+  option1Text: Lo voy a intentar
   option2Text: No tengo tiempo para esto
   option1Next: {fileID: 11400000, guid: 5457e2dddaaed5e43a0e13a33c30aaa8, type: 2}
-  option2Next: {fileID: 0}
+  option2Next: {fileID: 11400000, guid: eb78132a1f8fedd4ba2cf0f8cda18b51, type: 2}
   startsMinigame: 0
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 1
+  reintentarMinijuego: 0
+  daCamara: 0
+  entregaEntrevista: 0
+  daPermiso: 0

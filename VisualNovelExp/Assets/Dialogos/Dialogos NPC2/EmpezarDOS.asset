@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: EmpezarDOS
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: hola soy npc2
+  sentence: "Ohayou! Te gustar\xEDa practicar un poco tu memoria?"
   hasChoices: 1
   option1Text: si
   option2Text: no
   option1Next: {fileID: 11400000, guid: c8b78f37278b3844a9cf4a8f264f288c, type: 2}
-  option2Next: {fileID: 0}
+  option2Next: {fileID: 11400000, guid: 5ac518859f26eb243849537707eec609, type: 2}
   startsMinigame: 0
   endsDialogue: 0
   nextNode: {fileID: 0}

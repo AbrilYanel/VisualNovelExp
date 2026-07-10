@@ -15,10 +15,15 @@ MonoBehaviour:
   speakerName: Hombre Gato
   sentence: Miau~ Soy un gato!
   hasChoices: 1
-  option1Text: Genial, yo soy un humano!
+  option1Text: "\xBFQue haces?"
   option2Text: No estoy para estas cosas
   option1Next: {fileID: 11400000, guid: 2b4ff461bdd0b6c468e1326b2bd68e54, type: 2}
   option2Next: {fileID: 11400000, guid: 8f12ab836421247429528423d91a3f47, type: 2}
   startsMinigame: 0
   endsDialogue: 0
   nextNode: {fileID: 0}
+  tipoMinijuego: 0
+  reintentarMinijuego: 0
+  daCamara: 0
+  entregaEntrevista: 0
+  daPermiso: 0

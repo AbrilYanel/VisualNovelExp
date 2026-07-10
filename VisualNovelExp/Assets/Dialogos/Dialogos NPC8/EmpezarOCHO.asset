@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: EmpezarOCHO
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: hola soy npc8
+  sentence: "Te ves como una persona con modales, te gustar\xEDa resolver un cuestionario
+    y probar tu conocimiento?"
   hasChoices: 1
   option1Text: si
   option2Text: no
   option1Next: {fileID: 11400000, guid: 0ca28215e88431549a2c09f60b3a94c9, type: 2}
-  option2Next: {fileID: 0}
+  option2Next: {fileID: 11400000, guid: d47df1301d5a1fe4cbdd48a5882d5bf2, type: 2}
   startsMinigame: 0
   endsDialogue: 0
   nextNode: {fileID: 0}

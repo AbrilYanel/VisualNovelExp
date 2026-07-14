@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 738b51aa8c416854caeeaef89e79268a, type: 3}
+  m_Name: CharacterDatabase
+  m_EditorClassIdentifier: 
+  skinColors:
+  - {fileID: 11400000, guid: c88c97435bb4b6f4490a8057df1d7e9e, type: 2}
+  - {fileID: 11400000, guid: f53b5f8c31278da499504d05cc46efb7, type: 2}
+  - {fileID: 11400000, guid: ceaae736fb1c0b543b09e287194dedbb, type: 2}
+  - {fileID: 11400000, guid: a95060c477dca2d4a85a61af275a4234, type: 2}
+  hairColors:
+  - {fileID: 11400000, guid: f1b8d6b60b34647438d85ce703dd5842, type: 2}
+  - {fileID: 11400000, guid: 31684db99c09f474ea6b1f4130181b91, type: 2}
+  - {fileID: 11400000, guid: 5b60619ad2b3c3544842a93628d16975, type: 2}
+  - {fileID: 11400000, guid: 6211782b28f7c7a40b453ac410280b06, type: 2}
+  shirts:
+  - {fileID: 11400000, guid: 607d672b3245baa4a89bc828cf1634dd, type: 2}
+  - {fileID: 11400000, guid: d7de72de3be571646a1901c0a31343e4, type: 2}
+  - {fileID: 11400000, guid: 9e4909801495a5b43a417253f8b88239, type: 2}
+  - {fileID: 11400000, guid: aa4bf9b7631d53940b6691f2aa0c1dbe, type: 2}
+  - {fileID: 11400000, guid: 78d926c9885b98643b80bb4b2be76a0a, type: 2}
+  - {fileID: 11400000, guid: a2458ec673581d84886150e998cf3e25, type: 2}
+  skirts:
+  - {fileID: 11400000, guid: 8dc7b39ce09172748bb7d4e26066cf44, type: 2}
+  - {fileID: 11400000, guid: d04d03646a217be409920cd633d15c14, type: 2}
+  - {fileID: 11400000, guid: 132c44a0a1752e3458387d45111a7400, type: 2}
+  - {fileID: 11400000, guid: 97276aa5cdea5a647bc6fe4afcb3de0a, type: 2}
+  jeans:
+  - {fileID: 11400000, guid: e6dfc180332681941bba13129de62faa, type: 2}
+  - {fileID: 11400000, guid: fc692b64b48324b44912a6f5b7a2175b, type: 2}
+  dresses:
+  - {fileID: 11400000, guid: 672b3abacfbe9294d91eac817dc96e98, type: 2}
+  - {fileID: 11400000, guid: 9ccee34c22840fd4fb9b854634199b6e, type: 2}
+  - {fileID: 11400000, guid: 1763ef4f35ad9d243b3a4555eefa7be3, type: 2}
+  - {fileID: 11400000, guid: 06355977fafae4b4089193c7ef63b959, type: 2}
+  shoes:
+  - {fileID: 11400000, guid: 39668fc7853a13e4ab80ba118d6aa922, type: 2}
+  - {fileID: 11400000, guid: b827bc450fe2a2341bf03287cd159e59, type: 2}
+  - {fileID: 11400000, guid: fdadacba42edee740b17dbc7a0ae9f18, type: 2}
+  - {fileID: 11400000, guid: 4876eefeae68f6a4d9e10f61489a6b47, type: 2}
+  - {fileID: 11400000, guid: dbdcdb7fe6d1c2f49b5bfb9c7e7db651, type: 2}
+  accessories:
+  - {fileID: 11400000, guid: c9bafa7cdff0bfa4f8bbd0016be91bf9, type: 2}
+  - {fileID: 11400000, guid: 4946d9939a88f5243ab28d2be15aecc4, type: 2}

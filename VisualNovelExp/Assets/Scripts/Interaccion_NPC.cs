@@ -69,8 +69,7 @@ public class Interaccion_NPC : MonoBehaviour
         {
             panelNivelInsuficiente.SetActive(true);
             textoNivelInsuficiente.text =
-                $"Necesitás nivel {nivelRequerido} para hablar con este NPC.\n" +
-                $"Tu nivel actual es {playerProgress.nivelActual}.";
+                $"Necesitás nivel {nivelRequerido} para hablar con este NPC.\n";
 
             Invoke(nameof(OcultarMensajeNivel), 2.5f);
         }

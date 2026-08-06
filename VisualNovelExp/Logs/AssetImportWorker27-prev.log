@@ -362,3 +362,8 @@ Start importing Assets/CartoonLowPolyCityLite/Models/Road_02.fbx using Guid(ca27
  -> (artifact id: '944d12d23ef433236737a86479a913cd') in 0.032566 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 8
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: La operación de E/S se anuló por una salida de subproceso o por una solicitud de aplicación.
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

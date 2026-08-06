@@ -28,10 +28,18 @@ public class Interaccion_NPC : MonoBehaviour
     public NPC_Director npcDirector;
     public NPC_Comerciante npcComerciante;
 
+    [Header("Sonido")]
+    public AudioClip sonidoInteractuar;
+    private AudioSource audioSource;
+
     void Start()
     {
         if (animator == null)
             animator = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
 
         ActualizarIndicador();
     }
@@ -50,6 +58,9 @@ public class Interaccion_NPC : MonoBehaviour
         // Reproducir animación del NPC una sola vez
         if (animator != null && !string.IsNullOrEmpty(triggerInteractuar))
             animator.SetTrigger(triggerInteractuar);
+
+        if (audioSource != null && sonidoInteractuar != null)
+            audioSource.PlayOneShot(sonidoInteractuar);
 
         if (npcEntrevistado != null)
         {

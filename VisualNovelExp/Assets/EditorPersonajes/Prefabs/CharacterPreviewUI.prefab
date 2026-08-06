@@ -101,7 +101,6 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: f26c5d11bb9b3e0439244606f1d05da6, type: 2}
   characterRendererUI: {fileID: 4023223300217980894}
   loadOnStart: 1
-  loadOnEnable: 0
 --- !u!1 &2174224432256453323
 GameObject:
   m_ObjectHideFlags: 0

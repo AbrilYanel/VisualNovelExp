@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Despedir
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "De acuerdo, ten un buen d\xEDa!"
+  sentence: De acuerdo, ten un buen dia!
   hasChoices: 0
   option1Text: 
   option2Text: 

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: Continuar1
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: "Genial, entonces te ense\xF1ar\xE9 un poco de part\xEDculas y vocabulario."
+  speakerName: El Maestro
+  sentence: "Genial, entonces te ense\xF1are un poco de particulas y vocabulario."
   hasChoices: 1
   option1Text: Gracias!
   option2Text: Ahora no

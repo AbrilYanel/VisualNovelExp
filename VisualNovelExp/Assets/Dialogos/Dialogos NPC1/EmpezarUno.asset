@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: EmpezarUno
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Bienvenido, te gustar\xEDa responder un par de preguntas?"
+  sentence: Bienvenido, te gustaria responder un par de preguntas?
   hasChoices: 1
-  option1Text: si
-  option2Text: no
+  option1Text: Si
+  option2Text: No
   option1Next: {fileID: 11400000, guid: 9e4c281a93e0441488b41f00ab0ac2d8, type: 2}
   option2Next: {fileID: 11400000, guid: d3d7759c58c3fd043a119d1267ce872b, type: 2}
   startsMinigame: 0

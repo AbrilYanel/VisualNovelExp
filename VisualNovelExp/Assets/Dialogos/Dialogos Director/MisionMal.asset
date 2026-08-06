@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MisionMal
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Esta grabaci\xF3n no es lo suficientemente buena... "
+  sentence: 'Esta grabacion no es lo suficientemente buena... '
   hasChoices: 0
   option1Text: 
   option2Text: 

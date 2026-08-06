@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ComenzarD
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Ohayou! \xBFC\xF3mo puedo ayudarte?"
+  sentence: Ohayou! Como puedo ayudarte?
   hasChoices: 1
-  option1Text: "\xBFPuedo entrevistarte?"
+  option1Text: Puedo entrevistarte?
   option2Text: Hasta luego
   option1Next: {fileID: 11400000, guid: 3aac13e567678b04189a5b61aedb0470, type: 2}
   option2Next: {fileID: 11400000, guid: aa51d966a8ef82f49950f6579c4e3262, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: No
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Est\xE1 bien, hasta luego."
+  sentence: Esta bien, hasta luego.
   hasChoices: 0
   option1Text: 
   option2Text: 

@@ -20,7 +20,7 @@ public class Manager_VerdaderoFalso : MonoBehaviour
 
     [Header("Datos")]
     public List<PreguntaVoF> preguntas; // se puede inyectar también
-    [Tooltip("Si fallás 1 sola, perdés – es V/F de una oportunidad")]
+    [Tooltip("Si fallas 1 sola, perdés – es V/F de una oportunidad")]
     public bool falloInstantaneo = true;
 
     int indice = 0;
@@ -71,7 +71,7 @@ public class Manager_VerdaderoFalso : MonoBehaviour
         if (textoProgreso) textoProgreso.text = $"{indice + 1} / {preguntas.Count}";
         if (textoEnunciadoJapones) textoEnunciadoJapones.text = bloqueada ? "🔒🔒🔒" : p.enunciadoJapones;
         if (textoEnunciadoEspanol) textoEnunciadoEspanol.text = bloqueada ? "(Kana bloqueado, compralo en la tienda)" : p.enunciadoEspanol;
-        if (textoFeedback) textoFeedback.text = bloqueada ? "¡Necesitás la fila " + p.idFilaKana + "!" : "";
+        if (textoFeedback) textoFeedback.text = bloqueada ? "Necesitas la fila " + p.idFilaKana + "!" : "";
 
         botonVerdadero.interactable = true;
         botonFalso.interactable = true;
@@ -93,7 +93,7 @@ public class Manager_VerdaderoFalso : MonoBehaviour
         if (textoFeedback)
         {
             textoFeedback.color = acierto ? new Color(0.2f, 0.8f, 0.2f) : new Color(0.9f, 0.2f, 0.2f);
-            textoFeedback.text = acierto ? "¡Correcto!" : $"Incorrecto. {p.explicacion}";
+            textoFeedback.text = acierto ? "Correcto!" : $"Incorrecto. {p.explicacion}";
         }
 
         if (acierto)

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SiExplic
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Perfecto, intenta adivinar cu\xE1l es el romaji del hiragana lo m\xE1s
-    r\xE1pido que puedas, te servir\xE1 de pr\xE1ctica!"
+  sentence: Perfecto, intenta adivinar cual es el romaji del hiragana lo mas rapido
+    que puedas, te servira de practica!
   hasChoices: 1
   option1Text: Empecemos
   option2Text: Mejor no...

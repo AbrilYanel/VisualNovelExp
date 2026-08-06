@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: EntrevistaHecha
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "\xBFYa hiciste la entrevista? Dejame chequearla..."
+  sentence: Ya hiciste la entrevista? Dejame chequearla...
   hasChoices: 1
-  option1Text: "Ac\xE1 est\xE1"
-  option2Text: "No, a\xFAn no"
+  option1Text: Aqui tienes
+  option2Text: No, aun no
   option1Next: {fileID: 11400000, guid: dbac7b42d36e39642893a7d236d4b8c0, type: 2}
   option2Next: {fileID: 11400000, guid: 3e4675392e75d0e4ea6147ad5a3764df, type: 2}
   startsMinigame: 0
@@ -26,3 +26,4 @@ MonoBehaviour:
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0
+  daPermiso: 0

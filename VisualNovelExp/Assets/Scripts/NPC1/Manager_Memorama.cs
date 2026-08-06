@@ -75,7 +75,7 @@ public class Manager_Memorama : MonoBehaviour
         else
         {
             bloqueInput = false;
-            if (textoFeedback) textoFeedback.text = "¡Encontrá las parejas!";
+            if (textoFeedback) textoFeedback.text = "Encuentra las parejas!";
         }
     }
 
@@ -94,7 +94,7 @@ public class Manager_Memorama : MonoBehaviour
             if (textoFeedback)
             {
                 textoFeedback.color = new Color(1f, 0.6f, 0.1f);
-                textoFeedback.text = $"Memorizá las posiciones... {Mathf.CeilToInt(restante)}";
+                textoFeedback.text = $"Memoriza las posiciones... {Mathf.CeilToInt(restante)}";
             }
             if (textoCuentaRegresiva)
                 textoCuentaRegresiva.text = Mathf.CeilToInt(restante).ToString();
@@ -119,13 +119,13 @@ public class Manager_Memorama : MonoBehaviour
         if (textoFeedback)
         {
             textoFeedback.color = Color.white;
-            textoFeedback.text = "¡A jugar!";
+            textoFeedback.text = "A jugar!";
         }
 
         yield return new WaitForSeconds(0.4f);
 
         bloqueInput = false;
-        if (textoFeedback) textoFeedback.text = "¡Encontrá las parejas!";
+        if (textoFeedback) textoFeedback.text = "Encontra las parejas!";
         ActualizarUI();
     }
 
@@ -159,7 +159,7 @@ public class Manager_Memorama : MonoBehaviour
             primera.MarcarEmparejada();
             segunda.MarcarEmparejada();
             aciertos++;
-            if (textoFeedback) { textoFeedback.color = Color.green; textoFeedback.text = "¡Par encontrado!"; }
+            if (textoFeedback) { textoFeedback.color = Color.green; textoFeedback.text = "Par encontrado!"; }
             if (aciertos >= totalParejas)
             {
                 yield return new WaitForSeconds(0.6f);

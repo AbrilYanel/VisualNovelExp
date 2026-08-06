@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Si VOF
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: Buena suerte en el noseque escritura
+  sentence: Buena suerte.
   hasChoices: 0
   option1Text: 
   option2Text: 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mision Completa
   m_EditorClassIdentifier: 
   speakerName: Director
-  sentence: "\xA1Excelente trabajo! La entrevista qued\xF3 muy bien. \u3042\u308A\u304C\u3068\u3046\uFF01"
+  sentence: Excelente trabajo! La entrevista quedo muy bien. arigatou!
   hasChoices: 0
   option1Text: 
   option2Text: 

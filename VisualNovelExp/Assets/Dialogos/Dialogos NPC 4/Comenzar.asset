@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: Comenzar
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: "Pareces interesado en aprender sobre oraciones, te gustar\xEDa intentarlo?"
+  speakerName: El Maestro
+  sentence: Pareces interesado en aprender sobre oraciones, te gustaria intentarlo?
   hasChoices: 1
   option1Text: Lo voy a intentar
   option2Text: No tengo tiempo para esto

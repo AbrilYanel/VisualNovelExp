@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: EmpezarSEIS
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Hola, veo que quer\xE9s practicar tu lectura de hiragana, te gustar\xEDa
-    intentarlo?"
+  sentence: Hola, veo que quieres practicar tu lectura de hiragana, te gustaria intentarlo?
   hasChoices: 1
-  option1Text: si
-  option2Text: no
+  option1Text: Si
+  option2Text: No
   option1Next: {fileID: 11400000, guid: cadbdc3c6b855d54ea9150b1562ce797, type: 2}
   option2Next: {fileID: 11400000, guid: 2d18f367aeb6722479a8f70f236f56dc, type: 2}
   startsMinigame: 0

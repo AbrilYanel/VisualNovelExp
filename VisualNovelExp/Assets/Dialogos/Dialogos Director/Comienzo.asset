@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Comienzo
   m_EditorClassIdentifier: 
   speakerName: Director de cine
-  sentence: "\xBFQu\xE9 tal? Soy un Director de cine muy reconocido, tienes un minuto?"
+  sentence: Que tal? Soy un Director de cine muy reconocido, tienes un minuto?
   hasChoices: 1
   option1Text: Claro que si
   option2Text: Ahora no.
@@ -26,3 +26,4 @@ MonoBehaviour:
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0
+  daPermiso: 0

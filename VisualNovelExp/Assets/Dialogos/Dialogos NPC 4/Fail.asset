@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: Fail
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: "Mmm, parece que no lo entendiste del todo, te gustar\xEDa reintentar?"
+  speakerName: El Maestro
+  sentence: Mmm, parece que no lo entendiste del todo, te gustaria reintentar?
   hasChoices: 1
   option1Text: Si con gusto
   option2Text: No gracias
@@ -24,3 +24,6 @@ MonoBehaviour:
   nextNode: {fileID: 0}
   tipoMinijuego: 0
   reintentarMinijuego: 0
+  daCamara: 0
+  entregaEntrevista: 0
+  daPermiso: 0

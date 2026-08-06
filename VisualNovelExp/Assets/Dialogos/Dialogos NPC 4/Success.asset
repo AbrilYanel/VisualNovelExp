@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: Success
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: "Wow, aprendes r\xE1pido. Ahora est\xE1s preparado para interactuar con
-    gente m\xE1s avanzada. Ganbattene!"
+  speakerName: El Maestro
+  sentence: Wow, aprendes rapido. Ahora estas preparado para interactuar con gente
+    mas avanzada. Ganbattene!
   hasChoices: 0
   option1Text: 
   option2Text: 

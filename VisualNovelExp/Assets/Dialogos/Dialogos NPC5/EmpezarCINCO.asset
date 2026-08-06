@@ -15,8 +15,8 @@ MonoBehaviour:
   speakerName: 
   sentence: Hey! Te interesa participar en un reto?
   hasChoices: 1
-  option1Text: si
-  option2Text: no
+  option1Text: Sii
+  option2Text: No
   option1Next: {fileID: 11400000, guid: b3ded9bd0b490044e9cb5a591324bc65, type: 2}
   option2Next: {fileID: 11400000, guid: c11567d694daf084fb309380e4835205, type: 2}
   startsMinigame: 0

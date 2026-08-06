@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Confirmar1
   m_EditorClassIdentifier: 
   speakerName: Hombre Gato
-  sentence: "Estoy ac\xE1 para desafiar gente, te gustar\xEDa intentarlo?"
+  sentence: Estoy aqui para desafiar gente, te gustaria intentarlo?
   hasChoices: 1
   option1Text: Si, por favor!
   option2Text: Mejor no, gracias.

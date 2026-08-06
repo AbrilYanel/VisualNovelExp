@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Success
   m_EditorClassIdentifier: 
   speakerName: Hombre Gato
-  sentence: "Muy bien humano, al parecer sabes un poco, la pr\xF3xima no ser\xE1
-    tan f\xE1cil miau! Buena suerte."
+  sentence: Muy bien humano, al parecer sabes un poco, la proxima no sera tan facil
+    miau! Buena suerte.
   hasChoices: 0
   option1Text: Gracias Nekoman
   option2Text: Hasta luego.

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SiTengo
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Incre\xEDble, lo has conseguido, muchas gracias!"
+  sentence: Increible, lo has conseguido, muchas gracias!
   hasChoices: 0
   option1Text: 
   option2Text: 
@@ -26,3 +26,4 @@ MonoBehaviour:
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 1
+  daPermiso: 0

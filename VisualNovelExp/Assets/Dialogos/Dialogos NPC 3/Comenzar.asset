@@ -15,7 +15,7 @@ MonoBehaviour:
   speakerName: Hombre Gato
   sentence: Miau~ Soy un gato!
   hasChoices: 1
-  option1Text: "\xBFQue haces?"
+  option1Text: Que haces?
   option2Text: No estoy para estas cosas
   option1Next: {fileID: 11400000, guid: 2b4ff461bdd0b6c468e1326b2bd68e54, type: 2}
   option2Next: {fileID: 11400000, guid: 8f12ab836421247429528423d91a3f47, type: 2}

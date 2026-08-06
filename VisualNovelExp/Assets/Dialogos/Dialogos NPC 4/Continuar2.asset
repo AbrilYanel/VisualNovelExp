@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: Continuar2
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: "Genial, voy a ense\xF1arte sobre la part\xEDcula m\xE1s usada, su funcion
-    es la de marcar el tema de la oraci\xF3n y unificar la primera palabra con el
-    resto, dale un intento."
+  speakerName: El Maestro
+  sentence: "Genial, voy a ense\xF1arte sobre la particula mas usada, su funcion
+    es la de marcar el tema de la oracion y unificar la primera palabra con el resto,
+    dale un intento."
   hasChoices: 0
   option1Text: 
   option2Text: 

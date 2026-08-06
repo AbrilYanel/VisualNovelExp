@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: EmpezarSIETE
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Buenas, al parecer ten\xE9s el nivel para ordenar tus propias oraciones,
-    crees poder hacerlo?"
+  sentence: Buenas, al parecer tenes el nivel para ordenar tus propias oraciones,
+    crees poder hacerlo?
   hasChoices: 1
-  option1Text: si
-  option2Text: no
+  option1Text: Por supuesto
+  option2Text: No
   option1Next: {fileID: 11400000, guid: 0685e0568ceb82e4ba3e48c455bfa931, type: 2}
   option2Next: {fileID: 11400000, guid: c7ba877f185069143b2eb03a3852f782, type: 2}
   startsMinigame: 0

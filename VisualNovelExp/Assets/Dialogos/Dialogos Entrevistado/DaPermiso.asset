@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DaPermiso
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Ya has conseguido una c\xE1mara? Genial, empez\xE1 a grabar cuando quieras!"
+  sentence: Ya has conseguido una camara? Genial, empieza a grabar cuando quieras!
   hasChoices: 0
   option1Text: 
   option2Text: 

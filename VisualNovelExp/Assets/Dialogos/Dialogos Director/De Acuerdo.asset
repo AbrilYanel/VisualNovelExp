@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: De Acuerdo
   m_EditorClassIdentifier: 
   speakerName: 
-  sentence: "Toma esta c\xE1mara, te servir\xE1 para realizar la grabaci\xF3n. Ganbatte!"
+  sentence: "Toma esta c\xE1mara, te servir\xE1 para realizar la grabacion. Ganbatte!"
   hasChoices: 1
   option1Text: Gracias
   option2Text: 
@@ -26,3 +26,4 @@ MonoBehaviour:
   reintentarMinijuego: 0
   daCamara: 1
   entregaEntrevista: 0
+  daPermiso: 0

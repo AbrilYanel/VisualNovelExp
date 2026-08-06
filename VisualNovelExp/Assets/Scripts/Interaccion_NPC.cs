@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using TMPro;
 
 public class Interaccion_NPC : MonoBehaviour
@@ -16,6 +17,11 @@ public class Interaccion_NPC : MonoBehaviour
     public TextMeshProUGUI textoNivelInsuficiente;
     public GameObject indicadorExclamacion;
 
+    [Header("Animación")]
+    public Animator animator;
+    public string triggerInteractuar = "Interact";
+    private Coroutine corrutinaAnimacion;
+
     private bool completado = false;
 
     public NPC_Entrevistado npcEntrevistado;
@@ -24,6 +30,9 @@ public class Interaccion_NPC : MonoBehaviour
 
     void Start()
     {
+        if (animator == null)
+            animator = GetComponent<Animator>();
+
         ActualizarIndicador();
     }
 
@@ -37,6 +46,11 @@ public class Interaccion_NPC : MonoBehaviour
             MostrarMensajeNivel();
             return;
         }
+
+        // Reproducir animación del NPC una sola vez
+        if (animator != null && !string.IsNullOrEmpty(triggerInteractuar))
+            animator.SetTrigger(triggerInteractuar);
+
         if (npcEntrevistado != null)
         {
             npcEntrevistado.Interact();
@@ -54,10 +68,6 @@ public class Interaccion_NPC : MonoBehaviour
             npcComerciante.Interact();
             return;
         }
-
-
-
-
 
         dialogueManager.SetNPCActual(this);
         dialogueManager.StartDialogue(startNode);

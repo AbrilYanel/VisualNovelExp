@@ -31,7 +31,9 @@ public class Manager_Minijuego : MonoBehaviour
     // --- PASO 3: vidas / intentos ---
     [Header("Paso 3 - Vidas")]
     public int erroresMaximos = 3;
-    public TextMeshProUGUI textoVidas; // asignar en inspector: "Vidas: ❤❤❤"
+    public Transform contenedorVidas;       // Panel horizontal donde van los corazones
+    public Sprite spriteCorazonLleno;        // ❤
+    public Sprite spriteCorazonVacio;        // ♡ (corazón perdido)
     private int erroresActuales = 0;
 
     // --- PASO 5: bloqueo por kanas ---
@@ -162,7 +164,7 @@ public class Manager_Minijuego : MonoBehaviour
             textoFeedback.text = "¡Bien! " + itemImagen.id.ToUpper();
             textoFeedback.color = Color.green;
 
-           
+
 
             if (parejasCorrectas >= parejas.Count)
             {
@@ -174,12 +176,12 @@ public class Manager_Minijuego : MonoBehaviour
         }
         else
         {
-           
+
             itemImagen.SetError();
             itemPalabra.SetError();
             erroresActuales++;
             ActualizarVidasUI();
-            textoFeedback.text = $"Incorrecto... Vidas: {erroresMaximos - erroresActuales}";
+            textoFeedback.text = "Incorrecto...";
             textoFeedback.color = Color.red;
 
             if (erroresActuales >= erroresMaximos)
@@ -196,12 +198,25 @@ public class Manager_Minijuego : MonoBehaviour
 
     void ActualizarVidasUI()
     {
-        if (textoVidas == null) return;
-        int vidasRestantes = Mathf.Max(0, erroresMaximos - erroresActuales);
-        string corazones = "";
-        for (int i = 0; i < vidasRestantes; i++) corazones += "❤";
-        for (int i = vidasRestantes; i < erroresMaximos; i++) corazones += "♡";
-        textoVidas.text = $"{corazones}  ({vidasRestantes}/{erroresMaximos})";
+        if (contenedorVidas == null) return;
+
+        // Limpiar corazones anteriores
+        foreach (Transform t in contenedorVidas)
+            Destroy(t.gameObject);
+
+        for (int i = 0; i < erroresMaximos; i++)
+        {
+            GameObject corazon = new GameObject($"Corazon_{i}", typeof(Image));
+            corazon.transform.SetParent(contenedorVidas, false);
+
+            Image img = corazon.GetComponent<Image>();
+            img.sprite = (i < erroresMaximos - erroresActuales) ? spriteCorazonLleno : spriteCorazonVacio;
+            img.preserveAspect = true;
+
+            // Tamaño default por si no hay LayoutElement
+            RectTransform rt = corazon.GetComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(40f, 40f);
+        }
     }
 
     void FallarMinijuego()
@@ -255,5 +270,5 @@ public class ParejaDatos
     public string traduccion;
 
     [Header("Progresión Kanas - Paso 5")]
-    public string idFilaKana = "fila_a"; 
+    public string idFilaKana = "fila_a";
 }

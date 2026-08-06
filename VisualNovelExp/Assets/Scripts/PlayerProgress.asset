@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b8975488a81a64da90a379d4572575, type: 3}
   m_Name: PlayerProgress
   m_EditorClassIdentifier: 
-  nivelActual: 3
-  interaccionesCompletadas: 2
+  nivelActual: 4
+  interaccionesCompletadas: 0
   interaccionesPorNivel: 3
-  monedas: 405
+  monedas: 1059
   monedaInicial: 15

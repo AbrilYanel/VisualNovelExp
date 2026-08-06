@@ -23,13 +23,20 @@ public class Manager_Tienda : MonoBehaviour
     public MonoBehaviour cameraController;
     public MonoBehaviour Player_Movement;
 
+    [Header("Animación y sonido")]
     public Animator animator;
+    public AudioClip sonidoComprar;
+    private AudioSource audioSource;
 
     private bool tiendaAbierta = false;
     private Coroutine corrutinaCierre;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
         if (panelTienda != null) panelTienda.SetActive(false);
         SetupBotonCerrar();
         NukeRaycastBlockers();
@@ -154,30 +161,26 @@ public class Manager_Tienda : MonoBehaviour
 
     IEnumerator DesactivarTrasAnimacion()
     {
-        // Si no hay animator, desactivar directo
-        if (animator == null)
-        {
-            panelTienda.SetActive(false);
-            yield break;
-        }
-
         yield return null;
 
-        // Esperar a que arranque el estado "Close"
+        // Esperar a que arranque el estado "Close", con timeout de seguridad
         float timeout = 0f;
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Close"))
         {
             timeout += Time.deltaTime;
-            if (timeout > 3f) break;
+            if (timeout > 3f) break; // safety: si no arranca en 3s, salir
             yield return null;
         }
 
-        // Esperar a que complete hasta 1s antes del final
+        // Esperar a que termine la animación
         float duracion = animator.GetCurrentAnimatorStateInfo(0).length;
-        float espera = Mathf.Max(0f, duracion - 1f);
-        yield return new WaitForSeconds(espera);
+        yield return new WaitForSeconds(duracion);
 
-        panelTienda.SetActive(false);
+        // Solo desactivar si la tienda sigue cerrada (red de seguridad)
+        if (!tiendaAbierta)
+            panelTienda.SetActive(false);
+
+        corrutinaCierre = null;
     }
 
     void RefrescarLista()
@@ -197,7 +200,13 @@ public class Manager_Tienda : MonoBehaviour
             if (!item) { Destroy(obj); continue; }
             bool desbloqueada = kanaInventario && kanaInventario.EstaDesbloqueado(fila.id);
             item.Configurar(fila, desbloqueada, () => {
-                if (kanaInventario.Comprar(fila, playerProgress)) RefrescarLista();
+                if (kanaInventario.Comprar(fila, playerProgress))
+                {
+                    // Sonido solo si la compra fue exitosa
+                    if (audioSource != null && sonidoComprar != null)
+                        audioSource.PlayOneShot(sonidoComprar);
+                    RefrescarLista();
+                }
             });
         }
         Canvas.ForceUpdateCanvases();

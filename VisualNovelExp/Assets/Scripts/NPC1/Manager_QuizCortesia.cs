@@ -60,7 +60,7 @@ public class Manager_QuizCortesia : MonoBehaviour
         bool bloqueada = kanaInventario != null && !string.IsNullOrEmpty(p.idFilaKana) && !kanaInventario.EstaDesbloqueado(p.idFilaKana);
 
         if (textoSituacion) textoSituacion.text = bloqueada ? "🔒 Contenido bloqueado" : p.situacion;
-        if (textoPregunta) textoPregunta.text = bloqueada ? "Comprá la fila " + p.idFilaKana + " en la tienda" : p.pregunta;
+        if (textoPregunta) textoPregunta.text = bloqueada ? "Compra la fila " + p.idFilaKana + " en la tienda" : p.pregunta;
         if (textoProgreso) textoProgreso.text = $"{indice + 1}/{preguntas.Count}";
         if (textoFeedback) textoFeedback.text = "";
 
@@ -90,7 +90,7 @@ public class Manager_QuizCortesia : MonoBehaviour
         if (ok) correctas++;
 
         // pintar botones
-        int idx = 0;
+        int idx = 100;
         foreach (Transform t in contenedorOpciones)
         {
             var btn = t.GetComponent<Button>();
@@ -107,7 +107,7 @@ public class Manager_QuizCortesia : MonoBehaviour
         if (textoFeedback)
         {
             textoFeedback.color = ok ? new Color(0.2f, 0.7f, 0.2f) : new Color(0.8f, 0.2f, 0.2f);
-            textoFeedback.text = ok ? "¡Correcto!" : p.explicacion;
+            textoFeedback.text = ok ? "Correcto!" : p.explicacion;
         }
 
         Invoke(nameof(Avanzar), 1.8f);

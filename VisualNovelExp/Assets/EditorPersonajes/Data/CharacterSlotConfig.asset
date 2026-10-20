@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd744788225d2284281689bf94f837b2, type: 3}
+  m_Name: CharacterSlotConfig
+  m_EditorClassIdentifier: 
+  categories:
+  - id: skin
+    displayName: Skin
+    slots:
+    - id: skin_body
+      displayName: Body
+      folder: Skin/Body
+      sortOrder: 100
+      canBeEmpty: 0
+  - id: hair
+    displayName: Hair
+    slots:
+    - id: hair_front
+      displayName: Front
+      folder: Hair/Front
+      sortOrder: 310
+      canBeEmpty: 1
+    - id: hair_right_front
+      displayName: Right front side
+      folder: Hair/RightFrontSide
+      sortOrder: 300
+      canBeEmpty: 1
+    - id: hair_left_front
+      displayName: Left front side
+      folder: Hair/LeftFrontSide
+      sortOrder: 300
+      canBeEmpty: 1
+    - id: hair_upper_back
+      displayName: Upper back
+      folder: Hair/UpperBack
+      sortOrder: 10
+      canBeEmpty: 1
+    - id: hair_lower_back
+      displayName: Lower back
+      folder: Hair/LowerBack
+      sortOrder: 0
+      canBeEmpty: 1
+    - id: hair_left_lower
+      displayName: Left lower
+      folder: Hair/LeftLower
+      sortOrder: 20
+      canBeEmpty: 1
+    - id: hair_right_lower
+      displayName: Right lower
+      folder: Hair/RightLower
+      sortOrder: 20
+      canBeEmpty: 1
+  - id: face
+    displayName: Face
+    slots:
+    - id: face_ears
+      displayName: Ears
+      folder: Face/Ears
+      sortOrder: 110
+      canBeEmpty: 1
+    - id: face_mouth
+      displayName: Mouth
+      folder: Face/Mouth
+      sortOrder: 130
+      canBeEmpty: 1
+    - id: face_eye_shape
+      displayName: Eye shape
+      folder: Face/EyeShape
+      sortOrder: 140
+      canBeEmpty: 1
+    - id: face_pupil
+      displayName: Pupil
+      folder: Face/Pupil
+      sortOrder: 150
+      canBeEmpty: 1
+    - id: face_eye_spark
+      displayName: Eye spark
+      folder: Face/EyeSpark
+      sortOrder: 160
+      canBeEmpty: 1
+    - id: face_blush
+      displayName: Blush
+      folder: Face/Blush
+      sortOrder: 120
+      canBeEmpty: 1
+    - id: face_moles
+      displayName: Moles
+      folder: Face/Moles
+      sortOrder: 135
+      canBeEmpty: 1
+  - id: clothes
+    displayName: Clothes
+    slots:
+    - id: clothes_shirt
+      displayName: Shirt
+      folder: Clothes/Shirt
+      sortOrder: 200
+      canBeEmpty: 1
+    - id: clothes_shirt2
+      displayName: Shirt 2
+      folder: Clothes/Shirt2
+      sortOrder: 210
+      canBeEmpty: 1
+    - id: clothes_jacket
+      displayName: Jacket
+      folder: Clothes/Jacket
+      sortOrder: 220
+      canBeEmpty: 1
+  - id: accessories
+    displayName: Accessories
+    slots:
+    - id: acc_head
+      displayName: Head
+      folder: Accessories/Head
+      sortOrder: 330
+      canBeEmpty: 1
+    - id: acc_collar
+      displayName: Collar
+      folder: Accessories/Collar
+      sortOrder: 230
+      canBeEmpty: 1
+    - id: acc_glasses
+      displayName: Glasses
+      folder: Accessories/Glasses
+      sortOrder: 320
+      canBeEmpty: 1

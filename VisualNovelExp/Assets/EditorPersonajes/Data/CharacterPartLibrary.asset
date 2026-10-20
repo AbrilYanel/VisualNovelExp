@@ -1,0 +1,982 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8cc74569cc40c841bffe1b2df41f3be, type: 3}
+  m_Name: CharacterPartLibrary
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: b40bb2bcb23286d40b94634723a32dea, type: 2}
+  slots:
+  - slotId: skin_body
+    items:
+    - id: i_1EVlFMffcDGhHisi
+      icon: {fileID: 21300000, guid: db84b7fe80e5586468a567e061dc243d, type: 3}
+      sprite: {fileID: 21300000, guid: db84b7fe80e5586468a567e061dc243d, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_1zvN0FP4sXnvYgP8
+      icon: {fileID: 21300000, guid: c9452da8fdbe19342a03f456535c1e3b, type: 3}
+      sprite: {fileID: 21300000, guid: c9452da8fdbe19342a03f456535c1e3b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: hair_front
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 26f31b46b6e419f4bb43b9865977941f, type: 3}
+      sprite: {fileID: 21300000, guid: a9a6221f56da4844aaf31576bd4e1cc1, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: e654bbd6fe02bd14fb9b2dd019d33249, type: 3}
+      sprite: {fileID: 21300000, guid: 3f815c5a7de3cfe45b113ed306ba1f71, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 291081fdefa81ec44ac25a0f90901502, type: 3}
+      sprite: {fileID: 21300000, guid: 9d7b85c9242fb2149b94338d298abe28, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 979971c4c7485234abcfc58a357cf66e, type: 3}
+      sprite: {fileID: 21300000, guid: b399560c2b3207f4fbd469bf4ae940ad, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: 8316176d9af3da34e877b18862540303, type: 3}
+      sprite: {fileID: 21300000, guid: 7e0900653c2fbc44baf63e533b4c127c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: d3c5faa0e471f8445a69f5a80a4dfc54, type: 3}
+      sprite: {fileID: 21300000, guid: 6d178743a5f5d8340aa15b8dc2ce8703, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: ecdce5b9919c6ba438f882f1fb14fbb9, type: 3}
+      sprite: {fileID: 21300000, guid: f310db599d38ac84dae6282a33653342, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: 468dd918af82c0944ac84763fb8a41f8, type: 3}
+      sprite: {fileID: 21300000, guid: 05f3fa10db3f9674d96fbb63cb3882df, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 988fea22fcdeb7049b59651eb569876b, type: 3}
+      sprite: {fileID: 21300000, guid: a1f5ff72708044541a0160991eac8bc7, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: f5399a40030cfa6409d2b200ed0e8b21, type: 3}
+      sprite: {fileID: 21300000, guid: d3489c6a1fb35a34ea2133d6aaf78ac6, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: b1c4fe3975015e44690cb12bd564e782, type: 3}
+      sprite: {fileID: 21300000, guid: 392eb9cc5caffd947bd10f2ee18e00ea, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 012
+      icon: {fileID: 21300000, guid: 7269e6bb90d557d44bb3376dd7ad64bb, type: 3}
+      sprite: {fileID: 21300000, guid: 26e080280ef13334d94d04f7994f7ace, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 013
+      icon: {fileID: 21300000, guid: 13699e2074891664eb69a1261f2b2bf9, type: 3}
+      sprite: {fileID: 21300000, guid: 9641205abd4419945868c31c7893422b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 014
+      icon: {fileID: 21300000, guid: c1ee5e51749c8f84f9ceff26bd6f7051, type: 3}
+      sprite: {fileID: 21300000, guid: ec2160ca7c9db304b9bb515d95069306, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 015
+      icon: {fileID: 21300000, guid: 883929891f494a344af430c20eb00830, type: 3}
+      sprite: {fileID: 21300000, guid: a04404ee9fe94ef4b97e738cbac48e0d, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 016
+      icon: {fileID: 21300000, guid: 05dc84f0da0f6dd48a39a06dfa490abb, type: 3}
+      sprite: {fileID: 21300000, guid: 4024900087342bb49982de7f6fe1455c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 017
+      icon: {fileID: 21300000, guid: 76e0faec714ba824f8babbb915f01890, type: 3}
+      sprite: {fileID: 21300000, guid: f86cb180d6a698043b81ef1a5e2060ad, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 018
+      icon: {fileID: 21300000, guid: fa3beb40ba37fec4692bceb2bb204c58, type: 3}
+      sprite: {fileID: 21300000, guid: 68331ff9d73599847aa7dae202a4e7ef, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 019
+      icon: {fileID: 21300000, guid: 62a997f1e4ce6ee4e8f18de5b5d52585, type: 3}
+      sprite: {fileID: 21300000, guid: abcd86f20ab24f840a779fc37be8410c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 020
+      icon: {fileID: 21300000, guid: 199dd395d0f152c4c85ac447d995d2c2, type: 3}
+      sprite: {fileID: 21300000, guid: c6963dbf2740d304ea00f347c2580b5e, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: hair_right_front
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 393ec50cbbd54a743b616ad5eb7afd22, type: 3}
+      sprite: {fileID: 21300000, guid: a867ef901c5c34544b3e80d8a5fa4c60, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 07890163841ae1a4580b39c551dec946, type: 3}
+      sprite: {fileID: 21300000, guid: bb8d3444465bc2448aff8383f4dd873c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 583b238731ff34344ac5742ccdcc3487, type: 3}
+      sprite: {fileID: 21300000, guid: 4859bb84e7c81d74ba66bfc3c58201dd, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: a5667ae9157bce14d8d36f8e69a9c1ad, type: 3}
+      sprite: {fileID: 21300000, guid: 3b81c45b2a9080c4190fe390425a736b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: ae0d6fe8870dfab49b7d54273353f231, type: 3}
+      sprite: {fileID: 21300000, guid: 3d1fc0535b443df4496bc9c98c081eac, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: ef78e5315a18cf54081c12353bdebf19, type: 3}
+      sprite: {fileID: 21300000, guid: a4b1c8233d372d7419ba193ea00deae9, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: 6c004c2fe81a047468134f7a4de0da6c, type: 3}
+      sprite: {fileID: 21300000, guid: 9faa97c8c8234e64ab5eff558886b846, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: a327e09482728cb4d87cd55255d2ef17, type: 3}
+      sprite: {fileID: 21300000, guid: 7e19069862c3bbe43a89d4e5e3cb2d5b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: f258ba77a54fbf34aba0f550f2e74c31, type: 3}
+      sprite: {fileID: 21300000, guid: 56a196ed2790b88438a3ad6b059f8937, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: bc467c16fb834334887aa363a451a235, type: 3}
+      sprite: {fileID: 21300000, guid: ca71df588fdd71e4faf018e7ed3382ed, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: 0018aa24f0e612345a9aac1f4d45f1f6, type: 3}
+      sprite: {fileID: 21300000, guid: f5dd46ef14bc2564e90161ea10fcbc06, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 012
+      icon: {fileID: 21300000, guid: 9ad7f4378251cc84a97a46dd0a768be9, type: 3}
+      sprite: {fileID: 21300000, guid: 8abe22f4dcab31e41b9841be270f193e, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 013
+      icon: {fileID: 21300000, guid: 9e323f1fb3a93804ab0475fec6bb8bdf, type: 3}
+      sprite: {fileID: 21300000, guid: 2d119ec7e0996d54682d755da702f057, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 014
+      icon: {fileID: 21300000, guid: 8211492787f633846b4e29a0c0f57bcc, type: 3}
+      sprite: {fileID: 21300000, guid: 940fecbb52ec40b42a8d83755e37e71d, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 015
+      icon: {fileID: 21300000, guid: de27dafd9b98eda419655543741518da, type: 3}
+      sprite: {fileID: 21300000, guid: 27f3c9f860fc92a4eb75be50e99ec466, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: hair_left_front
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: e581f80cd8477f04ebc113a5d50f0c7e, type: 3}
+      sprite: {fileID: 21300000, guid: 2b2551ccd3da14644ae345878de3c2d1, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 86d520298675dbc4caeec60076a9adcc, type: 3}
+      sprite: {fileID: 21300000, guid: efc4465a9200f4a4ab6bdd60de62d433, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: c5ec18739709bf948880aa69862fef66, type: 3}
+      sprite: {fileID: 21300000, guid: b03fce6824080884f8276bd6b453162d, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 0724fec390a861b4d9673ebf969086de, type: 3}
+      sprite: {fileID: 21300000, guid: c055cab37b488574e996cfcfe1b6f5ab, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: 9fc4cba1d6ccb314d819797166a88b81, type: 3}
+      sprite: {fileID: 21300000, guid: 0dff135e0d5150b4b95116bcce9d450f, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: 8cec429954191174f89032397ec22d82, type: 3}
+      sprite: {fileID: 21300000, guid: b1b967256c54fda409233c8dcb179d85, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: d877f17d9850f424a8367e8453671057, type: 3}
+      sprite: {fileID: 21300000, guid: 6f984798883ed7a4cbd134698ca0d24a, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: d3f46f610dbc0a34bbf44e51e87c1317, type: 3}
+      sprite: {fileID: 21300000, guid: ce3aff130ad429f4ba9ec314c6770594, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 99b6bda0d0537634fa3cadd350e5d4ce, type: 3}
+      sprite: {fileID: 21300000, guid: a8bde4d7696900a498b7ac736700b95e, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: 64b7063b620d7bf4c911773c6395e3b1, type: 3}
+      sprite: {fileID: 21300000, guid: e128bd6c0bcf53641b6647d66d171730, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: a5396f56458832d4c922d96c07cb76c4, type: 3}
+      sprite: {fileID: 21300000, guid: 70f5736b2f73e344d8e6f528bfbf5077, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 012
+      icon: {fileID: 21300000, guid: 9ffc178eb9575f945bfda0dbf14c9368, type: 3}
+      sprite: {fileID: 21300000, guid: a587d43569f4d9e4daf38d070f707ebc, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 013
+      icon: {fileID: 21300000, guid: 52de0b90b8cc8ae41b5b3a6120fe95a3, type: 3}
+      sprite: {fileID: 21300000, guid: 0cfa287316743fe4d9edb9eb837b98e7, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 014
+      icon: {fileID: 21300000, guid: 596d27294aca22e43b8735ad25b4c391, type: 3}
+      sprite: {fileID: 21300000, guid: 43904b25ac62ed442a860bbcd0392f85, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 015
+      icon: {fileID: 21300000, guid: 403e56b2b307bea4985f5440fd22ff05, type: 3}
+      sprite: {fileID: 21300000, guid: b2bd0ae5bb53d6f46b9cb24e6ecca8e4, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: hair_upper_back
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 8f273d1a370fb6e4ea40770f731d4f74, type: 3}
+      sprite: {fileID: 21300000, guid: ed7043283e45fe44e90d3cdb43fe28fe, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 556d2acff0e926b4c886f26571ce40df, type: 3}
+      sprite: {fileID: 21300000, guid: 337dd98bc41e47c49a5f9a729a1ee535, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 2f70cf924e4144340bec138b6e7ae022, type: 3}
+      sprite: {fileID: 21300000, guid: e7c79704c6a005e42b2cf824c0fb6641, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: ce7d8824292059a4fa575c05ba0c3145, type: 3}
+      sprite: {fileID: 21300000, guid: a7b3b4ddca4e90144933a849dcd14022, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: 111a251d68f52be41add268af4393745, type: 3}
+      sprite: {fileID: 21300000, guid: 7a0cac78041e2734690052653dbd3873, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: ddb41779487f72143a6c80c14ed788a8, type: 3}
+      sprite: {fileID: 21300000, guid: 63b4fca6b46e9d4438bd20f0be548025, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: 854fa63b0c938bf418a990a58226c8b9, type: 3}
+      sprite: {fileID: 21300000, guid: 4d5044cd6f5cfd949a5d78d9cc13473a, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: 6aac5b295c38be147a296ab6060048b7, type: 3}
+      sprite: {fileID: 21300000, guid: 73da50776a88788449674f705c560120, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 1c33f257a2b156149b74cb3be4402b82, type: 3}
+      sprite: {fileID: 21300000, guid: 7669a6b357ed54c4dbcf8f3ce7793a7b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: 85a93280d64874b4ba407d94dae29516, type: 3}
+      sprite: {fileID: 21300000, guid: 3528401d2719b9248bb177e681e00874, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: 1578857562059ea47a7e96c84d012dd3, type: 3}
+      sprite: {fileID: 21300000, guid: 51aa857c876322348ac01e4cf57387f0, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 012
+      icon: {fileID: 21300000, guid: d33b1ea09fe13274795b6f5c19da1451, type: 3}
+      sprite: {fileID: 21300000, guid: a217da81e3c0a5e40a52f0f418c9e5ad, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 013
+      icon: {fileID: 21300000, guid: 229a0b0eef6cfb0469fff5db1c5aefed, type: 3}
+      sprite: {fileID: 21300000, guid: e343bd02ccdbeca4197ec2dc1a48926d, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 014
+      icon: {fileID: 21300000, guid: 0b6bdce9bdc2338479f02f4788c7965b, type: 3}
+      sprite: {fileID: 21300000, guid: 9c43692f22dc1e0449cd43e3ca211c2b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 015
+      icon: {fileID: 21300000, guid: a48e486d40f226f48b7a2cf6c93c2db8, type: 3}
+      sprite: {fileID: 21300000, guid: 595db4d9ea952a742adb41afc8ec5829, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: hair_lower_back
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: b082af60a9c176d44b15f3e779a4abd6, type: 3}
+      sprite: {fileID: 21300000, guid: 056d989a7a9f018439f812f572ff9699, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 0c7d47ece44f8ee478b4a973dc82ca73, type: 3}
+      sprite: {fileID: 21300000, guid: ff96a0753e72bcd499c5ca8af7bb0ce7, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 322e55c58c59dc54bb14723998b1b998, type: 3}
+      sprite: {fileID: 21300000, guid: 5c407169caacf2041a8c6b799d75314f, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: f80b1334ab8dade469563c93017d44a4, type: 3}
+      sprite: {fileID: 21300000, guid: f2c6a9dcb2fccc74496cd6d43347b36b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: 5373f95a5f0b16c4a95023a20c8b6e23, type: 3}
+      sprite: {fileID: 21300000, guid: 672015d15a73a48428253bb0ac24a30c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: e9e4a45bc57a74f47bd57936092b7bf5, type: 3}
+      sprite: {fileID: 21300000, guid: b89ac3da95318cd4197a31c0d6476674, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: 7600fa082aea9ea44b0c2be0f4180ad0, type: 3}
+      sprite: {fileID: 21300000, guid: cbe85e7931718584388499fb5666f11b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: ae7649c47825bbb4b85f0fe13ef30e1a, type: 3}
+      sprite: {fileID: 21300000, guid: 07feb8ff1a2470e46803897fcd9bed63, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 7570d6feac7d9ae4c9692ff1a30717d6, type: 3}
+      sprite: {fileID: 21300000, guid: 5e9f9d0721027a54da653b55e8e1a034, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: 5b47090990444d8418efdb9f11f80ff7, type: 3}
+      sprite: {fileID: 21300000, guid: 7c0aa222c8bed4b448fd127090632c2a, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: dd309ed13ff285443a2427b2b47d3012, type: 3}
+      sprite: {fileID: 21300000, guid: 89bc01c321d2db44b9475beedc7abb57, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 012
+      icon: {fileID: 21300000, guid: 114443ad11c89a141ab0eba91f7dd0fe, type: 3}
+      sprite: {fileID: 21300000, guid: 21c825206ab15c4409c1e7739ec6f63f, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 013
+      icon: {fileID: 21300000, guid: 20ac9b01714848949a76e4cc2c311088, type: 3}
+      sprite: {fileID: 21300000, guid: 3307296ffaecdf241b59493e5c0323b9, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 014
+      icon: {fileID: 21300000, guid: 53f3ccec6c492a944b59638592b2d221, type: 3}
+      sprite: {fileID: 21300000, guid: 7f629a715eba3d240b5a3298999f74c3, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 015
+      icon: {fileID: 21300000, guid: 6fde3c5a7c436e94290a30a839202cec, type: 3}
+      sprite: {fileID: 21300000, guid: 5aae264a1464e914f94ca92ff9404f94, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 016
+      icon: {fileID: 21300000, guid: 6766210ce6032994aa29bc0a4f758e30, type: 3}
+      sprite: {fileID: 21300000, guid: 2167159df0529ce4b8c59a0d3c908415, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 017
+      icon: {fileID: 21300000, guid: 4b2e1b81cdd46374587e9bbac3cdafce, type: 3}
+      sprite: {fileID: 21300000, guid: 28f453752615eba459b015bd06da3a45, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 018
+      icon: {fileID: 21300000, guid: ece3a994e6eb28d49933926d94ceed7a, type: 3}
+      sprite: {fileID: 21300000, guid: 2b56a0d70d7e1254f9f5275188417e0e, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: hair_left_lower
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: c97267bde255bec4c9d55c401ffa99bf, type: 3}
+      sprite: {fileID: 21300000, guid: bcaaef10798f4b442a66637acd86a843, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 106301c8b176be049bc33730e2b590ee, type: 3}
+      sprite: {fileID: 21300000, guid: be51c2f37ef9f5640a3796438211984e, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 9cb31df585323ae4aa557a14f60cba84, type: 3}
+      sprite: {fileID: 21300000, guid: 0d25d3282c5f20e41aebdb4f0dfaea33, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 96462b34c19e2eb488faade5644166b2, type: 3}
+      sprite: {fileID: 21300000, guid: da032490677e2a74e86cac0a9f1bd66f, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: 77f38f57ae1e92945868cb40606b8f29, type: 3}
+      sprite: {fileID: 21300000, guid: 1154f506d8ac63348bf7eda324ffe8ab, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: a827afd59a9c69849917ec789679784b, type: 3}
+      sprite: {fileID: 21300000, guid: f7db4053418113b459695afa3c00a0b5, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: 517a69386cf12ff499c42c76240e29d2, type: 3}
+      sprite: {fileID: 21300000, guid: c5bb39b7f1a6b1144bfe6ee0478e5f38, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: 211dd929cfa2b814f90c963815309b16, type: 3}
+      sprite: {fileID: 21300000, guid: bd0ce48151168fc4c83d59276d3d95d0, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 5323556973bc0de40aab5a015c392043, type: 3}
+      sprite: {fileID: 21300000, guid: 1b096d3812359b04daee0f9f2e66b8b2, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: 19f1081d54a655d42b9608618f6ac47f, type: 3}
+      sprite: {fileID: 21300000, guid: b2cf74dc4dc258149a69f52d0b0d6f44, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: 46090f3535fc3374d9c92bbcc2bc7299, type: 3}
+      sprite: {fileID: 21300000, guid: f38b4f59db81783468148bc42a34a906, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: hair_right_lower
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 88dcbc7a8df8046488269d6bfd725f5c, type: 3}
+      sprite: {fileID: 21300000, guid: 6ffd96ad92b6c6a4fa875047b40cc7f1, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 71cb0391d98114c48867b842ff429ba6, type: 3}
+      sprite: {fileID: 21300000, guid: 1be7acae3e2c21a4391e7e23cc08d060, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: a5fb5ba34019cfc45b94240276d54a61, type: 3}
+      sprite: {fileID: 21300000, guid: 5d674cf769fa04b46abf5f5098ffca7a, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 32cf25d618a792644b63987c12a6a479, type: 3}
+      sprite: {fileID: 21300000, guid: 3d7d454e604f51244b24b0bba9b48b94, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: d3e1edd06aa5c8a459789507ad79c900, type: 3}
+      sprite: {fileID: 21300000, guid: 0278d6ca814faa147b8d8601c373839c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: 5a2847a9d43c91b4995ed034b157459f, type: 3}
+      sprite: {fileID: 21300000, guid: 847c538fc41765f4aaf9b18f684d8755, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: db5e401818b54144ab8621a75df151b7, type: 3}
+      sprite: {fileID: 21300000, guid: 868528b47daa0714e83c72c3f1d039b6, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: abcfde648b3dd2442b63672f5bbd9432, type: 3}
+      sprite: {fileID: 21300000, guid: 535deb4504ddb5c4191d4341a24d0195, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 0cbf64bda94140440904246decdcf51d, type: 3}
+      sprite: {fileID: 21300000, guid: 6f2e1922d971d8f4ea36991d386b06cc, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: b8974c55f405f3a438f19a909ac1326b, type: 3}
+      sprite: {fileID: 21300000, guid: ea75116155271fa4ab8c0c8707876862, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: df546cb3b50876140a86190eb676e85a, type: 3}
+      sprite: {fileID: 21300000, guid: fd5061d0247dc2543822516b686c8fb9, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 012
+      icon: {fileID: 21300000, guid: 3b8aca994ffc0f646ae4c743782ba176, type: 3}
+      sprite: {fileID: 21300000, guid: acfcd77fcec4f114a8f4b04db65740db, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 013
+      icon: {fileID: 21300000, guid: f7f0c712298952640a6e7b17c448b16d, type: 3}
+      sprite: {fileID: 21300000, guid: 066a52d669b272a49a0b33a70a4b7afb, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 014
+      icon: {fileID: 21300000, guid: c548ee9c749d39841aed16a950094731, type: 3}
+      sprite: {fileID: 21300000, guid: 4cb6d3c3bc2bce74c9f177c414676e64, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 015
+      icon: {fileID: 21300000, guid: ae849d0a6cdf1c64c8fb594bc09e8e8b, type: 3}
+      sprite: {fileID: 21300000, guid: 45aee0352ef8abe4b8d956af173c5dbd, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 016
+      icon: {fileID: 21300000, guid: a6dfc220acc629a48960361ca20faa39, type: 3}
+      sprite: {fileID: 21300000, guid: aee5ebbf36016ca42986b45b02abfce5, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 017
+      icon: {fileID: 21300000, guid: 013d7d3bf96704d48afdf6b2298ca41d, type: 3}
+      sprite: {fileID: 21300000, guid: 57bf4376b969e0a48afa2b658cd95ed5, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 018
+      icon: {fileID: 21300000, guid: 928dbb1c60803d04eb42d889fea65027, type: 3}
+      sprite: {fileID: 21300000, guid: 5fa94782240003f4c9cea886c2352a25, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 019
+      icon: {fileID: 21300000, guid: dd25896ea74dd9843b684b81d748ae65, type: 3}
+      sprite: {fileID: 21300000, guid: f09027b9b70b62145a7d240b4d1b8ec9, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: face_ears
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: dc134de654a95924794d50def6cac149, type: 3}
+      sprite: {fileID: 21300000, guid: 785f68660bff37b4cadf2a99bd2b97ae, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 45f184427c6d6354187b6e5ab0fac229, type: 3}
+      sprite: {fileID: 21300000, guid: 58e3ab53e8ee2b240a977f0bab5ebacc, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 678f06caf69b86343948f6cc14b8c03a, type: 3}
+      sprite: {fileID: 21300000, guid: 3d9d4d3c22a6215449eafc537d5f8eca, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 49d17f8ab24e35c418ff0ca6155609f1, type: 3}
+      sprite: {fileID: 21300000, guid: b0cc87e0d46560345bf29fdaa274dc27, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: 984d888f4c7a6d64fb77b4f14448fb11, type: 3}
+      sprite: {fileID: 21300000, guid: cda14e9db589ffd4dbe718491e5e3c9b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: face_mouth
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: f06696e3dd853674c90e4567013c6be9, type: 3}
+      sprite: {fileID: 21300000, guid: 8c42d54a574bb514f92fb1061e0d2317, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 6bf120e391984b04d97a85e2724e0f22, type: 3}
+      sprite: {fileID: 21300000, guid: 0ab55d0fd9e0d4b4d87e1b7707bdde46, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 099ec5b380ae7d14d8b991accfcee8bf, type: 3}
+      sprite: {fileID: 21300000, guid: 58b2eca6837956e4a9b8c322dcf39cfe, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 847803c94993434479624c1812025092, type: 3}
+      sprite: {fileID: 21300000, guid: 1fa57075d01cc854f9e8dc2ac6b60920, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: c728487f4c91f5f4e9dd323d2df3e8be, type: 3}
+      sprite: {fileID: 21300000, guid: 416bf9f327958c542b2d938871457122, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: 61386cb38d4db894cb55cfcde115a701, type: 3}
+      sprite: {fileID: 21300000, guid: 4d50634983198ec4b99c73f06408346f, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: cee96532f263f9c4ab5d3572e808add8, type: 3}
+      sprite: {fileID: 21300000, guid: 22cd61020f813944bb60d99d07ffd43f, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: af456812a66c68642897fb037b443827, type: 3}
+      sprite: {fileID: 21300000, guid: a6a2bbbd648b0c24b914d61a6ead55e2, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 2d2aec8d9dfa38544be64ce5990278b9, type: 3}
+      sprite: {fileID: 21300000, guid: d47d7c1a0a404d94d95d6728dabebc67, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: ef70c66160b44754597dfb4bafce92b1, type: 3}
+      sprite: {fileID: 21300000, guid: 7098ae9d8df5c854a9d70a78bd639be5, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: 34f17b723fc5b5f498bb499a034adbee, type: 3}
+      sprite: {fileID: 21300000, guid: f8df25acb97c8e44aa637e6e1fc30cc3, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: face_eye_shape
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 8676db1611fa16148bb672dc4be39fd4, type: 3}
+      sprite: {fileID: 21300000, guid: 8676db1611fa16148bb672dc4be39fd4, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 26480186501e82540858fdb6e4e376de, type: 3}
+      sprite: {fileID: 21300000, guid: 26480186501e82540858fdb6e4e376de, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 004c8c56e4e0d0c4f8a39c853d661311, type: 3}
+      sprite: {fileID: 21300000, guid: 004c8c56e4e0d0c4f8a39c853d661311, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 113294f69a4182044843ac9e1ce9906e, type: 3}
+      sprite: {fileID: 21300000, guid: 113294f69a4182044843ac9e1ce9906e, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: 137b4da3d8c868243acfcf4f286d65ec, type: 3}
+      sprite: {fileID: 21300000, guid: 137b4da3d8c868243acfcf4f286d65ec, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: f85baf14dc71ad243bfc7b890251bf51, type: 3}
+      sprite: {fileID: 21300000, guid: f85baf14dc71ad243bfc7b890251bf51, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: d579b1a4507a461418249f4c3a880293, type: 3}
+      sprite: {fileID: 21300000, guid: d579b1a4507a461418249f4c3a880293, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: cfd58c13bff73b848a7050ee8d243f78, type: 3}
+      sprite: {fileID: 21300000, guid: cfd58c13bff73b848a7050ee8d243f78, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 3f238cd76dcfad94fbb2d346c0438512, type: 3}
+      sprite: {fileID: 21300000, guid: 3f238cd76dcfad94fbb2d346c0438512, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: 31e71a828116f0d4e97620da75fa7eef, type: 3}
+      sprite: {fileID: 21300000, guid: 31e71a828116f0d4e97620da75fa7eef, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: 93b04304f7a9c704a8b0100134c5c27b, type: 3}
+      sprite: {fileID: 21300000, guid: 93b04304f7a9c704a8b0100134c5c27b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 012
+      icon: {fileID: 21300000, guid: 624ce61fd2157b847ab3901526003583, type: 3}
+      sprite: {fileID: 21300000, guid: 624ce61fd2157b847ab3901526003583, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 013
+      icon: {fileID: 21300000, guid: 51dc137d4d9f4ea46b16b1cd92a5247a, type: 3}
+      sprite: {fileID: 21300000, guid: 51dc137d4d9f4ea46b16b1cd92a5247a, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 014
+      icon: {fileID: 21300000, guid: 4ad46ee66e99c054c8122323cccee849, type: 3}
+      sprite: {fileID: 21300000, guid: 4ad46ee66e99c054c8122323cccee849, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: face_pupil
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: e5c7ae8e91da4ec43b53830fc74fac8f, type: 3}
+      sprite: {fileID: 21300000, guid: e5c7ae8e91da4ec43b53830fc74fac8f, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 593abd4e1e3043f478e83cebaa29bac2, type: 3}
+      sprite: {fileID: 21300000, guid: 593abd4e1e3043f478e83cebaa29bac2, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 55fc754bec4588d48904f5309cc8a2f2, type: 3}
+      sprite: {fileID: 21300000, guid: 55fc754bec4588d48904f5309cc8a2f2, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 9228743283bcad64a8fa212fcf7e22c3, type: 3}
+      sprite: {fileID: 21300000, guid: 9228743283bcad64a8fa212fcf7e22c3, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: b75543a40bfc650489efaf8b13b50fb4, type: 3}
+      sprite: {fileID: 21300000, guid: b75543a40bfc650489efaf8b13b50fb4, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: b4b58d2f06539294a8199dea69ccbefd, type: 3}
+      sprite: {fileID: 21300000, guid: b4b58d2f06539294a8199dea69ccbefd, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: face_eye_spark
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 6fe32e24229bcb349902f27a1c1e5427, type: 3}
+      sprite: {fileID: 21300000, guid: 6fe32e24229bcb349902f27a1c1e5427, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 3834b7581628260499c0cad7ab2ea380, type: 3}
+      sprite: {fileID: 21300000, guid: 3834b7581628260499c0cad7ab2ea380, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 5a966ab6187b31440adac542d4cdcbef, type: 3}
+      sprite: {fileID: 21300000, guid: 5a966ab6187b31440adac542d4cdcbef, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 7b7dc0b44cb5ebe4e8f938d9f479f222, type: 3}
+      sprite: {fileID: 21300000, guid: 7b7dc0b44cb5ebe4e8f938d9f479f222, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: 8c8731e4e137da94b81fb92146d1219d, type: 3}
+      sprite: {fileID: 21300000, guid: 8c8731e4e137da94b81fb92146d1219d, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: ed0769cda525bc347a3b4643e818e339, type: 3}
+      sprite: {fileID: 21300000, guid: ed0769cda525bc347a3b4643e818e339, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: 0272fb9aa4db7f04a9ddb9ef58b2c2a3, type: 3}
+      sprite: {fileID: 21300000, guid: 0272fb9aa4db7f04a9ddb9ef58b2c2a3, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: 45af52b869c5ca64fb06a810c6b460fc, type: 3}
+      sprite: {fileID: 21300000, guid: 45af52b869c5ca64fb06a810c6b460fc, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: ef112a57e195eb146827c5b7e32d7181, type: 3}
+      sprite: {fileID: 21300000, guid: ef112a57e195eb146827c5b7e32d7181, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: b53ae64cf8b5b714eaaf4d7cadf3f383, type: 3}
+      sprite: {fileID: 21300000, guid: b53ae64cf8b5b714eaaf4d7cadf3f383, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: 8b47ff2b53efa2449af2e15bdb3011ec, type: 3}
+      sprite: {fileID: 21300000, guid: 8b47ff2b53efa2449af2e15bdb3011ec, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 012
+      icon: {fileID: 21300000, guid: a729e98a42389fc408384d74b5ab1efc, type: 3}
+      sprite: {fileID: 21300000, guid: a729e98a42389fc408384d74b5ab1efc, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 013
+      icon: {fileID: 21300000, guid: 10acd3493f4be144285a2cf663f05b72, type: 3}
+      sprite: {fileID: 21300000, guid: 10acd3493f4be144285a2cf663f05b72, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: face_blush
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 261c884470a0628438e4cd623db199ec, type: 3}
+      sprite: {fileID: 21300000, guid: a8ef498151e6f9a49a0a68e97b96f211, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 054c499ec1020a941875097e28c979e4, type: 3}
+      sprite: {fileID: 21300000, guid: d2e32f9d8af05b3449d4717b2a8b18f3, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: e09616d5926741b4281eae4735f349c4, type: 3}
+      sprite: {fileID: 21300000, guid: 2ef21b164876e724e870140d77663277, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: face_moles
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 51bbc6aab0eb59c409d0290946b7860e, type: 3}
+      sprite: {fileID: 21300000, guid: 0479a31e05733af4baa48d80fe098f73, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 10d20744a5cc87f47941e0f6d4063112, type: 3}
+      sprite: {fileID: 21300000, guid: ca59c8b44bcdddc49bfd0d45b1045d19, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: d45ee4360610d0a4caf86b5bf812e9ab, type: 3}
+      sprite: {fileID: 21300000, guid: df79384fd1720a3408d88b6663e7924c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: a8d65b80260404d42866d99aa9085bb3, type: 3}
+      sprite: {fileID: 21300000, guid: 89f94fdbafe5d464fa783e1a2d3b845c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: 9e4a8988e7053074298e5adf6426f6b4, type: 3}
+      sprite: {fileID: 21300000, guid: 2f2f2292a2037cf4ca31834b26d9c3c8, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: 9454e57d55657324ab0974f0d039c867, type: 3}
+      sprite: {fileID: 21300000, guid: bad90b4f9c3b76246879e24042d2979f, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: f89f68539be76744d807d2bb4158f6c0, type: 3}
+      sprite: {fileID: 21300000, guid: bf1a83ec17d641c4b817d1cb30e75e6c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: 8db6f4cad7e4d8143aae093a517fa11b, type: 3}
+      sprite: {fileID: 21300000, guid: c35d58cb629bedb49970f9809595127e, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: fca61f993358f2744936b9b65dba1ab2, type: 3}
+      sprite: {fileID: 21300000, guid: a680b32875748a44bbf0a740f6c5d9eb, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: 55ab7a04b3fa1fa4795a1f17ad92509c, type: 3}
+      sprite: {fileID: 21300000, guid: ed30536ebc053ec45997ca9462f9d91a, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: clothes_shirt
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 5674e7d22aa6ab647a9c067c95c4f15d, type: 3}
+      sprite: {fileID: 21300000, guid: 4c74e0193e4609f4a8b112af98ee2451, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 8c5ca51600ea9d944b5ef0c8926e8764, type: 3}
+      sprite: {fileID: 21300000, guid: 7ee073464d1d01c439f8f1222e81ab55, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 4f07a630ae19f5448a2298ee1c41bc5c, type: 3}
+      sprite: {fileID: 21300000, guid: b49675204218ec947b732f085c1b8ab7, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 3049d518cf5fd1047b4dab3fdd60c826, type: 3}
+      sprite: {fileID: 21300000, guid: 1d1c831c50926ef47afc07723a13235a, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: 8085eaa887be2ce4abe902025c739cea, type: 3}
+      sprite: {fileID: 21300000, guid: b170c39d250a5d747b113bb3fbc6436c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: a7c3c17fed39dc647bc81ef8e708fc44, type: 3}
+      sprite: {fileID: 21300000, guid: adba9755f1db52148b5cb49a8caf68fc, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: 060ef309b58e8c7458f33a68fbed122d, type: 3}
+      sprite: {fileID: 21300000, guid: 3893f7dfc5d2e784f84e727c7df54cf8, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: e0d1f5c45ef58cf42b0feb41f3f9f01a, type: 3}
+      sprite: {fileID: 21300000, guid: 6a3af0f7b8a0fae4f91335ab22a08711, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 996ec6c0dd6811b4e9a68724ff6b9e86, type: 3}
+      sprite: {fileID: 21300000, guid: 4f90ee3649aa8cf4c9846c8dd860fcbe, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: ef79deb6e51cf4a49b1c44bd966eb3aa, type: 3}
+      sprite: {fileID: 21300000, guid: 2f3e883503667404cad2119b3ccce419, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_1Dp6z3NNGutkJTSd
+      icon: {fileID: 21300000, guid: d8589d4ed982b4449bc019cf869f0f0b, type: 3}
+      sprite: {fileID: 21300000, guid: d8589d4ed982b4449bc019cf869f0f0b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_44YnzGNZPxrGALUP
+      icon: {fileID: 21300000, guid: adde25c5a99942a4f96647f7f27d3571, type: 3}
+      sprite: {fileID: 21300000, guid: adde25c5a99942a4f96647f7f27d3571, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_4d58AWQ1Up4bjEGd
+      icon: {fileID: 21300000, guid: 68fcd6e41d7d8d8448b745af359c0e65, type: 3}
+      sprite: {fileID: 21300000, guid: 68fcd6e41d7d8d8448b745af359c0e65, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_4uXmAtnXnt71QdOu
+      icon: {fileID: 21300000, guid: 9407a6babed0f3745a88903157a64365, type: 3}
+      sprite: {fileID: 21300000, guid: 9407a6babed0f3745a88903157a64365, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_84VrlurJGbUGEO4g
+      icon: {fileID: 21300000, guid: 740ff3b28f436af41a485153f1c2b163, type: 3}
+      sprite: {fileID: 21300000, guid: 740ff3b28f436af41a485153f1c2b163, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_CJveTf1Gm9LGiVZ8
+      icon: {fileID: 21300000, guid: e7c870f587c904d47916c714579909d4, type: 3}
+      sprite: {fileID: 21300000, guid: e7c870f587c904d47916c714579909d4, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_J6eRy1vRwFtfy7mx
+      icon: {fileID: 21300000, guid: 5ff032cd5eadce743bbaa2ba37f69b93, type: 3}
+      sprite: {fileID: 21300000, guid: 5ff032cd5eadce743bbaa2ba37f69b93, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_Tvqxt1Yj97Kdf4l4
+      icon: {fileID: 21300000, guid: cfed5787dd6a3334ba8b349aa08cd93b, type: 3}
+      sprite: {fileID: 21300000, guid: cfed5787dd6a3334ba8b349aa08cd93b, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_VmXzPnbi7o0apqSj
+      icon: {fileID: 21300000, guid: 94edc4c44b697144eb48bbf051bb9877, type: 3}
+      sprite: {fileID: 21300000, guid: 94edc4c44b697144eb48bbf051bb9877, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_pjIKV16Mj1wZagNM
+      icon: {fileID: 21300000, guid: b664281208bdd8a40948a9a04bfe59d4, type: 3}
+      sprite: {fileID: 21300000, guid: b664281208bdd8a40948a9a04bfe59d4, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_qQSvJSIlpoSSBK9x
+      icon: {fileID: 21300000, guid: 9d513861626d9ab41a782df127860135, type: 3}
+      sprite: {fileID: 21300000, guid: 9d513861626d9ab41a782df127860135, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: clothes_shirt2
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 87e605c9142fe65449b56001b52c4a99, type: 3}
+      sprite: {fileID: 21300000, guid: a68c785d7a4976b4d98d5cc200e0e35a, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 6e705af5466f7e94487b4819e0dd8877, type: 3}
+      sprite: {fileID: 21300000, guid: f8cf88f61b48a564cbfb80a3febf1b13, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: ba05983da45c17a449e5ba10bbf90379, type: 3}
+      sprite: {fileID: 21300000, guid: aa8faeb4693778d499f3c1007b1e9e90, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 5b7e30f52c3fe92499628cc569fb5969, type: 3}
+      sprite: {fileID: 21300000, guid: cb711b641190661468db399611132a6c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: f57fc4ca58a9605478f8e7246894b05a, type: 3}
+      sprite: {fileID: 21300000, guid: 3df0468944b0cec45bd7549a22be2256, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: 09da5ad148579734dbb015824c8ce422, type: 3}
+      sprite: {fileID: 21300000, guid: 466366526a6fab34b8d66d634b2085ed, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: 86b2935ce670853458e9cba9a8c47284, type: 3}
+      sprite: {fileID: 21300000, guid: 27a25ade01f63c4488133d3ff451093c, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: 8bf7ba4fb9da6bb49a31412abc4bf016, type: 3}
+      sprite: {fileID: 21300000, guid: 6d2923ccb64b762449b9902e44b7b942, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 796e7b9abd430e2479ee139432c18879, type: 3}
+      sprite: {fileID: 21300000, guid: 4b396f55819a0ce4ea5a9d148ef55bf6, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: 84044be4bd729024f8cd20426cfad669, type: 3}
+      sprite: {fileID: 21300000, guid: 9109dc8727241fa41a0132514e953d6e, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: 7341f5016adc5b943b4b14d3e9353e37, type: 3}
+      sprite: {fileID: 21300000, guid: 5cba4cb5eaa236c468873912aac42eff, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 012
+      icon: {fileID: 21300000, guid: 013cf3e30be60434787f4c99332ef3b9, type: 3}
+      sprite: {fileID: 21300000, guid: a502ae2c83ecb8346b7908f873639198, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_TaUfAvkB99HhfNfe
+      icon: {fileID: 21300000, guid: d8ba5d5db971b704280579a7ecc6a7b6, type: 3}
+      sprite: {fileID: 21300000, guid: d8ba5d5db971b704280579a7ecc6a7b6, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: i_vDK3iUDBAmllo1RO
+      icon: {fileID: 21300000, guid: ea232b8817905c140bfd9c166a76c0ec, type: 3}
+      sprite: {fileID: 21300000, guid: ea232b8817905c140bfd9c166a76c0ec, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: clothes_jacket
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 28b8070fe4c977042b055e4d7d237964, type: 3}
+      sprite: {fileID: 21300000, guid: d3f0bd18152fded42874151e07881ae2, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 79fb2d4ee9a1d3840a1755c04a0dca45, type: 3}
+      sprite: {fileID: 21300000, guid: ee02e7cebea75554a8061290759704a7, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: c393ac86e62a70b4ab50ab475a59f6f5, type: 3}
+      sprite: {fileID: 21300000, guid: 3a2277e11d85272468d161ca995068b6, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: acc_head
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: e3ee2838096126d418fa296a254af69a, type: 3}
+      sprite: {fileID: 21300000, guid: 07f75d5d8a5e8354ab5fab0775cfeeba, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 08b3a6bcf30d68c41b1831cf26cf71a3, type: 3}
+      sprite: {fileID: 21300000, guid: 796439e749d94434c9aca4743bf01984, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: e5b7d23e302fccd45aa4e34029987550, type: 3}
+      sprite: {fileID: 21300000, guid: 7aa32ad72400ec24da181059bb993496, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 532965e85b9205d468329cab5e865fec, type: 3}
+      sprite: {fileID: 21300000, guid: f1fbba5da35237f47bdd7adf3631c6e9, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: acc_collar
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 63aef78fea7b8454989475fc5c0f9783, type: 3}
+      sprite: {fileID: 21300000, guid: 564281ba292273f4b984aaa1045691f5, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: 44a85f998bbea874793d8cdf5fc398bd, type: 3}
+      sprite: {fileID: 21300000, guid: 10add1b1db414624d9630ea4bef0d3ff, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 68f5a4575955db84f9b3f9c023f2a0ba, type: 3}
+      sprite: {fileID: 21300000, guid: bbb198f4eed7db2439fa9e5ac050df93, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: 154d18b258497e246a23d8b2df9e51bd, type: 3}
+      sprite: {fileID: 21300000, guid: 353ddd958ddd9df41884e7b2c0f3c6e0, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: af7beaa81d079b04fabaf1c6aa5279a5, type: 3}
+      sprite: {fileID: 21300000, guid: 379f47576a849be468023c9ed923d2bc, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: 544b1ca79e9a68f479efcb0494498fbd, type: 3}
+      sprite: {fileID: 21300000, guid: 1ec65f1c476d71c449d265d4dc62fc14, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: 051d6d0617621314ba85b878cb6ed8cb, type: 3}
+      sprite: {fileID: 21300000, guid: 6b4d0497eace9c64b9bd2dee04441fb3, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: e5f1eaf0ac483734b83f0db1c1e0d668, type: 3}
+      sprite: {fileID: 21300000, guid: 322bfb21ce14616429fedf71f93d976d, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 50176546462635549ac108c87fb72dae, type: 3}
+      sprite: {fileID: 21300000, guid: 6f487f8b3a465394eb29ae57f14716ed, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: acc_glasses
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: 7634b046ca6eea3479d81129398bd4b9, type: 3}
+      sprite: {fileID: 21300000, guid: cb9094f8fa443a145a18ee0a7aced7b4, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: ed033a900acffd944acf1c8f770e99fa, type: 3}
+      sprite: {fileID: 21300000, guid: f2a96a17677fc304ead95e950fe43aca, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 6c7b773d57748b6419b64a7ce42a4b07, type: 3}
+      sprite: {fileID: 21300000, guid: a972c8059e1c9b84a8b4239727890e02, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}

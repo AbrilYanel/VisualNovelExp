@@ -1,6 +1,3 @@
-// CharacterCustomizer_ConAnalytics.cs - Tu CharacterCustomizer con los logs integrados
-// Usa este para reemplazar tu CharacterCustomizer actual (o copia las líneas marcadas con // RESEARCH)
-
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +14,7 @@ public class CharacterCustomizer : MonoBehaviour
 
     void Start()
     {
-        // RESEARCH: Log apertura del editor
+        
         ResearchAnalytics.LogEditorOpen();
 
         if (CharacterSaveSystem.HasSavedCharacter())
@@ -62,7 +59,7 @@ public class CharacterCustomizer : MonoBehaviour
         });
     }
 
-    // Helpers con RESEARCH
+    
     private void SelectSkin(int i)
     {
         if (IsValid(i, database.skinColors))
@@ -135,7 +132,6 @@ public class CharacterCustomizer : MonoBehaviour
 
     public void ConfirmAndSave()
     {
-        // RESEARCH: Log cierre del editor
         ResearchAnalytics.LogEditorClose();
 
         CharacterSaveSystem.Save(current);

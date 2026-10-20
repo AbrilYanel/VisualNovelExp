@@ -1,6 +1,5 @@
-// ResearchAnalytics.cs - Sistema de logs para investigación
-// Pon en: Assets/_CharacterEditor/Scripts/Research/ResearchAnalytics.cs
-// No necesita estar en escena, se auto-crea y persiste entre escenas (DontDestroyOnLoad)
+// Sistema de logs para investigación
+// No necesita estar en escena, se auto-crea y persiste entre escenas
 
 using System;
 using System.Collections.Generic;
@@ -163,39 +162,39 @@ public class ResearchAnalytics : MonoBehaviour
             string filePath = Path.Combine(folderPath, fileName);
 
             List<string> lines = new List<string>();
-            lines.Add($"=== RESEARCH RUN LOG ===");
-            lines.Add($"SESSION_ID: {sessionStartTime:yyyyMMdd_HHmmss}");
-            lines.Add($"SESSION_START: {sessionStartTime:O}");
-            lines.Add($"DEVICE: {SystemInfo.deviceModel} | {SystemInfo.operatingSystem}");
+            lines.Add($"=== Log de investigación ===");
+            lines.Add($"ID Sesión: {sessionStartTime:yyyyMMdd_HHmmss}");
+            lines.Add($"Inicio de la sesión: {sessionStartTime:O}");
+            lines.Add($"Dispositivo: {SystemInfo.deviceModel} | {SystemInfo.operatingSystem}");
             lines.Add($"BUILD_PATH: {folderPath}");
             lines.Add($"----------------------------------------");
             lines.Add($"EDITOR_OPEN: {(hasLoggedEditorOpen ? editorOpenTime.ToString("O") : "NOT_LOGGED")}");
 
             if (editorInteractionLogs.Count > 0)
             {
-                lines.Add($"--- EDITOR_INTERACTIONS ({totalEditorInteractions}) ---");
+                lines.Add($"--- Interacciones con el editor ({totalEditorInteractions}) ---");
                 lines.AddRange(editorInteractionLogs);
             }
             else
             {
-                lines.Add($"EDITOR_INTERACTIONS: 0 (none logged)");
+                lines.Add($"Interacciones con el editor: 0 (none logged)");
             }
 
             if (hasLoggedEditorClose)
             {
                 double editorDuration = (editorCloseTime - editorOpenTime).TotalSeconds;
-                lines.Add($"EDITOR_CLOSE: {editorCloseTime:O} | duration:{editorDuration:F3}s | interactions:{totalEditorInteractions}");
+                lines.Add($"Cierre Editor: {editorCloseTime:O} | duration:{editorDuration:F3}s | interactions:{totalEditorInteractions}");
             }
             else
             {
-                lines.Add($"EDITOR_CLOSE: NOT_LOGGED");
+                lines.Add($"Cierre Editor: NOT_LOGGED");
             }
 
             lines.Add($"GAMEPLAY_SCREEN_ON: {(hasLoggedGameplayOn ? gameplayScreenOnTime.ToString("O") : "NOT_LOGGED")}");
             lines.Add($"FIRST_INPUT: {(hasLoggedFirstInput ? $"{firstInputTime:O} | type:{firstInputType}" : "NOT_LOGGED")}");
 
             lines.Add($"----------------------------------------");
-            lines.Add($"SUMMARY:");
+            lines.Add($"Resumen:");
             if (hasLoggedEditorOpen && hasLoggedEditorClose)
             {
                 double ed = (editorCloseTime - editorOpenTime).TotalSeconds;
@@ -213,7 +212,7 @@ public class ResearchAnalytics : MonoBehaviour
                 lines.Add($"editorOpen_to_gameplay_seconds={totalToGameplay:F3}");
             }
             lines.Add($"fileGenerated_at={DateTime.UtcNow:O}");
-            lines.Add($"=== END LOG ===");
+            lines.Add($"=== Fin del log ===");
 
             File.WriteAllLines(filePath, lines);
             Debug.Log($"[Research] Archivo guardado en: {filePath}");

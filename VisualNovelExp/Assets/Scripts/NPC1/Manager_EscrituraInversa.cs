@@ -124,7 +124,7 @@ public class Manager_EscrituraInversa : MonoBehaviour
         }
 
         // subtítulo ayuda
-        if (textoSubtitulo) textoSubtitulo.text = "Escribí el romaji y presioná Enter";
+        if (textoSubtitulo) textoSubtitulo.text = "Escribi el romaji y presiona Enter";
 
         if (textoProgreso) textoProgreso.text = $"{indice + 1} / {Mathf.Min(rondas, mazo.Count)}   ✓ {aciertos}";
         if (textoPista) textoPista.text = "";
@@ -165,7 +165,7 @@ public class Manager_EscrituraInversa : MonoBehaviour
 
         if (string.IsNullOrEmpty(respuesta))
         {
-            if (textoFeedback) { textoFeedback.color = Color.yellow; textoFeedback.text = "Escribí el romaji y presioná Enter"; }
+            if (textoFeedback) { textoFeedback.color = Color.yellow; textoFeedback.text = "Escribi el romaji y presiona Enter"; }
             if (inputKana) { inputKana.ActivateInputField(); }
             return;
         }
@@ -184,7 +184,7 @@ public class Manager_EscrituraInversa : MonoBehaviour
         if (textoFeedback)
         {
             textoFeedback.color = ok ? new Color(0.2f, 0.8f, 0.2f) : new Color(0.9f, 0.2f, 0.2f);
-            textoFeedback.text = ok ? "¡Correcto!" : $"Era: {actual.romaji}  ({actual.kanaCorrecto})";
+            textoFeedback.text = ok ? "Correcto!" : $"Era: {actual.romaji}  ({actual.kanaCorrecto})";
         }
 
         if (ok) aciertos++;

@@ -47,7 +47,7 @@ MonoBehaviour:
     - id: hair_lower_back
       displayName: Lower back
       folder: Hair/LowerBack
-      sortOrder: 0
+      sortOrder: 1
       canBeEmpty: 1
     - id: hair_left_lower
       displayName: Left lower
@@ -57,7 +57,7 @@ MonoBehaviour:
     - id: hair_right_lower
       displayName: Right lower
       folder: Hair/RightLower
-      sortOrder: 20
+      sortOrder: 0
       canBeEmpty: 1
   - id: face
     displayName: Face
@@ -75,12 +75,12 @@ MonoBehaviour:
     - id: face_eye_shape
       displayName: Eye shape
       folder: Face/EyeShape
-      sortOrder: 140
+      sortOrder: 150
       canBeEmpty: 1
     - id: face_pupil
       displayName: Pupil
       folder: Face/Pupil
-      sortOrder: 150
+      sortOrder: 140
       canBeEmpty: 1
     - id: face_eye_spark
       displayName: Eye spark

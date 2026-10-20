@@ -16,13 +16,9 @@ MonoBehaviour:
   slots:
   - slotId: skin_body
     items:
-    - id: i_1EVlFMffcDGhHisi
-      icon: {fileID: 21300000, guid: db84b7fe80e5586468a567e061dc243d, type: 3}
-      sprite: {fileID: 21300000, guid: db84b7fe80e5586468a567e061dc243d, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_1zvN0FP4sXnvYgP8
-      icon: {fileID: 21300000, guid: c9452da8fdbe19342a03f456535c1e3b, type: 3}
-      sprite: {fileID: 21300000, guid: c9452da8fdbe19342a03f456535c1e3b, type: 3}
+    - id: 001
+      icon: {fileID: 21300000, guid: 85a742a0d79753c4e9ed109898560617, type: 3}
+      sprite: {fileID: 21300000, guid: 85a742a0d79753c4e9ed109898560617, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
   - slotId: hair_front
     items:
@@ -642,6 +638,62 @@ MonoBehaviour:
       icon: {fileID: 21300000, guid: b4b58d2f06539294a8199dea69ccbefd, type: 3}
       sprite: {fileID: 21300000, guid: b4b58d2f06539294a8199dea69ccbefd, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 007
+      icon: {fileID: 21300000, guid: 54a208af29a3d8641abd2eab927f18bc, type: 3}
+      sprite: {fileID: 21300000, guid: 54a208af29a3d8641abd2eab927f18bc, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 008
+      icon: {fileID: 21300000, guid: e4f7794f898728649bdb7991b5dd9cef, type: 3}
+      sprite: {fileID: 21300000, guid: e4f7794f898728649bdb7991b5dd9cef, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 009
+      icon: {fileID: 21300000, guid: 579acd890720a384a98911c9ea129e72, type: 3}
+      sprite: {fileID: 21300000, guid: 579acd890720a384a98911c9ea129e72, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 010
+      icon: {fileID: 21300000, guid: 033b9bf1c3a600b45bdc9201f1f8e268, type: 3}
+      sprite: {fileID: 21300000, guid: 033b9bf1c3a600b45bdc9201f1f8e268, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 011
+      icon: {fileID: 21300000, guid: 5ccc03ec1849a9a4fa2d991885045c86, type: 3}
+      sprite: {fileID: 21300000, guid: 5ccc03ec1849a9a4fa2d991885045c86, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 012
+      icon: {fileID: 21300000, guid: c2c61a55688d82e43b68ac808249edfd, type: 3}
+      sprite: {fileID: 21300000, guid: c2c61a55688d82e43b68ac808249edfd, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 013
+      icon: {fileID: 21300000, guid: 54e57ca94dd13e54598688717c5f686e, type: 3}
+      sprite: {fileID: 21300000, guid: 54e57ca94dd13e54598688717c5f686e, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 014
+      icon: {fileID: 21300000, guid: 8e69e2bb10abf10468a7adda445da40a, type: 3}
+      sprite: {fileID: 21300000, guid: 8e69e2bb10abf10468a7adda445da40a, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 015
+      icon: {fileID: 21300000, guid: 752721b74884a77449972185eebe5994, type: 3}
+      sprite: {fileID: 21300000, guid: 752721b74884a77449972185eebe5994, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 016
+      icon: {fileID: 21300000, guid: 19152134cb6f5434582549537a4e7dd5, type: 3}
+      sprite: {fileID: 21300000, guid: 19152134cb6f5434582549537a4e7dd5, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 017
+      icon: {fileID: 21300000, guid: b0717f279be373b4cb9383199a78acaf, type: 3}
+      sprite: {fileID: 21300000, guid: b0717f279be373b4cb9383199a78acaf, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 018
+      icon: {fileID: 21300000, guid: b4826d393581ca74094b54b471fe2297, type: 3}
+      sprite: {fileID: 21300000, guid: b4826d393581ca74094b54b471fe2297, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 019
+      icon: {fileID: 21300000, guid: b96bf2573acd5a042a7a0674e5408b27, type: 3}
+      sprite: {fileID: 21300000, guid: b96bf2573acd5a042a7a0674e5408b27, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 020
+      icon: {fileID: 21300000, guid: ca6b4e1bf70a6fe40999ed834fe06812, type: 3}
+      sprite: {fileID: 21300000, guid: ca6b4e1bf70a6fe40999ed834fe06812, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
   - slotId: face_eye_spark
     items:
     - id: 001
@@ -794,49 +846,21 @@ MonoBehaviour:
       icon: {fileID: 21300000, guid: ef79deb6e51cf4a49b1c44bd966eb3aa, type: 3}
       sprite: {fileID: 21300000, guid: 2f3e883503667404cad2119b3ccce419, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_1Dp6z3NNGutkJTSd
-      icon: {fileID: 21300000, guid: d8589d4ed982b4449bc019cf869f0f0b, type: 3}
-      sprite: {fileID: 21300000, guid: d8589d4ed982b4449bc019cf869f0f0b, type: 3}
+    - id: 011
+      icon: {fileID: 21300000, guid: ac9b58d6dab17084a8d67c23bdbb83de, type: 3}
+      sprite: {fileID: 21300000, guid: 5799ff079e7019e489f84bc6b049a700, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_44YnzGNZPxrGALUP
-      icon: {fileID: 21300000, guid: adde25c5a99942a4f96647f7f27d3571, type: 3}
-      sprite: {fileID: 21300000, guid: adde25c5a99942a4f96647f7f27d3571, type: 3}
+    - id: 012
+      icon: {fileID: 21300000, guid: e120021c0b78f6343a55800f5e9c820f, type: 3}
+      sprite: {fileID: 21300000, guid: d34552c4fe45f224582212f84543ed93, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_4d58AWQ1Up4bjEGd
-      icon: {fileID: 21300000, guid: 68fcd6e41d7d8d8448b745af359c0e65, type: 3}
-      sprite: {fileID: 21300000, guid: 68fcd6e41d7d8d8448b745af359c0e65, type: 3}
+    - id: 013
+      icon: {fileID: 21300000, guid: a3922e4aa6b6bac48bcc29a7b9bead39, type: 3}
+      sprite: {fileID: 21300000, guid: 0b8c6324cd1cdde4786e91808c2f4ddd, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_4uXmAtnXnt71QdOu
-      icon: {fileID: 21300000, guid: 9407a6babed0f3745a88903157a64365, type: 3}
-      sprite: {fileID: 21300000, guid: 9407a6babed0f3745a88903157a64365, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_84VrlurJGbUGEO4g
-      icon: {fileID: 21300000, guid: 740ff3b28f436af41a485153f1c2b163, type: 3}
-      sprite: {fileID: 21300000, guid: 740ff3b28f436af41a485153f1c2b163, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_CJveTf1Gm9LGiVZ8
-      icon: {fileID: 21300000, guid: e7c870f587c904d47916c714579909d4, type: 3}
-      sprite: {fileID: 21300000, guid: e7c870f587c904d47916c714579909d4, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_J6eRy1vRwFtfy7mx
-      icon: {fileID: 21300000, guid: 5ff032cd5eadce743bbaa2ba37f69b93, type: 3}
-      sprite: {fileID: 21300000, guid: 5ff032cd5eadce743bbaa2ba37f69b93, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_Tvqxt1Yj97Kdf4l4
-      icon: {fileID: 21300000, guid: cfed5787dd6a3334ba8b349aa08cd93b, type: 3}
-      sprite: {fileID: 21300000, guid: cfed5787dd6a3334ba8b349aa08cd93b, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_VmXzPnbi7o0apqSj
-      icon: {fileID: 21300000, guid: 94edc4c44b697144eb48bbf051bb9877, type: 3}
-      sprite: {fileID: 21300000, guid: 94edc4c44b697144eb48bbf051bb9877, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_pjIKV16Mj1wZagNM
-      icon: {fileID: 21300000, guid: b664281208bdd8a40948a9a04bfe59d4, type: 3}
-      sprite: {fileID: 21300000, guid: b664281208bdd8a40948a9a04bfe59d4, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_qQSvJSIlpoSSBK9x
-      icon: {fileID: 21300000, guid: 9d513861626d9ab41a782df127860135, type: 3}
-      sprite: {fileID: 21300000, guid: 9d513861626d9ab41a782df127860135, type: 3}
+    - id: 014
+      icon: {fileID: 21300000, guid: aa1f9fdd422eb8c43a468d7aff276f59, type: 3}
+      sprite: {fileID: 21300000, guid: 2b574143824dbc14bab87a0bec9398c2, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
   - slotId: clothes_shirt2
     items:
@@ -888,13 +912,9 @@ MonoBehaviour:
       icon: {fileID: 21300000, guid: 013cf3e30be60434787f4c99332ef3b9, type: 3}
       sprite: {fileID: 21300000, guid: a502ae2c83ecb8346b7908f873639198, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_TaUfAvkB99HhfNfe
-      icon: {fileID: 21300000, guid: d8ba5d5db971b704280579a7ecc6a7b6, type: 3}
-      sprite: {fileID: 21300000, guid: d8ba5d5db971b704280579a7ecc6a7b6, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: i_vDK3iUDBAmllo1RO
-      icon: {fileID: 21300000, guid: ea232b8817905c140bfd9c166a76c0ec, type: 3}
-      sprite: {fileID: 21300000, guid: ea232b8817905c140bfd9c166a76c0ec, type: 3}
+    - id: 013
+      icon: {fileID: 21300000, guid: e65c39a0a17e70c41b52b211fae42ef0, type: 3}
+      sprite: {fileID: 21300000, guid: cf384e50df8b6534387e4ab420dbcfe9, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
   - slotId: clothes_jacket
     items:

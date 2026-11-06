@@ -47,7 +47,7 @@ MonoBehaviour:
     - id: hair_lower_back
       displayName: Lower back
       folder: Hair/LowerBack
-      sortOrder: 1
+      sortOrder: 0
       canBeEmpty: 1
     - id: hair_left_lower
       displayName: Left lower
@@ -57,7 +57,7 @@ MonoBehaviour:
     - id: hair_right_lower
       displayName: Right lower
       folder: Hair/RightLower
-      sortOrder: 0
+      sortOrder: 20
       canBeEmpty: 1
   - id: face
     displayName: Face

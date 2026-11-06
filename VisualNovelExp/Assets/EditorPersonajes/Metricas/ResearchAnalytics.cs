@@ -11,9 +11,10 @@ public class ResearchAnalytics : MonoBehaviour
     public static ResearchAnalytics Instance { get; private set; }
 
     [Header("Config")]
-    public bool logToConsole = true;
-    public bool autoSaveOnQuit = true;
+    public bool logToConsole = false;
+    public bool autoSaveOnQuit = false;
     public string folderName = "research_logs";
+    public bool enableFileLogging = false; //activar o desactivar log
 
     // Datos de sesión
     private DateTime sessionStartTime; // Cuando se instanció por primera vez
@@ -31,6 +32,7 @@ public class ResearchAnalytics : MonoBehaviour
     private bool hasLoggedGameplayOn = false;
     private bool hasLoggedFirstInput = false;
 
+
     private float realtimeSessionStart;
 
     void Awake()
@@ -47,8 +49,6 @@ public class ResearchAnalytics : MonoBehaviour
         realtimeSessionStart = Time.realtimeSinceStartup;
         Debug.Log($"[Research] Sesión iniciada: {sessionStartTime:O}");
     }
-
-    // ========== API PÚBLICA ==========
 
     public static void LogEditorOpen()
     {
@@ -153,6 +153,8 @@ public class ResearchAnalytics : MonoBehaviour
 
     private void SaveInternal()
     {
+        if (!enableFileLogging) return;
+
         try
         {
             string folderPath = Path.Combine(Application.persistentDataPath, folderName);

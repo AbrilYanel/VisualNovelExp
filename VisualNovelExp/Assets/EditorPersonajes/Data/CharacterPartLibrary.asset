@@ -490,22 +490,18 @@ MonoBehaviour:
     items:
     - id: 001
       icon: {fileID: 21300000, guid: dc134de654a95924794d50def6cac149, type: 3}
-      sprite: {fileID: 21300000, guid: 785f68660bff37b4cadf2a99bd2b97ae, type: 3}
+      sprite: {fileID: 21300000, guid: 58e3ab53e8ee2b240a977f0bab5ebacc, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
     - id: 002
       icon: {fileID: 21300000, guid: 45f184427c6d6354187b6e5ab0fac229, type: 3}
-      sprite: {fileID: 21300000, guid: 58e3ab53e8ee2b240a977f0bab5ebacc, type: 3}
+      sprite: {fileID: 21300000, guid: 3d9d4d3c22a6215449eafc537d5f8eca, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
     - id: 003
       icon: {fileID: 21300000, guid: 678f06caf69b86343948f6cc14b8c03a, type: 3}
-      sprite: {fileID: 21300000, guid: 3d9d4d3c22a6215449eafc537d5f8eca, type: 3}
+      sprite: {fileID: 21300000, guid: b0cc87e0d46560345bf29fdaa274dc27, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
     - id: 004
       icon: {fileID: 21300000, guid: 49d17f8ab24e35c418ff0ca6155609f1, type: 3}
-      sprite: {fileID: 21300000, guid: b0cc87e0d46560345bf29fdaa274dc27, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
-    - id: 005
-      icon: {fileID: 21300000, guid: 984d888f4c7a6d64fb77b4f14448fb11, type: 3}
       sprite: {fileID: 21300000, guid: cda14e9db589ffd4dbe718491e5e3c9b, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
   - slotId: face_mouth

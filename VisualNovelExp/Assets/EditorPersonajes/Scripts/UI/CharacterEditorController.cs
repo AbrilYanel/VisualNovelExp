@@ -47,6 +47,7 @@ public class CharacterEditorController : MonoBehaviour
         }
 
         ResearchAnalytics.LogEditorOpen();
+        EventosJuego.Emitir("editor_inicio");
 
         if (CharacterLookSaveSystem.HasSavedLook())
         {
@@ -105,6 +106,7 @@ public class CharacterEditorController : MonoBehaviour
         current.SetItemId(slot.id, entry?.id);
         lookRenderer.SetPart(slot.id, entry);
         ResearchAnalytics.LogEditorInteraction(slot.id, entry != null ? entry.id : "none");
+        EventosJuego.Emitir("editor_seleccion", slot.id + ":" + (entry != null ? entry.id : "none"));
     }
 
     // ---------- Botones de la escena (conectalos en el OnClick) ----------
@@ -120,6 +122,7 @@ public class CharacterEditorController : MonoBehaviour
     public void ConfirmAndSave()
     {
         ResearchAnalytics.LogEditorClose();
+        EventosJuego.Emitir("editor_fin", current.selections.Count.ToString());
 
         CharacterLookSaveSystem.Save(current);
         CharacterLookSaveSystem.DeleteLegacySave();

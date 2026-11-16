@@ -8,6 +8,21 @@ using UnityEngine.EventSystems;
 
 public class Manager_Interaccion : MonoBehaviour
 {
+    public static Manager_Interaccion I;
+    bool primeraEscena;
+
+    void Awake()
+    {
+        I = this;
+        // Solo la primera escena de la partida resetea el progreso
+        if (!Partida.Iniciada)
+        {
+            Partida.Iniciada = true;
+            primeraEscena = true;
+            if (playerProgress) playerProgress.Resetear();
+        }
+    }
+
     [Header("UI Diálogo")]
     public GameObject dialoguePanel;
     public TextMeshProUGUI nameText;
@@ -104,8 +119,8 @@ public class Manager_Interaccion : MonoBehaviour
         if (dialoguePanel) dialoguePanel.SetActive(false);
         if (choicePanel) choicePanel.SetActive(false);
         CerrarTodasUIs();
-        if (playerProgress) playerProgress.Resetear();
         ActualizarUIProgreso();
+        if (primeraEscena) EventosJuego.Emitir("juego_inicio");
     }
 
     void CerrarTodasUIs()
@@ -213,10 +228,7 @@ public class Manager_Interaccion : MonoBehaviour
     // ---------- diálogo base ----------
     public void StartDialogue(Nodo_Dialogo node)
     {
-        if (cameraController) cameraController.enabled = false;
-        if (Player_Movement) Player_Movement.enabled = false;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        BloquearJugador();
         currentNode = node;
         EjecutarEfectosNodo(node);
         if (dialoguePanel) dialoguePanel.SetActive(true);
@@ -289,10 +301,7 @@ public class Manager_Interaccion : MonoBehaviour
     {
         if (dialoguePanel) dialoguePanel.SetActive(false);
         if (choicePanel) choicePanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        if (cameraController) cameraController.enabled = false;
-        if (Player_Movement) Player_Movement.enabled = false;
+        BloquearJugador();
         CerrarTodasUIs();
 
         var tipo = currentNode.tipoMinijuego;
@@ -444,15 +453,32 @@ public class Manager_Interaccion : MonoBehaviour
         }
     }
 
+    public void BloquearJugador()
+    {
+        EstadoUI.Bloqueada = true;
+        if (cameraController) cameraController.enabled = false;
+        if (Player_Movement) Player_Movement.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void LiberarJugador()
+    {
+        EstadoUI.Bloqueada = false;
+        EstadoUI.FrameLiberada = Time.frameCount;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        if (cameraController) cameraController.enabled = true;
+        if (Player_Movement) Player_Movement.enabled = true;
+    }
+
+
     void EndDialogue()
     {
         CerrarTodasUIs();
         if (dialoguePanel) dialoguePanel.SetActive(false);
         if (choicePanel) choicePanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        if (cameraController) cameraController.enabled = true;
-        if (Player_Movement) Player_Movement.enabled = true;
+        LiberarJugador();
         minijuegoActivo = 0;
         minijuegoActivoParaReintento = 0;
     }

@@ -15,5 +15,15 @@ MonoBehaviour:
   nivelActual: 4
   interaccionesCompletadas: 0
   interaccionesPorNivel: 3
-  monedas: 963
-  monedaInicial: 15
+  monedas: 0
+  monedaInicial: 10
+  comida: 0
+  comidaInicial: 1
+  hambre: 0
+  energia: 0
+  diversion: 0
+  hambreInicial: 35
+  energiaInicial: 70
+  diversionInicial: 60
+  tutorialCompleto: 0
+  npcsCompletados: []

@@ -44,20 +44,15 @@ public class Player_Camera : MonoBehaviour
 
     void TryInteract()
     {
+        if (EstadoUI.Bloqueada) return;
+
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, interactDistance))
         {
-            if (hit.collider.CompareTag("NPC"))
-            {
-                Interaccion_NPC npc = hit.collider.GetComponentInParent<Interaccion_NPC>();
-
-                if (npc != null)
-                {
-                    npc.Interact();
-                }
-            }
+            var objetivo = hit.collider.GetComponentInParent<IInteractuable>();
+            if (objetivo != null) objetivo.Interact();
         }
     }
 

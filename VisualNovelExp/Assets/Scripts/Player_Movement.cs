@@ -222,19 +222,12 @@ public class Player_Movement : MonoBehaviour
             MoverJugador();
         else if (modoPasos == ModoPasos.LoopContinuo)
             ActualizarLoopPasos(false, 0f);
-
+    #if UNITY_EDITOR
         HandleReinicio();
+    #endif
     }
 
-    // =====================================================================
-    //  CHARACTER CONTROLLER: MEDIDAS SEGURAS
-    // =====================================================================
-    /// <summary>
-    /// Aplica altura, radio, skin width y step offset respetando las reglas de Unity.
-    /// Unity valida cada propiedad por separado, así que el Step Offset se baja primero
-    /// y se sube al final; de lo contrario aparece "Step Offset must be less or equal to..."
-    /// y el controller queda inactivo.
-    /// </summary>
+  
     void AplicarMedidas(bool reiniciarController)
     {
         if (controller == null) controller = GetComponent<CharacterController>();
@@ -302,7 +295,10 @@ public class Player_Movement : MonoBehaviour
         bool hayInput = input.sqrMagnitude > 0.01f;
 
         bool correr = Input.GetKey(KeyCode.LeftShift) && hayInput && (!soloCorrerAdelante || input.y > 0.1f);
+
         float velocidadBase = correr ? runSpeed : walkSpeed;
+        if (Manager_Necesidades.I != null)
+            velocidadBase *= Manager_Necesidades.I.MultiplicadorVelocidad;
 
         Vector2 objetivo = new Vector2(
             input.x * velocidadBase * multiplicadorLateral,
@@ -406,10 +402,7 @@ public class Player_Movement : MonoBehaviour
         AudioSource.PlayClipAtPoint(sonidoAterrizaje, transform.position, volumenAterrizaje);
     }
 
-    /// <summary>
-    /// Modo LoopContinuo: el clip se repite mientras caminás y, al detenerte, el volumen baja
-    /// en 'fundidoSalida' segundos y recién ahí se frena (sin corte seco).
-    /// </summary>
+  
     void ActualizarLoopPasos(bool caminando, float factorCorrer)
     {
         if (audioPasos == null) return;

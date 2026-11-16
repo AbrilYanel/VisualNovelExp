@@ -2,7 +2,7 @@
 using UnityEngine;
 using TMPro;
 
-public class Interaccion_NPC : MonoBehaviour
+public class Interaccion_NPC : MonoBehaviour, IInteractuable
 {
     [Header("Diálogo")]
     public Manager_Interaccion dialogueManager;

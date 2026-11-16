@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "PlayerProgress", menuName = "Progress/PlayerProgress")]
 public class PlayerProgress : ScriptableObject
@@ -9,7 +10,31 @@ public class PlayerProgress : ScriptableObject
 
     [Header("Monedas")]
     public int monedas = 0;
-    public int monedaInicial = 15; // Debe alcanzar justo para comprar la primera fila de kana (a,i,u,e,o)
+    public int monedaInicial = 15; 
+    [Header("Comida en casa")]
+    public int comida = 0;
+    public int comidaInicial = 1; // la que se come en el tutorial
+
+    [Header("Necesidades (0 a 100)")]
+    public float hambre;
+    public float energia;
+    public float diversion;
+    public float hambreInicial = 35f;   // bajo a propósito: el tutorial pide comer
+    public float energiaInicial = 70f;
+    public float diversionInicial = 60f;
+
+    [Header("Estado de la partida")]
+    public bool tutorialCompleto;
+    public List<string> npcsCompletados = new List<string>();
+
+
+    public bool ConsumirComida()
+    {
+        if (comida <= 0) return false;
+        comida--;
+        return true;
+    }
+
 
     public void CompletarInteraccion()
     {
@@ -55,5 +80,11 @@ public class PlayerProgress : ScriptableObject
         nivelActual = 1;
         interaccionesCompletadas = 0;
         monedas = monedaInicial;
+        comida = comidaInicial;
+        hambre = hambreInicial;
+        energia = energiaInicial;
+        diversion = diversionInicial;
+        tutorialCompleto = false;
+        npcsCompletados.Clear();
     }
 }

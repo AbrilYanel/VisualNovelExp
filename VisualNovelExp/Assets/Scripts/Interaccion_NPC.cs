@@ -24,6 +24,12 @@ public class Interaccion_NPC : MonoBehaviour, IInteractuable
 
     private bool completado = false;
 
+    [Header("Objetivo en pantalla")]
+    public string nombreVisible = "Vecino";
+    public int orden = 1;
+    public bool cuentaComoObjetivo = true;
+    public bool Completado => completado;
+
     public NPC_Entrevistado npcEntrevistado;
     public NPC_Director npcDirector;
     public NPC_Comerciante npcComerciante;
@@ -40,6 +46,9 @@ public class Interaccion_NPC : MonoBehaviour, IInteractuable
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
+
+        if (playerProgress != null && playerProgress.npcsCompletados.Contains(gameObject.name))
+            completado = true;
 
         ActualizarIndicador();
     }
@@ -105,6 +114,8 @@ public class Interaccion_NPC : MonoBehaviour, IInteractuable
     public void MarcarCompletado()
     {
         completado = true;
+        if (playerProgress != null && !playerProgress.npcsCompletados.Contains(gameObject.name))
+            playerProgress.npcsCompletados.Add(gameObject.name);
         ActualizarIndicador();
 
     }

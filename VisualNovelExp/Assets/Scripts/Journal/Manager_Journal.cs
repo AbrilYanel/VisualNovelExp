@@ -17,6 +17,7 @@ public class Manager_Journal : MonoBehaviour
     public Animator animator;
     private bool estaAbierto = false;
 
+
     void Start()
     {
         journalPanel.SetActive(false);
@@ -33,6 +34,7 @@ public class Manager_Journal : MonoBehaviour
 
     public void AbrirJournal()
     {
+        EventosJuego.Emitir("journal");
         estaAbierto = true;
         journalPanel.SetActive(true);
         animator.SetTrigger("Open");

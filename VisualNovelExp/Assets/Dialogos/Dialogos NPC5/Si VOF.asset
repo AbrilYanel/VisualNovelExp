@@ -23,6 +23,27 @@ MonoBehaviour:
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 6
+  vocabulario:
+  - hiragana: 
+    romaji: 
+    traduccion: a
+    idFuente: a
+  - hiragana: 
+    romaji: 
+    traduccion: e
+    idFuente: e
+  - hiragana: 
+    romaji: 
+    traduccion: i
+    idFuente: i
+  - hiragana: 
+    romaji: 
+    traduccion: o
+    idFuente: o
+  - hiragana: 
+    romaji: 
+    traduccion: u
+    idFuente: u
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

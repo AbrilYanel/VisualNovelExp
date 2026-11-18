@@ -24,7 +24,7 @@ public class Panel_Vocabulario : MonoBehaviour
         alEmpezar = empezar;
         var sb = new System.Text.StringBuilder();
         foreach (var p in palabras)
-            sb.AppendLine($"<size=120%>{p.hiragana}</size>    <b>{p.romaji}</b>    =  {p.traduccion}");
+            sb.AppendLine($"{p.hiragana}</size>    <b>{p.romaji}</b>    =  {p.traduccion}");
         textoLista.text = sb.ToString();
         panel.SetActive(true);
 

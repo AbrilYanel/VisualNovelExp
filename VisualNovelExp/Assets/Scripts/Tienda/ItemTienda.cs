@@ -11,7 +11,6 @@ public class ItemTienda : MonoBehaviour
     public TextMeshProUGUI textoEstado;
     public Button botonComprar;
 
-    // Debug visual
     [Header("Colores Debug")]
     public Color colorComprado = new Color(0.7f, 0.95f, 0.7f);
 
@@ -20,11 +19,39 @@ public class ItemTienda : MonoBehaviour
     void Awake()
     {
         fondo = GetComponent<Image>();
-        // Asegurar que el item sea visible
         if (fondo != null && fondo.color.a < 0.1f)
             fondo.color = Color.white;
     }
 
+    // NUEVO: artículo de la konbini (se puede comprar varias veces)
+    public void ConfigurarArticulo(string nombre, string costo, string descripcion, Action onComprarClick)
+    {
+        gameObject.name = "ItemTienda_" + nombre;
+
+        if (textoNombre != null) textoNombre.text = nombre;
+        if (textoCosto != null) textoCosto.text = costo;
+        if (textoEstado != null) textoEstado.text = descripcion;
+
+        if (botonComprar != null)
+        {
+            botonComprar.gameObject.SetActive(true);
+            botonComprar.interactable = true;
+            botonComprar.onClick.RemoveAllListeners();
+            if (onComprarClick != null)
+                botonComprar.onClick.AddListener(() => onComprarClick.Invoke());
+        }
+        else
+        {
+            Debug.LogError("[ItemTienda] botonComprar NO asignado en prefab", this);
+        }
+
+        gameObject.SetActive(true);
+        var rt = GetComponent<RectTransform>();
+        if (rt != null && rt.localScale == Vector3.zero)
+            rt.localScale = Vector3.one;
+    }
+
+    // ANTERIOR: fila de kana. Se conserva para que ningún otro script deje de compilar.
     public void Configurar(KanaData fila, bool desbloqueada, Action onComprarClick)
     {
         if (fila == null)
@@ -37,8 +64,6 @@ public class ItemTienda : MonoBehaviour
 
         if (textoNombre != null)
             textoNombre.text = string.IsNullOrEmpty(fila.nombreFila) ? fila.id : fila.nombreFila;
-        else
-            Debug.LogWarning("[ItemTienda] textoNombre NO asignado en prefab", this);
 
         if (textoCosto != null)
             textoCosto.text = desbloqueada ? "" : $"{fila.costo} monedas";
@@ -57,17 +82,10 @@ public class ItemTienda : MonoBehaviour
             if (onComprarClick != null)
                 botonComprar.onClick.AddListener(() => onComprarClick.Invoke());
         }
-        else if (!desbloqueada)
-        {
-            Debug.LogError("[ItemTienda] botonComprar NO asignado en prefab", this);
-        }
 
-        // Forzar que el objeto esté activo y visible
         gameObject.SetActive(true);
         var rt = GetComponent<RectTransform>();
         if (rt != null && rt.localScale == Vector3.zero)
             rt.localScale = Vector3.one;
-
-        Debug.Log($"[ItemTienda] Configurado: {fila.nombreFila} desbloqueada={desbloqueada}", this);
     }
 }

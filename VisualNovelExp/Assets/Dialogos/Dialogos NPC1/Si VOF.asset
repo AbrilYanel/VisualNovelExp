@@ -23,6 +23,23 @@ MonoBehaviour:
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 2
+  vocabulario:
+  - hiragana: "\u3042\u308A\u304C\u3068\u3046"
+    romaji: Arigatou
+    traduccion: Gracias
+    idFuente: gracias
+  - hiragana: "\u304A\u306F\u3088\u3046"
+    romaji: Ohayou
+    traduccion: "Buen d\xEDa"
+    idFuente: "buen d\xEDa"
+  - hiragana: "\u3059\u307F\u307E\u305B\u3093"
+    romaji: Sumimasen
+    traduccion: "Disculpa, perd\xF3n"
+    idFuente: perdon
+  - hiragana: "\u3053\u3093\u306B\u3061\u306F"
+    romaji: Konnichiwa
+    traduccion: Hola
+    idFuente: hola
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

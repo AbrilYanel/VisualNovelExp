@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Comenzar
   m_EditorClassIdentifier: 
   speakerName: El Maestro
-  sentence: Pareces interesado en aprender sobre oraciones, te gustaria intentarlo?
+  sentence: "Pareces interesado en aprender sobre n\xFAmeros, te gustaria intentarlo?"
   hasChoices: 1
   option1Text: Lo voy a intentar
   option2Text: No tengo tiempo para esto
@@ -23,6 +23,7 @@ MonoBehaviour:
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 1
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

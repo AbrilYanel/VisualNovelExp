@@ -22,3 +22,29 @@ MonoBehaviour:
   startsMinigame: 1
   endsDialogue: 0
   nextNode: {fileID: 0}
+  tipoMinijuego: 0
+  vocabulario:
+  - hiragana: "\u304B\u304C\u307F"
+    romaji: kagami
+    traduccion: Espejo
+    idFuente: espejo
+  - hiragana: "\u308C\u3044\u305E\u3046\u3053"
+    romaji: reizouko
+    traduccion: Heladera
+    idFuente: heladera
+  - hiragana: "\u30D9\u30C3\u30C9"
+    romaji: beddo
+    traduccion: Cama
+    idFuente: cama
+  - hiragana: "\u30D1\u30BD\u30B3\u30F3"
+    romaji: pasokon
+    traduccion: Computadora
+    idFuente: pc
+  - hiragana: "\u30C9\u30A2 "
+    romaji: doa
+    traduccion: Puerta
+    idFuente: puerta
+  reintentarMinijuego: 0
+  daCamara: 0
+  entregaEntrevista: 0
+  daPermiso: 0

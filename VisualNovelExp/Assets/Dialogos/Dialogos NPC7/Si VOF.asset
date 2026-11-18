@@ -23,6 +23,27 @@ MonoBehaviour:
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 8
+  vocabulario:
+  - hiragana: "\u3092"
+    romaji: wo
+    traduccion: "part\xEDcula de objeto"
+    idFuente: wo
+  - hiragana: "\u304F\u3060\u3055\u3044"
+    romaji: kudasai
+    traduccion: por favor
+    idFuente: wo
+  - hiragana: 
+    romaji: 
+    traduccion: Agua
+    idFuente: agua
+  - hiragana: 
+    romaji: 
+    traduccion: Bola de arroz
+    idFuente: onigiri
+  - hiragana: 
+    romaji: 
+    traduccion: "T\xE9"
+    idFuente: te
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

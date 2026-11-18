@@ -19,9 +19,9 @@ MonoBehaviour:
   monedaInicial: 10
   comida: 1
   comidaInicial: 1
-  hambre: 29.482128
-  energia: 68.89618
-  diversion: 58.565304
+  hambre: 26.360264
+  energia: 68.271935
+  diversion: 57.75368
   hambreInicial: 35
   energiaInicial: 70
   diversionInicial: 60

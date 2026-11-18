@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Continuar2
   m_EditorClassIdentifier: 
   speakerName: El Maestro
-  sentence: "Genial, voy a ense\xF1arte sobre la particula mas usada, su funcion
-    es la de marcar el tema de la oracion y unificar la primera palabra con el resto,
-    dale un intento."
+  sentence: Mucha suerte.
   hasChoices: 0
   option1Text: 
   option2Text: 
@@ -25,6 +23,27 @@ MonoBehaviour:
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 5
+  vocabulario:
+  - hiragana: "\u3044\u3061"
+    romaji: ichi
+    traduccion: Uno
+    idFuente: uno
+  - hiragana: "\u306B"
+    romaji: ni
+    traduccion: Dos
+    idFuente: dos
+  - hiragana: "\u3055\u3093"
+    romaji: san
+    traduccion: Tres
+    idFuente: tres
+  - hiragana: "\u3088\u3093"
+    romaji: yon
+    traduccion: Cuatro
+    idFuente: cuatro
+  - hiragana: "\u3054"
+    romaji: go
+    traduccion: Cinco
+    idFuente: cinco
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

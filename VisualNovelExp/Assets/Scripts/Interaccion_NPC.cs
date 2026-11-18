@@ -34,6 +34,7 @@ public class Interaccion_NPC : MonoBehaviour, IInteractuable
     public NPC_Director npcDirector;
     public NPC_Comerciante npcComerciante;
 
+
     [Header("Sonido")]
     public AudioClip sonidoInteractuar;
     private AudioSource audioSource;

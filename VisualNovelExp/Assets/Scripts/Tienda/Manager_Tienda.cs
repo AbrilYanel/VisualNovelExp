@@ -1,25 +1,48 @@
-﻿using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
+// Tienda reutilizada como konbini: misma UI, animación y sonido que la tienda de kanas,
+// pero vende comida y ocio en lugar de filas de kana.
 public class Manager_Tienda : MonoBehaviour
 {
-    [Header("Datos")]
-    public KanaInventario kanaInventario;
-    public PlayerProgress playerProgress;
-    public List<KanaData> catalogoFilas;
+    [System.Serializable]
+    public class Articulo
+    {
+        public string hiragana = "おにぎり";
+        public string romaji = "onigiri";
+        public string traduccion = "bola de arroz";
+        public int precio = 10;
+        [Tooltip("Si es comida, se guarda en el refrigerador de la casa; si no, aplica su efecto al comprar")]
+        public bool esComida = true;
+        public Necesidad necesidad = Necesidad.Energia;
+        public float cantidad = 30f;
+    }
 
-    [Header("UI")]
+    [Header("Datos")]
+    public PlayerProgress playerProgress;
+    public List<Articulo> catalogo = new List<Articulo>
+    {
+        new Articulo { hiragana = "おにぎり", romaji = "onigiri", traduccion = "bola de arroz",
+                       precio = 10, esComida = true },
+        new Articulo { hiragana = "コーヒー", romaji = "kōhī", traduccion = "café",
+                       precio = 8, esComida = false, necesidad = Necesidad.Energia, cantidad = 30f },
+        new Articulo { hiragana = "ざっし", romaji = "zasshi", traduccion = "revista",
+                       precio = 12, esComida = false, necesidad = Necesidad.Diversion, cantidad = 35f },
+    };
+
+    [Header("UI (la misma de antes)")]
     public GameObject panelTienda;
     public Transform contenedorItems;
     public GameObject itemTiendaPrefab;
     public TextMeshProUGUI textoMonedas;
     public Button botonCerrar;
+    [Tooltip("Opcional. Si está vacío, los mensajes salen en la caja de mensajes (Mensaje_UI)")]
+    public TextMeshProUGUI textoMensaje;
 
-    [Header("Control de jugador")]
+    [Header("Control de jugador (solo si no hay Manager_Interaccion en la escena)")]
     public MonoBehaviour cameraController;
     public MonoBehaviour Player_Movement;
 
@@ -41,7 +64,6 @@ public class Manager_Tienda : MonoBehaviour
         SetupBotonCerrar();
         NukeRaycastBlockers();
         SetupLayout();
-        if (kanaInventario != null) kanaInventario.Reiniciar();
     }
 
     void SetupBotonCerrar()
@@ -52,33 +74,19 @@ public class Manager_Tienda : MonoBehaviour
         var nav = botonCerrar.navigation; nav.mode = Navigation.Mode.None; botonCerrar.navigation = nav;
     }
 
-    // Agresivo: apaga raycast de TODO lo que no sea Button
+    // Apaga el raycast de todo lo que no sea Button
     void NukeRaycastBlockers()
     {
         if (panelTienda == null) return;
 
-        // 1. Todas las Images que NO sean un Button
         foreach (var img in panelTienda.GetComponentsInChildren<Image>(true))
         {
             bool esBoton = img.GetComponent<Button>() != null || img.GetComponentInParent<Button>() != null;
-            if (!esBoton)
-            {
-                img.raycastTarget = false;
-            }
-            else
-            {
-                img.raycastTarget = true; // asegurar que los botones sí reciban
-            }
+            img.raycastTarget = esBoton;
         }
 
-        // 2. Todos los TMP que NO estén dentro de un Button
         foreach (var tmp in panelTienda.GetComponentsInChildren<TextMeshProUGUI>(true))
-        {
-            bool esBoton = tmp.GetComponentInParent<Button>() != null;
-            tmp.raycastTarget = esBoton; // solo los textos de botones bloquean raycast
-        }
-
-        Debug.Log("[Manager_Tienda] Raycast blockers limpiados", panelTienda);
+            tmp.raycastTarget = tmp.GetComponentInParent<Button>() != null;
     }
 
     void SetupLayout()
@@ -86,7 +94,6 @@ public class Manager_Tienda : MonoBehaviour
         if (contenedorItems == null) return;
         var vlg = contenedorItems.GetComponent<VerticalLayoutGroup>() ?? contenedorItems.gameObject.AddComponent<VerticalLayoutGroup>();
         vlg.spacing = 100f;
-
 
         var csf = contenedorItems.GetComponent<ContentSizeFitter>() ?? contenedorItems.gameObject.AddComponent<ContentSizeFitter>();
         csf.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
@@ -96,54 +103,46 @@ public class Manager_Tienda : MonoBehaviour
     {
         if (!tiendaAbierta) return;
         if (Input.GetKeyDown(KeyCode.Escape)) CerrarTienda();
-
     }
 
     public void AbrirTienda()
     {
-        // Cancelar cualquier corrutina de cierre pendiente (evita que desactive el panel a destiempo)
+        if (tiendaAbierta) return;
+
         if (corrutinaCierre != null)
         {
             StopCoroutine(corrutinaCierre);
             corrutinaCierre = null;
         }
 
-        // Resetear el Animator para limpiar triggers/states residuales
-        animator.ResetTrigger("Close");
-        animator.ResetTrigger("Open");
-        animator.Play("Idle", 0, 0f);
+        if (animator)
+        {
+            animator.ResetTrigger("Close");
+            animator.ResetTrigger("Open");
+            animator.Play("Idle", 0, 0f);
+        }
 
         tiendaAbierta = true;
-        // cerrar diálogos que tapan
-        var inter = FindObjectOfType<Manager_Interaccion>();
-        if (inter != null)
-        {
-            if (inter.dialoguePanel) inter.dialoguePanel.SetActive(false);
-            if (inter.choicePanel) inter.choicePanel.SetActive(false);
-            if (inter.minigameUI) inter.minigameUI.SetActive(false);
-            if (inter.minijuego2UI) inter.minijuego2UI.SetActive(false);
-        }
-        if (cameraController) cameraController.enabled = false;
-        if (Player_Movement) Player_Movement.enabled = false;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        BloquearJugador();
 
         panelTienda.SetActive(true);
-        animator.SetTrigger("Open");
+        if (animator) animator.SetTrigger("Open");
 
         panelTienda.transform.SetAsLastSibling();
         if (botonCerrar) { botonCerrar.transform.SetAsLastSibling(); botonCerrar.interactable = true; }
 
-        NukeRaycastBlockers(); // re-aplicar por si algo se reactivó
+        NukeRaycastBlockers();
         RefrescarLista();
+
+        Avisar("いらっしゃいませ (irasshaimase): ¡bienvenido!");
+        EventosJuego.Emitir("tienda_abierta");
     }
 
     public void CerrarTienda()
     {
-        Debug.Log("[Manager_Tienda] CerrarTienda OK");
+        if (!tiendaAbierta) return;
         tiendaAbierta = false;
 
-        // Cancelar corrutina de cierre anterior si existe
         if (corrutinaCierre != null)
         {
             StopCoroutine(corrutinaCierre);
@@ -151,32 +150,34 @@ public class Manager_Tienda : MonoBehaviour
         }
 
         if (animator) animator.SetTrigger("Close");
-        if (cameraController) cameraController.enabled = true;
-        if (Player_Movement) Player_Movement.enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        LiberarJugador();
+        EventosJuego.Emitir("tienda_cerrada");
 
         corrutinaCierre = StartCoroutine(DesactivarTrasAnimacion());
     }
 
     IEnumerator DesactivarTrasAnimacion()
     {
+        if (animator == null)
+        {
+            panelTienda.SetActive(false);
+            corrutinaCierre = null;
+            yield break;
+        }
+
         yield return null;
 
-        // Esperar a que arranque el estado "Close", con timeout de seguridad
         float timeout = 0f;
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Close"))
         {
             timeout += Time.deltaTime;
-            if (timeout > 3f) break; // safety: si no arranca en 3s, salir
+            if (timeout > 3f) break;
             yield return null;
         }
 
-        // Esperar a que termine la animación
         float duracion = animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(duracion);
 
-        // Solo desactivar si la tienda sigue cerrada (red de seguridad)
         if (!tiendaAbierta)
             panelTienda.SetActive(false);
 
@@ -189,27 +190,85 @@ public class Manager_Tienda : MonoBehaviour
         for (int i = contenedorItems.childCount - 1; i >= 0; i--) Destroy(contenedorItems.GetChild(i).gameObject);
         if (textoMonedas && playerProgress) textoMonedas.text = $"{playerProgress.monedas}";
 
-        foreach (var fila in catalogoFilas)
+        foreach (var articulo in catalogo)
         {
-            if (!fila) continue;
+            if (articulo == null) continue;
+            var a = articulo; // copia local para el closure
+
             var obj = Instantiate(itemTiendaPrefab, contenedorItems, false);
             obj.transform.localScale = Vector3.one;
             var le = obj.GetComponent<LayoutElement>() ?? obj.AddComponent<LayoutElement>();
             le.preferredHeight = 72; le.flexibleWidth = 1; le.minHeight = 60;
+
             var item = obj.GetComponent<ItemTienda>();
             if (!item) { Destroy(obj); continue; }
-            bool desbloqueada = kanaInventario && kanaInventario.EstaDesbloqueado(fila.id);
-            item.Configurar(fila, desbloqueada, () => {
-                if (kanaInventario.Comprar(fila, playerProgress))
-                {
-                    // Sonido solo si la compra fue exitosa
-                    if (audioSource != null && sonidoComprar != null)
-                        audioSource.PlayOneShot(sonidoComprar);
-                    RefrescarLista();
-                }
-            });
+
+            item.ConfigurarArticulo(
+                $"{a.hiragana} ({a.romaji})",
+                $"{a.precio} monedas",
+                $"{a.traduccion} · {Efecto(a)}",
+                () => Comprar(a));
         }
+
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(contenedorItems as RectTransform);
+    }
+
+    void Comprar(Articulo a)
+    {
+        if (playerProgress == null) return;
+
+        if (!playerProgress.GastarMonedas(a.precio))
+        {
+            Avisar("No tienes monedas suficientes. Ayuda a un vecino para ganar más.");
+            return;
+        }
+
+        if (a.esComida) playerProgress.comida++;
+        else if (Manager_Necesidades.I) Manager_Necesidades.I.Sumar(a.necesidad, a.cantidad);
+
+        if (audioSource != null && sonidoComprar != null)
+            audioSource.PlayOneShot(sonidoComprar);
+
+        string extra = a.esComida ? $" Comida en casa: {playerProgress.comida}." : "";
+        Avisar($"ありがとうございます (arigatō gozaimasu). Compraste: {a.traduccion}.{extra}");
+        EventosJuego.Emitir("compra", a.romaji);
+
+        RefrescarLista();
+    }
+
+    string Efecto(Articulo a)
+    {
+        if (a.esComida) return "para el refrigerador";
+        switch (a.necesidad)
+        {
+            case Necesidad.Energia: return $"+{a.cantidad:0} energía";
+            case Necesidad.Diversion: return $"+{a.cantidad:0} diversión";
+            default: return $"+{a.cantidad:0} hambre";
+        }
+    }
+
+    void Avisar(string texto)
+    {
+        if (textoMensaje) textoMensaje.text = texto;
+        else if (Mensaje_UI.I) Mensaje_UI.I.Mostrar(texto, 3.5f);
+    }
+
+    void BloquearJugador()
+    {
+        if (Manager_Interaccion.I) { Manager_Interaccion.I.BloquearJugador(); return; }
+        if (cameraController) cameraController.enabled = false;
+        if (Player_Movement) Player_Movement.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    void LiberarJugador()
+    {
+        if (Manager_Interaccion.I) { Manager_Interaccion.I.LiberarJugador(); return; }
+        if (cameraController) cameraController.enabled = true;
+        if (Player_Movement) Player_Movement.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Continuar1
   m_EditorClassIdentifier: 
   speakerName: El Maestro
-  sentence: "Genial, entonces te ense\xF1are un poco de particulas y vocabulario."
+  sentence: "Genial, entonces te ense\xF1are lo b\xE1sico."
   hasChoices: 1
   option1Text: Gracias!
   option2Text: Ahora no
@@ -23,6 +23,7 @@ MonoBehaviour:
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 5
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

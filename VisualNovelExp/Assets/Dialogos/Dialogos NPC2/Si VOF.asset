@@ -23,6 +23,23 @@ MonoBehaviour:
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 3
+  vocabulario:
+  - hiragana: "\u3054\u306F\u3093"
+    romaji: gohan
+    traduccion: Arroz
+    idFuente: arroz
+  - hiragana: "\u307F\u305A"
+    romaji: mizu
+    traduccion: Agua
+    idFuente: agua
+  - hiragana: "\u304A\u3061\u3083"
+    romaji: ocha
+    traduccion: "T\xE9"
+    idFuente: te
+  - hiragana: "\u304A\u306B\u304E\u308A"
+    romaji: onigiri
+    traduccion: Bola de arroz
+    idFuente: onigiri
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

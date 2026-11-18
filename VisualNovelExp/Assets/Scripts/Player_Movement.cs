@@ -508,8 +508,6 @@ public class Player_Movement : MonoBehaviour
         var progress = FindObjectOfType<Manager_Interaccion>()?.playerProgress;
         if (progress != null) progress.Resetear();
 
-        var kanaInv = FindObjectOfType<Manager_Tienda>()?.kanaInventario;
-        if (kanaInv != null) kanaInv.Reiniciar();
 
         var journalData = FindObjectOfType<Manager_Journal>()?.journalData;
         if (journalData != null) journalData.LimpiarTodo();

@@ -141,4 +141,6 @@ public class Manager_VerdaderoFalso : MonoBehaviour
     {
         interaccionManager.OnMinigameFinished(false);
     }
+
+    public void Detener() { CancelInvoke(); StopAllCoroutines(); }
 }

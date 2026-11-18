@@ -51,8 +51,9 @@ public class Manager_Minijuego2 : MonoBehaviour
     int respuestasCorrectas = 0;
     int opcionSeleccionada = -1;
     bool esperandoSiguiente = false;
+    bool respuestaIncompleta;
 
-    
+
     public void SetPreguntas(List<PreguntaData> nuevas)
     {
         if (nuevas != null && nuevas.Count > 0)
@@ -304,9 +305,9 @@ public class Manager_Minijuego2 : MonoBehaviour
     {
         if (esperandoSiguiente) return;
         var pregunta = preguntas[indiceActual];
+        respuestaIncompleta = false;
         bool correcto = pregunta.tipo == TipoPregunta.FillBlank ? VerificarFillBlank(pregunta) : VerificarWordOrder(pregunta);
-        
-        if (!esperandoSiguiente && !correcto) return; // salió temprano por input incompleto
+        if (respuestaIncompleta) return; // falta elegir o completar: no cuenta
 
         esperandoSiguiente = true;
         if (botonConfirmar) botonConfirmar.gameObject.SetActive(false);
@@ -339,6 +340,7 @@ public class Manager_Minijuego2 : MonoBehaviour
         if (opcionSeleccionada == -1)
         {
             if (textoFeedback) { textoFeedback.text = "Seleccioná una opción primero"; textoFeedback.color = colorIncorrecto; }
+            respuestaIncompleta = true;
             return false;
         }
         return opcionSeleccionada == pregunta.indiceRespuestaCorrecta;
@@ -361,6 +363,7 @@ public class Manager_Minijuego2 : MonoBehaviour
                 esperandoSiguiente = false;
                 if (botonConfirmar) botonConfirmar.gameObject.SetActive(true);
                 if (botonSiguiente) botonSiguiente.gameObject.SetActive(false);
+                respuestaIncompleta = true;
                 return false;
             }
             if (slots[i].OcupadoPor.valor != pregunta.ordenCorrecto[i])
@@ -412,6 +415,8 @@ public class Manager_Minijuego2 : MonoBehaviour
         p.tipo = TipoPregunta.WordOrder; // forzar
         MostrarPregunta(p);
     }
+
+    public void Detener() { CancelInvoke(); StopAllCoroutines(); }
 
     [ContextMenu("Test Mostrar FillBlank")]
     void TestFillBlank()

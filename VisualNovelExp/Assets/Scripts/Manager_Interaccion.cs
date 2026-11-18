@@ -92,7 +92,9 @@ public class Manager_Interaccion : MonoBehaviour
     public PlayerProgress playerProgress;
     public TextMeshProUGUI textoNivel;
     public int recompensaMonedas = 20;
+    public int recompensaFallo = 5;
     private Interaccion_NPC npcActual;
+    public Panel_Vocabulario panelVocabulario;
 
     [Header("Entrevista NPC9")]
     public Manager_Camara managerCamara;
@@ -174,7 +176,11 @@ public class Manager_Interaccion : MonoBehaviour
             StopAllCoroutines();
             if (dialogueText) dialogueText.text = currentSentence;
             isTyping = false;
-            if (currentNode.endsDialogue) EndDialogue();
+            if (currentNode.endsDialogue)
+            {
+                if (nodoPostEntrega != null) { var t = nodoPostEntrega; nodoPostEntrega = null; StartDialogue(t); }
+                else EndDialogue();
+            }
             else if (currentNode.hasChoices) ShowChoices();
             else if (currentNode.nextNode != null) StartDialogue(currentNode.nextNode);
             else EndDialogue();
@@ -188,6 +194,14 @@ public class Manager_Interaccion : MonoBehaviour
     public void AbandonarMinijuego()
     {
         Debug.LogWarning($"[Interaccion] Abortando minijuego {minijuegoActivo} por ESC – volviendo al mundo");
+        EventosJuego.Emitir("minijuego_abandono", minijuegoActivo.ToString());
+        if (managerVoF) managerVoF.Detener();
+        if (managerMemorama) managerMemorama.Detener();
+        if (managerMinijuego) managerMinijuego.Detener();
+        if (managerMinijuego2) managerMinijuego2.Detener();
+        if (managerKanaRush) managerKanaRush.Detener();
+        if (managerEscritura) managerEscritura.Detener();
+        if (managerQuiz) managerQuiz.Detener();
         StopAllCoroutines();
 
         // cerrar UIs
@@ -290,7 +304,18 @@ public class Manager_Interaccion : MonoBehaviour
         var nextNode = option == 1 ? currentNode.option1Next : currentNode.option2Next;
         if (nextNode != null)
         {
-            if (nextNode.startsMinigame) { currentNode = nextNode; StartMinigame(); return; }
+            if (nextNode.startsMinigame)
+            {
+                currentNode = nextNode;
+                bool hayFicha = panelVocabulario != null && nextNode.vocabulario != null && nextNode.vocabulario.Count > 0;
+                if (hayFicha)
+                {
+                    if (dialoguePanel) dialoguePanel.SetActive(false);
+                    panelVocabulario.Mostrar(nextNode.vocabulario, StartMinigame);
+                }
+                else StartMinigame();
+                return;
+            }
             if (nextNode.reintentarMinijuego) { ReintentarMinijuego(); return; }
             StartDialogue(nextNode);
         }
@@ -307,6 +332,7 @@ public class Manager_Interaccion : MonoBehaviour
         var tipo = currentNode.tipoMinijuego;
         if (tipo == Nodo_Dialogo.TipoMinijuego.Minijuego1) tipo = Nodo_Dialogo.TipoMinijuego.Emparejar;
         if (tipo == Nodo_Dialogo.TipoMinijuego.Minijuego2) tipo = Nodo_Dialogo.TipoMinijuego.FillBlank;
+        EventosJuego.Emitir("minijuego_inicio", tipo.ToString());
 
         switch (tipo)
         {
@@ -390,13 +416,15 @@ public class Manager_Interaccion : MonoBehaviour
     {
         int juegoTerminado = minijuegoActivo;
         CerrarTodasUIs(); // esto pone minijuegoActivo = 0
+        EventosJuego.Emitir(success ? "minijuego_exito" : "minijuego_fallo", juegoTerminado.ToString());
+        float mult = Manager_Necesidades.I ? Manager_Necesidades.I.MultiplicadorMonedas : 1f;
 
         if (success)
         {
             if (playerProgress != null)
             {
                 playerProgress.CompletarInteraccion();
-                playerProgress.GanarMonedas(recompensaMonedas);
+                playerProgress.GanarMonedas(Mathf.RoundToInt(recompensaMonedas * mult));
                 ActualizarUIProgreso();
             }
             if (npcActual != null) npcActual.MarcarCompletado();
@@ -416,6 +444,8 @@ public class Manager_Interaccion : MonoBehaviour
         }
         else
         {
+            if (playerProgress != null)
+                playerProgress.GanarMonedas(Mathf.RoundToInt(recompensaFallo * mult));
             minijuegoActivoParaReintento = juegoTerminado;
             Nodo_Dialogo nodoFail = null;
             switch (juegoTerminado)
@@ -451,6 +481,7 @@ public class Manager_Interaccion : MonoBehaviour
             case 6: if (escrituraUI) escrituraUI.SetActive(true); if (managerEscritura) managerEscritura.Iniciar(); break;
             case 8: if (quizCortesiaUI) quizCortesiaUI.SetActive(true); if (managerQuiz) managerQuiz.Iniciar(); break;
         }
+        EventosJuego.Emitir("minijuego_reintento", minijuegoActivo.ToString());
     }
 
     public void BloquearJugador()
@@ -495,4 +526,5 @@ public class Manager_Interaccion : MonoBehaviour
 
     // Botón UI opcional "Salir"
     public void BotonSalirMinijuego() { AbandonarMinijuego(); }
+    public void SalirDelDialogo() { EndDialogue(); }
 }

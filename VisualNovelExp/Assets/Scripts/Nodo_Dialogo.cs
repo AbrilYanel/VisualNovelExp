@@ -1,6 +1,6 @@
-
-
 using UnityEngine;
+using System.Collections.Generic;
+
 
 [CreateAssetMenu(fileName = "DialogueNode", menuName = "Dialogue/Node")]
 public class Nodo_Dialogo : ScriptableObject
@@ -36,6 +36,9 @@ public class Nodo_Dialogo : ScriptableObject
         Entrevista        // NPC9 – fila ra
     }
     public TipoMinijuego tipoMinijuego;
+
+    [Header("Ficha que se muestra antes del minijuego")]
+    public List<PalabraAprendida> vocabulario = new List<PalabraAprendida>();
 
     public bool reintentarMinijuego;
 

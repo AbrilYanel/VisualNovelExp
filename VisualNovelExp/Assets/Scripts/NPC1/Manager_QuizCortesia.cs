@@ -90,7 +90,7 @@ public class Manager_QuizCortesia : MonoBehaviour
         if (ok) correctas++;
 
         // pintar botones
-        int idx = 100;
+        int idx = 0;
         foreach (Transform t in contenedorOpciones)
         {
             var btn = t.GetComponent<Button>();
@@ -126,4 +126,6 @@ public class Manager_QuizCortesia : MonoBehaviour
             Mostrar();
         }
     }
+
+    public void Detener() { CancelInvoke(); StopAllCoroutines(); }
 }

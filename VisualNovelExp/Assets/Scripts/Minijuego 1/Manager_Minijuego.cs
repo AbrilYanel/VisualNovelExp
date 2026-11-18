@@ -46,9 +46,13 @@ public class Manager_Minijuego : MonoBehaviour
     public void Iniciar()
     {
         if (textoFeedback == null || botonConfirmar == null || columnaImagenes == null || columnaPalabras == null)
-        { Debug.LogError("[Minijuego] Faltan referencias UI"); return; }
+        { Debug.LogError("[Minijuego] Faltan referencias UI");
+            interaccionManager.OnMinigameFinished(false); 
+            return; }
         if (parejas == null || parejas.Count == 0)
-        { Debug.LogError("[Minijuego] Lista parejas vacía"); return; }
+        { Debug.LogError("[Minijuego] Lista parejas vacía");
+            interaccionManager.OnMinigameFinished(false); 
+            return; }
 
         IniciarMinijuego();
     }
@@ -244,7 +248,7 @@ public class Manager_Minijuego : MonoBehaviour
                         idFuente = p.id
                     });
                 }
-                //journal.RegistrarPalabras(aprendidas);
+                journal.RegistrarPalabras(aprendidas);
             }
         }
         interaccionManager.OnMinigameFinished(exito);
@@ -258,6 +262,8 @@ public class Manager_Minijuego : MonoBehaviour
             (lista[i], lista[j]) = (lista[j], lista[i]);
         }
     }
+
+    public void Detener() { CancelInvoke(); StopAllCoroutines(); }
 }
 
 [System.Serializable]

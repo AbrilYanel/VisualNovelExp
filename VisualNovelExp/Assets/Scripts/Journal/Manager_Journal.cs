@@ -21,7 +21,7 @@ public class Manager_Journal : MonoBehaviour
     void Start()
     {
         journalPanel.SetActive(false);
-        journalData.LimpiarTodo(); 
+        if (Partida.vistos.Add("journal_limpio")) journalData.LimpiarTodo();
     }
     void Update()
     {
@@ -49,8 +49,11 @@ public class Manager_Journal : MonoBehaviour
         estaAbierto = false;
         animator.SetTrigger("Close");
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (!EstadoUI.Bloqueada)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         StartCoroutine(DesactivarTrasAnimacion());
 
     }

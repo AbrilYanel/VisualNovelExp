@@ -45,6 +45,7 @@ public class Manager_EscrituraInversa : MonoBehaviour
     List<ItemEscritura> mazo;
     ItemEscritura actual;
     int pistasUsadas = 0;
+    bool esperando;
 
     [System.Serializable]
     public class ItemEscritura
@@ -102,6 +103,7 @@ public class Manager_EscrituraInversa : MonoBehaviour
         if (mazo.Count > rondas) mazo = mazo.GetRange(0, rondas);
 
         indice = 0;
+        esperando = false;
         aciertos = 0;
         pistasUsadas = 0;
         Siguiente();
@@ -109,6 +111,7 @@ public class Manager_EscrituraInversa : MonoBehaviour
 
     void Siguiente()
     {
+        esperando = false;
         if (indice >= mazo.Count || indice >= rondas)
         {
             Terminar();
@@ -158,7 +161,7 @@ public class Manager_EscrituraInversa : MonoBehaviour
 
     public void Confirmar()
     {
-        if (actual == null) return;
+        if (actual == null || esperando) return;
         string respuesta = inputKana ? inputKana.text.Trim().ToLower() : "";
         // normalizar: quitar espacios, pasar a minúsculas
         respuesta = respuesta.Replace(" ", "").Replace("-", "");
@@ -189,6 +192,7 @@ public class Manager_EscrituraInversa : MonoBehaviour
 
         if (ok) aciertos++;
         indice++;
+        esperando = true;
         Invoke(nameof(Siguiente), ok ? 0.9f : 1.4f);
     }
 
@@ -234,4 +238,6 @@ public class Manager_EscrituraInversa : MonoBehaviour
     // test rápido desde inspector
     [ContextMenu("Test Iniciar")]
     void TestIniciar() => Iniciar();
+
+    public void Detener() { CancelInvoke(); StopAllCoroutines(); }
 }

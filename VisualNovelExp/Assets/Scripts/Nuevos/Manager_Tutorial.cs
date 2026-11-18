@@ -37,6 +37,10 @@ public class Manager_Tutorial : MonoBehaviour
             if (panelTutorial) panelTutorial.SetActive(false);
             return;
         }
+
+        if (playerProgress == null)
+            Debug.LogWarning("[Tutorial] Falta asignar Player Progress: el tutorial se repetirá al volver a casa.", this);
+
         if (pasos.Count == 0) { Terminar(); return; }
         EventosJuego.Emitir("tutorial_inicio");
         Mostrar();
@@ -61,8 +65,10 @@ public class Manager_Tutorial : MonoBehaviour
     void Terminar()
     {
         Completo = true;
+        Debug.Log("[Tutorial] Terminado");
         if (playerProgress != null) playerProgress.tutorialCompleto = true;
         if (panelTutorial) panelTutorial.SetActive(false);
         EventosJuego.Emitir("tutorial_fin");
+
     }
 }

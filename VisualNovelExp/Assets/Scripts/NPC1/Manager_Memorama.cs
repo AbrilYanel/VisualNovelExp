@@ -51,9 +51,9 @@ public class Manager_Memorama : MonoBehaviour
 
         // armar mazo: 2 cartas por pareja
         List<ParejaDatos> mazo = new List<ParejaDatos>();
-        foreach (var p in parejas) { mazo.Add(p); mazo.Add(p); }
+       foreach (var p in parejas) mazo.Add(p);   // cada entrada es UNA carta
         Shuffle(mazo);
-        totalParejas = parejas.Count;
+        totalParejas = parejas.Count / 2;          // dos entradas con el mismo id = una pareja
 
         foreach (var dato in mazo)
         {
@@ -197,12 +197,14 @@ public class Manager_Memorama : MonoBehaviour
             string s = "";
             for (int i = 0; i < vidas; i++) s += "❤";
             for (int i = vidas; i < erroresMaximos; i++) s += "♡";
-            textoVidas.text = $"{vidas}/{erroresMaximos}";
+            textoVidas.text = s;
         }
         if (textoProgreso)
             textoProgreso.text = $"Pares: {aciertos}/{totalParejas}";
     }
 
     void Shuffle<T>(List<T> l) { for (int i = l.Count - 1; i > 0; i--) { int j = Random.Range(0, i + 1); (l[i], l[j]) = (l[j], l[i]); } }
+
+    public void Detener() { CancelInvoke(); StopAllCoroutines(); }
 }
 

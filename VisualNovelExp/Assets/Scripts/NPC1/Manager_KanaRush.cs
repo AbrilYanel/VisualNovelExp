@@ -46,14 +46,13 @@ public class Manager_KanaRush : MonoBehaviour
     public void Iniciar()
     {
         // si no hay banco manual, autogenerar desde filas desbloqueadas
-        if ((bancoPreguntas == null || bancoPreguntas.Count == 0) && kanaInventario != null && filasPermitidas != null)
+        if ((bancoPreguntas == null || bancoPreguntas.Count == 0) && filasPermitidas != null)
         {
             bancoPreguntas = new List<KanaPregunta>();
             foreach (var fila in filasPermitidas)
             {
                 if (fila == null) continue;
-                if (!kanaInventario.EstaDesbloqueado(fila.id)) continue;
-                foreach (var c in fila.caracteres)
+                if (kanaInventario != null && !kanaInventario.EstaDesbloqueado(fila.id)) continue; foreach (var c in fila.caracteres)
                 {
                     bancoPreguntas.Add(new KanaPregunta
                     {
@@ -182,4 +181,6 @@ public class Manager_KanaRush : MonoBehaviour
     }
 
     void Shuffle<T>(List<T> l) { for (int i = l.Count - 1; i > 0; i--) { int j = Random.Range(0, i + 1); (l[i], l[j]) = (l[j], l[i]); } }
+
+    public void Detener() { CancelInvoke(); StopAllCoroutines(); }
 }

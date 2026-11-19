@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Success
   m_EditorClassIdentifier: 
   speakerName: Hombre Gato
-  sentence: Muy bien humano, al parecer sabes un poco, la proxima no sera tan facil
-    miau! Buena suerte.
+  retratoNPC: {fileID: 21300000, guid: d3d28d90d49202a4f87b7817632b3357, type: 3}
+  hablaJugador: 0
+  sentence: Gracias, ahora puedo terminar la mudanza!
   hasChoices: 0
-  option1Text: Gracias Nekoman
+  option1Text: De nada
   option2Text: Hasta luego.
   option1Next: {fileID: 0}
   option2Next: {fileID: 0}
@@ -24,6 +25,7 @@ MonoBehaviour:
   endsDialogue: 1
   nextNode: {fileID: 0}
   tipoMinijuego: 0
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: EmpezarSEIS
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: Hola, veo que quieres practicar tu lectura de hiragana, te gustaria intentarlo?
+  speakerName: Pintora
+  retratoNPC: {fileID: 21300000, guid: 872b2068a5569cb46a93d39761509f7c, type: 3}
+  hablaJugador: 0
+  sentence: "Pint\xE9 letras nuevas para mi cartel, pero no se si se entienden. \xBFMe
+    dices c\xF3mo se lee cada una?"
   hasChoices: 1
-  option1Text: Si
+  option1Text: "Lo revisar\xE9"
   option2Text: No
   option1Next: {fileID: 11400000, guid: cadbdc3c6b855d54ea9150b1562ce797, type: 2}
   option2Next: {fileID: 11400000, guid: 2d18f367aeb6722479a8f70f236f56dc, type: 2}
@@ -23,6 +26,7 @@ MonoBehaviour:
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 7
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

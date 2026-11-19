@@ -116,6 +116,15 @@ public class Manager_Interaccion : MonoBehaviour
     int minijuegoActivoParaReintento = 0;
     Nodo_Dialogo nodoPostEntrega = null;
 
+    [Header("Retratos en el diálogo")]
+    public RectTransform ladoIzquierdo;
+    public RectTransform ladoDerecho;
+    public Image retratoNPC;               // Image del NPC dentro del panel de diálogo
+    public RectTransform retratoJugador;   // objeto con CharacterLookRenderer + Retrato_Personaje + CanvasGroup
+    [Range(0f, 1f)] public float opacidadQuienEscucha = 0.55f;
+    [Tooltip("Marco_Retrato del HUD: se oculta mientras hay un diálogo abierto")]
+    public GameObject retratoHUD;
+
     void Start()
     {
         if (dialoguePanel) dialoguePanel.SetActive(false);
@@ -246,6 +255,8 @@ public class Manager_Interaccion : MonoBehaviour
         currentNode = node;
         EjecutarEfectosNodo(node);
         if (dialoguePanel) dialoguePanel.SetActive(true);
+        MostrarRetratos(node);
+        if (retratoHUD) retratoHUD.SetActive(false);
         if (choicePanel) choicePanel.SetActive(false);
         if (nameText) nameText.text = node.speakerName;
         currentSentence = node.sentence;
@@ -263,6 +274,13 @@ public class Manager_Interaccion : MonoBehaviour
             var director = FindObjectOfType<NPC_Director>();
             if (director) director.CompletarMision();
             nodoPostEntrega = exitosa ? nodoEntregaExitosa : nodoEntregaMala;
+            if (playerProgress != null && !playerProgress.festivalCompletado)
+            {
+                playerProgress.festivalCompletado = true;
+                EventosJuego.Emitir("festival_completado", exitosa ? "exitosa" : "mala");
+                if (Mensaje_UI.I)
+                    Mensaje_UI.I.Mostrar("¡La entrevista llegó a tiempo para el festival! Puedes seguir explorando el barrio.", 6f);
+            }
         }
     }
 
@@ -321,13 +339,59 @@ public class Manager_Interaccion : MonoBehaviour
         }
     }
 
+    // ---------- Necesidades -> rendimiento ----------
+    float baseTiempoKana = -1f;
+    float multMonedasPartida = 1f;  // se guarda al empezar cada minijuego
+    int baseErroresMemorama = -1, baseErroresEmparejar = -1;
+
+    void AplicarNecesidadesAMinijuegos()
+    {
+        multMonedasPartida = 1f;
+        var nec = Manager_Necesidades.I;
+        if (nec == null) return;
+        multMonedasPartida = nec.MultiplicadorMonedas;
+        var efectos = new List<string>();
+
+        // Hambre: tiempo de Kana Rush
+        if (managerKanaRush)
+        {
+            if (baseTiempoKana < 0f) baseTiempoKana = managerKanaRush.tiempoPorPregunta;
+            managerKanaRush.tiempoPorPregunta = baseTiempoKana * Mathf.Lerp(0.7f, 1f, nec.hambre / 100f);
+        }
+        if (nec.hambre < 50f)
+            efectos.Add("Con hambre: menos tiempo en los desafíos con reloj.");
+
+        // Energía: errores permitidos
+        int ajuste = nec.energia >= 75f ? 1 : (nec.energia < 50f ? -1 : 0);
+        if (managerMemorama)
+        {
+            if (baseErroresMemorama < 0) baseErroresMemorama = managerMemorama.erroresMaximos;
+            managerMemorama.erroresMaximos = Mathf.Max(1, baseErroresMemorama + ajuste);
+        }
+        if (managerMinijuego)
+        {
+            if (baseErroresEmparejar < 0) baseErroresEmparejar = managerMinijuego.erroresMaximos;
+            managerMinijuego.erroresMaximos = Mathf.Max(1, baseErroresEmparejar + ajuste);
+        }
+        if (ajuste > 0) efectos.Add("Descansado: +1 error permitido.");
+        if (ajuste < 0) efectos.Add("Cansado: −1 error permitido.");
+
+        // Diversión y bonus (las monedas se calculan en OnMinigameFinished)
+        if (nec.TodoAlto) efectos.Add("¡En plena forma: +50 % de monedas!");
+        else if (nec.diversion <= 0f) efectos.Add("Aburrido: ganarás la mitad de monedas.");
+
+        if (efectos.Count > 0 && Mensaje_UI.I) Mensaje_UI.I.Mostrar(string.Join("\n", efectos), 4f);
+    }
     // ---------- MINIJUEGOS ----------
+
     void StartMinigame()
     {
         if (dialoguePanel) dialoguePanel.SetActive(false);
+        if (retratoHUD) retratoHUD.SetActive(true);
         if (choicePanel) choicePanel.SetActive(false);
         BloquearJugador();
         CerrarTodasUIs();
+        AplicarNecesidadesAMinijuegos();
 
         var tipo = currentNode.tipoMinijuego;
         if (tipo == Nodo_Dialogo.TipoMinijuego.Minijuego1) tipo = Nodo_Dialogo.TipoMinijuego.Emparejar;
@@ -417,17 +481,29 @@ public class Manager_Interaccion : MonoBehaviour
         int juegoTerminado = minijuegoActivo;
         CerrarTodasUIs(); // esto pone minijuegoActivo = 0
         EventosJuego.Emitir(success ? "minijuego_exito" : "minijuego_fallo", juegoTerminado.ToString());
-        float mult = Manager_Necesidades.I ? Manager_Necesidades.I.MultiplicadorMonedas : 1f;
+
+        // Cada minijuego terminado, ganado o perdido, ocupa una franja del día
+        if (Manager_Dia.I) Manager_Dia.I.UsarFranja("minijuego");
+
+        float mult = multMonedasPartida;
+        bool esTrabajo = npcActual != null && npcActual.repetible;
 
         if (success)
         {
             if (playerProgress != null)
             {
-                playerProgress.CompletarInteraccion();
-                playerProgress.GanarMonedas(Mathf.RoundToInt(recompensaMonedas * mult));
+                if (esTrabajo)
+                {
+                    playerProgress.GanarMonedas(Mathf.RoundToInt(npcActual.pagoTrabajo * mult));
+                }
+                else
+                {
+                    playerProgress.CompletarInteraccion();
+                    playerProgress.GanarMonedas(Mathf.RoundToInt(recompensaMonedas * mult));
+                }
                 ActualizarUIProgreso();
             }
-            if (npcActual != null) npcActual.MarcarCompletado();
+            if (npcActual != null && !esTrabajo) npcActual.MarcarCompletado();
 
             Nodo_Dialogo nodoOk = null;
             switch (juegoTerminado)
@@ -444,8 +520,14 @@ public class Manager_Interaccion : MonoBehaviour
         }
         else
         {
-            if (playerProgress != null)
+            // Consuelo solo la primera vez que se pierde con cada NPC (y nunca en el trabajo)
+            string clave = "consuelo_" + (npcActual != null ? npcActual.name : juegoTerminado.ToString());
+            if (playerProgress != null && !esTrabajo && Partida.vistos.Add(clave))
+            {
                 playerProgress.GanarMonedas(Mathf.RoundToInt(recompensaFallo * mult));
+                ActualizarUIProgreso();
+            }
+
             minijuegoActivoParaReintento = juegoTerminado;
             Nodo_Dialogo nodoFail = null;
             switch (juegoTerminado)
@@ -464,12 +546,20 @@ public class Manager_Interaccion : MonoBehaviour
 
     public void ReintentarMinijuego()
     {
+        if (Manager_Dia.I != null && Manager_Dia.I.EsDeNoche)
+        {
+            if (Mensaje_UI.I) Mensaje_UI.I.Mostrar("Ya es de noche. Vuelve a intentarlo mañana.", 3f);
+            EndDialogue();
+            return;
+        }
         CerrarTodasUIs();
         if (dialoguePanel) dialoguePanel.SetActive(false);
+        if (retratoHUD) retratoHUD.SetActive(true);
         if (choicePanel) choicePanel.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         minijuegoActivo = minijuegoActivoParaReintento;
+        AplicarNecesidadesAMinijuegos();
 
         switch (minijuegoActivo)
         {
@@ -504,8 +594,51 @@ public class Manager_Interaccion : MonoBehaviour
     }
 
 
+    void MostrarRetratos(Nodo_Dialogo node)
+    {
+        if (node == null) return;
+
+        Sprite sprite = node.retratoNPC != null ? node.retratoNPC
+                      : (npcActual != null ? npcActual.retratoDialogo : null);
+        bool npcIzquierda = npcActual != null && npcActual.retratoALaIzquierda;
+        bool hayNPC = sprite != null;
+
+        if (retratoNPC != null)
+        {
+            retratoNPC.sprite = sprite;
+            retratoNPC.preserveAspect = true;
+            retratoNPC.raycastTarget = false;
+            retratoNPC.gameObject.SetActive(hayNPC);
+            Colocar(retratoNPC.rectTransform, npcIzquierda ? ladoIzquierdo : ladoDerecho);
+            retratoNPC.color = new Color(1f, 1f, 1f, node.hablaJugador ? opacidadQuienEscucha : 1f);
+        }
+
+        if (retratoJugador != null)
+        {
+            retratoJugador.gameObject.SetActive(true);
+            Colocar(retratoJugador, npcIzquierda ? ladoDerecho : ladoIzquierdo);
+            var grupo = retratoJugador.GetComponent<CanvasGroup>();
+            if (grupo)
+            {
+                grupo.blocksRaycasts = false;
+                grupo.alpha = (node.hablaJugador || !hayNPC) ? 1f : opacidadQuienEscucha;
+            }
+        }
+    }
+
+    static void Colocar(RectTransform rt, RectTransform lado)
+    {
+        if (rt == null || lado == null || rt.parent == lado) return;
+        rt.SetParent(lado, false);
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
+    }
+
     void EndDialogue()
     {
+        if (retratoHUD) retratoHUD.SetActive(true);
         CerrarTodasUIs();
         if (dialoguePanel) dialoguePanel.SetActive(false);
         if (choicePanel) choicePanel.SetActive(false);

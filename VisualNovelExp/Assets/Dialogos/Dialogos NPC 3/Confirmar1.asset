@@ -13,16 +13,20 @@ MonoBehaviour:
   m_Name: Confirmar1
   m_EditorClassIdentifier: 
   speakerName: Hombre Gato
-  sentence: Estoy aqui para desafiar gente, te gustaria intentarlo?
+  retratoNPC: {fileID: 21300000, guid: d3d28d90d49202a4f87b7817632b3357, type: 3}
+  hablaJugador: 0
+  sentence: "Las cajas de la mudanza tienen nombres en japon\xE9s. No se leerlas
+    claramente \xBFQu\xE9 va en cada una?"
   hasChoices: 1
-  option1Text: Si, por favor!
-  option2Text: Mejor no, gracias.
+  option1Text: "Te ayudar\xE9"
+  option2Text: "No lo s\xE9, adi\xF3s."
   option1Next: {fileID: 11400000, guid: fd8227ae5d07d914ea85cbc7c2f62a5e, type: 2}
   option2Next: {fileID: 11400000, guid: 8f12ab836421247429528423d91a3f47, type: 2}
   startsMinigame: 0
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 4
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

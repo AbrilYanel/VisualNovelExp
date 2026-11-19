@@ -59,5 +59,6 @@ public class Manager_Necesidades : MonoBehaviour
     }
 
     public float MultiplicadorVelocidad => (hambre <= 0f || energia <= 0f) ? 0.5f : 1f;
-    public float MultiplicadorMonedas => diversion <= 0f ? 0.5f : 1f;
+    public bool TodoAlto => hambre >= 75f && energia >= 75f && diversion >= 75f;
+    public float MultiplicadorMonedas => diversion <= 0f ? 0.5f : (TodoAlto ? 1.5f : 1f);
 }

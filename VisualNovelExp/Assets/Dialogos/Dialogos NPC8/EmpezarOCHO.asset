@@ -12,18 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: EmpezarOCHO
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: Te ves como una persona con modales, te gustaria resolver un cuestionario
-    y probar tu conocimiento?
+  speakerName: Empleado ansioso
+  retratoNPC: {fileID: 21300000, guid: cdcfeaf2370185148a756ad8adf5ee64, type: 3}
+  hablaJugador: 0
+  sentence: "Empiezo a trabajar ma\xF1ana, estoy muy nervioso. \xBFQu\xE9 debo decirle
+    a los clientes?"
   hasChoices: 1
-  option1Text: Claro
-  option2Text: Oscuro
+  option1Text: "Te ayudar\xE9"
+  option2Text: "Adi\xF3s"
   option1Next: {fileID: 11400000, guid: 0ca28215e88431549a2c09f60b3a94c9, type: 2}
   option2Next: {fileID: 11400000, guid: d47df1301d5a1fe4cbdd48a5882d5bf2, type: 2}
   startsMinigame: 0
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 9
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

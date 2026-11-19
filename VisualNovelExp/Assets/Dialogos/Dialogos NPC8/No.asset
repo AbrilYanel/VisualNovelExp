@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: No
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: Esta bien, hasta luego.
+  speakerName: Empleado ansioso
+  retratoNPC: {fileID: 21300000, guid: cdcfeaf2370185148a756ad8adf5ee64, type: 3}
+  hablaJugador: 0
+  sentence: "Me despedir\xE1n en el primer d\xEDa probablemente..."
   hasChoices: 0
   option1Text: 
   option2Text: 
@@ -23,6 +25,7 @@ MonoBehaviour:
   endsDialogue: 1
   nextNode: {fileID: 0}
   tipoMinijuego: 9
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

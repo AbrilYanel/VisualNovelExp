@@ -13,9 +13,9 @@ public class Objeto_Casa : MonoBehaviour, IInteractuable
     public float cantidad = 40f;
 
     [Header("Palabra que enseña")]
-    public string hiragana = "かがみ";
-    public string romaji = "kagami";
-    public string traduccion = "espejo";
+    public string hiragana = "<b>かがみ</b>";
+    public string romaji = "<b>kagami</b>";
+    public string traduccion = "<b>espejo</b>";
 
     [Header("Según la acción")]
     public PlayerProgress playerProgress;          // Comer
@@ -55,11 +55,14 @@ public class Objeto_Casa : MonoBehaviour, IInteractuable
                 break;
 
             case Accion.Dormir:
-                Fundido.I.Hacer(() =>
-                {
-                    Manager_Necesidades.I.Sumar(Necesidad.Energia, 100f);
-                    Mostrar(palabra + "\nDormiste y recuperaste toda tu energía.");
-                }, 1.2f);
+                Fundido.I.Hacer(
+                    () => Manager_Necesidades.I.Sumar(Necesidad.Energia, 100f),
+                    1.2f,
+                    () =>
+                    {
+                        if (Manager_Dia.I) Manager_Dia.I.Dormir();
+                        else Mostrar(palabra + "\nDormiste y recuperaste toda tu energía.");
+                    });
                 EventosJuego.Emitir(idEvento);
                 break;
 
@@ -70,7 +73,7 @@ public class Objeto_Casa : MonoBehaviour, IInteractuable
                 {
                     Manager_Necesidades.I.Sumar(Necesidad.Diversion, cantidad);
                     if (string.IsNullOrEmpty(extra)) Mostrar(palabra + "\nTe divertiste un rato.");
-                    else Mostrar(palabra + "\n" + extra, 9f);
+                    else Mostrar(palabra + "\n\n" + extra, 14f);
                 }, 0.8f);
                 EventosJuego.Emitir(idEvento);
                 break;

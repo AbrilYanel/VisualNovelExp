@@ -14,12 +14,12 @@ public class Fundido : MonoBehaviour
         if (grupo) { grupo.alpha = 0f; grupo.blocksRaycasts = false; }
     }
 
-    public void Hacer(System.Action enMedio, float espera)
+    public void Hacer(System.Action enMedio, float espera, System.Action alTerminar = null)
     {
-        StartCoroutine(Rutina(enMedio, espera));
+        StartCoroutine(Rutina(enMedio, espera, alTerminar));
     }
 
-    IEnumerator Rutina(System.Action enMedio, float espera)
+    IEnumerator Rutina(System.Action enMedio, float espera, System.Action alTerminar)
     {
         if (Manager_Interaccion.I) Manager_Interaccion.I.BloquearJugador();
         grupo.blocksRaycasts = true;
@@ -29,6 +29,7 @@ public class Fundido : MonoBehaviour
         yield return Fade(1f, 0f);
         grupo.blocksRaycasts = false;
         if (Manager_Interaccion.I) Manager_Interaccion.I.LiberarJugador();
+        alTerminar?.Invoke();
     }
 
     IEnumerator Fade(float desde, float hasta)

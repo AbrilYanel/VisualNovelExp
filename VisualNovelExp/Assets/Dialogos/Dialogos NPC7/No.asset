@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: No
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: "Est\xE1 bien, hasta luego."
+  speakerName: Turista
+  retratoNPC: {fileID: 21300000, guid: 7468c528d23ea3a4f847ee8126e322ec, type: 3}
+  hablaJugador: 0
+  sentence: "Est\xE1 bien, morir\xE9 de hambre..."
   hasChoices: 0
   option1Text: 
   option2Text: 
@@ -23,6 +25,7 @@ MonoBehaviour:
   endsDialogue: 1
   nextNode: {fileID: 0}
   tipoMinijuego: 8
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

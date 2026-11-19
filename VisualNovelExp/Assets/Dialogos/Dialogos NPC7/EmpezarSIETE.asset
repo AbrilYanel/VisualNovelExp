@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: EmpezarSIETE
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: Buenas, al parecer tenes el nivel para ordenar tus propias oraciones,
-    crees poder hacerlo?
+  speakerName: Turista
+  retratoNPC: {fileID: 21300000, guid: 7468c528d23ea3a4f847ee8126e322ec, type: 3}
+  hablaJugador: 0
+  sentence: "Ayuda! Quiero pedir en el restaurante, pero no s\xE9 armar la frase."
   hasChoices: 1
-  option1Text: Por supuesto
-  option2Text: No
+  option1Text: "Te ense\xF1ar\xE9"
+  option2Text: Hasta luego
   option1Next: {fileID: 11400000, guid: 0685e0568ceb82e4ba3e48c455bfa931, type: 2}
   option2Next: {fileID: 11400000, guid: c7ba877f185069143b2eb03a3852f782, type: 2}
   startsMinigame: 0
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 8
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

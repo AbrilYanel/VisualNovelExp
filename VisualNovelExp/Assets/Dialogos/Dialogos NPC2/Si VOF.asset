@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: Si VOF
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: Buena suerte en el memorama
+  speakerName: Cocinera
+  retratoNPC: {fileID: 21300000, guid: f7218a508cd22054eb8a14c4910b72b0, type: 3}
+  hablaJugador: 0
+  sentence: 
   hasChoices: 0
   option1Text: 
   option2Text: 

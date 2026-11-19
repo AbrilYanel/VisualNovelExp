@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: EmpezarUno
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentence: Bienvenido, te gustaria responder un par de preguntas?
+  speakerName: "Vecino Reci\xE9n Llegado"
+  retratoNPC: {fileID: 21300000, guid: 53f4ce22c877ea54b8aacd48eebd6e92, type: 3}
+  hablaJugador: 0
+  sentence: "Buenas, acabo de llegar a la ciudad. Ma\xF1ana conozco a los vecinos
+    y no quiero confundir los saludos. \xBFMe ayudas a practicar?"
   hasChoices: 1
   option1Text: Si
   option2Text: No
@@ -23,6 +26,7 @@ MonoBehaviour:
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 2
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

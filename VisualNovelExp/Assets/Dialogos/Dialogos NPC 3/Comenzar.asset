@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: Comenzar
   m_EditorClassIdentifier: 
   speakerName: Hombre Gato
-  sentence: Miau~ Soy un gato!
+  retratoNPC: {fileID: 21300000, guid: d3d28d90d49202a4f87b7817632b3357, type: 3}
+  hablaJugador: 0
+  sentence: Hola, tengo un problema con las cajas de la mudanza...
   hasChoices: 1
-  option1Text: Que haces?
-  option2Text: No estoy para estas cosas
+  option1Text: "C\xF3mo te ayudo?"
+  option2Text: "Adi\xF3s"
   option1Next: {fileID: 11400000, guid: 2b4ff461bdd0b6c468e1326b2bd68e54, type: 2}
   option2Next: {fileID: 11400000, guid: 8f12ab836421247429528423d91a3f47, type: 2}
   startsMinigame: 0
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 0
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

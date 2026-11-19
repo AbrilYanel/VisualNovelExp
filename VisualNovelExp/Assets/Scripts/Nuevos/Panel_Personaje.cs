@@ -53,6 +53,7 @@ public class Panel_Personaje : MonoBehaviour
         if (!playerProgress) return;
         if (textoMonedas) textoMonedas.text = $"Monedas: {playerProgress.monedas}";
         if (textoComida) textoComida.text = $"Comida en casa: {playerProgress.comida}";
-        if (textoNivel) textoNivel.text = $"Nivel {playerProgress.nivelActual}";
+        if (textoNivel) textoNivel.text = $"Nivel {playerProgress.nivelActual}" +
+         (Manager_Dia.I ? $" · Día {Manager_Dia.I.Dia} · {Manager_Dia.I.Franja}" : "");
     }
 }

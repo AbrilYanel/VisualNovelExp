@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Reintentar
   m_EditorClassIdentifier: 
   speakerName: 
+  retratoNPC: {fileID: 21300000, guid: a267f5eac1f7a2748a89a8b7045c2c03, type: 3}
+  hablaJugador: 0
   sentence: 
   hasChoices: 0
   option1Text: 
@@ -23,4 +25,8 @@ MonoBehaviour:
   endsDialogue: 0
   nextNode: {fileID: 0}
   tipoMinijuego: 0
+  vocabulario: []
   reintentarMinijuego: 1
+  daCamara: 0
+  entregaEntrevista: 0
+  daPermiso: 0

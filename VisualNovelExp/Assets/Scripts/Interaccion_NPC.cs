@@ -34,10 +34,22 @@ public class Interaccion_NPC : MonoBehaviour, IInteractuable
     public NPC_Director npcDirector;
     public NPC_Comerciante npcComerciante;
 
+    [Tooltip("Marcado: atiende aunque sea de noche (konbini, Director, entrevistado)")]
+    public bool atiendeDeNoche = false;
 
     [Header("Sonido")]
     public AudioClip sonidoInteractuar;
     private AudioSource audioSource;
+
+    [Header("Trabajo repetible")]
+    [Tooltip("Nunca queda completado: paga monedas fijas cada vez que se gana")]
+    public bool repetible = false;
+    public int pagoTrabajo = 12;
+
+    [Header("Retrato en el diálogo")]
+    public Sprite retratoDialogo;
+    [Tooltip("Marcado: el NPC aparece a la izquierda y el jugador a la derecha")]
+    public bool retratoALaIzquierda = false;
 
     void Start()
     {
@@ -58,13 +70,18 @@ public class Interaccion_NPC : MonoBehaviour, IInteractuable
     {
         if (completado)
             return;
+        if (!atiendeDeNoche && Manager_Dia.I != null && Manager_Dia.I.EsDeNoche)
+        {
+            if (Mensaje_UI.I) Mensaje_UI.I.Mostrar("Es de noche y ya no atiende. Vuelve mañana.", 3f);
+            return;
+        }
 
         if (playerProgress != null && !playerProgress.PuedeInteractuar(nivelRequerido))
         {
             MostrarMensajeNivel();
             return;
         }
-
+        if (dialogueManager != null) dialogueManager.SetNPCActual(this);
         // Reproducir animación del NPC una sola vez
         if (animator != null && !string.IsNullOrEmpty(triggerInteractuar))
             animator.SetTrigger(triggerInteractuar);
@@ -126,7 +143,8 @@ public class Interaccion_NPC : MonoBehaviour, IInteractuable
         if (indicadorExclamacion == null) return;
 
 
-        bool mostrar = !completado &&
+        bool deNoche = !atiendeDeNoche && Manager_Dia.I != null && Manager_Dia.I.EsDeNoche;
+        bool mostrar = !completado && !deNoche &&
                        playerProgress != null &&
                        playerProgress.PuedeInteractuar(nivelRequerido);
 

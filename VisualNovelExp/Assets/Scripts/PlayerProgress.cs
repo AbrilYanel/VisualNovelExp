@@ -27,6 +27,13 @@ public class PlayerProgress : ScriptableObject
     public bool tutorialCompleto;
     public List<string> npcsCompletados = new List<string>();
 
+    [Header("Días")]
+    public int dia = 1;
+    public int franjasUsadas = 0;
+    public int monedasInicioDia;
+    public int palabrasInicioDia;
+    public bool festivalCompletado;
+
 
     public bool ConsumirComida()
     {
@@ -86,5 +93,10 @@ public class PlayerProgress : ScriptableObject
         diversion = diversionInicial;
         tutorialCompleto = false;
         npcsCompletados.Clear();
+        dia = 1;
+        franjasUsadas = 0;
+        monedasInicioDia = monedas;
+        palabrasInicioDia = 0;
+        festivalCompletado = false;
     }
 }

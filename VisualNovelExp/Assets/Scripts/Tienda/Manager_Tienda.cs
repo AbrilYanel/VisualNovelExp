@@ -4,8 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Tienda reutilizada como konbini: misma UI, animación y sonido que la tienda de kanas,
-// pero vende comida y ocio en lugar de filas de kana.
 public class Manager_Tienda : MonoBehaviour
 {
     [System.Serializable]
@@ -27,11 +25,13 @@ public class Manager_Tienda : MonoBehaviour
     {
         new Articulo { hiragana = "おにぎり", romaji = "onigiri", traduccion = "bola de arroz",
                        precio = 10, esComida = true },
-        new Articulo { hiragana = "コーヒー", romaji = "kōhī", traduccion = "café",
+        new Articulo { hiragana = "かんコーヒー", romaji = "kan kōhī", traduccion = "café en lata",
                        precio = 8, esComida = false, necesidad = Necesidad.Energia, cantidad = 30f },
         new Articulo { hiragana = "ざっし", romaji = "zasshi", traduccion = "revista",
                        precio = 12, esComida = false, necesidad = Necesidad.Diversion, cantidad = 35f },
     };
+    [Tooltip("Desmarcado: los artículos se muestran solo en japonés (paso 41)")]
+    public bool mostrarTraduccion = true;
 
     [Header("UI (la misma de antes)")]
     public GameObject panelTienda;
@@ -74,17 +74,14 @@ public class Manager_Tienda : MonoBehaviour
         var nav = botonCerrar.navigation; nav.mode = Navigation.Mode.None; botonCerrar.navigation = nav;
     }
 
-    // Apaga el raycast de todo lo que no sea Button
     void NukeRaycastBlockers()
     {
         if (panelTienda == null) return;
-
         foreach (var img in panelTienda.GetComponentsInChildren<Image>(true))
         {
             bool esBoton = img.GetComponent<Button>() != null || img.GetComponentInParent<Button>() != null;
             img.raycastTarget = esBoton;
         }
-
         foreach (var tmp in panelTienda.GetComponentsInChildren<TextMeshProUGUI>(true))
             tmp.raycastTarget = tmp.GetComponentInParent<Button>() != null;
     }
@@ -94,7 +91,6 @@ public class Manager_Tienda : MonoBehaviour
         if (contenedorItems == null) return;
         var vlg = contenedorItems.GetComponent<VerticalLayoutGroup>() ?? contenedorItems.gameObject.AddComponent<VerticalLayoutGroup>();
         vlg.spacing = 100f;
-
         var csf = contenedorItems.GetComponent<ContentSizeFitter>() ?? contenedorItems.gameObject.AddComponent<ContentSizeFitter>();
         csf.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
     }
@@ -108,12 +104,7 @@ public class Manager_Tienda : MonoBehaviour
     public void AbrirTienda()
     {
         if (tiendaAbierta) return;
-
-        if (corrutinaCierre != null)
-        {
-            StopCoroutine(corrutinaCierre);
-            corrutinaCierre = null;
-        }
+        if (corrutinaCierre != null) { StopCoroutine(corrutinaCierre); corrutinaCierre = null; }
 
         if (animator)
         {
@@ -127,13 +118,11 @@ public class Manager_Tienda : MonoBehaviour
 
         panelTienda.SetActive(true);
         if (animator) animator.SetTrigger("Open");
-
         panelTienda.transform.SetAsLastSibling();
         if (botonCerrar) { botonCerrar.transform.SetAsLastSibling(); botonCerrar.interactable = true; }
 
         NukeRaycastBlockers();
         RefrescarLista();
-
         Avisar("いらっしゃいませ (irasshaimase): ¡bienvenido!");
         EventosJuego.Emitir("tienda_abierta");
     }
@@ -142,31 +131,19 @@ public class Manager_Tienda : MonoBehaviour
     {
         if (!tiendaAbierta) return;
         tiendaAbierta = false;
-
-        if (corrutinaCierre != null)
-        {
-            StopCoroutine(corrutinaCierre);
-            corrutinaCierre = null;
-        }
+        if (corrutinaCierre != null) { StopCoroutine(corrutinaCierre); corrutinaCierre = null; }
 
         if (animator) animator.SetTrigger("Close");
         LiberarJugador();
         EventosJuego.Emitir("tienda_cerrada");
-
         corrutinaCierre = StartCoroutine(DesactivarTrasAnimacion());
     }
 
     IEnumerator DesactivarTrasAnimacion()
     {
-        if (animator == null)
-        {
-            panelTienda.SetActive(false);
-            corrutinaCierre = null;
-            yield break;
-        }
+        if (animator == null) { panelTienda.SetActive(false); corrutinaCierre = null; yield break; }
 
         yield return null;
-
         float timeout = 0f;
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Close"))
         {
@@ -174,13 +151,9 @@ public class Manager_Tienda : MonoBehaviour
             if (timeout > 3f) break;
             yield return null;
         }
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
-        float duracion = animator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(duracion);
-
-        if (!tiendaAbierta)
-            panelTienda.SetActive(false);
-
+        if (!tiendaAbierta) panelTienda.SetActive(false);
         corrutinaCierre = null;
     }
 
@@ -193,7 +166,7 @@ public class Manager_Tienda : MonoBehaviour
         foreach (var articulo in catalogo)
         {
             if (articulo == null) continue;
-            var a = articulo; // copia local para el closure
+            var a = articulo;
 
             var obj = Instantiate(itemTiendaPrefab, contenedorItems, false);
             obj.transform.localScale = Vector3.one;
@@ -203,11 +176,8 @@ public class Manager_Tienda : MonoBehaviour
             var item = obj.GetComponent<ItemTienda>();
             if (!item) { Destroy(obj); continue; }
 
-            item.ConfigurarArticulo(
-                $"{a.hiragana} ({a.romaji})",
-                $"{a.precio} monedas",
-                $"{a.traduccion} · {Efecto(a)}",
-                () => Comprar(a));
+            string descripcion = mostrarTraduccion ? $"{a.traduccion} · {Efecto(a)}" : Efecto(a);
+            item.ConfigurarArticulo($"{a.hiragana} ({a.romaji})", $"{a.precio} monedas", descripcion, () => Comprar(a));
         }
 
         Canvas.ForceUpdateCanvases();
@@ -217,7 +187,6 @@ public class Manager_Tienda : MonoBehaviour
     void Comprar(Articulo a)
     {
         if (playerProgress == null) return;
-
         if (!playerProgress.GastarMonedas(a.precio))
         {
             Avisar("No tienes monedas suficientes. Ayuda a un vecino para ganar más.");
@@ -227,13 +196,11 @@ public class Manager_Tienda : MonoBehaviour
         if (a.esComida) playerProgress.comida++;
         else if (Manager_Necesidades.I) Manager_Necesidades.I.Sumar(a.necesidad, a.cantidad);
 
-        if (audioSource != null && sonidoComprar != null)
-            audioSource.PlayOneShot(sonidoComprar);
+        if (audioSource != null && sonidoComprar != null) audioSource.PlayOneShot(sonidoComprar);
 
         string extra = a.esComida ? $" Comida en casa: {playerProgress.comida}." : "";
         Avisar($"ありがとうございます (arigatō gozaimasu). Compraste: {a.traduccion}.{extra}");
         EventosJuego.Emitir("compra", a.romaji);
-
         RefrescarLista();
     }
 

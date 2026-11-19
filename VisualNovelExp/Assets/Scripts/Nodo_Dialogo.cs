@@ -6,6 +6,11 @@ using System.Collections.Generic;
 public class Nodo_Dialogo : ScriptableObject
 {
     public string speakerName;
+    [Header("Retratos")]
+    [Tooltip("Opcional: reemplaza el retrato del NPC solo en este nodo (para expresiones)")]
+    public Sprite retratoNPC;
+    [Tooltip("Marcado: habla el jugador (se atenúa el NPC)")]
+    public bool hablaJugador;
     [TextArea] public string sentence;
 
     public bool hasChoices;

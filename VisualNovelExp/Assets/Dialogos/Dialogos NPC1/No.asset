@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: No
   m_EditorClassIdentifier: 
   speakerName: 
+  retratoNPC: {fileID: 21300000, guid: 53f4ce22c877ea54b8aacd48eebd6e92, type: 3}
+  hablaJugador: 0
   sentence: Esta bien, hasta luego.
   hasChoices: 0
   option1Text: 
@@ -23,6 +25,7 @@ MonoBehaviour:
   endsDialogue: 1
   nextNode: {fileID: 0}
   tipoMinijuego: 2
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

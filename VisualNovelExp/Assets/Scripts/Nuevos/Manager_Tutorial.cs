@@ -40,6 +40,9 @@ public class Manager_Tutorial : MonoBehaviour
 
         if (playerProgress == null)
             Debug.LogWarning("[Tutorial] Falta asignar Player Progress: el tutorial se repetirá al volver a casa.", this);
+        if (playerProgress != null) indice = Mathf.Clamp(playerProgress.pasoTutorial, 0, pasos.Count);
+        if (indice >= pasos.Count) { Terminar(); return; }
+        if (indice > 0) { Mostrar(); return; } // retoma sin volver a emitir tutorial_inicio
 
         if (pasos.Count == 0) { Terminar(); return; }
         EventosJuego.Emitir("tutorial_inicio");
@@ -51,6 +54,7 @@ public class Manager_Tutorial : MonoBehaviour
         if (Completo || indice >= pasos.Count) return;
         if (evento != pasos[indice].eventoEsperado) return;
         indice++;
+        if (playerProgress != null) playerProgress.pasoTutorial = indice;
         EventosJuego.Emitir("tutorial_paso", indice.ToString());
         if (indice >= pasos.Count) Terminar();
         else Mostrar();

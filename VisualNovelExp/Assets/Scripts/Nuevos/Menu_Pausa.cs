@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Menu_Pausa : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Menu_Pausa : MonoBehaviour
 
     bool abierto;
     bool sesionTerminada;
+    [Tooltip("Nombre exacto de la escena del menú principal")]
+    public string escenaMenu = "MenuPrincipal";
 
     void Awake()
     {
@@ -62,12 +65,20 @@ public class Menu_Pausa : MonoBehaviour
 
     void Salir()
     {
+        GuardarPartida();
         EventosJuego.Emitir(sesionTerminada ? "salir_fin_sesion" : "salir_voluntario");
         Time.timeScale = 1f;
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        abierto = false;
+        SceneManager.LoadScene(escenaMenu);
+    }
+
+    void GuardarPartida()
+    {
+        var jugador = FindObjectOfType<Player_Movement>();
+        Partida.hayPartida = !sesionTerminada && jugador != null; // al terminar la sesión no se puede continuar
+        if (!Partida.hayPartida) return;
+        Partida.escenaGuardada = SceneManager.GetActiveScene().name;
+        Partida.posicionGuardada = jugador.transform.position;
+        Partida.rotacionGuardada = jugador.transform.rotation;
     }
 }

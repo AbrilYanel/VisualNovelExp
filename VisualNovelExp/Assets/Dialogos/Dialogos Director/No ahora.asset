@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: No ahora
   m_EditorClassIdentifier: 
-  speakerName: 
+  speakerName: Director
+  retratoNPC: {fileID: 21300000, guid: 8a3db0e9b64717746b4dfbcfa34d3934, type: 3}
+  hablaJugador: 0
   sentence: De acuerdo, vuelve a hablarme si cambias de opinion.
   hasChoices: 0
   option1Text: 
@@ -23,6 +25,8 @@ MonoBehaviour:
   endsDialogue: 1
   nextNode: {fileID: 0}
   tipoMinijuego: 0
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0
+  daPermiso: 0

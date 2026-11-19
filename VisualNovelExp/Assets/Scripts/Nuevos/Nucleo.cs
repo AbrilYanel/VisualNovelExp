@@ -36,9 +36,14 @@ public static class Partida
 {
     public static bool Iniciada;                                   // PlayerProgress ya se reseteó
     public static HashSet<string> vistos = new HashSet<string>();  // palabras y mensajes ya mostrados
+    // Partida dejada en pausa al volver al menú
+    public static bool hayPartida;
+    public static string escenaGuardada;
+    public static Vector3 posicionGuardada;
+    public static Quaternion rotacionGuardada;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    static void Reiniciar() { Iniciada = false; vistos.Clear(); }
+    static void Reiniciar() { hayPartida = false; Iniciada = false; vistos.Clear(); }
 }
 
 // Cualquier script avisa que algo pasó; el tutorial y el log escuchan

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Punto_Aparicion : MonoBehaviour
 {
+    public const string CONTINUAR = "__continuar__";
     public static string siguiente = "";
 
     [Tooltip("inicio, desde_casa, desde_ciudad...")]
@@ -15,12 +16,18 @@ public class Punto_Aparicion : MonoBehaviour
 
     void Start()
     {
+        // Volver desde el menú: solo el punto por defecto se encarga, y usa la posición guardada
+        if (siguiente == CONTINUAR)
+        {
+            if (!porDefecto) return;
+            siguiente = "";
+            Mover(Partida.posicionGuardada, Partida.rotacionGuardada);
+            return;
+        }
+
         bool hayDestino = !string.IsNullOrEmpty(siguiente) && ExisteEnEscena(siguiente);
         bool meToca = hayDestino ? siguiente == id : porDefecto;
-        if (!meToca) return;
-        Mover();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (meToca) Mover(transform.position, transform.rotation);
     }
 
     static bool ExisteEnEscena(string buscado)
@@ -30,14 +37,17 @@ public class Punto_Aparicion : MonoBehaviour
         return false;
     }
 
-    void Mover()
+    void Mover(Vector3 posicion, Quaternion rotacion)
     {
         if (jugador == null) { Debug.LogError("[Punto_Aparicion] Falta asignar el jugador en " + name); return; }
         var cc = jugador.GetComponent<CharacterController>();
         if (cc) cc.enabled = false;
-        jugador.SetPositionAndRotation(transform.position, transform.rotation);
+        jugador.SetPositionAndRotation(posicion, rotacion);
         if (cc) cc.enabled = true;
         var rb = jugador.GetComponent<Rigidbody>();
-        if (rb) rb.position = transform.position;
+        if (rb) rb.position = posicion;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

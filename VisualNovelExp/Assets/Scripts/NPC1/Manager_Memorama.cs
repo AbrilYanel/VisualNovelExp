@@ -194,10 +194,7 @@ public class Manager_Memorama : MonoBehaviour
         if (textoVidas)
         {
             int vidas = Mathf.Max(0, erroresMaximos - errores);
-            string s = "";
-            for (int i = 0; i < vidas; i++) s += "❤";
-            for (int i = vidas; i < erroresMaximos; i++) s += "♡";
-            textoVidas.text = s;
+            textoVidas.text = $"Vidas: {vidas}/{erroresMaximos}";
         }
         if (textoProgreso)
             textoProgreso.text = $"Pares: {aciertos}/{totalParejas}";

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7e5ddf29c3674dba074924d34cd18, type: 3}
   m_Name: DaPermiso
   m_EditorClassIdentifier: 
-  speakerName: 
+  speakerName: Chica
+  retratoNPC: {fileID: 21300000, guid: 3e2a5a572ab161a46a3a101fc6babcab, type: 3}
+  hablaJugador: 0
   sentence: Ya has conseguido una camara? Genial, empieza a grabar cuando quieras!
   hasChoices: 0
   option1Text: 
@@ -23,6 +25,7 @@ MonoBehaviour:
   endsDialogue: 1
   nextNode: {fileID: 0}
   tipoMinijuego: 0
+  vocabulario: []
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

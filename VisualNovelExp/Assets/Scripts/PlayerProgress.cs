@@ -34,6 +34,13 @@ public class PlayerProgress : ScriptableObject
     public int palabrasInicioDia;
     public bool festivalCompletado;
 
+    public int pasoTutorial;
+
+    [Header("Misión del festival")]
+    public bool tieneCamara;
+    public bool permisoObtenido;
+    public bool entrevistaCompletada;
+    public int puntajeEntrevista;
 
     public bool ConsumirComida()
     {
@@ -98,5 +105,10 @@ public class PlayerProgress : ScriptableObject
         monedasInicioDia = monedas;
         palabrasInicioDia = 0;
         festivalCompletado = false;
+        pasoTutorial = 0;
+        tieneCamara = false;
+        permisoObtenido = false;
+        entrevistaCompletada = false;
+        puntajeEntrevista = 0;
     }
 }

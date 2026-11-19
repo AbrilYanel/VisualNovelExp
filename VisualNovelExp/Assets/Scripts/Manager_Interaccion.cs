@@ -270,8 +270,7 @@ public class Manager_Interaccion : MonoBehaviour
         if (node.daPermiso && managerCamara != null) managerCamara.ObtenerPermiso();
         if (node.entregaEntrevista && managerCamara != null && managerEntrevista != null)
         {
-            bool exitosa = managerCamara.puntajeEntrevista >= managerEntrevista.entrevistaData.puntajeMinimoExito;
-            var director = FindObjectOfType<NPC_Director>();
+            bool exitosa = managerCamara.puntajeEntrevista >= managerCamara.puntajeMinimoExito; var director = FindObjectOfType<NPC_Director>();
             if (director) director.CompletarMision();
             nodoPostEntrega = exitosa ? nodoEntregaExitosa : nodoEntregaMala;
             if (playerProgress != null && !playerProgress.festivalCompletado)

@@ -41,34 +41,34 @@ public class Manager_Entrevista : MonoBehaviour
     public Button botonCerrarResultado;
 
     [Header("UI - Feedback de opción")]
-    public GameObject panelFeedback;         // Panel que muestra si fue correcto/incorrecto
-    public TextMeshProUGUI textoFeedback;    // "¡Correcto!" / "Incorrecto"
-    public Image imagenFeedbackBG;           // Fondo del feedback
+    public GameObject panelFeedback;
+    public TextMeshProUGUI textoFeedback;
+    public Image imagenFeedbackBG;
 
     [Header("Colores")]
     public Color colorCorrecta = new Color(0.2f, 0.8f, 0.2f);
     public Color colorIncorrecta = new Color(0.9f, 0.2f, 0.2f);
     public Color colorNormal = Color.white;
 
+    [Header("Tiempos")]
+    public float segundosEntrePreguntas = 3f;
+
     // Estado interno
     private int indiceActual = 0;
     private int puntajeTotal = 0;
     private bool esperandoSiguiente = false;
+    private bool activa = false;
+
+    Manager_Interaccion Interaccion => Manager_Interaccion.I != null ? Manager_Interaccion.I : managerInteraccion;
+
+    int PuntajeMinimo => managerCamara != null ? managerCamara.puntajeMinimoExito
+                       : (entrevistaData != null ? entrevistaData.puntajeMinimoExito : 0);
 
     // ─────────────────────────────────────────
     void Start()
     {
-
         if (entrevistaData == null)
-        {
             entrevistaData = Resources.Load<EntrevistaData>("Sakamoto");
-            Debug.Log("Intentando cargar desde Resources/Sakamoto");
-            Debug.Log("Resultado: " + (entrevistaData != null ? "OK" : "NULL"));
-        }
-        else
-        {
-            Debug.Log("EntrevistaData asignado desde Inspector: " + entrevistaData.name);
-        }
 
         if (panelEntrevista != null) panelEntrevista.SetActive(false);
         if (panelResultado != null) panelResultado.SetActive(false);
@@ -80,51 +80,40 @@ public class Manager_Entrevista : MonoBehaviour
     // ─────────────────────────────────────────
     public void IniciarEntrevista()
     {
+        if (activa) return;
+
+        if (entrevistaData == null)
+            entrevistaData = Resources.Load<EntrevistaData>("Sakamoto");
+
+        if (entrevistaData == null || entrevistaData.preguntas == null || entrevistaData.preguntas.Count == 0)
+        {
+            Debug.LogError("[Manager_Entrevista] No hay EntrevistaData o no tiene preguntas", this);
+            return;
+        }
+        if (panelEntrevista == null)
+        {
+            Debug.LogError("[Manager_Entrevista] Falta asignar panelEntrevista", this);
+            return;
+        }
+
+        activa = true;
         indiceActual = 0;
         puntajeTotal = 0;
         esperandoSiguiente = false;
 
-       
-
-
-        if (managerInteraccion != null)
+        var mi = Interaccion;
+        if (mi != null)
         {
-            if (managerInteraccion.dialoguePanel != null)
-                managerInteraccion.dialoguePanel.SetActive(false);
-            else
-                Debug.LogError("[Manager_Entrevista] dialoguePanel es null en build");
-
-            if (managerInteraccion.choicePanel != null)
-                managerInteraccion.choicePanel.SetActive(false);
+            if (mi.dialoguePanel) mi.dialoguePanel.SetActive(false);
+            if (mi.choicePanel) mi.choicePanel.SetActive(false);
+            mi.BloquearJugador(); // congela al jugador, pausa las necesidades y muestra el cursor
         }
 
-        if (panelEntrevista != null)
-            panelEntrevista.SetActive(true);
-        else
-        {
-            Debug.LogError("[Manager_Entrevista] panelEntrevista es null en build");
-            return;
-        }
+        panelEntrevista.SetActive(true);
+        if (panelResultado) panelResultado.SetActive(false);
+        if (textoNombreEntrevistado) textoNombreEntrevistado.text = entrevistaData.nombreEntrevistado;
 
-        if (textoNombreEntrevistado != null && entrevistaData != null)
-            textoNombreEntrevistado.text = entrevistaData.nombreEntrevistado;
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        if (entrevistaData == null)
-        {
-            entrevistaData = Resources.Load<EntrevistaData>("Sakamoto");
-            Debug.Log("Carga desde Resources en IniciarEntrevista: " +
-                      (entrevistaData != null ? "OK" : "FALLÓ"));
-        }
-
-        if (entrevistaData == null)
-        {
-            Debug.LogError("entrevistaData sigue siendo null, abortando");
-            return;
-        }
-
+        EventosJuego.Emitir("entrevista_inicio");
         MostrarPregunta(entrevistaData.preguntas[indiceActual]);
     }
 
@@ -132,40 +121,32 @@ public class Manager_Entrevista : MonoBehaviour
     void MostrarPregunta(PreguntaEntrevista pregunta)
     {
         esperandoSiguiente = false;
-        textoRespuestaNPC.text = "";
-        textoProgreso.text = $"Pregunta {indiceActual + 1}/{entrevistaData.preguntas.Count}";
-        textoPuntaje.text = $"Relacion: {puntajeTotal}pts";
+        if (textoRespuestaNPC) textoRespuestaNPC.text = "";
+        if (textoProgreso) textoProgreso.text = $"Pregunta {indiceActual + 1}/{entrevistaData.preguntas.Count}";
+        if (textoPuntaje) textoPuntaje.text = $"Confianza: {puntajeTotal} pts";
 
-        textoPreguntaJapones.text = pregunta.preguntaJapones;
-        textoPreguntaEspanol.text = $"({pregunta.preguntaEspanol})";
+        if (textoPreguntaJapones) textoPreguntaJapones.text = pregunta.preguntaJapones;
+        if (textoPreguntaEspanol) textoPreguntaEspanol.text = $"({pregunta.preguntaEspanol})";
 
-        // Ocultar feedback anterior
-        if (panelFeedback != null)
-            panelFeedback.SetActive(false);
+        if (panelFeedback != null) panelFeedback.SetActive(false);
+        ActualizarReaccionNPC(ReaccionNPC.Neutral);
 
-        // Limpiar botones anteriores
         foreach (Transform t in contenedorOpciones)
             Destroy(t.gameObject);
 
-        // Crear botones de opciones
         foreach (var opcion in pregunta.opciones)
         {
             OpcionEntrevista opcionLocal = opcion;
             GameObject obj = Instantiate(botonOpcionPrefab, contenedorOpciones);
 
-            // Asignar texto
             TextMeshProUGUI tmp = obj.GetComponentInChildren<TextMeshProUGUI>(true);
-            if (tmp != null)
-                tmp.text = opcion.textoOpcion;
+            if (tmp != null) tmp.text = opcion.textoOpcion;
 
-            // Asignar click
             Button btn = obj.GetComponent<Button>();
-            btn.onClick.AddListener(() => SeleccionarOpcion(opcionLocal, obj));
+            if (btn != null) btn.onClick.AddListener(() => SeleccionarOpcion(opcionLocal, obj));
 
-            // Estado inicial normal
             Image imgBtn = obj.GetComponent<Image>();
-            if (imgBtn != null)
-                imgBtn.color = colorNormal;
+            if (imgBtn != null) imgBtn.color = colorNormal;
         }
     }
 
@@ -175,29 +156,24 @@ public class Manager_Entrevista : MonoBehaviour
         if (esperandoSiguiente) return;
         esperandoSiguiente = true;
 
-        // Colorear el botón seleccionado
         Image imgBoton = botonObj.GetComponent<Image>();
         if (imgBoton != null)
             imgBoton.color = opcion.esCorrecta ? colorCorrecta : colorIncorrecta;
 
-        // Desactivar todos los botones
         foreach (Transform t in contenedorOpciones)
         {
             Button btn = t.GetComponent<Button>();
             if (btn != null) btn.interactable = false;
         }
 
-        // Actualizar puntaje
         puntajeTotal += opcion.puntaje;
-        textoPuntaje.text = $"Relación: {puntajeTotal}pts";
+        if (textoPuntaje) textoPuntaje.text = $"Confianza: {puntajeTotal} pts";
 
-        // Mostrar respuesta y reacción del NPC
-        textoRespuestaNPC.text = opcion.respuestaDelNPC;
+        if (textoRespuestaNPC) textoRespuestaNPC.text = opcion.respuestaDelNPC;
         ActualizarReaccionNPC(opcion.reaccion);
-
-        // Mostrar feedback de correcto/incorrecto
         MostrarFeedback(opcion.esCorrecta);
 
+        EventosJuego.Emitir("entrevista_respuesta", $"{indiceActual + 1}:{opcion.puntaje}");
         StartCoroutine(EsperarSiguiente());
     }
 
@@ -205,12 +181,10 @@ public class Manager_Entrevista : MonoBehaviour
     void MostrarFeedback(bool correcto)
     {
         if (panelFeedback == null) return;
-
         panelFeedback.SetActive(true);
 
         if (textoFeedback != null)
-            textoFeedback.text = correcto ? "Correcto" : "Incorrecto";
-        // "¡Correcto!" / "Incorrecto"
+            textoFeedback.text = correcto ? "¡Bien dicho!" : "No era esa";
 
         if (imagenFeedbackBG != null)
             imagenFeedbackBG.color = correcto
@@ -236,10 +210,9 @@ public class Manager_Entrevista : MonoBehaviour
     // ─────────────────────────────────────────
     IEnumerator EsperarSiguiente()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(segundosEntrePreguntas);
 
         indiceActual++;
-
         if (indiceActual >= entrevistaData.preguntas.Count)
         {
             TerminarEntrevista();
@@ -252,61 +225,62 @@ public class Manager_Entrevista : MonoBehaviour
     // ─────────────────────────────────────────
     public void TerminarEntrevista()
     {
-        // Ocultar panel de preguntas
-        panelEntrevista.SetActive(false);
+        if (panelEntrevista) panelEntrevista.SetActive(false);
 
-        // Mostrar resultado final
+        if (managerCamara) managerCamara.CompletarEntrevista(puntajeTotal);
+        EventosJuego.Emitir("entrevista_fin", puntajeTotal.ToString());
+
+        // La entrevista ocupa una franja del día, como cualquier actividad
+        if (Manager_Dia.I) Manager_Dia.I.UsarFranja("entrevista");
+
         MostrarResultadoFinal();
-
-        // Notificar al manager
-        managerCamara.CompletarEntrevista(puntajeTotal);
     }
 
     // ─────────────────────────────────────────
     void MostrarResultadoFinal()
     {
-        if (panelResultado == null) return;
+        if (panelResultado == null)
+        {
+            CerrarPanelResultado(); // sin panel de resultado, se libera al jugador enseguida
+            return;
+        }
 
         panelResultado.SetActive(true);
-
-        bool exito = puntajeTotal >= entrevistaData.puntajeMinimoExito;
+        bool exito = puntajeTotal >= PuntajeMinimo;
 
         if (textoResultadoTitulo != null)
-            textoResultadoTitulo.text = exito
-                ? "¡Entrevista exitosa!"   // ¡Entrevista exitosa!
-                : " Entrevista terminada";       // Entrevista terminada
+            textoResultadoTitulo.text = exito ? "¡Entrevista exitosa!" : "Entrevista terminada";
 
         if (textoResultadoPuntaje != null)
-            textoResultadoPuntaje.text =
-                $"Score: {puntajeTotal} / {entrevistaData.puntajeMaximo}";
+            textoResultadoPuntaje.text = $"Puntaje: {puntajeTotal} / {entrevistaData.puntajeMaximo}";
 
         if (textoResultadoMensaje != null)
-        {
             textoResultadoMensaje.text = ObtenerMensajeFinal(puntajeTotal);
-        }
     }
 
     string ObtenerMensajeFinal(int puntaje)
     {
-        // Ajustá los rangos según tu puntajeMaximo
-        float porcentaje = (float)puntaje / entrevistaData.puntajeMaximo;
+        float porcentaje = (float)puntaje / Mathf.Max(1, entrevistaData.puntajeMaximo);
 
         if (porcentaje >= 0.8f)
-            return "Excelente!\n¡Excelente entrevista! Sakamoto-san quedó muy contento.";
-        else if (porcentaje >= 0.5f)
-            return "Bien.\nEntrevista aceptable. Podría haber sido mejor.";
-        else
-            return "Ánimos\nNecesitás practicar más el vocabulario.";
+            return "¡Excelente! Futaba quedó muy contenta. Lleva la entrevista al Director.";
+        if (porcentaje >= 0.5f)
+            return "Bien. La entrevista sirve para el boletín, aunque podría haber salido mejor. Llévala al Director.";
+        return "Ánimo. Repasa las palabras de tu journal (TAB). Igual puedes llevar la entrevista al Director.";
     }
 
     // ─────────────────────────────────────────
     void CerrarPanelResultado()
     {
-        if (panelResultado != null)
-            panelResultado.SetActive(false);
+        if (panelResultado != null) panelResultado.SetActive(false);
+        activa = false;
 
-        // Restaurar cursor según tu sistema
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        var mi = Interaccion;
+        if (mi != null) mi.LiberarJugador();
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

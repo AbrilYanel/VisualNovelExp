@@ -5,25 +5,55 @@ public class Manager_Camara : MonoBehaviour
 {
     public static Manager_Camara Instance;
 
-    [Header("Estado misión")]
-    public bool tieneCamara = false;
-    public bool permisoObtenido = false;
-    public bool entrevistaCompletada = false;
-    public int puntajeEntrevista = 0;
-    public int puntajeMinimoExito = 3; // Movido aquí desde EntrevistaData
+    [Header("Progreso (guarda la misión entre escenas)")]
+    public PlayerProgress playerProgress;
+
+    [Header("Reglas")]
+    [Tooltip("Puntaje mínimo para que la entrevista sea exitosa. Es el único valor que usa todo el juego")]
+    public int puntajeMinimoExito = 6;
 
     [Header("UI - HUD")]
     public GameObject iconoCamara;
     public GameObject panelTextoGrabar;    // Panel que contiene el texto de grabar
-    public TextMeshProUGUI textoGrabar;    // "Presioná R para grabar"
+    public TextMeshProUGUI textoGrabar;
     public TextMeshProUGUI textoEstado;    // Estado actual de la misión
 
     [Header("UI - Panel Item Cámara")]
-    public GameObject panelItemRecibido;         // Aparece brevemente al recibir la cámara
-    public TextMeshProUGUI textoItemRecibido;     // "¡Recibiste: Cámara!"
+    public GameObject panelItemRecibido;          // Aparece brevemente al recibir la cámara
+    public TextMeshProUGUI textoItemRecibido;
 
     [Header("NPC Entrevistado")]
     public Interaccion_NPC npcEntrevistado;
+
+    const string TEXTO_GRABAR = "Presiona R cerca de Sakamoto-san para empezar la entrevista";
+
+    // ---------- Estado: vive en PlayerProgress para no perderse al ir a casa y volver ----------
+
+    public bool tieneCamara
+    {
+        get => playerProgress != null && playerProgress.tieneCamara;
+        set { if (playerProgress != null) playerProgress.tieneCamara = value; }
+    }
+
+    public bool permisoObtenido
+    {
+        get => playerProgress != null && playerProgress.permisoObtenido;
+        set { if (playerProgress != null) playerProgress.permisoObtenido = value; }
+    }
+
+    public bool entrevistaCompletada
+    {
+        get => playerProgress != null && playerProgress.entrevistaCompletada;
+        set { if (playerProgress != null) playerProgress.entrevistaCompletada = value; }
+    }
+
+    public int puntajeEntrevista
+    {
+        get => playerProgress != null ? playerProgress.puntajeEntrevista : 0;
+        set { if (playerProgress != null) playerProgress.puntajeEntrevista = value; }
+    }
+
+    // ---------- Ciclo de vida ----------
 
     void Awake()
     {
@@ -33,70 +63,69 @@ public class Manager_Camara : MonoBehaviour
 
     void Start()
     {
-        if (iconoCamara != null)
-            iconoCamara.SetActive(false);
-        else
-            Debug.LogError("[Manager_Camara] iconoCamara es null");
+        if (playerProgress == null)
+            Debug.LogError("[Manager_Camara] Falta asignar Player Progress", this);
 
-        if (panelTextoGrabar != null)
-            panelTextoGrabar.SetActive(false);
-        else
-            Debug.LogError("[Manager_Camara] panelTextoGrabar es null");
+        if (panelItemRecibido) panelItemRecibido.SetActive(false);
+        RestaurarHUD();
     }
+
+    // Al entrar a la ciudad, el HUD muestra el punto de la misión en que quedó el jugador
+    void RestaurarHUD()
+    {
+        bool misionTerminada = playerProgress != null && playerProgress.festivalCompletado;
+
+        if (iconoCamara) iconoCamara.SetActive(tieneCamara && !misionTerminada);
+
+        bool puedeGrabar = permisoObtenido && !entrevistaCompletada;
+        if (panelTextoGrabar) panelTextoGrabar.SetActive(puedeGrabar);
+        if (puedeGrabar && textoGrabar) textoGrabar.text = TEXTO_GRABAR;
+
+        if (misionTerminada) ActualizarEstado("");
+        else if (entrevistaCompletada) ActualizarEstado("Lleva la entrevista al Director");
+        else if (permisoObtenido) ActualizarEstado("Entrevista a Sakamoto-san");
+        else if (tieneCamara) ActualizarEstado("Tienes la cámara: busca a Sakamoto-san");
+        else ActualizarEstado("");
+    }
+
+    // ---------- Pasos de la misión ----------
 
     public void RecibirCamara()
     {
-        Debug.Log("RecibirCamara llamado correctamente");
-
         tieneCamara = true;
-        iconoCamara.SetActive(true);
-        ActualizarEstado("Obtuviste la camara, ve con Sakamoto-San");
-        // "Tenés la cámara - ¡Encontrá a Sakamoto-san!"
+        if (iconoCamara) iconoCamara.SetActive(true);
+        ActualizarEstado("Tienes la cámara: busca a Sakamoto-san");
+        EventosJuego.Emitir("mision_camara");
 
-        // Mostrar popup de item recibido
         if (panelItemRecibido != null)
-            StartCoroutine(MostrarPopupItem("カメラ (Cámara)"));
+            StartCoroutine(MostrarPopupItem("カメラ (kamera) · cámara"));
     }
 
     public void ObtenerPermiso()
     {
         permisoObtenido = true;
-
-        // ✅ Null check
-        if (panelTextoGrabar != null)
-            panelTextoGrabar.SetActive(true);
-        else
-            Debug.LogError("[Manager_Camara] panelTextoGrabar es null en build");
-
-        if (textoGrabar != null)
-            textoGrabar.text = "Presioná R para grabar";
-        else
-            Debug.LogError("[Manager_Camara] textoGrabar es null en build");
-
-        ActualizarEstado("Empezá la entrevista!");
+        if (panelTextoGrabar) panelTextoGrabar.SetActive(true);
+        if (textoGrabar) textoGrabar.text = TEXTO_GRABAR;
+        ActualizarEstado("Entrevista a la Chica en frente");
+        EventosJuego.Emitir("mision_permiso");
     }
 
     public void CompletarEntrevista(int puntaje)
     {
         entrevistaCompletada = true;
         puntajeEntrevista = puntaje;
-        panelTextoGrabar.SetActive(false);
+        if (panelTextoGrabar) panelTextoGrabar.SetActive(false);
 
-        // Feedback según puntaje
-        if (puntaje >= puntajeMinimoExito)
-            ActualizarEstado("Fue una buena entrevista! Volvé al Director");
-        // "¡Fue una buena entrevista! Volvé al Director"
-        else
-            ActualizarEstado("Entrevista terminada. Volvé al Director");
-        // "Entrevista terminada. Volvé al Director"
+        ActualizarEstado(puntaje >= puntajeMinimoExito
+            ? "¡Buena entrevista! Llévala al Director"
+            : "Entrevista terminada. Llévala al Director");
     }
 
     public void EntregarEntrevista()
     {
         tieneCamara = false;
-        iconoCamara.SetActive(false);
-        ActualizarEstado("Mision Completa!");
-        // "¡Misión completa!"
+        if (iconoCamara) iconoCamara.SetActive(false);
+        ActualizarEstado("¡Misión completa! El boletín del festival está listo");
     }
 
     public void Resetear()
@@ -105,22 +134,23 @@ public class Manager_Camara : MonoBehaviour
         permisoObtenido = false;
         entrevistaCompletada = false;
         puntajeEntrevista = 0;
-        iconoCamara.SetActive(false);
-        panelTextoGrabar.SetActive(false);
+        if (iconoCamara) iconoCamara.SetActive(false);
+        if (panelTextoGrabar) panelTextoGrabar.SetActive(false);
         ActualizarEstado("");
     }
 
+    // ---------- Auxiliares ----------
+
     void ActualizarEstado(string mensaje)
     {
-        if (textoEstado != null)
-            textoEstado.text = mensaje;
+        if (textoEstado != null) textoEstado.text = mensaje;
     }
 
     System.Collections.IEnumerator MostrarPopupItem(string nombreItem)
     {
         panelItemRecibido.SetActive(true);
         if (textoItemRecibido != null)
-            textoItemRecibido.text = $"Item Recibido! \n{nombreItem}";
+            textoItemRecibido.text = $"¡Objeto recibido!\n{nombreItem}";
 
         yield return new WaitForSeconds(2.5f);
 

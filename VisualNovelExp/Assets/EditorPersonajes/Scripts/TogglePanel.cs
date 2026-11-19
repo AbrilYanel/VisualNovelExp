@@ -6,9 +6,6 @@ public class TogglePanel : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            panel.SetActive(!panel.activeSelf);
-        }
+      
     }
 }

@@ -16,6 +16,11 @@ public class CharacterLookRenderer : MonoBehaviour
     public CharacterSlotConfig config;
     public CharacterPartLibrary library;
 
+    [Header("Color")]
+    public ColorPaletteConfig paletas;
+    [Tooltip("Mat_TintableGris: se usa en las capas que tienen paleta")]
+    public Material materialTenible;
+
     private const string ROOT_NAME = "_Layers";
 
     private readonly Dictionary<string, Image> layers = new Dictionary<string, Image>();
@@ -71,6 +76,9 @@ public class CharacterLookRenderer : MonoBehaviour
             img.raycastTarget = false;
             img.preserveAspect = true;
             img.enabled = false; // sin sprite y enabled = cuadro blanco, asi que arranca apagada
+            var grupo = paletas != null ? paletas.GrupoQueTine(slot.id) : null;
+            if (grupo != null)
+                img.material = grupo.materialPropio != null ? grupo.materialPropio : materialTenible;
             layers[slot.id] = img;
         }
 
@@ -108,8 +116,20 @@ public class CharacterLookRenderer : MonoBehaviour
         }
 
         img.sprite = entry.sprite;
-        img.color = entry.tint;
+        img.color = ColorPara(slotId, entry);
         img.enabled = true;
+    }
+
+    // Color de la paleta si el slot tiene una; si no, el tinte de la pieza
+    private Color ColorPara(string slotId, PartEntry entry)
+    {
+        var grupo = paletas != null ? paletas.GrupoQueTine(slotId) : null;
+        if (grupo == null || grupo.colores.Count == 0) return entry.tint;
+
+        int i = currentLook != null ? currentLook.GetColorIndex(grupo.id) : -1;
+        if (i < 0 || i >= grupo.colores.Count)
+            i = Mathf.Clamp(grupo.colorPorDefecto, 0, grupo.colores.Count - 1);
+        return grupo.colores[i];
     }
 
     public void ClearSlot(string slotId) => SetPart(slotId, null);

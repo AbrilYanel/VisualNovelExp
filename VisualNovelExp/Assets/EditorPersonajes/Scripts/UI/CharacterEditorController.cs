@@ -20,6 +20,19 @@ public class CharacterEditorController : MonoBehaviour
     public TabBar categoryBar;   // Skin, Hair, Face...
     public TabBar slotBar;       // Front, Upper back, Ears...
     public PartGridPanel grid;   // grilla de piezas
+
+    [Header("Color")]
+    public ColorPaletteConfig paletas;
+    public ColorGridPanel colorGrid;
+
+    [Header("Nombre")]
+    public TMPro.TMP_InputField inputNombre;
+    public string nombrePorDefecto = "Kai";
+    public int largoMaximo = 16;
+
+    [Header("Confirmar reset")]
+    public GameObject panelConfirmarReset;
+
     public string nextSceneName = "MainScene";
 
     [Header("Personaje inicial (al empezar sin guardado y al resetear)")]
@@ -61,6 +74,13 @@ public class CharacterEditorController : MonoBehaviour
         }
 
         lookRenderer.ApplyLook(current);
+        if (panelConfirmarReset) panelConfirmarReset.SetActive(false);
+        if (inputNombre)
+        {
+            inputNombre.characterLimit = largoMaximo;
+            inputNombre.text = current.nombre ?? "";
+            inputNombre.onEndEdit.AddListener(GuardarNombre);
+        }
 
         categoryBar.Populate(
             config.categories.Select(c => c.displayName).ToList(),
@@ -96,6 +116,7 @@ public class CharacterEditorController : MonoBehaviour
         currentSlot = slot;
         var items = library.GetItems(slot.id);
         grid.Populate(items, slot.canBeEmpty, current.GetItemId(slot.id), entry => SelectPart(slot, entry));
+        MostrarPaleta(slot);
     }
 
     // ---------- Seleccion ----------
@@ -109,21 +130,75 @@ public class CharacterEditorController : MonoBehaviour
         EventosJuego.Emitir("editor_seleccion", slot.id + ":" + (entry != null ? entry.id : "none"));
     }
 
+    // Muestra la grilla de color si esta subcategoría tiene paleta; si no, la oculta
+    private void MostrarPaleta(SlotDefinition slot)
+    {
+        if (colorGrid == null) return;
+        var grupo = paletas != null ? paletas.GrupoQueAparece(slot.id) : null;
+        bool hay = grupo != null && grupo.colores.Count > 0;
+        colorGrid.gameObject.SetActive(hay);
+        if (!hay) return;
+
+        int actual = current.GetColorIndex(grupo.id);
+        if (actual < 0) actual = grupo.colorPorDefecto;
+        colorGrid.Populate(grupo, actual, i => SelectColor(grupo, i));
+    }
+
+    private void SelectColor(GrupoColor grupo, int indice)
+    {
+        current.SetColorIndex(grupo.id, indice);
+        lookRenderer.ApplyLook(current);
+        ResearchAnalytics.LogEditorInteraction("color_" + grupo.id, indice.ToString());
+        EventosJuego.Emitir("editor_color", grupo.id + ":" + indice);
+    }
+
     // ---------- Botones de la escena (conectalos en el OnClick) ----------
 
     public void ResetCharacter()
     {
+        string nombre = current.nombre;
         current = CreateDefaultLook();
+        current.nombre = nombre;               // el reset no borra el nombre
         lookRenderer.ApplyLook(current);
-        if (currentSlot != null) OpenSlot(currentSlot); // refresca el resaltado
+        if (currentSlot != null) OpenSlot(currentSlot);
         ResearchAnalytics.LogEditorInteraction("reset", "reset_character");
+        EventosJuego.Emitir("editor_reset");
+    }
+
+    // Botón Reset: primero pregunta
+    public void PedirReset()
+    {
+        if (panelConfirmarReset) panelConfirmarReset.SetActive(true);
+        else ResetCharacter();
+    }
+
+    public void ConfirmarReset()
+    {
+        if (panelConfirmarReset) panelConfirmarReset.SetActive(false);
+        ResetCharacter();
+    }
+
+    public void CancelarReset()
+    {
+        if (panelConfirmarReset) panelConfirmarReset.SetActive(false);
+        ResearchAnalytics.LogEditorInteraction("reset", "cancelado");
+        EventosJuego.Emitir("editor_reset_cancelado");
+    }
+
+    private void GuardarNombre(string texto)
+    {
+        current.nombre = texto.Trim();
+        // Se registra solo el largo, no el nombre: puede ser el nombre real del participante
+        EventosJuego.Emitir("editor_nombre", current.nombre.Length.ToString());
     }
 
     public void ConfirmAndSave()
     {
         ResearchAnalytics.LogEditorClose();
-        EventosJuego.Emitir("editor_fin", current.selections.Count.ToString());
+        EventosJuego.Emitir("editor_fin", $"piezas{current.selections.Count}:colores{current.colores.Count}");
 
+        if (inputNombre) current.nombre = inputNombre.text.Trim();
+        if (string.IsNullOrEmpty(current.nombre)) current.nombre = nombrePorDefecto;
         CharacterLookSaveSystem.Save(current);
         CharacterLookSaveSystem.DeleteLegacySave();
         Debug.Log($"Guardado: {current}");

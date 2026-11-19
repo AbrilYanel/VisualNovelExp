@@ -325,11 +325,12 @@ public class Manager_Interaccion : MonoBehaviour
             if (nextNode.startsMinigame)
             {
                 currentNode = nextNode;
-                bool hayFicha = panelVocabulario != null && nextNode.vocabulario != null && nextNode.vocabulario.Count > 0;
-                if (hayFicha)
+                bool hayPalabras = nextNode.vocabulario != null && nextNode.vocabulario.Count > 0;
+                string efectos = TextoEfectosNecesidades();
+                if (panelVocabulario != null && (hayPalabras || efectos != ""))
                 {
                     if (dialoguePanel) dialoguePanel.SetActive(false);
-                    panelVocabulario.Mostrar(nextNode.vocabulario, StartMinigame);
+                    panelVocabulario.Mostrar(nextNode.vocabulario, efectos, StartMinigame);
                 }
                 else StartMinigame();
                 return;
@@ -350,7 +351,6 @@ public class Manager_Interaccion : MonoBehaviour
         var nec = Manager_Necesidades.I;
         if (nec == null) return;
         multMonedasPartida = nec.MultiplicadorMonedas;
-        var efectos = new List<string>();
 
         // Hambre: tiempo de Kana Rush
         if (managerKanaRush)
@@ -358,8 +358,6 @@ public class Manager_Interaccion : MonoBehaviour
             if (baseTiempoKana < 0f) baseTiempoKana = managerKanaRush.tiempoPorPregunta;
             managerKanaRush.tiempoPorPregunta = baseTiempoKana * Mathf.Lerp(0.7f, 1f, nec.hambre / 100f);
         }
-        if (nec.hambre < 50f)
-            efectos.Add("Con hambre: menos tiempo en los desafíos con reloj.");
 
         // Energía: errores permitidos
         int ajuste = nec.energia >= 75f ? 1 : (nec.energia < 50f ? -1 : 0);
@@ -373,14 +371,20 @@ public class Manager_Interaccion : MonoBehaviour
             if (baseErroresEmparejar < 0) baseErroresEmparejar = managerMinijuego.erroresMaximos;
             managerMinijuego.erroresMaximos = Mathf.Max(1, baseErroresEmparejar + ajuste);
         }
-        if (ajuste > 0) efectos.Add("Descansado: +1 error permitido.");
-        if (ajuste < 0) efectos.Add("Cansado: −1 error permitido.");
+    }
 
-        // Diversión y bonus (las monedas se calculan en OnMinigameFinished)
+    // Solo arma el texto de los efectos, para mostrarlo en la ficha
+    string TextoEfectosNecesidades()
+    {
+        var nec = Manager_Necesidades.I;
+        if (nec == null) return "";
+        var efectos = new List<string>();
+        if (nec.hambre < 50f) efectos.Add("Con hambre: menos tiempo en los desafíos con reloj.");
+        if (nec.energia >= 75f) efectos.Add("Descansado: +1 error permitido.");
+        else if (nec.energia < 50f) efectos.Add("Cansado: −1 error permitido.");
         if (nec.TodoAlto) efectos.Add("¡En plena forma: +50 % de monedas!");
         else if (nec.diversion <= 0f) efectos.Add("Aburrido: ganarás la mitad de monedas.");
-
-        if (efectos.Count > 0 && Mensaje_UI.I) Mensaje_UI.I.Mostrar(string.Join("\n", efectos), 4f);
+        return string.Join("\n", efectos);
     }
     // ---------- MINIJUEGOS ----------
 

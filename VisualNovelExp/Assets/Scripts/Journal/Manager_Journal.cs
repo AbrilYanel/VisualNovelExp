@@ -17,6 +17,11 @@ public class Manager_Journal : MonoBehaviour
     public Animator animator;
     private bool estaAbierto = false;
 
+    [Header("Animación")]
+    [Tooltip("Tiempo mínimo entre abrir y cerrar, para ignorar pulsaciones muy rápidas")]
+    public float tiempoEntreToggles = 0.3f;
+    private float proximoToggle;
+    private Coroutine corrutinaCierre;
 
     void Start()
     {
@@ -25,19 +30,27 @@ public class Manager_Journal : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (estaAbierto) CerrarJournal();
-            else AbrirJournal();
-        }
+        if (!Input.GetKeyDown(KeyCode.Tab)) return;
+        if (Time.unscaledTime < proximoToggle) return;
+        proximoToggle = Time.unscaledTime + tiempoEntreToggles;
+
+        if (estaAbierto) CerrarJournal();
+        else AbrirJournal();
     }
 
     public void AbrirJournal()
     {
+        // Si había un cierre en curso, se cancela para que no apague el panel después
+        if (corrutinaCierre != null) { StopCoroutine(corrutinaCierre); corrutinaCierre = null; }
+
         EventosJuego.Emitir("journal");
         estaAbierto = true;
         journalPanel.SetActive(true);
-        animator.SetTrigger("Open");
+        if (animator)
+        {
+            animator.ResetTrigger("Close");
+            animator.SetTrigger("Open");
+        }
         RefrescarLista();
 
         Cursor.lockState = CursorLockMode.None;
@@ -47,41 +60,48 @@ public class Manager_Journal : MonoBehaviour
     public void CerrarJournal()
     {
         estaAbierto = false;
-        animator.SetTrigger("Close");
+        if (animator)
+        {
+            animator.ResetTrigger("Open");
+            animator.SetTrigger("Close");
+        }
 
         if (!EstadoUI.Bloqueada)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        StartCoroutine(DesactivarTrasAnimacion());
 
+        if (corrutinaCierre != null) StopCoroutine(corrutinaCierre);
+        corrutinaCierre = StartCoroutine(DesactivarTrasAnimacion());
     }
 
     IEnumerator DesactivarTrasAnimacion()
     {
-        // Si no hay animator, desactivar directo
         if (animator == null)
         {
             journalPanel.SetActive(false);
+            corrutinaCierre = null;
             yield break;
         }
 
         yield return null;
 
-        // Esperar a que arranque el estado "Close"
-        float timeout = 0f;
-        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Close"))
+        // Espera a que empiece "Close" (máximo 1 segundo)
+        float t = 0f;
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Close") && t < 1f)
         {
-            timeout += Time.deltaTime;
-            if (timeout > 3f) break;
+            t += Time.unscaledDeltaTime;
             yield return null;
         }
 
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        // Espera a que "Close" termine
+        while (animator.GetCurrentAnimatorStateInfo(0).IsName("Close") &&
+               animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
             yield return null;
 
-        journalPanel.SetActive(false);
+        if (!estaAbierto) journalPanel.SetActive(false);   // solo si sigue cerrado
+        corrutinaCierre = null;
     }
 
     void RefrescarLista()

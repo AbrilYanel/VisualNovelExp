@@ -11,6 +11,8 @@ public class Panel_Personaje : MonoBehaviour
     public PlayerProgress playerProgress;
     public Slider barraHambre, barraEnergia, barraDiversion;
     public TextMeshProUGUI textoMonedas, textoComida, textoNivel;
+    public TextMeshProUGUI textoNombre;
+    public string nombrePorDefecto = "Tanaka";
 
     public bool Abierto => panel != null && panel.activeSelf;
 
@@ -34,6 +36,11 @@ public class Panel_Personaje : MonoBehaviour
     {
         if (Abierto) return;
         panel.SetActive(true);
+        if (textoNombre)
+        {
+            var look = CharacterLookSaveSystem.HasSavedLook() ? CharacterLookSaveSystem.Load() : null;
+            textoNombre.text = look != null && !string.IsNullOrEmpty(look.nombre) ? look.nombre : nombrePorDefecto;
+        }
         if (Manager_Interaccion.I) Manager_Interaccion.I.BloquearJugador();
         Refrescar();
         EventosJuego.Emitir("panel_personaje_abierto");
@@ -53,7 +60,6 @@ public class Panel_Personaje : MonoBehaviour
         if (!playerProgress) return;
         if (textoMonedas) textoMonedas.text = $"Monedas: {playerProgress.monedas}";
         if (textoComida) textoComida.text = $"Comida en casa: {playerProgress.comida}";
-        if (textoNivel) textoNivel.text = $"Nivel {playerProgress.nivelActual}" +
-         (Manager_Dia.I ? $" · Día {Manager_Dia.I.Dia} · {Manager_Dia.I.Franja}" : "");
+        if (textoNivel) textoNivel.text = $"Nivel {playerProgress.nivelActual}";
     }
 }

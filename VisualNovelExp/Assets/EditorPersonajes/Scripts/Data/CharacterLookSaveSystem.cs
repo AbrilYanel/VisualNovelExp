@@ -33,6 +33,7 @@ public static class CharacterLookSaveSystem
             var look = JsonUtility.FromJson<CharacterLook>(json);
             if (look == null) return new CharacterLook();
             if (look.selections == null) look.selections = new System.Collections.Generic.List<SlotSelection>();
+            if (look.colores == null) look.colores = new System.Collections.Generic.List<ColorSelection>();
             Debug.Log($"[LookSave] Cargado: {json}");
             return look;
         }

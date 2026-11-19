@@ -16,9 +16,31 @@ public class SlotSelection
 }
 
 [System.Serializable]
+public class ColorSelection
+{
+    public string grupoId; // ej: hair
+    public int indice;     // posición en la paleta
+}
+
+[System.Serializable]
 public class CharacterLook
 {
     public List<SlotSelection> selections = new List<SlotSelection>();
+    public List<ColorSelection> colores = new List<ColorSelection>();
+    public string nombre = "";
+
+    public int GetColorIndex(string grupoId)
+    {
+        foreach (var c in colores)
+            if (c.grupoId == grupoId) return c.indice;
+        return -1; // -1 = usar el color por defecto
+    }
+
+    public void SetColorIndex(string grupoId, int indice)
+    {
+        colores.RemoveAll(c => c.grupoId == grupoId);
+        if (indice >= 0) colores.Add(new ColorSelection { grupoId = grupoId, indice = indice });
+    }
 
     public string GetItemId(string slotId)
     {

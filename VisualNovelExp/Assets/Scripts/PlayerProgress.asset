@@ -28,7 +28,7 @@ MonoBehaviour:
   tutorialCompleto: 0
   npcsCompletados: []
   dia: 1
-  franjasUsadas: 0
+  franjasUsadas: 3
   monedasInicioDia: 10
   palabrasInicioDia: 0
   festivalCompletado: 0

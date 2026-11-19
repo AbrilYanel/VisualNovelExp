@@ -25,6 +25,11 @@ public class Objeto_Casa : MonoBehaviour, IInteractuable
 
     public void Interact()
     {
+        if (Manager_Tutorial.I != null && !Manager_Tutorial.I.PermiteEvento(idEvento))
+        {
+            Mostrar("Todavía no. Sigue las indicaciones de arriba.");
+            return;
+        }
         RegistrarPalabra();
         string palabra = $"{hiragana}  ({romaji})  =  {traduccion}";
 

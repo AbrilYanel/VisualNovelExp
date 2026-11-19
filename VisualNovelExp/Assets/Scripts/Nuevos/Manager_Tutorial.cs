@@ -56,6 +56,18 @@ public class Manager_Tutorial : MonoBehaviour
         else Mostrar();
     }
 
+ // Bloquea solo los objetos de pasos que todavía no llegaron.
+    public bool PermiteEvento(string evento)
+    {
+        if (Completo) return true;
+        if (evento == "cama") return false;   // no se puede dormir durante el tutorial
+
+        if (indice < pasos.Count && pasos[indice].eventoEsperado == evento) return true; // es el paso actual
+        for (int i = indice + 1; i < pasos.Count; i++)
+            if (pasos[i].eventoEsperado == evento) return false;                          // es un paso futuro
+        return true;                                                                      // no es parte del tutorial
+    }
+
     void Mostrar()
     {
         if (panelTutorial) panelTutorial.SetActive(true);

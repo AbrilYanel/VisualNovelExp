@@ -390,8 +390,9 @@ public class Manager_Minijuego2 : MonoBehaviour
     }
 
     void Shuffle<T>(List<T> lista) { for (int i = lista.Count - 1; i > 0; i--) { int j = Random.Range(0, i + 1); (lista[i], lista[j]) = (lista[j], lista[i]); } }
+    public void Detener() { CancelInvoke(); StopAllCoroutines(); }
 
-   
+
 #if UNITY_EDITOR
     [ContextMenu("Test Mostrar WordOrder")]
     void TestWordOrder()
@@ -416,7 +417,6 @@ public class Manager_Minijuego2 : MonoBehaviour
         MostrarPregunta(p);
     }
 
-    public void Detener() { CancelInvoke(); StopAllCoroutines(); }
 
     [ContextMenu("Test Mostrar FillBlank")]
     void TestFillBlank()

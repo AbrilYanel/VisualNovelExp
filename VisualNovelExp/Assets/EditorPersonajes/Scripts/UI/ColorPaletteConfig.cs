@@ -32,12 +32,12 @@ public class ColorPaletteConfig : ScriptableObject
     public void CargarPorDefecto()
     {
         string[] general =
-        {
-            "#FFFFFF", "#D9D9D9", "#8C8C8C", "#3A3A3A", "#1A1A1A",           // 0-4 blanco a negro
-            "#F2E1B3", "#D9A441", "#A0622D", "#6B3A1E", "#3B2314",           // 5-9 rubios y castaños
-            "#E53935", "#FB8C00", "#FDD835", "#7CB342", "#2E7D32", "#00ACC1", // 10-15
-            "#1E88E5", "#283593", "#8E24AA", "#D81B60", "#F48FB1", "#B39DDB", // 16-21
-            "#80DEEA", "#A5D6A7"                                              // 22-23 celeste, menta
+         {
+            "#FAF7F2", "#DCD8D3", "#A8A29C", "#6E6863", "#3E3A38",           // 0-4 blanco cálido a negro suave
+            "#F3E7C6", "#E2C68F", "#C29A76", "#8E6B55", "#5E4A40",           // 5-9 rubios y castaños
+            "#E8918C", "#F2B880", "#F3E29A", "#BFD8A0", "#86AE8A", "#86C9C8", // 10-15 rojo, naranja, amarillo, verde claro, verde, turquesa
+            "#94B8E0", "#6F7FA8", "#B49AC8", "#D99AB5", "#F5C6D3", "#D3C8EA", // 16-21 azul, azul marino, violeta, magenta, rosa, lavanda
+            "#BFE3EC", "#C8E8D2"                                              // 22-23 celeste, menta
         };
         string[] piel =
         {

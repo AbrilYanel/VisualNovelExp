@@ -107,8 +107,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.24
-  m_Height: 1.31
+  m_Radius: 0.42
+  m_Height: 6.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6679909667031982481
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17b0bc9cfb5502409ca72fb8799725f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 2
-  runSpeed: 4
+  walkSpeed: 4
+  runSpeed: 6
   multiplicadorRetroceso: 0.7
   multiplicadorLateral: 0.9
   soloCorrerAdelante: 1
@@ -136,8 +136,8 @@ MonoBehaviour:
   fuerzaPegadoSuelo: 2
   velocidadTerminal: 30
   controlarMedidasDesdeScript: 1
-  alturaJugador: 1.31
-  radioJugador: 0.24
+  alturaJugador: 6.5
+  radioJugador: 0.42
   alturaEscalon: 0.3
   sincronizarCapsuleCollider: 1
   camaraJugador: {fileID: 3559490027479457006}
@@ -189,11 +189,11 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.31
-  m_Radius: 0.24
+  m_Height: 6.5
+  m_Radius: 0.42
   m_SlopeLimit: 45
-  m_StepOffset: 0.17256173
-  m_SkinWidth: 0.024
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.042
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5895611091315091343
@@ -238,7 +238,7 @@ Transform:
   m_GameObject: {fileID: 7427285112820489786}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1.12, z: 0}
+  m_LocalPosition: {x: 0, y: 1.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

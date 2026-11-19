@@ -11,7 +11,7 @@ public class PuertaMensaje : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        textoInteraccion.text = "Presiona E para salir";
+        textoInteraccion.text = "Presiona E";
         textoInteraccion.gameObject.SetActive(false);
     }
 

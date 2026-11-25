@@ -14,112 +14,112 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories:
   - id: skin
-    displayName: Skin
+    displayName: Piel
     slots:
     - id: skin_body
-      displayName: Body
+      displayName: Cuerpo
       folder: Skin/Body
       sortOrder: 100
       canBeEmpty: 0
   - id: hair
-    displayName: Hair
+    displayName: Pelo
     slots:
     - id: hair_front
-      displayName: Front
+      displayName: Frente
       folder: Hair/Front
       sortOrder: 310
       canBeEmpty: 1
     - id: hair_right_front
-      displayName: Right front side
+      displayName: Frente derecho
       folder: Hair/RightFrontSide
       sortOrder: 300
       canBeEmpty: 1
     - id: hair_left_front
-      displayName: Left front side
+      displayName: Frente izquierdo
       folder: Hair/LeftFrontSide
       sortOrder: 300
       canBeEmpty: 1
     - id: hair_upper_back
-      displayName: Upper back
+      displayName: "Atr\xE1s superior"
       folder: Hair/UpperBack
       sortOrder: 10
       canBeEmpty: 1
     - id: hair_lower_back
-      displayName: Lower back
+      displayName: "Atr\xE1s inferior"
       folder: Hair/LowerBack
       sortOrder: 0
       canBeEmpty: 1
     - id: hair_left_lower
-      displayName: Left lower
+      displayName: Lateral izquierdo
       folder: Hair/LeftLower
       sortOrder: 20
       canBeEmpty: 1
     - id: hair_right_lower
       displayName: Right lower
-      folder: Hair/RightLower
+      folder: Lateral derecho
       sortOrder: 20
       canBeEmpty: 1
   - id: face
-    displayName: Face
+    displayName: Cara
     slots:
     - id: face_ears
-      displayName: Ears
+      displayName: Orejas
       folder: Face/Ears
       sortOrder: 110
       canBeEmpty: 1
     - id: face_mouth
-      displayName: Mouth
+      displayName: Boca
       folder: Face/Mouth
       sortOrder: 130
       canBeEmpty: 1
     - id: face_eye_shape
-      displayName: Eye shape
+      displayName: Forma del ojo
       folder: Face/EyeShape
       sortOrder: 150
       canBeEmpty: 1
     - id: face_pupil
-      displayName: Pupil
+      displayName: Pupila
       folder: Face/Pupil
       sortOrder: 140
       canBeEmpty: 1
     - id: face_eye_spark
-      displayName: Eye spark
+      displayName: Brillo del ojo
       folder: Face/EyeSpark
       sortOrder: 160
       canBeEmpty: 1
     - id: face_blush
-      displayName: Blush
+      displayName: Rubor
       folder: Face/Blush
       sortOrder: 120
       canBeEmpty: 1
     - id: face_moles
-      displayName: Moles
+      displayName: Lunares
       folder: Face/Moles
       sortOrder: 135
       canBeEmpty: 1
   - id: clothes
-    displayName: Clothes
+    displayName: Ropa
     slots:
     - id: clothes_shirt
-      displayName: Shirt
+      displayName: Remera 1
       folder: Clothes/Shirt
       sortOrder: 200
       canBeEmpty: 1
     - id: clothes_shirt2
-      displayName: Shirt 2
+      displayName: Remera 2
       folder: Clothes/Shirt2
       sortOrder: 210
       canBeEmpty: 1
     - id: clothes_jacket
-      displayName: Jacket
+      displayName: Abrigo
       folder: Clothes/Jacket
       sortOrder: 220
       canBeEmpty: 1
   - id: accessories
-    displayName: Accessories
+    displayName: Accesorios
     slots:
     - id: acc_head
-      displayName: Head
+      displayName: Cabeza
       folder: Accessories/Head
       sortOrder: 330
       canBeEmpty: 1
@@ -129,7 +129,7 @@ MonoBehaviour:
       sortOrder: 230
       canBeEmpty: 1
     - id: acc_glasses
-      displayName: Glasses
+      displayName: Lentes
       folder: Accessories/Glasses
       sortOrder: 320
       canBeEmpty: 1

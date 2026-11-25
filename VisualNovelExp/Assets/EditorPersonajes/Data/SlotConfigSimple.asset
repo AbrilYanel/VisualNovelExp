@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd744788225d2284281689bf94f837b2, type: 3}
+  m_Name: SlotConfigSimple
+  m_EditorClassIdentifier: 
+  categories:
+  - id: skin
+    displayName: Skin
+    slots:
+    - id: skin_body
+      displayName: Body
+      folder: Skin/Body
+      sortOrder: 100
+      canBeEmpty: 0
+  - id: hair
+    displayName: Hair
+    slots:
+    - id: hair_style
+      displayName: Peinado
+      folder: Hair/Front
+      sortOrder: 310
+      canBeEmpty: 1
+  - id: face
+    displayName: Face
+    slots:
+    - id: face_eye_shape
+      displayName: Eye shape
+      folder: Face/EyeShape
+      sortOrder: 150
+      canBeEmpty: 1
+  - id: clothes
+    displayName: Clothes
+    slots:
+    - id: clothes_shirt
+      displayName: Shirt
+      folder: Clothes/Shirt
+      sortOrder: 200
+      canBeEmpty: 1

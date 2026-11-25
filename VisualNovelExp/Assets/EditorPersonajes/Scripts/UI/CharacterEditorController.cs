@@ -1,9 +1,3 @@
-// CharacterEditorController.cs - PASO 6
-// Pon en: Assets/_CharacterEditor/Scripts/UI/CharacterEditorController.cs
-//
-// Reemplaza a CharacterCustomizer.
-// Categorias (arriba) > subcategorias (abajo) > grilla de piezas.
-
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -33,6 +27,7 @@ public class CharacterEditorController : MonoBehaviour
     [Header("Confirmar reset")]
     public GameObject panelConfirmarReset;
 
+
     public string nextSceneName = "MainScene";
 
     [Header("Personaje inicial (al empezar sin guardado y al resetear)")]
@@ -44,6 +39,27 @@ public class CharacterEditorController : MonoBehaviour
         "face_ears", "face_mouth", "face_eye_shape", "face_pupil",
         "clothes_shirt"
     };
+
+
+    [Header("Editor simple: peinados armados")]
+    [Tooltip("Slot cuyas piezas son íconos de peinados completos. Solo existe en la config de B")]
+    public string slotPeinado = "hair_style";
+    [Tooltip("Slots que se reemplazan al elegir un peinado")]
+    public List<string> slotsDePelo = new List<string>
+    {
+        "hair_front", "hair_right_front", "hair_left_front", "hair_upper_back",
+        "hair_lower_back", "hair_left_lower", "hair_right_lower"
+    };
+    [Tooltip("Qué piezas pone cada ícono. Los slots de pelo que no estén quedan en 'ninguno'")]
+    public List<Peinado> peinados = new List<Peinado>();
+
+    [System.Serializable]
+    public class Peinado
+    {
+        [Tooltip("ID del ícono en el slot de peinado (ej: 001)")]
+        public string itemId;
+        public List<SlotSelection> piezas = new List<SlotSelection>();
+    }
 
     private CharacterLook current = new CharacterLook();
     private SlotDefinition currentSlot;
@@ -115,7 +131,12 @@ public class CharacterEditorController : MonoBehaviour
     {
         currentSlot = slot;
         var items = library.GetItems(slot.id);
-        grid.Populate(items, slot.canBeEmpty, current.GetItemId(slot.id), entry => SelectPart(slot, entry));
+
+        if (EsSlotPeinado(slot.id))
+            grid.Populate(items, false, PeinadoActual(), SelectPeinado);   // sin "ninguno"
+        else
+            grid.Populate(items, slot.canBeEmpty, current.GetItemId(slot.id), entry => SelectPart(slot, entry));
+
         MostrarPaleta(slot);
     }
 
@@ -128,6 +149,59 @@ public class CharacterEditorController : MonoBehaviour
         lookRenderer.SetPart(slot.id, entry);
         ResearchAnalytics.LogEditorInteraction(slot.id, entry != null ? entry.id : "none");
         EventosJuego.Emitir("editor_seleccion", slot.id + ":" + (entry != null ? entry.id : "none"));
+    }
+
+    // ---------- Peinados armados (editor simple) ----------
+
+    private bool EsSlotPeinado(string slotId)
+    {
+        return !string.IsNullOrEmpty(slotPeinado) && peinados.Count > 0 && slotId == slotPeinado;
+    }
+
+    // Un clic en el ícono pone todas las piezas del peinado; el ícono no se guarda ni se dibuja
+    private void SelectPeinado(PartEntry icono)
+    {
+        if (icono == null) return;
+        var p = peinados.Find(x => x.itemId == icono.id);
+        if (p == null)
+        {
+            Debug.LogWarning($"[EditorController] El ícono {icono.id} no tiene peinado cargado en la lista.", this);
+            return;
+        }
+
+        foreach (string slotId in slotsDePelo)
+        {
+            var sel = p.piezas.Find(s => s.slotId == slotId);
+            string itemId = sel != null ? sel.itemId : null;
+            PartEntry pieza = string.IsNullOrEmpty(itemId) ? null : library.FindById(slotId, itemId);
+            if (!string.IsNullOrEmpty(itemId) && pieza == null)
+                Debug.LogWarning($"[EditorController] El peinado {p.itemId} usa {slotId}={itemId}, que no existe.", this);
+
+            current.SetItemId(slotId, pieza?.id);
+            lookRenderer.SetPart(slotId, pieza);
+        }
+
+        // Un solo registro por clic: es una decisión, no siete
+        ResearchAnalytics.LogEditorInteraction(slotPeinado, icono.id);
+        EventosJuego.Emitir("editor_seleccion", slotPeinado + ":" + icono.id);
+    }
+
+    // ID del ícono cuyo peinado coincide con el personaje actual (null si ninguno)
+    private string PeinadoActual()
+    {
+        foreach (var p in peinados)
+        {
+            bool igual = true;
+            foreach (string slotId in slotsDePelo)
+            {
+                var sel = p.piezas.Find(s => s.slotId == slotId);
+                string esperado = sel != null ? sel.itemId ?? "" : "";
+                string actual = current.GetItemId(slotId) ?? "";
+                if (esperado != actual) { igual = false; break; }
+            }
+            if (igual) return p.itemId;
+        }
+        return null;
     }
 
     // Muestra la grilla de color si esta subcategoría tiene paleta; si no, la oculta
@@ -152,7 +226,7 @@ public class CharacterEditorController : MonoBehaviour
         EventosJuego.Emitir("editor_color", grupo.id + ":" + indice);
     }
 
-    // ---------- Botones de la escena (conectalos en el OnClick) ----------
+    // ---------- Botones de la escena ----------
 
     public void ResetCharacter()
     {
@@ -230,6 +304,7 @@ public class CharacterEditorController : MonoBehaviour
     {
         foreach (var slot in config.AllSlots())
         {
+            if (EsSlotPeinado(slot.id)) continue;
             if (slot.canBeEmpty || look.HasItem(slot.id)) continue;
 
             var items = library.GetItems(slot.id);

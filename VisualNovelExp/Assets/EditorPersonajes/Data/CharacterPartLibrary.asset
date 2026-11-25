@@ -996,3 +996,29 @@ MonoBehaviour:
       icon: {fileID: 21300000, guid: 6c7b773d57748b6419b64a7ce42a4b07, type: 3}
       sprite: {fileID: 21300000, guid: a972c8059e1c9b84a8b4239727890e02, type: 3}
       tint: {r: 1, g: 1, b: 1, a: 1}
+  - slotId: hair_style
+    items:
+    - id: 001
+      icon: {fileID: 21300000, guid: f8c2828a544cec047878cfe90d31114f, type: 3}
+      sprite: {fileID: 21300000, guid: f8c2828a544cec047878cfe90d31114f, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 002
+      icon: {fileID: 21300000, guid: ea724f6b6fadf394a859bb491bbf387d, type: 3}
+      sprite: {fileID: 21300000, guid: ea724f6b6fadf394a859bb491bbf387d, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 003
+      icon: {fileID: 21300000, guid: 1e4f19b3ba4c26b4590417fb62bbd584, type: 3}
+      sprite: {fileID: 21300000, guid: 1e4f19b3ba4c26b4590417fb62bbd584, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 004
+      icon: {fileID: 21300000, guid: f5537ced6477ba54696d770efa16b86f, type: 3}
+      sprite: {fileID: 21300000, guid: f5537ced6477ba54696d770efa16b86f, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 005
+      icon: {fileID: 21300000, guid: 33f828e6b4536ed489a30eeffb261b06, type: 3}
+      sprite: {fileID: 21300000, guid: 33f828e6b4536ed489a30eeffb261b06, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}
+    - id: 006
+      icon: {fileID: 21300000, guid: 976554a6e9afbd049a6f61d4e76753ae, type: 3}
+      sprite: {fileID: 21300000, guid: 976554a6e9afbd049a6f61d4e76753ae, type: 3}
+      tint: {r: 1, g: 1, b: 1, a: 1}

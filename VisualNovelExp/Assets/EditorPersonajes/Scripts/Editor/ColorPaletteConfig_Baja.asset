@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5fdc819da37a6b44922673bbe15b28c, type: 3}
+  m_Name: ColorPaletteConfig_Baja
+  m_EditorClassIdentifier: 
+  grupos:
+  - id: skin
+    nombre: Tono de piel
+    slotsQueTine:
+    - skin_body
+    - face_ears
+    slotsDondeAparece:
+    - skin_body
+    colores:
+    - {r: 1, g: 0.94509804, b: 0.9019608, a: 1}
+    - {r: 0.9529412, g: 0.7764706, b: 0.64705884, a: 1}
+    - {r: 0.7254902, g: 0.48235294, b: 0.3372549, a: 1}
+    - {r: 0.5882353, g: 0.3647059, b: 0.2509804, a: 1}
+    - {r: 0.5176471, g: 0.3137255, b: 0.21176471, a: 1}
+    - {r: 0.24705882, g: 0.14117648, b: 0.09411765, a: 1}
+    colorPorDefecto: 1
+    materialPropio: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
+  - id: hair_style
+    nombre: Color de pelo
+    slotsQueTine:
+    - hair_front
+    - hair_right_front
+    - hair_left_front
+    - hair_upper_back
+    - hair_lower_back
+    - hair_left_lower
+    - hair_right_lower
+    slotsDondeAparece:
+    - hair_front
+    - hair_right_front
+    - hair_left_front
+    - hair_upper_back
+    - hair_lower_back
+    - hair_left_lower
+    - hair_right_lower
+    colores:
+    - {r: 0.98039216, g: 0.96862745, b: 0.9490196, a: 1}
+    - {r: 0.8627451, g: 0.84705883, b: 0.827451, a: 1}
+    - {r: 0.65882355, g: 0.63529414, b: 0.6117647, a: 1}
+    - {r: 0.43137255, g: 0.40784314, b: 0.3882353, a: 1}
+    - {r: 0.24313726, g: 0.22745098, b: 0.21960784, a: 1}
+    - {r: 0.9529412, g: 0.90588236, b: 0.7764706, a: 1}
+    - {r: 0.8862745, g: 0.7764706, b: 0.56078434, a: 1}
+    - {r: 0.7607843, g: 0.6039216, b: 0.4627451, a: 1}
+    - {r: 0.5568628, g: 0.41960785, b: 0.33333334, a: 1}
+    - {r: 0.36862746, g: 0.2901961, b: 0.2509804, a: 1}
+    - {r: 0.9098039, g: 0.5686275, b: 0.54901963, a: 1}
+    - {r: 0.9490196, g: 0.72156864, b: 0.5019608, a: 1}
+    - {r: 0.9529412, g: 0.8862745, b: 0.6039216, a: 1}
+    - {r: 0.7490196, g: 0.84705883, b: 0.627451, a: 1}
+    - {r: 0.5254902, g: 0.68235296, b: 0.5411765, a: 1}
+    - {r: 0.5254902, g: 0.7882353, b: 0.78431374, a: 1}
+    - {r: 0.5803922, g: 0.72156864, b: 0.8784314, a: 1}
+    - {r: 0.43529412, g: 0.49803922, b: 0.65882355, a: 1}
+    - {r: 0.4128384, g: 0.2995283, b: 0.5, a: 1}
+    - {r: 0.8509804, g: 0.6039216, b: 0.70980394, a: 1}
+    - {r: 0.9607843, g: 0.7764706, b: 0.827451, a: 1}
+    - {r: 0.827451, g: 0.78431374, b: 0.91764706, a: 1}
+    - {r: 0.7490196, g: 0.8901961, b: 0.9254902, a: 1}
+    - {r: 0.78431374, g: 0.9098039, b: 0.8235294, a: 1}
+    colorPorDefecto: 22
+    materialPropio: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
+  - id: eyes
+    nombre: Color de ojos
+    slotsQueTine:
+    - face_pupil
+    slotsDondeAparece: []
+    colores:
+    - {r: 0.24313726, g: 0.22745098, b: 0.21960784, a: 1}
+    - {r: 0.36862746, g: 0.2901961, b: 0.2509804, a: 1}
+    - {r: 0.7607843, g: 0.6039216, b: 0.4627451, a: 1}
+    - {r: 0.9529412, g: 0.8862745, b: 0.6039216, a: 1}
+    - {r: 0.7490196, g: 0.84705883, b: 0.627451, a: 1}
+    - {r: 0.5803922, g: 0.72156864, b: 0.8784314, a: 1}
+    colorPorDefecto: 10
+    materialPropio: {fileID: 2100000, guid: 1e79920cb7f71884580da14ff651857e, type: 2}
+  - id: shirt
+    nombre: Color de camisa
+    slotsQueTine:
+    - clothes_shirt
+    slotsDondeAparece:
+    - clothes_shirt
+    colores: []
+    colorPorDefecto: 0
+    materialPropio: {fileID: 0}

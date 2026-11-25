@@ -19,6 +19,25 @@ public class CharacterEditorController : MonoBehaviour
     public ColorPaletteConfig paletas;
     public ColorGridPanel colorGrid;
 
+    [Header("Editor simple: slots que solo cambian color")]
+    [Tooltip("En estos slots no se muestran piezas: los colores ocupan el lugar de la grilla (ej: face_pupil)")]
+    public List<string> slotsSoloColor = new List<string>();
+    [Tooltip("ColorGridPanel ubicado donde está la grilla de piezas")]
+    public ColorGridPanel colorGridEnGrilla;
+
+    [Header("Editor simple: piezas permitidas")]
+    [Tooltip("Limita las piezas que muestra la grilla de un slot. Un slot que no está en la lista muestra todas")]
+    public List<PiezasPermitidas> piezasPermitidas = new List<PiezasPermitidas>();
+
+    [System.Serializable]
+    public class PiezasPermitidas
+    {
+        [Tooltip("Ej: face_pupil")]
+        public string slotId;
+        [Tooltip("IDs que se muestran, en este orden (ej: 001, 101, 102...)")]
+        public List<string> itemIds = new List<string>();
+    }
+
     [Header("Nombre")]
     public TMPro.TMP_InputField inputNombre;
     public string nombrePorDefecto = "Kai";
@@ -132,7 +151,20 @@ public class CharacterEditorController : MonoBehaviour
     private void OpenSlot(SlotDefinition slot)
     {
         currentSlot = slot;
-        var items = library.GetItems(slot.id);
+
+        // Slot de solo color: los colores van en el lugar de la grilla y la pieza no se puede cambiar
+        bool soloColor = EsSoloColor(slot.id);
+        grid.gameObject.SetActive(!soloColor);
+        if (colorGridEnGrilla) colorGridEnGrilla.gameObject.SetActive(soloColor);
+
+        if (soloColor)
+        {
+            if (colorGrid) colorGrid.gameObject.SetActive(false);
+            MostrarColoresEnGrilla(slot);
+            return;
+        }
+
+        var items = FiltrarPermitidas(slot.id, library.GetItems(slot.id));
 
         if (EsSlotPeinado(slot.id))
             grid.Populate(items, false, PeinadoActual(), SelectPeinado);   // sin "ninguno"
@@ -140,6 +172,49 @@ public class CharacterEditorController : MonoBehaviour
             grid.Populate(items, slot.canBeEmpty, current.GetItemId(slot.id), entry => SelectPart(slot, entry));
 
         MostrarPaleta(slot);
+    }
+
+    // ---------- Piezas permitidas (editor simple) ----------
+
+    private List<PartEntry> FiltrarPermitidas(string slotId, IEnumerable<PartEntry> items)
+    {
+        if (items == null) return new List<PartEntry>();
+        var lista = items.ToList();
+
+        var regla = piezasPermitidas.Find(r => r.slotId == slotId);
+        if (regla == null || regla.itemIds.Count == 0) return lista;
+
+        // Respeta el orden de la lista del Inspector
+        var resultado = new List<PartEntry>();
+        foreach (string id in regla.itemIds)
+        {
+            var entry = lista.Find(e => e.id == id);
+            if (entry != null) resultado.Add(entry);
+            else Debug.LogWarning($"[EditorController] {slotId}={id} está en Piezas Permitidas pero no existe en la biblioteca.", this);
+        }
+        return resultado;
+    }
+
+    // ---------- Slots de solo color (editor simple) ----------
+
+    private bool EsSoloColor(string slotId)
+    {
+        return colorGridEnGrilla != null && slotsSoloColor.Contains(slotId);
+    }
+
+    private void MostrarColoresEnGrilla(SlotDefinition slot)
+    {
+        var grupo = paletas != null ? paletas.GrupoQueAparece(slot.id) : null;
+        if (grupo == null || grupo.colores.Count == 0)
+        {
+            Debug.LogWarning($"[EditorController] {slot.id} está en Slots Solo Color pero ninguna paleta aparece en él.", this);
+            colorGridEnGrilla.gameObject.SetActive(false);
+            return;
+        }
+
+        int actual = current.GetColorIndex(grupo.id);
+        if (actual < 0) actual = grupo.colorPorDefecto;
+        colorGridEnGrilla.Populate(grupo, actual, i => SelectColor(grupo, i));
     }
 
     // ---------- Seleccion ----------

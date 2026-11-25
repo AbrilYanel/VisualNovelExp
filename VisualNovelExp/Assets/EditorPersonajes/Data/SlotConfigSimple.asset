@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories:
   - id: skin
-    displayName: Skin
+    displayName: Piel
     slots:
     - id: skin_body
       displayName: Body
@@ -22,26 +22,26 @@ MonoBehaviour:
       sortOrder: 100
       canBeEmpty: 0
   - id: hair
-    displayName: Hair
+    displayName: Peinado
     slots:
     - id: hair_style
-      displayName: Peinado
+      displayName: Front
       folder: Hair/Front
       sortOrder: 310
       canBeEmpty: 1
   - id: face
-    displayName: Face
+    displayName: Ojos
     slots:
-    - id: face_eye_shape
-      displayName: Eye shape
-      folder: Face/EyeShape
+    - id: face_pupil
+      displayName: Ojos
+      folder: Face/Pupil
       sortOrder: 150
-      canBeEmpty: 1
+      canBeEmpty: 0
   - id: clothes
-    displayName: Clothes
+    displayName: Ropa
     slots:
     - id: clothes_shirt
       displayName: Shirt
       folder: Clothes/Shirt
       sortOrder: 200
-      canBeEmpty: 1
+      canBeEmpty: 0

@@ -57,7 +57,7 @@ MonoBehaviour:
     - id: hair_right_lower
       displayName: Right lower
       folder: Lateral derecho
-      sortOrder: 20
+      sortOrder: 0
       canBeEmpty: 1
   - id: face
     displayName: Cara

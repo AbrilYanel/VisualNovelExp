@@ -809,11 +809,11 @@ MonoBehaviour:
     - id: 002
       icon: {fileID: 21300000, guid: 8c5ca51600ea9d944b5ef0c8926e8764, type: 3}
       sprite: {fileID: 21300000, guid: 7ee073464d1d01c439f8f1222e81ab55, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
+      tint: {r: 0.764151, g: 0.38568, b: 0.38568, a: 1}
     - id: 003
       icon: {fileID: 21300000, guid: 4f07a630ae19f5448a2298ee1c41bc5c, type: 3}
       sprite: {fileID: 21300000, guid: b49675204218ec947b732f085c1b8ab7, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
+      tint: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
     - id: 004
       icon: {fileID: 21300000, guid: 3049d518cf5fd1047b4dab3fdd60c826, type: 3}
       sprite: {fileID: 21300000, guid: 1d1c831c50926ef47afc07723a13235a, type: 3}
@@ -829,7 +829,7 @@ MonoBehaviour:
     - id: 007
       icon: {fileID: 21300000, guid: 060ef309b58e8c7458f33a68fbed122d, type: 3}
       sprite: {fileID: 21300000, guid: 3893f7dfc5d2e784f84e727c7df54cf8, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
+      tint: {r: 0.68089294, g: 0.8018868, b: 0.6770648, a: 1}
     - id: 008
       icon: {fileID: 21300000, guid: e0d1f5c45ef58cf42b0feb41f3f9f01a, type: 3}
       sprite: {fileID: 21300000, guid: 6a3af0f7b8a0fae4f91335ab22a08711, type: 3}
@@ -849,7 +849,7 @@ MonoBehaviour:
     - id: 012
       icon: {fileID: 21300000, guid: e120021c0b78f6343a55800f5e9c820f, type: 3}
       sprite: {fileID: 21300000, guid: d34552c4fe45f224582212f84543ed93, type: 3}
-      tint: {r: 1, g: 1, b: 1, a: 1}
+      tint: {r: 0.9528302, g: 0.7775454, b: 0.9022185, a: 1}
     - id: 013
       icon: {fileID: 21300000, guid: a3922e4aa6b6bac48bcc29a7b9bead39, type: 3}
       sprite: {fileID: 21300000, guid: 0b8c6324cd1cdde4786e91808c2f4ddd, type: 3}

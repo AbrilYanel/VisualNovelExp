@@ -72,7 +72,7 @@ MonoBehaviour:
     - {r: 0.827451, g: 0.78431374, b: 0.91764706, a: 1}
     - {r: 0.7490196, g: 0.8901961, b: 0.9254902, a: 1}
     - {r: 0.78431374, g: 0.9098039, b: 0.8235294, a: 1}
-    colorPorDefecto: 22
+    colorPorDefecto: 0
     materialPropio: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
   - id: eyes
     nombre: Color de ojos

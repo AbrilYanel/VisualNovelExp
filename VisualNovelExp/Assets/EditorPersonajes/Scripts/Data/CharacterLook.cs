@@ -1,10 +1,3 @@
-// CharacterLook.cs - PASO 4
-// Pon en: Assets/_CharacterEditor/Scripts/Data/CharacterLook.cs
-//
-// Reemplaza (mas adelante) a CharacterSaveData.
-// En vez de campos fijos (skinIndex, hairIndex...) guarda una lista "slot -> pieza elegida".
-// Si un slot NO aparece en la lista = ese slot esta en "ninguno".
-
 using System.Collections.Generic;
 using System.Text;
 
@@ -28,6 +21,9 @@ public class CharacterLook
     public List<SlotSelection> selections = new List<SlotSelection>();
     public List<ColorSelection> colores = new List<ColorSelection>();
     public string nombre = "";
+    // Nombre del asset ColorPaletteConfig que usó el editor (ej: ColorPaletteConfig_B).
+    // CharacterLookLoader lo usa para pintar al personaje con la misma paleta en el juego.
+    public string paleta = "";
 
     public int GetColorIndex(string grupoId)
     {

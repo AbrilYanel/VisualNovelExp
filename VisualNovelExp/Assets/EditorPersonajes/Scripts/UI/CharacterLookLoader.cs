@@ -1,13 +1,14 @@
-// CharacterLookLoader.cs - PASO 6
-// Pon en: Assets/_CharacterEditor/Scripts/UI/CharacterLookLoader.cs
-//
-// Reemplaza a CharacterLoaderUI. Va en la escena del JUEGO, junto a un CharacterLookRenderer.
-
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterLookLoader : MonoBehaviour
 {
     public CharacterLookRenderer lookRenderer;
+
+    [Tooltip("Paletas de todas las condiciones (ej: ColorPaletteConfig y ColorPaletteConfig_B). " +
+             "Se elige la que tenga el mismo nombre que la guardada. Si no hay coincidencia, " +
+             "el renderer conserva la paleta que tiene asignada.")]
+    public List<ColorPaletteConfig> paletasPorCondicion = new List<ColorPaletteConfig>();
 
     void Start()
     {
@@ -27,6 +28,18 @@ public class CharacterLookLoader : MonoBehaviour
 
         CharacterLook look = CharacterLookSaveSystem.Load();
         look.RemoveInvalid(lookRenderer.library);
+        AsignarPaleta(look);
         lookRenderer.ApplyLook(look);
+    }
+
+    private void AsignarPaleta(CharacterLook look)
+    {
+        if (string.IsNullOrEmpty(look.paleta)) return;   // guardado viejo o sin editor: no se toca
+
+        var paleta = paletasPorCondicion.Find(p => p != null && p.name == look.paleta);
+        if (paleta != null)
+            lookRenderer.paletas = paleta;
+        else
+            Debug.LogWarning($"[LookLoader] La paleta '{look.paleta}' no está en Paletas Por Condicion.", this);
     }
 }

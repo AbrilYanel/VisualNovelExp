@@ -1,10 +1,3 @@
-// CharacterLookRenderer.cs - PASO 5
-// Pon en: Assets/_CharacterEditor/Scripts/UI/CharacterLookRenderer.cs
-//
-// Reemplaza (mas adelante) a CharacterRendererUI.
-// Lee el CharacterSlotConfig y crea SOLO una Image por slot, ordenadas por sortOrder.
-// No hay que armar ni asignar capas a mano en el Inspector.
-
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;

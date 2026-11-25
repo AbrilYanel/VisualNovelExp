@@ -3240,6 +3240,9 @@ MonoBehaviour:
       itemId: 002
     - slotId: hair_lower_back
       itemId: 001
+    colores:
+    - grupoId: hair_style
+      indice: 4
   - itemId: 002
     piezas:
     - slotId: hair_front
@@ -3250,6 +3253,9 @@ MonoBehaviour:
       itemId: 015
     - slotId: hair_lower_back
       itemId: 009
+    colores:
+    - grupoId: hair_style
+      indice: 5
   - itemId: 003
     piezas:
     - slotId: hair_front
@@ -3260,6 +3266,9 @@ MonoBehaviour:
       itemId: 014
     - slotId: hair_right_lower
       itemId: 018
+    colores:
+    - grupoId: hair_style
+      indice: 6
   - itemId: 004
     piezas:
     - slotId: hair_front
@@ -3270,6 +3279,9 @@ MonoBehaviour:
       itemId: 019
     - slotId: hair_right_front
       itemId: 003
+    colores:
+    - grupoId: hair_style
+      indice: 7
   - itemId: 005
     piezas:
     - slotId: hair_front
@@ -3278,6 +3290,9 @@ MonoBehaviour:
       itemId: 015
     - slotId: hair_lower_back
       itemId: 002
+    colores:
+    - grupoId: hair_style
+      indice: 8
   - itemId: 006
     piezas:
     - slotId: hair_front
@@ -3290,6 +3305,9 @@ MonoBehaviour:
       itemId: 014
     - slotId: hair_left_front
       itemId: 011
+    colores:
+    - grupoId: hair_style
+      indice: 9
 --- !u!4 &1687309359
 Transform:
   m_ObjectHideFlags: 0
@@ -4050,6 +4068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRenderer: {fileID: 2074433964}
+  paletasPorCondicion: []
 --- !u!114 &2074433964
 MonoBehaviour:
   m_ObjectHideFlags: 0

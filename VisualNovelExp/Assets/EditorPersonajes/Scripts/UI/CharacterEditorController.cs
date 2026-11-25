@@ -59,6 +59,8 @@ public class CharacterEditorController : MonoBehaviour
         [Tooltip("ID del ícono en el slot de peinado (ej: 001)")]
         public string itemId;
         public List<SlotSelection> piezas = new List<SlotSelection>();
+        [Tooltip("Color de las piezas: grupo de la paleta + índice (ej: hair / 3). Vacío = color por defecto")]
+        public List<ColorSelection> colores = new List<ColorSelection>();
     }
 
     private CharacterLook current = new CharacterLook();
@@ -178,8 +180,17 @@ public class CharacterEditorController : MonoBehaviour
                 Debug.LogWarning($"[EditorController] El peinado {p.itemId} usa {slotId}={itemId}, que no existe.", this);
 
             current.SetItemId(slotId, pieza?.id);
-            lookRenderer.SetPart(slotId, pieza);
         }
+
+        // Primero vuelve al color por defecto todos los grupos que usan los peinados,
+        // así no queda el color del peinado anterior; después pone los de este peinado
+        foreach (string grupoId in GruposDeColorDePeinados())
+            current.SetColorIndex(grupoId, -1);
+        foreach (var c in p.colores)
+            current.SetColorIndex(c.grupoId, c.indice);
+
+        // ApplyLook redibuja piezas y colores juntos
+        lookRenderer.ApplyLook(current);
 
         // Un solo registro por clic: es una decisión, no siete
         ResearchAnalytics.LogEditorInteraction(slotPeinado, icono.id);
@@ -199,9 +210,35 @@ public class CharacterEditorController : MonoBehaviour
                 string actual = current.GetItemId(slotId) ?? "";
                 if (esperado != actual) { igual = false; break; }
             }
+
+            // También compara los colores: dos peinados pueden usar las mismas piezas
+            if (igual)
+            {
+                foreach (string grupoId in GruposDeColorDePeinados())
+                {
+                    var c = p.colores.Find(x => x.grupoId == grupoId);
+                    int esperado = c != null ? c.indice : ColorPorDefecto(grupoId);
+                    int actual = current.GetColorIndex(grupoId);
+                    if (actual < 0) actual = ColorPorDefecto(grupoId);
+                    if (esperado != actual) { igual = false; break; }
+                }
+            }
+
             if (igual) return p.itemId;
         }
         return null;
+    }
+
+    // Todos los grupos de color que usa algún peinado (ej: hair)
+    private List<string> GruposDeColorDePeinados()
+    {
+        return peinados.SelectMany(p => p.colores).Select(c => c.grupoId).Distinct().ToList();
+    }
+
+    private int ColorPorDefecto(string grupoId)
+    {
+        var grupo = paletas != null ? paletas.grupos.Find(g => g.id == grupoId) : null;
+        return grupo != null ? grupo.colorPorDefecto : -1;
     }
 
     // Muestra la grilla de color si esta subcategoría tiene paleta; si no, la oculta
@@ -273,6 +310,7 @@ public class CharacterEditorController : MonoBehaviour
 
         if (inputNombre) current.nombre = inputNombre.text.Trim();
         if (string.IsNullOrEmpty(current.nombre)) current.nombre = nombrePorDefecto;
+        current.paleta = paletas != null ? paletas.name : "";   // la paleta de esta condición
         CharacterLookSaveSystem.Save(current);
         CharacterLookSaveSystem.DeleteLegacySave();
         Debug.Log($"Guardado: {current}");

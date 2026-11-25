@@ -4273,8 +4273,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7e4a719cc9b5d4198067d052db67c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRenderer: {fileID: 2074433964}
-  paletasPorCondicion: []
+  lookRenderer: {fileID: 1035212251}
+  paletasPorCondicion:
+  - {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  - {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d, type: 2}
 --- !u!114 &2074433964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4318,7 +4320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbcf701cb4d0b2a4bbe4bf93c9bd32a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  escenaSiguiente: Hogar
+  escenaSiguiente: Casa
   escenaAnterior: MenuPrincipal
   botonContinuar: {fileID: 0}
 --- !u!1 &2127584221

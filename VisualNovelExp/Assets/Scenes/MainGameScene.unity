@@ -216189,6 +216189,19 @@ MonoBehaviour:
   minTimeBetweenClips: 3
   maxTimeBetweenClips: 7
   initialDelay: 0
+--- !u!114 &207758710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207758694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: Presiona E para hablar
 --- !u!114 &207778729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220770,7 +220783,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1965863957}
   animator: {fileID: 623356231}
   triggerInteractuar: Bow
-  nombreVisible: Vecino 5
+  nombreVisible: Vecina triste
   orden: 1
   cuentaComoObjetivo: 1
   npcEntrevistado: {fileID: 0}
@@ -220920,6 +220933,19 @@ MonoBehaviour:
   minTimeBetweenClips: 3
   maxTimeBetweenClips: 7
   initialDelay: 0
+--- !u!114 &216365409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216365397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: Presiona E para hablar
 --- !u!1 &216505879 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100380, guid: c925872ce3bfa384589bf34b953d5a65,
@@ -342720,6 +342746,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 254230506}
+    - targetCorrespondingSourceObject: {fileID: 3028773059517198441, guid: f1ffd2a25c3810540902d233e81edf49,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 254230510}
   m_SourcePrefab: {fileID: 100100000, guid: f1ffd2a25c3810540902d233e81edf49, type: 3}
 --- !u!4 &254230497 stripped
 Transform:
@@ -342924,6 +342954,19 @@ MonoBehaviour:
   minTimeBetweenClips: 3
   maxTimeBetweenClips: 7
   initialDelay: 0
+--- !u!114 &254230510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254230498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: Presiona E para hablar
 --- !u!43 &254403678
 Mesh:
   m_ObjectHideFlags: 0
@@ -348467,8 +348510,8 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7910483267601218395, guid: ddc5bc99304cb4244aa23887d9ceaf2a,
         type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 1743280154}
+      insertIndex: -1
+      addedObject: {fileID: 1743280161}
   m_SourcePrefab: {fileID: 100100000, guid: ddc5bc99304cb4244aa23887d9ceaf2a, type: 3}
 --- !u!4 &264317543 stripped
 Transform:
@@ -348509,7 +348552,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1743563525}
   animator: {fileID: 595988814}
   triggerInteractuar: Bow
-  nombreVisible: Vecino 1
+  nombreVisible: Vecino Nuevo
   orden: 1
   cuentaComoObjetivo: 1
   npcEntrevistado: {fileID: 0}
@@ -348755,6 +348798,19 @@ MonoBehaviour:
   minTimeBetweenClips: 3
   maxTimeBetweenClips: 7
   initialDelay: 0
+--- !u!114 &265036859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265036846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: Presiona E para hablar
 --- !u!43 &265224235
 Mesh:
   m_ObjectHideFlags: 0
@@ -371352,6 +371408,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 315513002}
+    - targetCorrespondingSourceObject: {fileID: 3028773059517198441, guid: f1ffd2a25c3810540902d233e81edf49,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 315513009}
   m_SourcePrefab: {fileID: 100100000, guid: f1ffd2a25c3810540902d233e81edf49, type: 3}
 --- !u!4 &315513000 stripped
 Transform:
@@ -371536,6 +371596,19 @@ MonoBehaviour:
   pagoTrabajo: 12
   retratoDialogo: {fileID: 0}
   retratoALaIzquierda: 0
+--- !u!114 &315513009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315513001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: Presiona E para hablar
 --- !u!114 &316061371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387626,6 +387699,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 338823315}
+    - targetCorrespondingSourceObject: {fileID: 3028773059517198441, guid: f1ffd2a25c3810540902d233e81edf49,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 338823319}
   m_SourcePrefab: {fileID: 100100000, guid: f1ffd2a25c3810540902d233e81edf49, type: 3}
 --- !u!1 &338823304 stripped
 GameObject:
@@ -387654,7 +387731,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 29329633}
   animator: {fileID: 1158320432}
   triggerInteractuar: Bow
-  nombreVisible: Vecino 4
+  nombreVisible: Maestro Panadero
   orden: 1
   cuentaComoObjetivo: 1
   npcEntrevistado: {fileID: 0}
@@ -387810,6 +387887,19 @@ MonoBehaviour:
   minTimeBetweenClips: 3
   maxTimeBetweenClips: 7
   initialDelay: 0
+--- !u!114 &338823319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338823304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: Presiona E para hablar
 --- !u!43 &338857188
 Mesh:
   m_ObjectHideFlags: 0
@@ -393334,6 +393424,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1260555720}
+    - targetCorrespondingSourceObject: {fileID: 3028773059517198441, guid: f1ffd2a25c3810540902d233e81edf49,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1260555724}
   m_SourcePrefab: {fileID: 100100000, guid: f1ffd2a25c3810540902d233e81edf49, type: 3}
 --- !u!114 &351690283
 MonoBehaviour:
@@ -402958,6 +403052,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 470672345211517486, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 470672345211517486, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.09411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 470672345211517486, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.7294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 470672345211517486, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.12156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 470672345211517486, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 470672345211517486, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 470672345211517486, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 543048138732514143, guid: 672d5acf2c47f564cbf984f388c088cd,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -402993,6 +403122,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3343047074784762515, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: b40bb2bcb23286d40b94634723a32dea,
+        type: 2}
+    - target: {fileID: 3343047074784762515, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: paletas
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3472701858679787908, guid: 672d5acf2c47f564cbf984f388c088cd,
         type: 3}
       propertyPath: m_Name
@@ -403017,6 +403157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340379352191884381, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: paletas
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6733723316325348066, guid: 672d5acf2c47f564cbf984f388c088cd,
         type: 3}
@@ -569443,6 +569588,19 @@ MonoBehaviour:
   minTimeBetweenClips: 3
   maxTimeBetweenClips: 7
   initialDelay: 0
+--- !u!114 &518979693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518979678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: Presiona E para hablar
 --- !u!43 &519069577
 Mesh:
   m_ObjectHideFlags: 0
@@ -587594,7 +587752,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -587623,7 +587781,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -76.42645, w: 0}
+  m_margin: {x: -178.46216, y: 0, z: -76.42645, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -665135,6 +665293,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 216365405}
+    - targetCorrespondingSourceObject: {fileID: 3028773059517198441, guid: f1ffd2a25c3810540902d233e81edf49,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 216365409}
   m_SourcePrefab: {fileID: 100100000, guid: f1ffd2a25c3810540902d233e81edf49, type: 3}
 --- !u!43 &730377775
 Mesh:
@@ -783658,7 +783820,12 @@ PrefabInstance:
         type: 3}
       propertyPath: lookRenderer
       value: 
-      objectReference: {fileID: 1027851272}
+      objectReference: {fileID: 998132950}
+    - target: {fileID: 2397898750926910098, guid: d0407955e0c80aa43b84e61e58069fae,
+        type: 3}
+      propertyPath: lookRenderer
+      value: 
+      objectReference: {fileID: 1788051871}
     - target: {fileID: 4615948362325444748, guid: d0407955e0c80aa43b84e61e58069fae,
         type: 3}
       propertyPath: m_Name
@@ -838391,6 +838558,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1658872465}
+    - targetCorrespondingSourceObject: {fileID: 3028773059517198441, guid: f1ffd2a25c3810540902d233e81edf49,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1658872469}
   m_SourcePrefab: {fileID: 100100000, guid: f1ffd2a25c3810540902d233e81edf49, type: 3}
 --- !u!43 &949312489
 Mesh:
@@ -856781,6 +856952,18 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &998132950 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3343047074784762515, guid: 672d5acf2c47f564cbf984f388c088cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 366984871}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4e2b045484f2649b6da6f6fefb4bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &998438680
 Mesh:
   m_ObjectHideFlags: 0
@@ -870162,18 +870345,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &1027851272 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3343047074784762515, guid: 672d5acf2c47f564cbf984f388c088cd,
-    type: 3}
-  m_PrefabInstance: {fileID: 366984871}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d4e2b045484f2649b6da6f6fefb4bfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1027948095
 Mesh:
   m_ObjectHideFlags: 0
@@ -962553,6 +962724,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 265036855}
+    - targetCorrespondingSourceObject: {fileID: 3028773059517198441, guid: f1ffd2a25c3810540902d233e81edf49,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 265036859}
   m_SourcePrefab: {fileID: 100100000, guid: f1ffd2a25c3810540902d233e81edf49, type: 3}
 --- !u!43 &1230955029
 Mesh:
@@ -980325,7 +980500,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1173622761}
   animator: {fileID: 1345366958}
   triggerInteractuar: Bow
-  nombreVisible: Vecino 7
+  nombreVisible: Turista
   orden: 1
   cuentaComoObjetivo: 1
   npcEntrevistado: {fileID: 0}
@@ -980475,6 +980650,19 @@ MonoBehaviour:
   minTimeBetweenClips: 3
   maxTimeBetweenClips: 7
   initialDelay: 0
+--- !u!114 &1260555724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260555712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: Presiona E para hablar
 --- !u!114 &1260967096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119324,6 +1119512,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1560963677}
+    - targetCorrespondingSourceObject: {fileID: 3028773059517198441, guid: f1ffd2a25c3810540902d233e81edf49,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1560963681}
   m_SourcePrefab: {fileID: 100100000, guid: f1ffd2a25c3810540902d233e81edf49, type: 3}
 --- !u!43 &1532817934
 Mesh:
@@ -1130948,7 +1131140,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1825905288}
   animator: {fileID: 728511427}
   triggerInteractuar: Bow
-  nombreVisible: Vecina 8
+  nombreVisible: Empleado ansioso
   orden: 1
   cuentaComoObjetivo: 1
   npcEntrevistado: {fileID: 0}
@@ -1131098,6 +1131290,19 @@ MonoBehaviour:
   minTimeBetweenClips: 3
   maxTimeBetweenClips: 7
   initialDelay: 0
+--- !u!114 &1560963681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560963669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: Presiona E para hablar
 --- !u!43 &1561516243
 Mesh:
   m_ObjectHideFlags: 0
@@ -1178956,7 +1179161,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1574609999}
   animator: {fileID: 1191058993}
   triggerInteractuar: Bow
-  nombreVisible: Vecino 2
+  nombreVisible: Cocinera
   orden: 1
   cuentaComoObjetivo: 1
   npcEntrevistado: {fileID: 0}
@@ -1179106,6 +1179311,19 @@ MonoBehaviour:
   minTimeBetweenClips: 3
   maxTimeBetweenClips: 7
   initialDelay: 0
+--- !u!114 &1658872469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658872457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: Presiona E para hablar
 --- !u!43 &1658920969
 Mesh:
   m_ObjectHideFlags: 0
@@ -1200198,7 +1200416,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1175308664}
   animator: {fileID: 1945094472}
   triggerInteractuar: Bow
-  nombreVisible: Vecino 6
+  nombreVisible: Pintora
   orden: 1
   cuentaComoObjetivo: 1
   npcEntrevistado: {fileID: 0}
@@ -1200348,6 +1200566,19 @@ MonoBehaviour:
   minTimeBetweenClips: 3
   maxTimeBetweenClips: 7
   initialDelay: 0
+--- !u!114 &1701604459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701604447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: Presiona E para hablar
 --- !u!43 &1702828337
 Mesh:
   m_ObjectHideFlags: 0
@@ -1216374,7 +1216605,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 264317542}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1743280154
+--- !u!114 &1743280161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1216383,11 +1216614,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1743280147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65fc4943fbab2994980b6cd7ba18732f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e3d0d5b74ec32a46b81ebaeac613f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textoInteraccion: {fileID: 427020597}
-  distancia: 2.5
+  texto: Presiona E para volver a casa
 --- !u!1 &1743563525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235609,7 +1235839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: b40bb2bcb23286d40b94634723a32dea, type: 2}
   library: {fileID: 11400000, guid: e737f4220bc1f144e8a879d5becaf894, type: 2}
-  paletas: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  paletas: {fileID: 0}
   materialTenible: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
 --- !u!114 &1788702293
 MonoBehaviour:
@@ -1267114,6 +1267344,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 207758706}
+    - targetCorrespondingSourceObject: {fileID: 3028773059517198441, guid: f1ffd2a25c3810540902d233e81edf49,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 207758710}
   m_SourcePrefab: {fileID: 100100000, guid: f1ffd2a25c3810540902d233e81edf49, type: 3}
 --- !u!114 &1851180222
 MonoBehaviour:
@@ -1335269,6 +1335503,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1701604455}
+    - targetCorrespondingSourceObject: {fileID: 3028773059517198441, guid: f1ffd2a25c3810540902d233e81edf49,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1701604459}
   m_SourcePrefab: {fileID: 100100000, guid: f1ffd2a25c3810540902d233e81edf49, type: 3}
 --- !u!43 &1987856512
 Mesh:
@@ -1338165,6 +1338403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1994772000}
   - component: {fileID: 1994771999}
+  - component: {fileID: 1994772001}
   m_Layer: 0
   m_Name: Sistemas Ciudad
   m_TagString: Untagged
@@ -1338204,6 +1338443,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1994772001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994771998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc01fa81ae013c4f803e159c092a916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textoInteraccion: {fileID: 427020597}
+  distancia: 1
+  textoPorDefecto: Presiona E
+  ocultarConCursorLibre: 1
 --- !u!43 &1994957871
 Mesh:
   m_ObjectHideFlags: 0
@@ -1409305,6 +1409560,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 518979689}
+    - targetCorrespondingSourceObject: {fileID: 3028773059517198441, guid: f1ffd2a25c3810540902d233e81edf49,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 518979693}
   m_SourcePrefab: {fileID: 100100000, guid: f1ffd2a25c3810540902d233e81edf49, type: 3}
 --- !u!1001 &1912658311679294917
 PrefabInstance:
@@ -1409396,9 +1409655,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6679909667031982481, guid: aa120004e233ecf478ec62b02aa9256a,
         type: 3}
+      propertyPath: runSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6679909667031982481, guid: aa120004e233ecf478ec62b02aa9256a,
+        type: 3}
+      propertyPath: walkSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6679909667031982481, guid: aa120004e233ecf478ec62b02aa9256a,
+        type: 3}
       propertyPath: audioPasos
       value: 
       objectReference: {fileID: 1333862179}
+    - target: {fileID: 6679909667031982481, guid: aa120004e233ecf478ec62b02aa9256a,
+        type: 3}
+      propertyPath: aceleracion
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6679909667031982481, guid: aa120004e233ecf478ec62b02aa9256a,
         type: 3}
       propertyPath: alturaJugador

@@ -72,6 +72,8 @@ public class CharacterLookRenderer : MonoBehaviour
             var grupo = paletas != null ? paletas.GrupoQueTine(slot.id) : null;
             if (grupo != null)
                 img.material = grupo.materialPropio != null ? grupo.materialPropio : materialTenible;
+            else
+                img.material = null;
             layers[slot.id] = img;
         }
 

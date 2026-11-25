@@ -22,7 +22,7 @@ public class Interaccion_NPC : MonoBehaviour, IInteractuable
     public string triggerInteractuar = "Interact";
     private Coroutine corrutinaAnimacion;
 
-    private bool completado = false;
+    public bool completado = false;
 
     [Header("Objetivo en pantalla")]
     public string nombreVisible = "Vecino";

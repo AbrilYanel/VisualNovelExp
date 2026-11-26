@@ -3446,9 +3446,86 @@ MonoBehaviour:
   - hair_left_lower
   - hair_right_lower
   peinados:
-  - itemId: 
-    piezas: []
-    colores: []
+  - itemId: 001
+    piezas:
+    - slotId: hair_front
+      itemId: 019
+    - slotId: hair_right_front
+      itemId: 014
+    - slotId: hair_left_front
+      itemId: 011
+    - slotId: hair_upper_back
+      itemId: 002
+    - slotId: hair_lower_back
+      itemId: 001
+    colores:
+    - grupoId: hair
+      indice: 4
+  - itemId: 002
+    piezas:
+    - slotId: hair_front
+      itemId: 003
+    - slotId: hair_right_front
+      itemId: 003
+    - slotId: hair_upper_back
+      itemId: 015
+    - slotId: hair_lower_back
+      itemId: 009
+    colores:
+    - grupoId: hair
+      indice: 5
+  - itemId: 003
+    piezas:
+    - slotId: hair_front
+      itemId: 007
+    - slotId: hair_upper_back
+      itemId: 012
+    - slotId: hair_lower_back
+      itemId: 014
+    - slotId: hair_right_lower
+      itemId: 018
+    colores:
+    - grupoId: hair
+      indice: 6
+  - itemId: 004
+    piezas:
+    - slotId: hair_front
+      itemId: 006
+    - slotId: hair_upper_back
+      itemId: 001
+    - slotId: hair_lower_back
+      itemId: 004
+    - slotId: hair_right_front
+      itemId: 003
+    colores:
+    - grupoId: hair
+      indice: 7
+  - itemId: 005
+    piezas:
+    - slotId: hair_front
+      itemId: 008
+    - slotId: hair_upper_back
+      itemId: 015
+    - slotId: hair_lower_back
+      itemId: 002
+    colores:
+    - grupoId: hair
+      indice: 4
+  - itemId: 006
+    piezas:
+    - slotId: hair_front
+      itemId: 018
+    - slotId: hair_upper_back
+      itemId: 014
+    - slotId: hair_lower_back
+      itemId: 018
+    - slotId: hair_right_front
+      itemId: 014
+    - slotId: hair_left_front
+      itemId: 011
+    colores:
+    - grupoId: hair
+      indice: 9
 --- !u!4 &1687309359
 Transform:
   m_ObjectHideFlags: 0

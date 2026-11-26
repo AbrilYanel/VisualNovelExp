@@ -403139,6 +403139,18 @@ PrefabInstance:
       propertyPath: paletas
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3343047074784762515, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: paletaAlta
+      value: 
+      objectReference: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2,
+        type: 2}
+    - target: {fileID: 3343047074784762515, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: paletaBaja
+      value: 
+      objectReference: {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d,
+        type: 2}
     - target: {fileID: 3472701858679787908, guid: 672d5acf2c47f564cbf984f388c088cd,
         type: 3}
       propertyPath: m_Name
@@ -403169,6 +403181,18 @@ PrefabInstance:
       propertyPath: paletas
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6340379352191884381, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: paletaAlta
+      value: 
+      objectReference: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2,
+        type: 2}
+    - target: {fileID: 6340379352191884381, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: paletaBaja
+      value: 
+      objectReference: {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d,
+        type: 2}
     - target: {fileID: 6733723316325348066, guid: 672d5acf2c47f564cbf984f388c088cd,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1235827,10 +1235851,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: b40bb2bcb23286d40b94634723a32dea, type: 2}
   library: {fileID: 11400000, guid: e737f4220bc1f144e8a879d5becaf894, type: 2}
-  paletas: {fileID: 0}
-  paletasPorCondicion:
-  - {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
-  - {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d, type: 2}
+  paletaAlta: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  paletaBaja: {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d, type: 2}
+  versionPorDefecto: 0
   materialTenible: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
   slotsPorDefecto:
   - skin_body

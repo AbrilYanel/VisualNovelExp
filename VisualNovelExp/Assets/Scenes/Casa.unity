@@ -52415,6 +52415,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3343047074784762515, guid: 672d5acf2c47f564cbf984f388c088cd,
         type: 3}
+      propertyPath: paletaAlta
+      value: 
+      objectReference: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2,
+        type: 2}
+    - target: {fileID: 3343047074784762515, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: paletaBaja
+      value: 
+      objectReference: {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d,
+        type: 2}
+    - target: {fileID: 3343047074784762515, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
       propertyPath: materialTenible
       value: 
       objectReference: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
@@ -52450,6 +52462,18 @@ PrefabInstance:
       propertyPath: paletas
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6340379352191884381, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: paletaAlta
+      value: 
+      objectReference: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2,
+        type: 2}
+    - target: {fileID: 6340379352191884381, guid: 672d5acf2c47f564cbf984f388c088cd,
+        type: 3}
+      propertyPath: paletaBaja
+      value: 
+      objectReference: {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d,
+        type: 2}
     - target: {fileID: 6340379352191884381, guid: 672d5acf2c47f564cbf984f388c088cd,
         type: 3}
       propertyPath: paletasPorCondicion.Array.size

@@ -1883,10 +1883,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: b40bb2bcb23286d40b94634723a32dea, type: 2}
   library: {fileID: 11400000, guid: e737f4220bc1f144e8a879d5becaf894, type: 2}
-  paletas: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
-  paletasPorCondicion:
-  - {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
-  - {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d, type: 2}
+  paletaAlta: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  paletaBaja: {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d, type: 2}
+  versionPorDefecto: 0
   materialTenible: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
   slotsPorDefecto:
   - skin_body
@@ -2642,7 +2641,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1976138675}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99869794
+  m_Size: 0.9999966
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3217,14 +3216,15 @@ MonoBehaviour:
   categoryBar: {fileID: 2034513941}
   slotBar: {fileID: 764050108}
   grid: {fileID: 2135451016}
-  paletas: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  version: 0
   colorGrid: {fileID: 1510747443}
+  slotsSoloColor: []
+  colorGridEnGrilla: {fileID: 0}
+  piezasPermitidas: []
   inputNombre: {fileID: 880724306}
   nombrePorDefecto: Kai
   largoMaximo: 16
   panelConfirmarReset: {fileID: 232213580}
-  piezasPermitidas: []
-  conjuntos: []
   nextSceneName: Casa
   defaultSlotIds:
   - skin_body
@@ -3233,6 +3233,16 @@ MonoBehaviour:
   - face_eye_shape
   - face_pupil
   - clothes_shirt
+  slotPeinado: hair_style
+  slotsDePelo:
+  - hair_front
+  - hair_right_front
+  - hair_left_front
+  - hair_upper_back
+  - hair_lower_back
+  - hair_left_lower
+  - hair_right_lower
+  peinados: []
 --- !u!4 &1687309359
 Transform:
   m_ObjectHideFlags: 0
@@ -3317,7 +3327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000015258789, y: 0.0005140668}
+  m_AnchoredPosition: {x: -0.000015258789, y: 0.00019803038}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1891469690
@@ -3993,9 +4003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRenderer: {fileID: 1035212251}
-  paletasPorCondicion:
-  - {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
-  - {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d, type: 2}
+  registrarPantallaJuego: 1
 --- !u!114 &2074433964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4010,10 +4018,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: b40bb2bcb23286d40b94634723a32dea, type: 2}
   library: {fileID: 11400000, guid: e737f4220bc1f144e8a879d5becaf894, type: 2}
-  paletas: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
-  paletasPorCondicion:
-  - {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
-  - {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d, type: 2}
+  paletaAlta: {fileID: 0}
+  paletaBaja: {fileID: 0}
+  versionPorDefecto: 0
   materialTenible: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
   slotsPorDefecto:
   - skin_body

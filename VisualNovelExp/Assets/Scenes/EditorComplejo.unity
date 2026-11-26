@@ -1884,7 +1884,20 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: b40bb2bcb23286d40b94634723a32dea, type: 2}
   library: {fileID: 11400000, guid: e737f4220bc1f144e8a879d5becaf894, type: 2}
   paletas: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  paletasPorCondicion:
+  - {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  - {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d, type: 2}
   materialTenible: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
+  slotsPorDefecto:
+  - skin_body
+  - hair_front
+  - hair_upper_back
+  - hair_lower_back
+  - face_ears
+  - face_mouth
+  - face_eye_shape
+  - face_pupil
+  - clothes_shirt
 --- !u!1 &1071173954
 GameObject:
   m_ObjectHideFlags: 0
@@ -2629,7 +2642,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1976138675}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99989593
+  m_Size: 0.99869794
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3210,6 +3223,8 @@ MonoBehaviour:
   nombrePorDefecto: Kai
   largoMaximo: 16
   panelConfirmarReset: {fileID: 232213580}
+  piezasPermitidas: []
+  conjuntos: []
   nextSceneName: Casa
   defaultSlotIds:
   - skin_body
@@ -3218,78 +3233,6 @@ MonoBehaviour:
   - face_eye_shape
   - face_pupil
   - clothes_shirt
-  slotPeinado: hair_style
-  slotsDePelo:
-  - hair_front
-  - hair_right_front
-  - hair_left_front
-  - hair_upper_back
-  - hair_lower_back
-  - hair_left_lower
-  - hair_right_lower
-  peinados:
-  - itemId: 001
-    piezas:
-    - slotId: hair_front
-      itemId: 019
-    - slotId: hair_right_front
-      itemId: 008
-    - slotId: hair_left_front
-      itemId: 012
-    - slotId: hair_upper_back
-      itemId: 002
-    - slotId: hair_lower_back
-      itemId: 001
-  - itemId: 002
-    piezas:
-    - slotId: hair_front
-      itemId: 003
-    - slotId: hair_right_front
-      itemId: 003
-    - slotId: hair_upper_back
-      itemId: 015
-    - slotId: hair_lower_back
-      itemId: 009
-  - itemId: 003
-    piezas:
-    - slotId: hair_front
-      itemId: 007
-    - slotId: hair_upper_back
-      itemId: 012
-    - slotId: hair_lower_back
-      itemId: 014
-    - slotId: hair_right_lower
-      itemId: 018
-  - itemId: 004
-    piezas:
-    - slotId: hair_front
-      itemId: 006
-    - slotId: hair_right_front
-      itemId: 003
-    - slotId: hair_upper_back
-      itemId: 001
-    - slotId: hair_lower_back
-      itemId: 019
-  - itemId: 005
-    piezas:
-    - slotId: hair_front
-      itemId: 008
-    - slotId: hair_upper_back
-      itemId: 015
-    - slotId: hair_lower_back
-      itemId: 002
-  - itemId: 006
-    piezas:
-    - slotId: hair_front
-      itemId: 018
-    - slotId: hair_upper_back
-      itemId: 014
-    - slotId: hair_lower_back
-      itemId: 018
-    - slotId: hair_right_front
-      itemId: 014
-    - slotId: hair_left_front
-      itemId: 011
 --- !u!4 &1687309359
 Transform:
   m_ObjectHideFlags: 0
@@ -3374,7 +3317,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000015258789, y: 0.000012199125}
+  m_AnchoredPosition: {x: -0.000015258789, y: 0.0005140668}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1891469690
@@ -4049,7 +3992,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7e4a719cc9b5d4198067d052db67c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRenderer: {fileID: 2074433964}
+  lookRenderer: {fileID: 1035212251}
+  paletasPorCondicion:
+  - {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  - {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d, type: 2}
 --- !u!114 &2074433964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4065,7 +4011,20 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: b40bb2bcb23286d40b94634723a32dea, type: 2}
   library: {fileID: 11400000, guid: e737f4220bc1f144e8a879d5becaf894, type: 2}
   paletas: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  paletasPorCondicion:
+  - {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  - {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d, type: 2}
   materialTenible: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
+  slotsPorDefecto:
+  - skin_body
+  - hair_front
+  - hair_upper_back
+  - hair_lower_back
+  - face_ears
+  - face_mouth
+  - face_eye_shape
+  - face_pupil
+  - clothes_shirt
 --- !u!4 &2074433965
 Transform:
   m_ObjectHideFlags: 0

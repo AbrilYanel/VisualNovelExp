@@ -26,23 +26,23 @@ MonoBehaviour:
   nextNode: {fileID: 0}
   tipoMinijuego: 7
   vocabulario:
-  - hiragana: 
+  - hiragana: "\u3042"
     romaji: 
     traduccion: a
     idFuente: a
-  - hiragana: 
+  - hiragana: "\u3048"
     romaji: 
     traduccion: e
     idFuente: e
-  - hiragana: 
+  - hiragana: "\u3044"
     romaji: 
     traduccion: i
     idFuente: i
-  - hiragana: 
+  - hiragana: "\u304A"
     romaji: 
     traduccion: o
     idFuente: o
-  - hiragana: 
+  - hiragana: "\u3046"
     romaji: 
     traduccion: u
     idFuente: u

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fdc819da37a6b44922673bbe15b28c, type: 3}
   m_Name: ColorPaletteConfig_Baja
   m_EditorClassIdentifier: 
+  usarMaterialTenible: 0
   grupos:
   - id: skin
     nombre: Tono de piel
@@ -29,7 +30,20 @@ MonoBehaviour:
     - {r: 0.3018868, g: 0.21414685, b: 0.1751513, a: 1}
     colorPorDefecto: 0
     materialPropio: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
-  - id: hair_style
+  - id: eyes
+    nombre: Color de ojos
+    slotsQueTine: []
+    slotsDondeAparece: []
+    colores:
+    - {r: 0.7490196, g: 0.84705883, b: 0.627451, a: 1}
+    - {r: 0.5803922, g: 0.72156864, b: 0.8784314, a: 1}
+    - {r: 0.9529412, g: 0.8862745, b: 0.6039216, a: 1}
+    - {r: 0.7607843, g: 0.6039216, b: 0.4627451, a: 1}
+    - {r: 0.36862746, g: 0.2901961, b: 0.2509804, a: 1}
+    - {r: 0.24313726, g: 0.22745098, b: 0.21960784, a: 1}
+    colorPorDefecto: 10
+    materialPropio: {fileID: 2100000, guid: c2966cc5b55d23e4690375a0ac80e95a, type: 2}
+  - id: hair
     nombre: Color de pelo
     slotsQueTine:
     - hair_front
@@ -72,26 +86,5 @@ MonoBehaviour:
     - {r: 0.827451, g: 0.78431374, b: 0.91764706, a: 1}
     - {r: 0.7490196, g: 0.8901961, b: 0.9254902, a: 1}
     - {r: 0.78431374, g: 0.9098039, b: 0.8235294, a: 1}
-    colorPorDefecto: 0
+    colorPorDefecto: 22
     materialPropio: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
-  - id: eyes
-    nombre: Color de ojos
-    slotsQueTine: []
-    slotsDondeAparece: []
-    colores:
-    - {r: 0.7490196, g: 0.84705883, b: 0.627451, a: 1}
-    - {r: 0.5803922, g: 0.72156864, b: 0.8784314, a: 1}
-    - {r: 0.9529412, g: 0.8862745, b: 0.6039216, a: 1}
-    - {r: 0.7607843, g: 0.6039216, b: 0.4627451, a: 1}
-    - {r: 0.36862746, g: 0.2901961, b: 0.2509804, a: 1}
-    - {r: 0.24313726, g: 0.22745098, b: 0.21960784, a: 1}
-    colorPorDefecto: 10
-    materialPropio: {fileID: 2100000, guid: c2966cc5b55d23e4690375a0ac80e95a, type: 2}
-  - id: shirt
-    nombre: Color de camisa
-    slotsQueTine:
-    - 
-    slotsDondeAparece: []
-    colores: []
-    colorPorDefecto: 0
-    materialPropio: {fileID: 0}

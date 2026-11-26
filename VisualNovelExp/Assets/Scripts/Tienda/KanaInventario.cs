@@ -8,7 +8,7 @@ public class KanaInventario : ScriptableObject
 
     public bool EstaDesbloqueado(string id)
     {
-        return desbloqueadas.Contains(id);
+        return true;
     }
 
     // Compra en la tienda: descuenta monedas de PlayerProgress

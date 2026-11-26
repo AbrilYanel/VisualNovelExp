@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Text;
 
+// Versión del editor de personajes (condición experimental)
+public enum VersionEditor { Alta, Baja }
+
 [System.Serializable]
 public class SlotSelection
 {
@@ -21,9 +24,9 @@ public class CharacterLook
     public List<SlotSelection> selections = new List<SlotSelection>();
     public List<ColorSelection> colores = new List<ColorSelection>();
     public string nombre = "";
-    // Nombre del asset ColorPaletteConfig que usó el editor (ej: ColorPaletteConfig_B).
-    // CharacterLookLoader lo usa para pintar al personaje con la misma paleta en el juego.
-    public string paleta = "";
+    // Versión del editor que creó al personaje ("Alta" o "Baja").
+    // CharacterLookRenderer la usa para elegir la paleta en el juego.
+    public string version = "";
 
     public int GetColorIndex(string grupoId)
     {

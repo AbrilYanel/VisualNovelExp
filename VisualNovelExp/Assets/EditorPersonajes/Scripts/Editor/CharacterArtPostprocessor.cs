@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class CharacterArtPostprocessor : AssetPostprocessor
 {
-    private const string ART_ROOT = "Assets/_CharacterEditor/Art/";
+    // Debe ser la misma carpeta que usa CharacterPartLibrary (ART_ROOT).
+    // Antes decía "Assets/_CharacterEditor/Art/", así que los PNG nuevos no recibían esta configuración.
+    private const string ART_ROOT = "Assets/EditorPersonajes/Art/";
 
     void OnPreprocessTexture()
     {

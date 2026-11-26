@@ -1400,7 +1400,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4849152615734253544}
   - component: {fileID: 6340379352191884381}
-  - component: {fileID: 756454191294439908}
   m_Layer: 5
   m_Name: Retrato
   m_TagString: Untagged
@@ -1442,19 +1441,8 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: b40bb2bcb23286d40b94634723a32dea, type: 2}
   library: {fileID: 11400000, guid: e737f4220bc1f144e8a879d5becaf894, type: 2}
   paletas: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  paletasPorCondicion: []
   materialTenible: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
---- !u!114 &756454191294439908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1332752271384894388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a60cff1296f8cae4cb4fa83500cc5d5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   slotsPorDefecto:
   - skin_body
   - hair_front
@@ -2023,7 +2011,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4161122561158108035}
   - component: {fileID: 3343047074784762515}
-  - component: {fileID: 7800218782859041512}
   m_Layer: 5
   m_Name: Retrato
   m_TagString: Untagged
@@ -2065,19 +2052,8 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: b40bb2bcb23286d40b94634723a32dea, type: 2}
   library: {fileID: 11400000, guid: e737f4220bc1f144e8a879d5becaf894, type: 2}
   paletas: {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  paletasPorCondicion: []
   materialTenible: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
---- !u!114 &7800218782859041512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1621446498728177128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a60cff1296f8cae4cb4fa83500cc5d5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   slotsPorDefecto:
   - skin_body
   - hair_front

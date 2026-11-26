@@ -10,17 +10,42 @@ public class CharacterLookRenderer : MonoBehaviour
     public CharacterPartLibrary library;
 
     [Header("Color")]
-    public ColorPaletteConfig paletas;
-    [Tooltip("Mat_TintableGris: se usa en las capas que tienen paleta")]
+    [Tooltip("Paleta del editor de alta complejidad (condición A)")]
+    public ColorPaletteConfig paletaAlta;
+    [Tooltip("Paleta del editor de baja complejidad (condición B)")]
+    public ColorPaletteConfig paletaBaja;
+    [Tooltip("Versión que se usa si el personaje no indica ninguna (ej.: probar la escena sin pasar por el editor)")]
+    public VersionEditor versionPorDefecto = VersionEditor.Alta;
+    [Tooltip("Mat_TintableGris: se usa en las capas que tienen grupo de color, salvo que la paleta lo desactive")]
     public Material materialTenible;
+
+    // Paleta en uso (la decide la versión). Solo lectura desde otros scripts.
+    public ColorPaletteConfig paletas { get; private set; }
+
+    public ColorPaletteConfig PaletaDe(VersionEditor version) =>
+        version == VersionEditor.Alta ? paletaAlta : paletaBaja;
+
+    [Header("Personaje por defecto (solo si no hay guardado)")]
+    [Tooltip("Los mismos Default Slot Ids del CharacterEditorController")]
+    public List<string> slotsPorDefecto = new List<string>
+    {
+        "skin_body",
+        "hair_front", "hair_upper_back", "hair_lower_back",
+        "face_ears", "face_mouth", "face_eye_shape", "face_pupil",
+        "clothes_shirt"
+    };
 
     private const string ROOT_NAME = "_Layers";
 
     private readonly Dictionary<string, Image> layers = new Dictionary<string, Image>();
+    private readonly Dictionary<string, GrupoColor> grupoPorSlot = new Dictionary<string, GrupoColor>();
+    private ColorPaletteConfig paletaAplicada;   // paleta con la que se calcularon los materiales
+    private bool materialesListos;
     private CharacterLook currentLook;
 
     void Awake()
     {
+        paletas = PaletaDe(versionPorDefecto);
         Build();
     }
 
@@ -69,24 +94,84 @@ public class CharacterLookRenderer : MonoBehaviour
             img.raycastTarget = false;
             img.preserveAspect = true;
             img.enabled = false; // sin sprite y enabled = cuadro blanco, asi que arranca apagada
-            var grupo = paletas != null ? paletas.GrupoQueTine(slot.id) : null;
-            if (grupo != null)
-                img.material = grupo.materialPropio != null ? grupo.materialPropio : materialTenible;
-            else
-                img.material = null;
             layers[slot.id] = img;
         }
+
+        materialesListos = false;
+        AplicarMateriales();
 
         // Si ya habia un personaje mostrado, lo volvemos a aplicar
         if (currentLook != null) ApplyLook(currentLook);
     }
 
+    // ---------- Paleta y materiales ----------
+
+    // Elige la paleta según la versión del personaje y, si cambió, recalcula materiales
+    private void ElegirPaleta(CharacterLook look)
+    {
+        VersionEditor version = versionPorDefecto;
+        if (look != null && System.Enum.TryParse(look.version, out VersionEditor guardada))
+            version = guardada;
+
+        var nueva = PaletaDe(version);
+        if (nueva == null)
+            Debug.LogWarning($"[LookRenderer] Falta asignar la Paleta {version} en este renderer.", this);
+
+        paletas = nueva;
+        if (!materialesListos || paletas != paletaAplicada) AplicarMateriales();
+    }
+
+    // Pone en cada capa el material de su grupo de color (o ninguno) y guarda el grupo de cada slot
+    private void AplicarMateriales()
+    {
+        grupoPorSlot.Clear();
+        bool usarTenible = paletas == null || paletas.usarMaterialTenible;
+
+        foreach (var kv in layers)
+        {
+            var grupo = paletas != null ? paletas.GrupoQueTine(kv.Key) : null;
+            if (grupo != null && grupo.colores.Count > 0) grupoPorSlot[kv.Key] = grupo;
+
+            Material mat = null;
+            if (grupo != null)
+                mat = grupo.materialPropio != null ? grupo.materialPropio : (usarTenible ? materialTenible : null);
+            kv.Value.material = mat;   // null = material por defecto de la UI (colores originales del PNG)
+        }
+
+        paletaAplicada = paletas;
+        materialesListos = true;
+    }
+
     // ---------- API publica ----------
+
+    // Carga el personaje guardado (o el predeterminado si no hay guardado) y lo dibuja.
+    // La usan los retratos de Casa y Ciudad.
+    public void CargarGuardado()
+    {
+        if (config == null || library == null)
+        {
+            Debug.LogError("[LookRenderer] Falta Config o Library.", this);
+            return;
+        }
+
+        CharacterLook look;
+        if (CharacterLookSaveSystem.HasSavedLook())
+        {
+            look = CharacterLookSaveSystem.Load();
+            look.RemoveInvalid(library);
+        }
+        else
+        {
+            look = CrearPredeterminado();
+        }
+        ApplyLook(look);
+    }
 
     // Muestra un personaje completo
     public void ApplyLook(CharacterLook look)
     {
         currentLook = look;
+        ElegirPaleta(look);
         foreach (var slot in config.AllSlots())
         {
             string itemId = look?.GetItemId(slot.id);
@@ -110,16 +195,16 @@ public class CharacterLookRenderer : MonoBehaviour
             return;
         }
 
+        if (!materialesListos) AplicarMateriales();
         img.sprite = entry.sprite;
         img.color = ColorPara(slotId, entry);
         img.enabled = true;
     }
 
-    // Color de la paleta si el slot tiene una; si no, el tinte de la pieza
+    // Color de la paleta si el slot tiene un grupo; si no, el tinte de la pieza
     private Color ColorPara(string slotId, PartEntry entry)
     {
-        var grupo = paletas != null ? paletas.GrupoQueTine(slotId) : null;
-        if (grupo == null || grupo.colores.Count == 0) return entry.tint;
+        if (!grupoPorSlot.TryGetValue(slotId, out GrupoColor grupo)) return entry.tint;
 
         int i = currentLook != null ? currentLook.GetColorIndex(grupo.id) : -1;
         if (i < 0 || i >= grupo.colores.Count)
@@ -138,6 +223,20 @@ public class CharacterLookRenderer : MonoBehaviour
             img.enabled = false;
             img.sprite = null;
         }
+    }
+
+    // ---------- Auxiliares ----------
+
+    private CharacterLook CrearPredeterminado()
+    {
+        var look = new CharacterLook();
+        foreach (var slot in config.AllSlots())
+        {
+            if (!slotsPorDefecto.Contains(slot.id) && slot.canBeEmpty) continue;
+            var items = library.GetItems(slot.id);
+            if (items != null && items.Count > 0) look.SetItemId(slot.id, items[0].id);
+        }
+        return look;
     }
 
     // ---------- Prueba rapida ----------

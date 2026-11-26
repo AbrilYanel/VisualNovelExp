@@ -24,8 +24,28 @@ MonoBehaviour:
   startsMinigame: 0
   endsDialogue: 1
   nextNode: {fileID: 0}
-  tipoMinijuego: 2
-  vocabulario: []
+  tipoMinijuego: 6
+  vocabulario:
+  - hiragana: "\u3042"
+    romaji: 
+    traduccion: a
+    idFuente: a
+  - hiragana: "\u3048"
+    romaji: 
+    traduccion: e
+    idFuente: e
+  - hiragana: "\u3044"
+    romaji: 
+    traduccion: i
+    idFuente: i
+  - hiragana: "\u304A"
+    romaji: 
+    traduccion: o
+    idFuente: o
+  - hiragana: "\u3046"
+    romaji: 
+    traduccion: u
+    idFuente: u
   reintentarMinijuego: 0
   daCamara: 0
   entregaEntrevista: 0

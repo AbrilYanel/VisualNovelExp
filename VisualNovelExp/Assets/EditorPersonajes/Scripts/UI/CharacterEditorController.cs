@@ -16,7 +16,11 @@ public class CharacterEditorController : MonoBehaviour
     public PartGridPanel grid;   // grilla de piezas
 
     [Header("Color")]
-    public ColorPaletteConfig paletas;
+    [Tooltip("Versión de este editor. Define la paleta (la toma del renderer: Paleta Alta o Paleta Baja) " +
+             "y se guarda en el personaje para que el juego use la misma")]
+    public VersionEditor version = VersionEditor.Alta;
+    // Paleta de esta versión, tomada del CharacterLookRenderer
+    ColorPaletteConfig paletas => lookRenderer != null ? lookRenderer.PaletaDe(version) : null;
     public ColorGridPanel colorGrid;
 
     [Header("Editor simple: slots que solo cambian color")]
@@ -109,6 +113,11 @@ public class CharacterEditorController : MonoBehaviour
         {
             current = CreateDefaultLook();
         }
+
+        // En el editor manda la versión de esta escena, no la de un guardado anterior de otra condición
+        current.version = version.ToString();
+        if (paletas == null)
+            Debug.LogWarning($"[EditorController] El renderer no tiene asignada la Paleta {version}.", this);
 
         lookRenderer.ApplyLook(current);
         if (panelConfirmarReset) panelConfirmarReset.SetActive(false);
@@ -385,7 +394,7 @@ public class CharacterEditorController : MonoBehaviour
 
         if (inputNombre) current.nombre = inputNombre.text.Trim();
         if (string.IsNullOrEmpty(current.nombre)) current.nombre = nombrePorDefecto;
-        current.paleta = paletas != null ? paletas.name : "";   // la paleta de esta condición
+        current.version = version.ToString();   // el juego usará la paleta de esta versión
         CharacterLookSaveSystem.Save(current);
         CharacterLookSaveSystem.DeleteLegacySave();
         Debug.Log($"Guardado: {current}");
@@ -402,7 +411,7 @@ public class CharacterEditorController : MonoBehaviour
 
     private CharacterLook CreateDefaultLook()
     {
-        var look = new CharacterLook();
+        var look = new CharacterLook { version = version.ToString() };
         foreach (string slotId in defaultSlotIds)
         {
             var items = library.GetItems(slotId);

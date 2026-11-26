@@ -12,28 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b8975488a81a64da90a379d4572575, type: 3}
   m_Name: PlayerProgress
   m_EditorClassIdentifier: 
-  nivelActual: 2
+  nivelActual: 1
   interaccionesCompletadas: 0
   interaccionesPorNivel: 3
   monedas: 10
   monedaInicial: 10
   comida: 1
   comidaInicial: 1
-  hambre: 0
-  energia: 20
-  diversion: 30
+  hambre: 35
+  energia: 70
+  diversion: 60
   hambreInicial: 35
   energiaInicial: 70
   diversionInicial: 60
   tutorialCompleto: 0
   npcsCompletados: []
   dia: 1
-  franjasUsadas: 2
+  franjasUsadas: 0
   monedasInicioDia: 10
   palabrasInicioDia: 0
   festivalCompletado: 0
   pasoTutorial: 0
-  tieneCamara: 1
-  permisoObtenido: 1
-  entrevistaCompletada: 1
-  puntajeEntrevista: 10
+  tieneCamara: 0
+  permisoObtenido: 0
+  entrevistaCompletada: 0
+  puntajeEntrevista: 0

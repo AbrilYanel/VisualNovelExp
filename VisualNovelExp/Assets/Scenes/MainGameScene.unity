@@ -72730,8 +72730,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e6e8f2b17e244b74a9400a8a732f8cff, type: 2}
-  m_sharedMaterial: {fileID: 144273725763147936, guid: e6e8f2b17e244b74a9400a8a732f8cff,
+  m_fontAsset: {fileID: 11400000, guid: 2e72fc77a17f09b4486933964782ac1b, type: 2}
+  m_sharedMaterial: {fileID: 8403923613568617168, guid: 2e72fc77a17f09b4486933964782ac1b,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -216012,6 +216012,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 354288447}
   animator: {fileID: 790880214}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Director
   orden: 1
   cuentaComoObjetivo: 0
@@ -220783,6 +220784,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1965863957}
   animator: {fileID: 623356231}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Vecina triste
   orden: 1
   cuentaComoObjetivo: 1
@@ -342804,6 +342806,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 754105936}
   animator: {fileID: 2076618930}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Chica
   orden: 1
   cuentaComoObjetivo: 0
@@ -348552,6 +348555,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1743563525}
   animator: {fileID: 595988814}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Vecino Nuevo
   orden: 1
   cuentaComoObjetivo: 1
@@ -371584,6 +371588,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 0}
   animator: {fileID: 213829472}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Cajera
   orden: 1
   cuentaComoObjetivo: 0
@@ -387731,6 +387736,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 29329633}
   animator: {fileID: 1158320432}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Maestro Panadero
   orden: 1
   cuentaComoObjetivo: 1
@@ -420220,7 +420226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &406973768
 RectTransform:
   m_ObjectHideFlags: 0
@@ -569432,6 +569438,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 238233761}
   animator: {fileID: 1759828084}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Hombre Gato
   orden: 1
   cuentaComoObjetivo: 1
@@ -655324,7 +655331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &709495093
 RectTransform:
   m_ObjectHideFlags: 0
@@ -915160,8 +915167,8 @@ MonoBehaviour:
     esComida: 1
     necesidad: 1
     cantidad: 30
-  - hiragana: "\u304B\u3093\u30B3\u30FC\u30D2\u30FC"
-    romaji: "kan k\u014Dh\u012B"
+  - hiragana: "\u30B3\u30FC\u30D2\u30FC"
+    romaji: "k\u014Dh\u012B"
     traduccion: "caf\xE9 en lata"
     precio: 8
     esComida: 0
@@ -980500,6 +980507,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1173622761}
   animator: {fileID: 1345366958}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Turista
   orden: 1
   cuentaComoObjetivo: 1
@@ -1007847,8 +1007855,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tienda de conveniencia
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e6e8f2b17e244b74a9400a8a732f8cff, type: 2}
-  m_sharedMaterial: {fileID: 144273725763147936, guid: e6e8f2b17e244b74a9400a8a732f8cff,
+  m_fontAsset: {fileID: 11400000, guid: 2e72fc77a17f09b4486933964782ac1b, type: 2}
+  m_sharedMaterial: {fileID: 8403923613568617168, guid: 2e72fc77a17f09b4486933964782ac1b,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1131140,6 +1131148,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1825905288}
   animator: {fileID: 728511427}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Empleado ansioso
   orden: 1
   cuentaComoObjetivo: 1
@@ -1179161,6 +1179170,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1574609999}
   animator: {fileID: 1191058993}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Cocinera
   orden: 1
   cuentaComoObjetivo: 1
@@ -1200416,6 +1200426,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 1175308664}
   animator: {fileID: 1945094472}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Pintora
   orden: 1
   cuentaComoObjetivo: 1
@@ -1235763,7 +1235774,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1788051868}
   - component: {fileID: 1788051871}
-  - component: {fileID: 1788051870}
   - component: {fileID: 1788051869}
   m_Layer: 5
   m_Name: Retrato_Jugador
@@ -1235803,28 +1235813,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1788051870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1788051867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a60cff1296f8cae4cb4fa83500cc5d5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotsPorDefecto:
-  - skin_body
-  - hair_front
-  - hair_upper_back
-  - hair_lower_back
-  - face_ears
-  - face_mouth
-  - face_eye_shape
-  - face_pupil
-  - clothes_shirt
 --- !u!114 &1788051871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235840,7 +1235828,20 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: b40bb2bcb23286d40b94634723a32dea, type: 2}
   library: {fileID: 11400000, guid: e737f4220bc1f144e8a879d5becaf894, type: 2}
   paletas: {fileID: 0}
+  paletasPorCondicion:
+  - {fileID: 11400000, guid: f102516e975502048859c6593ef0f3d2, type: 2}
+  - {fileID: 11400000, guid: 651057ce947147047a0fdc630d7bd41d, type: 2}
   materialTenible: {fileID: 2100000, guid: 772cafb26b723bd4da9ad99e9ebff96b, type: 2}
+  slotsPorDefecto:
+  - skin_body
+  - hair_front
+  - hair_upper_back
+  - hair_lower_back
+  - face_ears
+  - face_mouth
+  - face_eye_shape
+  - face_pupil
+  - clothes_shirt
 --- !u!114 &1788702293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1252755,8 +1252756,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e6e8f2b17e244b74a9400a8a732f8cff, type: 2}
-  m_sharedMaterial: {fileID: 144273725763147936, guid: e6e8f2b17e244b74a9400a8a732f8cff,
+  m_fontAsset: {fileID: 11400000, guid: 2e72fc77a17f09b4486933964782ac1b, type: 2}
+  m_sharedMaterial: {fileID: 8403923613568617168, guid: 2e72fc77a17f09b4486933964782ac1b,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1283706,6 +1283707,7 @@ MonoBehaviour:
   indicadorExclamacion: {fileID: 0}
   animator: {fileID: 2131402171}
   triggerInteractuar: Bow
+  completado: 0
   nombreVisible: Comerciante
   orden: 1
   cuentaComoObjetivo: 0
@@ -1353714,6 +1353716,8 @@ MonoBehaviour:
   colorIncorrecta: {r: 0.9, g: 0.2, b: 0.2, a: 1}
   colorNormal: {r: 1, g: 1, b: 1, a: 1}
   segundosEntrePreguntas: 3
+  preguntaEnTextoRespuesta: 1
+  retratoJugador: {fileID: 0}
 --- !u!4 &2029658476
 Transform:
   m_ObjectHideFlags: 0
@@ -1387129,8 +1387133,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 98924dc357ae24146b7f170a4ab00dc1, type: 2}
-  m_sharedMaterial: {fileID: -8565691963130180758, guid: 98924dc357ae24146b7f170a4ab00dc1,
+  m_fontAsset: {fileID: 11400000, guid: 2e72fc77a17f09b4486933964782ac1b, type: 2}
+  m_sharedMaterial: {fileID: 8403923613568617168, guid: 2e72fc77a17f09b4486933964782ac1b,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

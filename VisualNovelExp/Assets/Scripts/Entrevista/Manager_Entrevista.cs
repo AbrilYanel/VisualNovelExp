@@ -53,6 +53,12 @@ public class Manager_Entrevista : MonoBehaviour
     [Header("Tiempos")]
     public float segundosEntrePreguntas = 3f;
 
+    [Header("Presentación")]
+    [Tooltip("Escribe la pregunta (japonés y español) en el mismo texto donde responde el NPC")]
+    public bool preguntaEnTextoRespuesta = true;
+    [Tooltip("Retrato del jugador que se oculta durante la entrevista. Vacío = usa el Retrato HUD de Manager_Interaccion")]
+    public GameObject retratoJugador;
+
     // Estado interno
     private int indiceActual = 0;
     private int puntajeTotal = 0;
@@ -63,6 +69,9 @@ public class Manager_Entrevista : MonoBehaviour
 
     int PuntajeMinimo => managerCamara != null ? managerCamara.puntajeMinimoExito
                        : (entrevistaData != null ? entrevistaData.puntajeMinimoExito : 0);
+
+    GameObject RetratoJugador => retratoJugador != null ? retratoJugador
+                               : (Interaccion != null ? Interaccion.retratoHUD : null);
 
     // ─────────────────────────────────────────
     void Start()
@@ -109,6 +118,16 @@ public class Manager_Entrevista : MonoBehaviour
             mi.BloquearJugador(); // congela al jugador, pausa las necesidades y muestra el cursor
         }
 
+        // El retrato del jugador queda oculto hasta cerrar el panel de resultado
+        if (RetratoJugador) RetratoJugador.SetActive(false);
+
+        // Si la pregunta va en el texto del NPC, los textos de pregunta separados no se usan
+        if (preguntaEnTextoRespuesta)
+        {
+            if (textoPreguntaJapones) textoPreguntaJapones.gameObject.SetActive(false);
+            if (textoPreguntaEspanol) textoPreguntaEspanol.gameObject.SetActive(false);
+        }
+
         panelEntrevista.SetActive(true);
         if (panelResultado) panelResultado.SetActive(false);
         if (textoNombreEntrevistado) textoNombreEntrevistado.text = entrevistaData.nombreEntrevistado;
@@ -121,12 +140,21 @@ public class Manager_Entrevista : MonoBehaviour
     void MostrarPregunta(PreguntaEntrevista pregunta)
     {
         esperandoSiguiente = false;
-        if (textoRespuestaNPC) textoRespuestaNPC.text = "";
         if (textoProgreso) textoProgreso.text = $"Pregunta {indiceActual + 1}/{entrevistaData.preguntas.Count}";
         if (textoPuntaje) textoPuntaje.text = $"Confianza: {puntajeTotal} pts";
 
-        if (textoPreguntaJapones) textoPreguntaJapones.text = pregunta.preguntaJapones;
-        if (textoPreguntaEspanol) textoPreguntaEspanol.text = $"({pregunta.preguntaEspanol})";
+        if (preguntaEnTextoRespuesta)
+        {
+            // La pregunta ocupa el texto del diálogo; al responder, la reemplaza la respuesta del NPC
+            if (textoRespuestaNPC)
+                textoRespuestaNPC.text = $"{pregunta.preguntaJapones}\n({pregunta.preguntaEspanol})";
+        }
+        else
+        {
+            if (textoRespuestaNPC) textoRespuestaNPC.text = "";
+            if (textoPreguntaJapones) textoPreguntaJapones.text = pregunta.preguntaJapones;
+            if (textoPreguntaEspanol) textoPreguntaEspanol.text = $"({pregunta.preguntaEspanol})";
+        }
 
         if (panelFeedback != null) panelFeedback.SetActive(false);
         ActualizarReaccionNPC(ReaccionNPC.Neutral);
@@ -274,6 +302,8 @@ public class Manager_Entrevista : MonoBehaviour
     {
         if (panelResultado != null) panelResultado.SetActive(false);
         activa = false;
+
+        if (RetratoJugador) RetratoJugador.SetActive(true);
 
         var mi = Interaccion;
         if (mi != null) mi.LiberarJugador();

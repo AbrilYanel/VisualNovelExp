@@ -25,12 +25,12 @@ public class Manager_Tienda : MonoBehaviour
     {
         new Articulo { hiragana = "おにぎり", romaji = "onigiri", traduccion = "bola de arroz",
                        precio = 10, esComida = true },
-        new Articulo { hiragana = "かんコーヒー", romaji = "kan kōhī", traduccion = "café en lata",
+        new Articulo { hiragana = "コーヒー", romaji = "kōhī", traduccion = "café en lata",
                        precio = 8, esComida = false, necesidad = Necesidad.Energia, cantidad = 30f },
         new Articulo { hiragana = "ざっし", romaji = "zasshi", traduccion = "revista",
                        precio = 12, esComida = false, necesidad = Necesidad.Diversion, cantidad = 35f },
     };
-    [Tooltip("Desmarcado: los artículos se muestran solo en japonés (paso 41)")]
+    [Tooltip("Desmarcado: los artículos se muestran solo en japonés")]
     public bool mostrarTraduccion = true;
 
     [Header("UI (la misma de antes)")]
@@ -206,7 +206,7 @@ public class Manager_Tienda : MonoBehaviour
 
     string Efecto(Articulo a)
     {
-        if (a.esComida) return "para el refrigerador";
+        if (a.esComida) return "para la casa";
         switch (a.necesidad)
         {
             case Necesidad.Energia: return $"+{a.cantidad:0} energía";

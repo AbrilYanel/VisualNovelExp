@@ -22,6 +22,7 @@ public class Panel_Vocabulario : MonoBehaviour
 
     public void Mostrar(List<PalabraAprendida> palabras, string efectos, System.Action empezar)
     {
+        Debug.Log($"[Vocabulario] palabras recibidas: {(palabras != null ? palabras.Count : -1)}");
         alEmpezar = empezar;
 
         var sb = new System.Text.StringBuilder();

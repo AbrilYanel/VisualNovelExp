@@ -113,7 +113,7 @@ public class Manager_Journal : MonoBehaviour
         if (journalData.palabrasAprendidas.Count == 0)
         {
             textoVacio.gameObject.SetActive(true);
-            textoVacio.text = "Todavía no aprendiste ninguna palabra.\n¡Hablá con los NPCs!";
+            textoVacio.text = "Todavía no has aprendido ninguna palabra.\n¡Habla con los NPCs!";
             return;
         }
 

@@ -22,6 +22,10 @@ public class GrupoColor
 [CreateAssetMenu(fileName = "ColorPaletteConfig", menuName = "Character/Color Palette Config")]
 public class ColorPaletteConfig : ScriptableObject
 {
+    [Tooltip("Si está marcado, los grupos sin Material Propio usan el Material Tenible del renderer (pasa la pieza a gris y la tiñe). " +
+             "Desmárcalo en la paleta del editor simple para que esos grupos se tiñan sobre los colores originales del PNG.")]
+    public bool usarMaterialTenible = true;
+
     public List<GrupoColor> grupos = new List<GrupoColor>();
 
     public GrupoColor GrupoQueTine(string slotId) => grupos.Find(g => g.slotsQueTine.Contains(slotId));

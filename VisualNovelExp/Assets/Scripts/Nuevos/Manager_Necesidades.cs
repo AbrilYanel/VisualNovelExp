@@ -7,6 +7,7 @@ public class Manager_Necesidades : MonoBehaviour
 {
     public static Manager_Necesidades I;
     public const float UMBRAL_BAJO = 25f;
+    public const float UMBRAL_ALTO = 100f;
 
     [Tooltip("Los valores viven en el asset para sobrevivir al cambio de escena")]
     public PlayerProgress playerProgress;
@@ -61,4 +62,6 @@ public class Manager_Necesidades : MonoBehaviour
     public float MultiplicadorVelocidad => (hambre <= 0f || energia <= 0f) ? 0.5f : 1f;
     public bool TodoAlto => hambre >= 75f && energia >= 75f && diversion >= 75f;
     public float MultiplicadorMonedas => diversion <= 0f ? 0.5f : (TodoAlto ? 1.5f : 1f);
+
+
 }
